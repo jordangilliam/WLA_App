@@ -43,8 +43,8 @@ export default function Learn() {
 
   const totalPoints = LEARNING_MODULES.reduce((sum, m) => sum + m.points, 0);
   const earnedPoints = Array.from(completed).reduce((sum, id) => {
-    const module = LEARNING_MODULES.find(m => m.id === id);
-    return sum + (module?.points || 0);
+    const learningModule = LEARNING_MODULES.find(m => m.id === id);
+    return sum + (learningModule?.points || 0);
   }, 0);
   const progress = (earnedPoints / totalPoints) * 100;
 
@@ -94,15 +94,15 @@ export default function Learn() {
 
       {/* Learning Modules */}
       <div className="row">
-        {filteredModules.map(module => {
-          const isCompleted = completed.has(module.id);
+        {filteredModules.map(learningModule => {
+          const isCompleted = completed.has(learningModule.id);
           return (
-            <div key={module.id} className="card section animate-slide-up" style={{
+            <div key={learningModule.id} className="card section animate-slide-up" style={{
               opacity: isCompleted ? 0.7 : 1,
               borderLeft: isCompleted ? '4px solid var(--wla-green)' : '4px solid transparent'
             }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
-                {module.icon}
+                {learningModule.icon}
               </div>
               <div style={{ 
                 display: 'inline-block',
@@ -113,15 +113,15 @@ export default function Learn() {
                 fontWeight: 600,
                 marginBottom: '0.75rem'
               }}>
-                {module.category}
+                {learningModule.category}
               </div>
-              <h3 style={{ marginBottom: '0.75rem' }}>{module.title}</h3>
+              <h3 style={{ marginBottom: '0.75rem' }}>{learningModule.title}</h3>
               <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', flexGrow: 1 }}>
-                {module.description}
+                {learningModule.description}
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ fontWeight: 700, color: 'var(--wla-orange)' }}>
-                  +{module.points} points
+                  +{learningModule.points} points
                 </div>
                 {isCompleted ? (
                   <div className="badge badge-green" style={{ fontSize: '0.9rem' }}>
@@ -129,7 +129,7 @@ export default function Learn() {
                   </div>
                 ) : (
                   <button 
-                    onClick={() => completeModule(module.id, module.points)}
+                    onClick={() => completeModule(learningModule.id, learningModule.points)}
                     className="btn-success"
                   >
                     Complete

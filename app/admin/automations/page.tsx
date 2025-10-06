@@ -1,20 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-
-export default async function Automations(){
-  const session = await getServerSession(authOptions);
-  const email = session?.user?.email || '';
-  const allowDomains = (process.env.ADMIN_DOMAINS || '').split(',').map(s=>s.trim()).filter(Boolean);
-  const allowEmails = (process.env.ADMIN_EMAILS || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
-  const emailDomain = email.split('@')[1] || '';
-  const allowed = (!!email && (allowEmails.includes(email.toLowerCase()) || allowDomains.includes(emailDomain)));
-  if (!allowed) {
-    return (<section className="section"><h1>Admin</h1><p>Access denied. Ask the WLA admin to add your email/domain to <code>ADMIN_EMAILS</code> or <code>ADMIN_DOMAINS</code>.</p></section>);
-  }
-
+export default function Automations(){
   const [track, setTrack] = useState('Brookies');
   const [sessions, setSessions] = useState('[]');
   const [series, setSeries] = useState('[]');
