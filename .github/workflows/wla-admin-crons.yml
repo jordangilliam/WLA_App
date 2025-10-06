@@ -1,0 +1,104 @@
+name: WLA Admin Automations
+
+on:
+  schedule:
+    # Daily digest at ~8:05am ET (covers DST by firing twice)
+    - cron: '5 12 * * *'
+    - cron: '5 13 * * *'
+    # Weekly anomaly scan on Fridays at ~8:10am ET
+    - cron: '10 12 * * 5'
+    - cron: '10 13 * * 5'
+  workflow_dispatch:
+    inputs:
+      endpoint:
+        description: 'Endpoint to call (daily-digest|anomaly-scan|outreach-pack|grant-pack|board-bundle|workforce)'
+        required: true
+        default: 'daily-digest'
+      track:
+        description: 'Track (Bucktails|Bass|Brookies|Gobblers|Ursids|General)'
+        required: true
+        default: 'Brookies'
+
+env:
+  APP_BASE_URL: ${{ secrets.APP_BASE_URL }}   # e.g., https://wla.yourdomain.org
+  CRON_SECRET:  ${{ secrets.CRON_SECRET }}    # must match .env CRON_SECRET in the app
+
+jobs:
+  daily-digest:
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.endpoint == 'daily-digest')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        track: [ "Bucktails", "Bass", "Brookies", "Gobblers", "Ursids" ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare payload
+        id: payload
+        shell: bash
+        run: |
+          FILE="data/sessions/${{ matrix.track }}.json"
+          if [[ ! -f "$FILE" ]]; then
+            echo "No $FILE found; using empty sessions array" >&2
+            echo '{"track":"${{ matrix.track }}","sessions":[]}' > payload.json
+          else
+            jq -c --arg track "${{ matrix.track }}" '{track:$track, sessions:.}' "$FILE" > payload.json
+          fi
+      - name: POST to /api/cron/daily-digest
+        shell: bash
+        run: |
+          bash scripts/post-json.sh "$APP_BASE_URL/api/cron/daily-digest" payload.json "$CRON_SECRET"
+
+  anomaly-scan:
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.endpoint == 'anomaly-scan')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        track: [ "Bucktails", "Bass", "Brookies", "Gobblers", "Ursids" ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare payload
+        shell: bash
+        run: |
+          FILE="data/series/${{ matrix.track }}.json"
+          if [[ ! -f "$FILE" ]]; then
+            echo "No $FILE found; using empty series" >&2
+            echo '{"track":"${{ matrix.track }}","series":[]}' > payload.json
+          else
+            jq -c --arg track "${{ matrix.track }}" '{track:$track, series:.}' "$FILE" > payload.json
+          fi
+      - name: POST to /api/cron/anomaly-scan
+        shell: bash
+        run: |
+          bash scripts/post-json.sh "$APP_BASE_URL/api/cron/anomaly-scan" payload.json "$CRON_SECRET"
+
+  manual-ops:
+    if: github.event_name == 'workflow_dispatch' && inputs.endpoint != 'daily-digest' && inputs.endpoint != 'anomaly-scan'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare payload for ${{ inputs.endpoint }}
+        shell: bash
+        run: |
+          ENDPOINT="${{ inputs.endpoint }}"
+          TRACK="${{ inputs.track }}"
+          case "$ENDPOINT" in
+            outreach-pack)
+              SRC="data/templates/outreach-pack.sample.json"
+              ;;
+            grant-pack)
+              SRC="data/templates/grant-pack.sample.json"
+              ;;
+            board-bundle)
+              SRC="data/templates/board-bundle.sample.json"
+              ;;
+            workforce)
+              SRC="data/templates/workforce.sample.json"
+              ;;
+            *)
+              echo "Unknown endpoint: $ENDPOINT"; exit 1;
+          esac
+          jq -c --arg track "$TRACK" '.track = $track' "$SRC" > payload.json
+      - name: POST to /api/cron/${{ inputs.endpoint }}
+        shell: bash
+        run: |
+          bash scripts/post-json.sh "$APP_BASE_URL/api/cron/${{ inputs.endpoint }}" payload.json "$CRON_SECRET"

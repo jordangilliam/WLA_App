@@ -1,0 +1,1 @@
+export default function BugKey(){ return (<section className='section'><h1>Bug & Beetle Key</h1><p>Practice modes here; official records via iNaturalist.</p><a className='btn' href='https://www.inaturalist.org' target='_blank'>Open iNaturalist</a></section>); }

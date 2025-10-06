@@ -1,0 +1,1 @@
+export default function Birds(){ return (<section className='section'><h1>Bird Song Identifier</h1><p>Upload/record and connect to BirdWeather.</p><a className='btn' href='https://app.birdweather.com/' target='_blank'>Open BirdWeather</a></section>); }

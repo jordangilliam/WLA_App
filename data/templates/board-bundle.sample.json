@@ -1,0 +1,22 @@
+{
+  "track": "Brookies",
+  "summary": "Quarterly highlights, cohort progress, and community partnerships.",
+  "sessions": [
+    {
+      "email": "a@example.org",
+      "team": "Blue",
+      "track": "Brookies",
+      "points": [
+        {
+          "delta": 10
+        }
+      ],
+      "readings": [
+        {}
+      ],
+      "journal": [
+        {}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "grantName": "DCNR Mini-Grant",
+  "track": "Brookies",
+  "timeframe": "FY25",
+  "narrative": "Youth-led watershed monitoring and conservation outreach.",
+  "sessions": [
+    {
+      "email": "a@example.org",
+      "team": "Blue",
+      "track": "Brookies",
+      "points": [
+        {
+          "delta": 10
+        },
+        {
+          "delta": 5
+        }
+      ],
+      "readings": [
+        {}
+      ],
+      "journal": [
+        {}
+      ]
+    },
+    {
+      "email": "b@example.org",
+      "team": "Green",
+      "track": "Brookies",
+      "points": [
+        {
+          "delta": 20
+        }
+      ],
+      "readings": [
+        {},
+        {}
+      ],
+      "journal": [
+        {}
+      ]
+    }
+  ]
+}

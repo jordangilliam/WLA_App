@@ -1,0 +1,1 @@
+export default function PlantKey(){ return (<section className='section'><h1>Plant Key</h1><p>Gamified ID practice. Use iNaturalist for verified records.</p><a className='btn' href='https://www.inaturalist.org' target='_blank'>Open iNaturalist</a></section>); }

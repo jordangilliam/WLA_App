@@ -1,0 +1,1 @@
+export default function Jobs(){ return (<section className='section'><h1>Jobs & Training</h1><p>Conservation jobs and certifications feed.</p></section>); }

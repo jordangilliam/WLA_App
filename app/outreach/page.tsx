@@ -1,0 +1,1 @@
+export default function Outreach(){ return (<section className='section'><h1>Outreach Guide</h1><p>Events, policy, officials directory. Plug in your feeds/calendars.</p></section>); }

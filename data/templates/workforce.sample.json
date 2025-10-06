@@ -1,0 +1,20 @@
+{
+  "track": "Brookies",
+  "jobs": [
+    {
+      "title": "Seasonal Fisheries Technician",
+      "org": "PA Fish & Boat Commission",
+      "location": "Centre County, PA",
+      "url": "https://example.org/job1",
+      "skills": [
+        "boat handling",
+        "data entry",
+        "water sampling"
+      ],
+      "certs": [
+        "PA Boating Safety"
+      ],
+      "deadline": "2025-11-01"
+    }
+  ]
+}

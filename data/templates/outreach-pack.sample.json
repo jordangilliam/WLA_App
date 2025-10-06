@@ -1,0 +1,20 @@
+{
+  "track": "Brookies",
+  "entries": [
+    {
+      "student": "Student Name",
+      "email": "student@example.org",
+      "activity": "Stream cleanup",
+      "date": "2025-10-05",
+      "hours": 3.5,
+      "supervisor": "Ranger Alex",
+      "notes": "Removed trash along 0.8mi stretch.",
+      "artifacts": [
+        {
+          "name": "photo1.jpg",
+          "url": "https://example.org/photo1.jpg"
+        }
+      ]
+    }
+  ]
+}
