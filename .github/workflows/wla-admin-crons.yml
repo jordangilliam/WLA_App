@@ -1,13 +1,14 @@
 name: WLA Admin Automations
 
 on:
-  schedule:
-    # Daily digest at ~8:05am ET (covers DST by firing twice)
-    - cron: '5 12 * * *'
-    - cron: '5 13 * * *'
-    # Weekly anomaly scan on Fridays at ~8:10am ET
-    - cron: '10 12 * * 5'
-    - cron: '10 13 * * 5'
+  # Schedules disabled until secrets are configured
+  # schedule:
+  #   # Daily digest at ~8:05am ET (covers DST by firing twice)
+  #   - cron: '5 12 * * *'
+  #   - cron: '5 13 * * *'
+  #   # Weekly anomaly scan on Fridays at ~8:10am ET
+  #   - cron: '10 12 * * 5'
+  #   - cron: '10 13 * * 5'
   workflow_dispatch:
     inputs:
       endpoint:
