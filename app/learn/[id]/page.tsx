@@ -18,7 +18,7 @@ export default function LessonPage({ params }: { params: Promise<{ id: string }>
         <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📚</div>
         <h1>Lesson Not Found</h1>
         <p style={{ marginBottom: '2rem', color: '#6C757D' }}>
-          The lesson you're looking for doesn't exist or has been moved.
+          The lesson you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <Link 
           href="/learn"
