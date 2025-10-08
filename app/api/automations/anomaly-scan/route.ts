@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/auth.config";
 import { gdEnsureFolder, gdUploadString, msGraph, odEnsureChildFolder, odUploadString } from "@/app/api/_lib/storage";
 
 function zscores(values: number[]){

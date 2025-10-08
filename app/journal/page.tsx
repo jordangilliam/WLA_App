@@ -1,16 +1,16 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
 export default function Journal(){
   const { award } = usePoints();
   const [entries, setEntries] = useState<{ text: string; photo?: string }[]>([]);
 
   // Load saved entries
-  React.useEffect(()=>{
+  useEffect(()=>{
     try{ const raw = localStorage.getItem('wla-journal-entries'); if(raw) setEntries(JSON.parse(raw)); }catch{}
   },[]);
 
-  React.useEffect(()=>{
+  useEffect(()=>{
     try{ localStorage.setItem('wla-journal-entries', JSON.stringify(entries)); }catch{}
   },[entries]);
   const onPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {

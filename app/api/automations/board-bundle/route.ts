@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/auth.config";
 import { gdEnsureFolder, gdUploadString, msGraph, odEnsureChildFolder, odUploadString } from "@/app/api/_lib/storage";
 
 function quarterFromDate(d: Date){
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest){
     const pts = (s.points||[]).reduce((a:any,b:any)=>a+(b?.delta||0),0);
     return { idx:i+1, email: s.email || s.userEmail || 'unknown', team: s.team || 'NoTeam', track: s.track || track || 'General', points: pts, readings: (s.readings||[]).length||0, journal: (s.journal||[]).length||0 };
   });
-  const csv = (rows.length ? (Object.keys(rows[0]).join(',') + '\n' + rows.map(r=> Object.values(r).join(',')).join('\n')) : 'idx,email,team,track,points,readings,journal\n');
+  const csv = (rows.length ? (Object.keys(rows[0]).join(',') + '\n' + rows.map((r: any)=> Object.values(r).join(',')).join('\n')) : 'idx,email,team,track,points,readings,journal\n');
 
   const out:any = { ok:true, google:null, onedrive:null };
   if (gtok){

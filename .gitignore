@@ -48,3 +48,19 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary batch scripts and deployment docs
+*.bat
+*_FIX.md
+*_DEPLOY*.md
+*_PUSH*.md
+*_INSTRUCTIONS.md
+IMPROVEMENTS.md
+FILES_CHANGED.md
+SUCCESS_*.md
+
+# Sensitive files with secrets
+SECRETS.txt
+.env
+.env.local
+.env*.local

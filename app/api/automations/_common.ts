@@ -1,5 +1,5 @@
 // Utility: simple HTML render with a style
-function wrapHtml(title: string, body: string) {
+export function wrapHtml(title: string, body: string) {
   return `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title>
   <style>
     body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; line-height:1.5;}
@@ -12,15 +12,15 @@ function wrapHtml(title: string, body: string) {
   </style></head><body>${body}</body></html>`;
 }
 
-function toCSV(rows: any[]) {
+export function toCSV(rows: Record<string, any>[]) {
   if(!rows.length) return '';
   const headers = Object.keys(rows[0]);
-  const esc = (v:any) => {
+  const esc = (v: any) => {
     const s = String(v ?? '');
     if (s.includes(',') || s.includes('\n') || s.includes('"')) return '"' + s.replace(/"/g, '""') + '"';
     return s;
   };
   const lines = [headers.join(',')];
-  rows.forEach(r => lines.push(headers.map(h=>esc(r[h])).join(',')));
+  rows.forEach((r: Record<string, any>) => lines.push(headers.map(h=>esc(r[h])).join(',')));
   return lines.join('\n');
 }
