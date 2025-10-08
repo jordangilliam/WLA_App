@@ -3,10 +3,9 @@ import React from 'react';
 import lessons from '../_catalog';
 import { LessonView } from '../_Lesson';
 import Link from 'next/link';
-import { use } from 'react';
 
-export default function LessonPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function LessonPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   
   const lesson = lessons.find(l => l.id === id);
   const idx = lessons.findIndex(l => l.id === id);
