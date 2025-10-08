@@ -170,21 +170,21 @@ export function LessonView({ lesson, onDone }:{lesson: Lesson, onDone: ()=>void}
           {!showResult ? (
             <button 
               onClick={submit}
-              disabled={Object.keys(answers).length < lesson.quiz.length}
+              disabled={!lesson.quiz || Object.keys(answers).length < lesson.quiz.length}
               style={{
                 padding: '0.875rem 2rem',
                 fontSize: '1rem',
                 fontWeight: 600,
                 borderRadius: '8px',
-                background: Object.keys(answers).length < lesson.quiz.length ? '#CCC' : 'linear-gradient(135deg, #0077B6, #023047)',
+                background: (!lesson.quiz || Object.keys(answers).length < lesson.quiz.length) ? '#CCC' : 'linear-gradient(135deg, #0077B6, #023047)',
                 color: 'white',
                 border: 'none',
-                cursor: Object.keys(answers).length < lesson.quiz.length ? 'not-allowed' : 'pointer',
+                cursor: (!lesson.quiz || Object.keys(answers).length < lesson.quiz.length) ? 'not-allowed' : 'pointer',
                 transition: 'transform 0.2s',
                 width: '100%'
               }}
               onMouseOver={(e) => {
-                if(Object.keys(answers).length >= lesson.quiz.length) {
+                if(lesson.quiz && Object.keys(answers).length >= lesson.quiz.length) {
                   e.currentTarget.style.transform = 'translateY(-2px)';
                 }
               }}
