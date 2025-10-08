@@ -1,140 +1,260 @@
 'use client';
-import { useState } from 'react';
-import { usePoints } from '@/ui/points/PointsProvider';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import lessons from './_catalog';
 
-type Module = {
-  id: string;
-  title: string;
-  icon: string;
-  description: string;
-  points: number;
-  category: string;
-  completed?: boolean;
-};
+export default function LearnHome(){
+  const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
+  
+  useEffect(() => {
+    // Load completed lessons from points history
+    try {
+      const raw = localStorage.getItem('wla-points') || '[]';
+      const points = JSON.parse(raw);
+      const completed = new Set<string>();
+      points.forEach((p: any) => {
+        if (p.reason?.includes('Quiz:') || p.reason?.includes('Completed:')) {
+          const lessonTitle = p.reason.split(': ')[1];
+          const lesson = lessons.find(l => l.title === lessonTitle);
+          if (lesson) completed.add(lesson.id);
+        }
+      });
+      setCompletedLessons(completed);
+    } catch {}
+  }, []);
 
-const LEARNING_MODULES: Module[] = [
-  { id: 'pa-history', title: 'PA Conservation History', icon: '📜', description: 'Learn about Pennsylvania\'s rich conservation heritage and wildlife recovery stories', points: 15, category: 'History' },
-  { id: 'watershed', title: 'Watershed Science', icon: '💧', description: 'Understand stream ecology, water quality, and aquatic ecosystems', points: 20, category: 'Science' },
-  { id: 'wildlife-id', title: 'Wildlife Identification', icon: '🦌', description: 'Master PA wildlife species, habitats, and behaviors', points: 15, category: 'Biology' },
-  { id: 'native-traditions', title: 'Native American Traditions', icon: '🪶', description: 'Explore indigenous conservation wisdom and land stewardship', points: 15, category: 'Culture' },
-  { id: 'habitat-restoration', title: 'Habitat Restoration', icon: '🌲', description: 'Learn techniques for restoring forests, wetlands, and streams', points: 20, category: 'Conservation' },
-  { id: 'policy', title: 'Conservation Policy', icon: '⚖️', description: 'Understand wildlife laws, regulations, and advocacy', points: 15, category: 'Policy' },
-  { id: 'climate-impact', title: 'Climate & Wildlife', icon: '🌡️', description: 'Explore climate change impacts on PA ecosystems', points: 20, category: 'Science' },
-  { id: 'tracking', title: 'Wildlife Tracking', icon: '🐾', description: 'Master animal track and sign identification', points: 10, category: 'Skills' },
-  { id: 'reintroduction', title: 'Species Reintroduction', icon: '🦅', description: 'Success stories: elk, river otter, peregrine falcon, and more', points: 15, category: 'Conservation' },
-];
+  const tracks = Array.from(new Set(lessons.map(l=>l.track)));
+  const grouped: Record<string, typeof lessons> = {};
+  tracks.forEach(t => grouped[t] = lessons.filter(l=>l.track===t));
 
-export default function Learn() {
-  const { award } = usePoints();
-  const [completed, setCompleted] = useState<Set<string>>(new Set());
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-
-  const categories = ['All', ...Array.from(new Set(LEARNING_MODULES.map(m => m.category)))];
-  const filteredModules = selectedCategory === 'All' 
-    ? LEARNING_MODULES 
-    : LEARNING_MODULES.filter(m => m.category === selectedCategory);
-
-  const completeModule = (moduleId: string, points: number) => {
-    if (!completed.has(moduleId)) {
-      setCompleted(new Set(completed).add(moduleId));
-      award(points, `learn-${moduleId}`);
-    }
+  const trackColors: Record<string, string> = {
+    'Brookies': '#0077B6',
+    'Bass': '#06D6A0',
+    'Bucktails': '#8B4513',
+    'Gobblers': '#9D4EDD',
+    'Ursids': '#2C1810',
+    'All': '#023047'
   };
 
-  const totalPoints = LEARNING_MODULES.reduce((sum, m) => sum + m.points, 0);
-  const earnedPoints = Array.from(completed).reduce((sum, id) => {
-    const learningModule = LEARNING_MODULES.find(m => m.id === id);
-    return sum + (learningModule?.points || 0);
-  }, 0);
-  const progress = (earnedPoints / totalPoints) * 100;
+  const trackIcons: Record<string, string> = {
+    'Brookies': '🐟',
+    'Bass': '🎣',
+    'Bucktails': '🦌',
+    'Gobblers': '🦃',
+    'Ursids': '🐻',
+    'All': '🌲'
+  };
+
+  const trackDescriptions: Record<string, string> = {
+    'Brookies': 'Stream ecology, watershed science, and brook trout conservation',
+    'Bass': 'Lake ecology, aquatic invasives, and responsible angling',
+    'Bucktails': 'Deer ecology, forest management, and wildlife populations',
+    'Gobblers': 'Turkey habitat, mast cycles, and predator-prey dynamics',
+    'Ursids': 'Black bear ecology, coexistence, and landscape connectivity',
+    'All': 'Civic engagement, outreach, and conservation policy'
+  };
+
+  const totalLessons = lessons.length;
+  const completedCount = completedLessons.size;
+  const progressPercent = Math.round((completedCount / totalLessons) * 100);
 
   return (
     <>
-      <section className="section bg-green animate-slide-up" style={{ textAlign: 'center' }}>
-        <h1 style={{ color: 'white' }}>📚 Learning Center</h1>
-        <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto' }}>
-          Master conservation science, wildlife biology, and PA natural history. Complete modules to earn points and badges!
+      {/* Hero Section */}
+      <section className="section" style={{
+        background: 'linear-gradient(135deg, #023047, #0077B6)',
+        color: 'white',
+        textAlign: 'center',
+        padding: '3rem 1.5rem'
+      }}>
+        <h1 style={{ color: 'white', fontSize: '2.5rem', marginBottom: '1rem' }}>
+          📚 WLA Learning Center
+        </h1>
+        <p style={{ 
+          fontSize: '1.2rem', 
+          maxWidth: '700px', 
+          margin: '0 auto 2rem',
+          opacity: 0.95
+        }}>
+          Master conservation science, wildlife biology, and PA natural history through interactive lessons and quizzes.
         </p>
-      </section>
-
-      {/* Progress Tracker */}
-      <section className="section" style={{ background: 'linear-gradient(135deg, #023047, #0077B6)', color: 'white' }}>
-        <div className="row" style={{ alignItems: 'center' }}>
-          <div style={{ flex: '2' }}>
-            <h2 style={{ color: 'white', marginBottom: '0.5rem' }}>Your Learning Progress</h2>
-            <div className="progress-bar" style={{ background: 'rgba(255,255,255,0.2)', height: '16px', marginBottom: '0.5rem' }}>
-              <div className="progress-fill" style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #06D6A0, #FFB703)' }}></div>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.95rem', opacity: 0.9 }}>
-              {completed.size} of {LEARNING_MODULES.length} modules completed • {earnedPoints}/{totalPoints} points
-            </p>
+        
+        {/* Progress Bar */}
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto',
+          background: 'rgba(255,255,255,0.2)',
+          borderRadius: '12px',
+          padding: '1.5rem',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between',
+            marginBottom: '0.75rem',
+            fontSize: '0.95rem',
+            fontWeight: 600
+          }}>
+            <span>{completedCount} / {totalLessons} Lessons Completed</span>
+            <span>{progressPercent}%</span>
           </div>
-          <div style={{ fontSize: '4rem', textAlign: 'center' }}>
-            {Math.round(progress)}%
+          <div style={{
+            background: 'rgba(255,255,255,0.3)',
+            height: '12px',
+            borderRadius: '6px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: `${progressPercent}%`,
+              height: '100%',
+              background: 'linear-gradient(90deg, #06D6A0, #FFB703)',
+              transition: 'width 0.5s ease'
+            }} />
           </div>
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="section">
-        <h3>Filter by Category</h3>
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={selectedCategory === cat ? 'btn-purple' : 'btn-outline'}
-              style={{ fontSize: '0.9rem' }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Learning Modules */}
-      <div className="row">
-        {filteredModules.map(learningModule => {
-          const isCompleted = completed.has(learningModule.id);
+      {/* Tracks Section */}
+      <div className="section">
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2rem' }}>
+          Choose Your Learning Track
+        </h2>
+        
+        {tracks.map(track=> {
+          const trackLessons = grouped[track];
+          const trackCompleted = trackLessons.filter(l => completedLessons.has(l.id)).length;
+          const trackProgress = Math.round((trackCompleted / trackLessons.length) * 100);
+          
           return (
-            <div key={learningModule.id} className="card section animate-slide-up" style={{
-              opacity: isCompleted ? 0.7 : 1,
-              borderLeft: isCompleted ? '4px solid var(--wla-green)' : '4px solid transparent'
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
-                {learningModule.icon}
-              </div>
-              <div style={{ 
-                display: 'inline-block',
-                padding: '0.25rem 0.75rem',
-                background: '#F8F9FA',
-                borderRadius: '20px',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                marginBottom: '0.75rem'
+            <div 
+              key={track} 
+              className="section" 
+              style={{
+                background: 'white',
+                borderRadius: '16px',
+                border: '2px solid #E9ECEF',
+                overflow: 'hidden',
+                marginBottom: '2rem',
+                transition: 'transform 0.2s, box-shadow 0.2s'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* Track Header */}
+              <div style={{
+                background: trackColors[track],
+                color: 'white',
+                padding: '1.5rem 2rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem'
               }}>
-                {learningModule.category}
-              </div>
-              <h3 style={{ marginBottom: '0.75rem' }}>{learningModule.title}</h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', flexGrow: 1 }}>
-                {learningModule.description}
-              </p>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontWeight: 700, color: 'var(--wla-orange)' }}>
-                  +{learningModule.points} points
+                <div style={{ fontSize: '3rem' }}>{trackIcons[track]}</div>
+                <div style={{ flex: 1 }}>
+                  <h2 style={{ color: 'white', margin: '0 0 0.25rem 0' }}>{track}</h2>
+                  <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>
+                    {trackDescriptions[track]}
+                  </p>
                 </div>
-                {isCompleted ? (
-                  <div className="badge badge-green" style={{ fontSize: '0.9rem' }}>
-                    ✓ Completed
-                  </div>
-                ) : (
-                  <button 
-                    onClick={() => completeModule(learningModule.id, learningModule.points)}
-                    className="btn-success"
-                  >
-                    Complete
-                  </button>
-                )}
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 700 }}>{trackProgress}%</div>
+                  <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>Complete</div>
+                </div>
+              </div>
+
+              {/* Lessons List */}
+              <div style={{ padding: '1.5rem 2rem' }}>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {trackLessons.map(lesson=> {
+                    const isCompleted = completedLessons.has(lesson.id);
+                    return (
+                      <Link 
+                        key={lesson.id} 
+                        href={`/learn/${lesson.id}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '1.5rem',
+                          padding: '1.25rem',
+                          background: isCompleted ? '#F0FDF4' : '#F8F9FA',
+                          borderRadius: '10px',
+                          border: `2px solid ${isCompleted ? '#86EFAC' : '#E9ECEF'}`,
+                          textDecoration: 'none',
+                          color: 'inherit',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = isCompleted ? '#DCFCE7' : '#E9ECEF';
+                          e.currentTarget.style.borderColor = trackColors[track];
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = isCompleted ? '#F0FDF4' : '#F8F9FA';
+                          e.currentTarget.style.borderColor = isCompleted ? '#86EFAC' : '#E9ECEF';
+                        }}
+                      >
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          background: isCompleted ? '#22C55E' : trackColors[track],
+                          color: 'white',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 700,
+                          fontSize: '1.2rem',
+                          flexShrink: 0
+                        }}>
+                          {isCompleted ? '✓' : trackLessons.indexOf(lesson) + 1}
+                        </div>
+                        
+                        <div style={{ flex: 1 }}>
+                          <h3 style={{ 
+                            margin: '0 0 0.25rem 0', 
+                            fontSize: '1.1rem',
+                            color: '#023047'
+                          }}>
+                            {lesson.title}
+                          </h3>
+                          <div style={{ 
+                            fontSize: '0.875rem', 
+                            color: '#6C757D',
+                            display: 'flex',
+                            gap: '1rem',
+                            alignItems: 'center'
+                          }}>
+                            <span>⏱️ {lesson.minutes} min</span>
+                            {lesson.quiz && lesson.quiz.length > 0 && (
+                              <span>✅ {lesson.quiz.length} quiz {lesson.quiz.length === 1 ? 'question' : 'questions'}</span>
+                            )}
+                            {isCompleted && (
+                              <span style={{ 
+                                color: '#22C55E', 
+                                fontWeight: 600 
+                              }}>
+                                Completed
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div style={{ 
+                          fontSize: '1.5rem',
+                          color: trackColors[track],
+                          flexShrink: 0
+                        }}>
+                          →
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           );
@@ -142,34 +262,31 @@ export default function Learn() {
       </div>
 
       {/* Resources Section */}
-      <section className="section" style={{ background: '#F8F9FA' }}>
+      <section className="section" style={{ background: '#F8F9FA', borderRadius: '16px', padding: '2rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>📖 Additional Resources</h2>
         <div className="row">
-          <div className="card section">
-            <h3>🎓 External Learning</h3>
-            <ul style={{ lineHeight: 2 }}>
-              <li><a href="https://www.pgc.pa.gov/Education/Pages/default.aspx" target="_blank" rel="noopener noreferrer">PA Game Commission Education</a></li>
-              <li><a href="https://www.fishandboat.com/Education/Pages/default.aspx" target="_blank" rel="noopener noreferrer">PA Fish & Boat Commission</a></li>
-              <li><a href="https://www.dcnr.pa.gov/Education/Pages/default.aspx" target="_blank" rel="noopener noreferrer">DCNR Environmental Education</a></li>
+          <div className="card section" style={{ flex: 1 }}>
+            <h3>🎓 PA State Agencies</h3>
+            <ul style={{ lineHeight: 2.2 }}>
+              <li><a href="https://www.pa.gov/agencies/pgc/education/" target="_blank" rel="noopener">PA Game Commission Education</a></li>
+              <li><a href="https://www.pa.gov/agencies/fishandboat/education/" target="_blank" rel="noopener">PA Fish & Boat Commission</a></li>
+              <li><a href="https://www.dcnr.pa.gov/Education/" target="_blank" rel="noopener">DCNR Environmental Education</a></li>
             </ul>
           </div>
-          <div className="card section">
-            <h3>📺 Video Tutorials</h3>
-            <ul style={{ lineHeight: 2 }}>
-              <li>Stream Sampling Techniques</li>
-              <li>Macro-Invertebrate Identification</li>
-              <li>Wildlife Camera Setup</li>
-              <li>Habitat Assessment Protocols</li>
+          <div className="card section" style={{ flex: 1 }}>
+            <h3>🔬 Penn State Extension</h3>
+            <ul style={{ lineHeight: 2.2 }}>
+              <li><a href="https://extension.psu.edu/natural-resources" target="_blank" rel="noopener">Natural Resources</a></li>
+              <li><a href="https://extension.psu.edu/wildlife" target="_blank" rel="noopener">Wildlife Resources</a></li>
+              <li><a href="https://extension.psu.edu/water-resources" target="_blank" rel="noopener">Water Resources</a></li>
             </ul>
           </div>
-          <div className="card section">
-            <h3>📝 Quizzes & Assessments</h3>
-            <p>Test your knowledge with interactive quizzes (coming soon):</p>
-            <ul style={{ lineHeight: 2 }}>
-              <li>PA Wildlife Quiz</li>
-              <li>Water Quality Assessment</li>
-              <li>Conservation Policy Test</li>
-              <li>Field Skills Challenge</li>
+          <div className="card section" style={{ flex: 1 }}>
+            <h3>📋 Academic Standards</h3>
+            <ul style={{ lineHeight: 2.2 }}>
+              <li><a href="https://www.pa.gov/agencies/education/" target="_blank" rel="noopener">PA Dept. of Education</a></li>
+              <li><a href="https://www.pdesas.org/" target="_blank" rel="noopener">SAS (Standards Aligned System)</a></li>
+              <li><a href="https://static.pdesas.org/content/documents/academic_standards_for_environment_and_ecology.pdf" target="_blank" rel="noopener">Environment & Ecology Standards</a></li>
             </ul>
           </div>
         </div>
