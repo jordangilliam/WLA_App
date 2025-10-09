@@ -349,7 +349,7 @@ export default function BirdSongs() {
                     {bird.rarity}
                   </div>
                   <p style={{ fontSize: '0.85rem', color: '#6C757D', margin: '0.5rem 0', fontStyle: 'italic' }}>
-                    "{bird.song}"
+                    &ldquo;{bird.song}&rdquo;
                   </p>
                   <div style={{ color: '#FFB703', fontWeight: 600, fontSize: '0.9rem' }}>
                     +{bird.points} points
