@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import lessons from '../_catalog';
-import { LessonView } from '../_Lesson';
+import { LessonViewEnhanced } from '../_LessonEnhanced';
 import Link from 'next/link';
 
 export default function LessonPage({ params }: { params: { id: string } }) {
@@ -66,7 +66,7 @@ export default function LessonPage({ params }: { params: { id: string } }) {
           ← Back to All Lessons
         </Link>
       </div>
-      <LessonView lesson={lesson} onDone={handleDone} />
+      <LessonViewEnhanced lesson={lesson} onDone={handleDone} />
     </>
   );
 }

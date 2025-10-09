@@ -2,26 +2,30 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import lessons from './_catalog';
+import { getAllProgress, getProgressStats } from './_progress';
 
 export default function LearnHome(){
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
+  const [stats, setStats] = useState<any>(null);
   
   useEffect(() => {
-    // Load completed lessons from points history
-    try {
-      const raw = localStorage.getItem('wla-points') || '[]';
-      const points = JSON.parse(raw);
-      const completed = new Set<string>();
-      points.forEach((p: any) => {
-        if (p.reason?.includes('Quiz:') || p.reason?.includes('Completed:')) {
-          const lessonTitle = p.reason.split(': ')[1];
-          const lesson = lessons.find(l => l.title === lessonTitle);
-          if (lesson) completed.add(lesson.id);
-        }
-      });
-      setCompletedLessons(completed);
-    } catch {}
+    loadProgress();
+    
+    // Listen for progress updates
+    const handleUpdate = () => loadProgress();
+    window.addEventListener('progress-updated', handleUpdate);
+    return () => window.removeEventListener('progress-updated', handleUpdate);
   }, []);
+  
+  const loadProgress = () => {
+    const progress = getAllProgress();
+    const completed = new Set<string>();
+    Object.entries(progress).forEach(([id, data]: [string, any]) => {
+      if (data.completed) completed.add(id);
+    });
+    setCompletedLessons(completed);
+    setStats(getProgressStats(lessons));
+  };
 
   const tracks = Array.from(new Set(lessons.map(l=>l.track)));
   const grouped: Record<string, typeof lessons> = {};
