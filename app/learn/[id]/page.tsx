@@ -7,8 +7,11 @@ import Link from 'next/link';
 export default function LessonPage({ params }: { params: { id: string } }) {
   const { id } = params;
   
-  const lesson = lessons.find(l => l.id === id);
-  const idx = lessons.findIndex(l => l.id === id);
+  // Decode URL-encoded ID (handles &, %, etc.)
+  const decodedId = decodeURIComponent(id);
+  
+  const lesson = lessons.find(l => l.id === decodedId || l.id === id);
+  const idx = lessons.findIndex(l => l.id === decodedId || l.id === id);
   const nextId = (idx >= 0 && idx < lessons.length - 1) ? lessons[idx + 1].id : null;
   
   if (!lesson) {

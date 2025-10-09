@@ -180,7 +180,7 @@ export default function LearnHome(){
                     return (
                       <Link 
                         key={lesson.id} 
-                        href={`/learn/${lesson.id}`}
+                        href={`/learn/${encodeURIComponent(lesson.id)}`}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
