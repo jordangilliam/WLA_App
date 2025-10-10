@@ -66,7 +66,7 @@ export default function LearnPage() {
             maxWidth: '700px',
             margin: '0 auto 2rem',
           }}>
-            Explore PA's rich conservation heritage through hands-on learning
+            Explore PA&apos;s rich conservation heritage through hands-on learning
           </p>
 
           {/* Stats */}
