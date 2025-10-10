@@ -646,5 +646,405 @@ Invasive plants displace native species, reduce wildlife food and cover, and can
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
+  
+  {
+    id: 'terrestrial-riparian-buffers-wildlife',
+    slug: 'riparian-buffers-wildlife-habitat',
+    track: 'Gobblers',
+    title: 'Riparian Buffers & Wildlife Habitat',
+    description: 'Learn how riparian zones function as wildlife engines, connecting uplands to streams while providing critical food, cover, and travel corridors.',
+    estimatedMinutes: 35,
+    difficulty: 'intermediate',
+    objectives: [
+      'Explain the three-zone riparian buffer model',
+      'Understand how buffers link uplands to stream health',
+      'Select native plants appropriate for each zone',
+      'Connect buffer functions to wildlife benefits',
+    ],
+    content: `## Riparian Zones: Wildlife Engines
+
+**Core Principle**: Riparian edges are wildlife engines—buffers link uplands to stream health, and planting choices directly affect wildlife value.
+
+These transitional zones between land and water are disproportionately important for biodiversity. Though riparian areas may cover only 2-5% of the landscape, they support 70-80% of wildlife species at some point in their life cycles.
+
+### What Makes Riparian Zones Special?
+
+**Unique Characteristics**
+- **Water availability** year-round
+- **Diverse vegetation** structure (edge effect)
+- **Microclimate** moderation (cooler in summer, warmer in winter)
+- **Food abundance** (insects, seeds, berries)
+- **Travel corridors** connecting habitats
+- **Thermal refuge** for wildlife
+
+**Multifunctional Value**
+- Wildlife habitat
+- Water quality protection
+- Flood mitigation
+- Carbon storage
+- Recreational opportunity
+- Aesthetic beauty
+
+## The Three-Zone Buffer Model
+
+Penn State Extension recommends a three-zone riparian buffer system, each serving specific functions:
+
+### Zone 1: Streamside Forest (Closest to Water)
+
+**Width**: Minimum 25 feet, ideally 50+ feet
+
+**Composition**
+- **Trees**: Native hardwoods and conifers
+  - Sycamore, river birch, black willow (wet sites)
+  - Red maple, green ash, cottonwood
+  - Eastern hemlock (shading cold-water streams)
+- **Shrubs**: Multi-flora dogwood, spicebush, elderberry
+- **Groundcover**: Ferns, sedges, native grasses
+
+**Primary Functions**
+- **Maximum shade** for stream temperature control
+- **Root systems** stabilize banks
+- **Woody debris** inputs to stream (fish habitat)
+- **Leaf litter** = food base for aquatic insects
+- **Nutrient uptake** (especially nitrogen)
+
+**Wildlife Benefits**
+- **Amphibians**: Salamanders, frogs need moist understory
+- **Birds**: Warblers, thrushes forage in canopy and leaf litter
+- **Mammals**: Raccoons, otters, mink hunt along streams
+- **Reptiles**: Turtles nest in sunny gaps
+- **Insects**: Mayflies, caddisflies emerge from stream
+
+### Zone 2: Managed Forest (Middle Zone)
+
+**Width**: 50-100 feet from edge of Zone 1
+
+**Composition**
+- **Mix of trees**: Oak, hickory, cherry, tulip poplar
+- **Shrubs**: Viburnum, serviceberry, hazelnut
+- **Small trees**: Dogwood, redbud, ironwood
+- **Diversity is key**
+
+**Primary Functions**
+- **Sediment filtration** (particles settle as water slows)
+- **Nutrient removal** (plants absorb excess nitrogen, phosphorus)
+- **Wildlife food production** (mast, berries)
+- **Nesting habitat** (variety of structures)
+
+**Wildlife Benefits**
+- **Game birds**: Turkey, grouse use edge habitat
+- **Deer**: Browse and travel corridors
+- **Songbirds**: Diverse vertical structure = diverse bird community
+- **Small mammals**: Chipmunks, squirrels, rabbits
+- **Pollinators**: Early flowering shrubs critical for bees
+
+### Zone 3: Grass Filter Strip (Furthest from Water)
+
+**Width**: Minimum 20 feet
+
+**Composition**
+- **Native warm-season grasses**: Switchgrass, big bluestem, Indiangrass
+- **Wildflowers**: Black-eyed Susan, coneflower, asters
+- **Cool-season grasses** where appropriate
+- **NO lawn grass** (too short, low wildlife value)
+
+**Primary Functions**
+- **Sediment trapping** (first line of defense)
+- **Nutrient filtration**
+- **Pesticide/herbicide buffer**
+- **Stormwater absorption**
+
+**Wildlife Benefits**
+- **Grassland birds**: Declining species like meadowlarks, sparrows
+- **Small mammals**: Voles, shrews (prey base)
+- **Pollinators**: Diverse flowers = robust bee/butterfly communities
+- **Upland game**: Pheasants, rabbits need dense grass cover
+
+## How Buffers Improve Water Quality
+
+### Temperature Regulation
+
+**The Problem**
+- Stream temperatures above 68°F stress or kill cold-water fish
+- Loss of riparian shade is primary cause of warming
+- Warmer water holds less dissolved oxygen
+
+**Buffer Solution**
+- Mature tree canopy provides 70-90% shade
+- Can reduce stream temperature by 5-15°F
+- Critical for brook trout persistence
+
+### Sediment Reduction
+
+**The Problem**
+- Eroded soil carries nutrients, pesticides
+- Smothers fish eggs and macroinvertebrate habitat
+- Increases turbidity (limits photosynthesis)
+
+**Buffer Solution**
+- Vegetation slows runoff
+- Roots bind soil
+- Particles settle out before reaching water
+- Can reduce sediment loads by 60-90%
+
+### Nutrient Filtering
+
+**The Problem**
+- Excess nitrogen and phosphorus cause algae blooms
+- Low oxygen when algae decompose
+- Sources: Fertilizer, manure, septic systems
+
+**Buffer Solution**
+- Plants absorb nutrients through roots
+- Denitrification in wet soils converts nitrate to harmless nitrogen gas
+- Can remove 50-80% of nutrients from runoff
+
+## Plant Selection Strategy
+
+### Match Plant to Site
+
+**Assess Site Conditions**
+1. **Hydrology**: Wet, moist, or dry?
+2. **Soils**: Texture, pH, drainage
+3. **Light**: Full sun, partial, or shade?
+4. **Space**: How wide is the planting area?
+5. **Existing vegetation**: What's already there?
+
+**Plant Accordingly**
+- **Wet sites** (seasonally flooded): Black willow, sycamore, elderberry
+- **Moist sites**: River birch, spicebush, dogwood
+- **Dry upland edges**: Oak, hickory, hazelnut
+
+### Wildlife Value Priorities
+
+**Food Sources**
+- **Soft mast** (berries): Elderberry, dogwood, viburnum
+- **Hard mast** (nuts): Oak, hickory, hazelnut
+- **Seeds**: Grasses, wildflowers
+- **Insects**: Native plants support 10-50x more insects than non-natives
+
+**Cover & Structure**
+- **Dense shrubs**: Nesting sites, hiding from predators
+- **Evergreens**: Winter cover (hemlock, pine)
+- **Hollow trees** (eventual): Cavity nesters (owls, wood ducks, squirrels)
+- **Vertical layers**: Ground, shrub, understory, canopy
+
+**Seasonal Considerations**
+- **Early flowers** (March-April): Critical for pollinators
+- **Summer berries**: Bird food during nesting
+- **Fall mast**: Fuels migration, winter prep
+- **Winter structure**: Cover during harsh weather
+
+## Establishment & Maintenance
+
+### Planting Techniques
+
+**Bare-Root vs. Container Stock**
+- **Bare-root**: Cheaper, plant in spring
+- **Container**: More expensive, plant spring-fall
+- **Quality**: Inspect roots, reject circling or damaged
+
+**Spacing**
+- **Trees**: 8-12 feet apart
+- **Shrubs**: 4-6 feet apart
+- **Grasses**: Broadcast seed or plugs 1-2 feet apart
+
+**Planting Steps**
+1. Dig hole twice as wide as root ball
+2. Place plant at same depth as in container
+3. Backfill, eliminate air pockets
+4. Water thoroughly
+5. Mulch (3-4 inches, pull back from stem)
+
+### Weed Control
+
+**First 3 Years Critical**
+- Weeds compete for water and nutrients
+- Can overtop and kill young plants
+
+**Methods**
+- **Mulch**: Wood chips, straw (not hay)
+- **Fabric**: Landscape fabric with holes for plants
+- **Mowing**: Keep surrounding grass short
+- **Hand-weeding**: Around individual plants
+- **Herbicides**: Educational discussion only (see invasives lesson)
+
+### Protection from Browsing
+
+**Deer, Rabbits, Voles**
+- Tree shelters (tubes) for seedlings
+- Fencing for larger areas
+- Repellents (limited effectiveness)
+- Plant diversity (some species less palatable)
+
+## Monitoring Success
+
+### What to Measure
+
+**Survival Rate**
+- Target: >70% after first year
+- Replace failures year 2
+
+**Growth**
+- Measure height annually
+- Trees should add 1-2+ feet/year once established
+- Poor growth = investigate (competition, browsing, soil)
+
+**Wildlife Use**
+- **Birds**: Conduct point counts, note nesting
+- **Mammals**: Track surveys, trail cameras
+- **Amphibians**: Call surveys, visual surveys
+- **Insects**: Sweep net samples, photo documentation
+
+**Water Quality**
+- Compare upstream vs. downstream
+- Before vs. after buffer establishment
+- Parameters: Temperature, turbidity, nutrients
+
+## Economic & Policy Context
+
+### Cost-Share Programs
+
+**USDA Programs**
+- EQIP (Environmental Quality Incentives Program)
+- CRP (Conservation Reserve Program)
+- CSP (Conservation Stewardship Program)
+
+**PA Programs**
+- Conservation District cost-share
+- Growing Greener grants
+- Chesapeake Bay Program funding
+
+**What's Covered**
+- Plant materials (50-100%)
+- Site preparation
+- Fencing
+- Technical assistance
+
+### Return on Investment
+
+**Upstream Prevention vs. Downstream Treatment**
+- **Riparian buffers**: $500-2,000/acre (one-time)
+- **Stream restoration**: $50,000-500,000/mile
+- **Water treatment**: Ongoing annual costs
+
+**Penn State research shows**:
+- Every $1 spent on buffers saves $10-100 on downstream fixes
+- Multifunctional benefits (flood reduction, wildlife, recreation)
+- Increases property values near quality habitat
+
+## Career Connections
+
+**Jobs Involving Riparian Management**
+- **Conservation Planner**: Design buffer systems
+- **Habitat Restoration Specialist**: Implement projects
+- **Wildlife Biologist**: Monitor populations
+- **Watershed Coordinator**: Work with landowners
+- **Nursery Manager**: Grow native plants
+
+**Skills You're Building**
+- Plant identification
+- Site assessment
+- Project planning
+- Landowner communication
+- Monitoring & evaluation
+
+## Communication Challenge
+
+**Talk to a Landowner**
+
+Scenario: Farmer concerned buffers waste productive land.
+
+Your response:
+"I understand you want to use every acre productively. Here's what research shows: the outer 30 feet of a field next to a stream often produces below-average yields due to wet soils and flooding. Converting that 30 feet to buffer doesn't cost you much productivity, but it filters nutrients you've paid for—keeping them on your farm instead of in the stream. Plus, USDA cost-share can pay for establishment, and you gain wildlife habitat for hunting or watching. Over time, reduced erosion means more topsoil stays put. It's a win for your farm AND the stream."`,
+    quiz: [
+      {
+        id: 'q1',
+        prompt: 'What is the minimum recommended width for Zone 1 (streamside forest) in a riparian buffer?',
+        choices: [
+          '10 feet',
+          '25 feet (ideally 50+ feet)',
+          '100 feet',
+          '5 feet',
+        ],
+        correctIndex: 1,
+        explanation: 'Penn State Extension recommends a minimum of 25 feet for Zone 1, with 50+ feet being ideal. This zone provides critical shade, bank stabilization, and direct inputs to the stream ecosystem.',
+      },
+      {
+        id: 'q2',
+        prompt: 'Why are riparian zones called "wildlife engines" even though they cover only 2-5% of the landscape?',
+        choices: [
+          'They are not actually important for wildlife',
+          'They support 70-80% of wildlife species at some point in their life cycles',
+          'They only benefit aquatic species',
+          'They have no special value',
+        ],
+        correctIndex: 1,
+        explanation: 'Despite covering only 2-5% of the landscape, riparian areas support 70-80% of wildlife species at some point in their life cycles. The combination of water, diverse vegetation, food abundance, and travel corridors makes them disproportionately valuable.',
+      },
+      {
+        id: 'q3',
+        prompt: 'How much can mature riparian tree canopy reduce stream temperature?',
+        choices: [
+          '1-2°F',
+          '5-15°F',
+          '20-30°F',
+          'Shade has no effect on temperature',
+        ],
+        correctIndex: 1,
+        explanation: 'Mature riparian tree canopy providing 70-90% shade can reduce stream temperature by 5-15°F. This is critical for cold-water fish like brook trout, which cannot survive temperatures above 68°F.',
+      },
+      {
+        id: 'q4',
+        prompt: 'What percentage of sediment can properly established riparian buffers remove from runoff?',
+        choices: [
+          '5-10%',
+          '20-30%',
+          '60-90%',
+          'Buffers do not reduce sediment',
+        ],
+        correctIndex: 2,
+        explanation: 'Properly established riparian buffers can reduce sediment loads by 60-90%. Vegetation slows runoff velocity, allowing particles to settle, while roots bind soil and prevent erosion.',
+      },
+      {
+        id: 'q5',
+        prompt: 'According to Penn State research, what is the cost-benefit ratio of riparian buffers vs. downstream fixes?',
+        choices: [
+          'Buffers cost more than fixes',
+          'Every $1 spent on buffers saves $10-100 on downstream fixes',
+          'There is no cost difference',
+          'Buffers are always more expensive',
+        ],
+        correctIndex: 1,
+        explanation: 'Penn State research shows that every dollar spent on upstream prevention through riparian buffers saves $10-100 on downstream treatment and restoration. Buffers provide multifunctional benefits at a fraction of the cost of fixing problems after they occur.',
+      },
+    ],
+    resources: [
+      {
+        label: 'Penn State Extension: Riparian Forest Buffers',
+        url: 'https://extension.psu.edu/riparian-forest-buffers',
+        type: 'article',
+      },
+      {
+        label: 'PSU Extension: Native Plant Selection',
+        url: 'https://extension.psu.edu/native-plants',
+        type: 'article',
+      },
+      {
+        label: 'Alliance for the Chesapeake Bay: Buffer Resources',
+        url: 'https://www.allianceforthebay.org/our-work/restore/riparian-forest-buffers/',
+        type: 'article',
+      },
+    ],
+    standards: [
+      'PDE Env & Ecology 4.2.12.C - Water Systems and Riparian Function',
+      'PDE Env & Ecology 4.3.12.A - Natural Resources',
+      'NGSS HS-LS2-6 - Ecosystem Dynamics',
+      'NGSS HS-LS2-7 - Ecosystem Services',
+    ],
+    tags: ['riparian buffers', 'wildlife habitat', 'water quality', 'native plants', 'restoration'],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
 ];
 
