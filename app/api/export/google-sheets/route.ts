@@ -18,6 +18,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
+import type { ProgressExport, JournalExport } from '@/lib/types/export.types';
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,6 +39,11 @@ export async function POST(req: NextRequest) {
       spreadsheetId,
       sheetName = 'WLA Progress',
       shareWithEmail,
+    }: {
+      progressData: ProgressExport;
+      spreadsheetId?: string;
+      sheetName?: string;
+      shareWithEmail?: string;
     } = body;
 
     // Validate data

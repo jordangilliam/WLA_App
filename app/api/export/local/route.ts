@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
 import { convertToCSV, flattenProgressData } from '@/lib/utils/export';
+import type { ProgressExport, JournalExport, ExportFormat } from '@/lib/types/export.types';
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,6 +29,10 @@ export async function POST(req: NextRequest) {
       progressData,
       journalData,
       format = 'csv',
+    }: {
+      progressData: ProgressExport;
+      journalData?: JournalExport;
+      format?: ExportFormat;
     } = body;
 
     // Validate data

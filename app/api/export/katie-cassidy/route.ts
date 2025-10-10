@@ -17,6 +17,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
+import type { ProgressExport, JournalExport } from '@/lib/types/export.types';
 
 // Katie Cassidy's email (could also come from env variable)
 const KATIE_EMAIL = process.env.KATIE_CASSIDY_EMAIL || 'katie.cassidy@example.com';
@@ -44,6 +45,14 @@ export async function POST(req: NextRequest) {
       attachments = [],
       subject = 'WLA Ambassador Progress Report',
       cc = [],
+    }: {
+      userName: string;
+      userEmail: string;
+      progressData: ProgressExport;
+      journalData?: JournalExport;
+      attachments?: any[];
+      subject?: string;
+      cc?: string[];
     } = body;
 
     // Validate data
