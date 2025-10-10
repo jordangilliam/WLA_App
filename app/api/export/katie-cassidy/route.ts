@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
       </div>
       ` : ''}
 
-      ${journalData?.entries?.length > 0 ? `
+      ${journalData?.entries && journalData.entries.length > 0 ? `
       <div style="background: #FEF3C7; padding: 20px; border-radius: 8px; margin: 20px 0;">
         <h3 style="margin-top: 0; color: #023047;">Journal Activity</h3>
         <p><strong>Total Entries:</strong> ${journalData.entries.length}</p>
