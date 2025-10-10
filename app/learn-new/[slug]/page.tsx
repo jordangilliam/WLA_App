@@ -7,14 +7,14 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LessonDisplay } from '@/components/lesson/LessonDisplay';
-import { sampleLessons } from '@/lib/data/sample-lessons';
+import { getLessonBySlug } from '@/lib/data';
 import { getTrackColor } from '@/lib/config/tracks';
 
 export default function LessonPage({ params }: { params: { slug: string } }) {
   const router = useRouter();
   const { slug } = params;
 
-  const lesson = sampleLessons.find(l => l.slug === slug);
+  const lesson = getLessonBySlug(slug);
 
   if (!lesson) {
     return (

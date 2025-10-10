@@ -7,7 +7,7 @@
 import { useState, useMemo } from 'react';
 import { LessonCard } from '@/components/lesson/LessonCard';
 import { useProgress } from '@/lib/hooks/useProgress';
-import { sampleLessons } from '@/lib/data/sample-lessons';
+import { allLessons } from '@/lib/data';
 import { TRACKS, type Track } from '@/lib/config/tracks';
 
 export default function LearnPage() {
@@ -19,7 +19,7 @@ export default function LearnPage() {
 
   // Filter lessons
   const filteredLessons = useMemo(() => {
-    return sampleLessons.filter(lesson => {
+    return allLessons.filter(lesson => {
       const matchesTrack = selectedTrack === 'all' || lesson.track === selectedTrack;
       const matchesSearch = searchQuery === '' || 
         lesson.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -30,7 +30,7 @@ export default function LearnPage() {
 
   // Group by track
   const lessonsByTrack = useMemo(() => {
-    const grouped: Record<string, typeof sampleLessons> = {};
+    const grouped: Record<string, typeof allLessons> = {};
     filteredLessons.forEach(lesson => {
       if (!grouped[lesson.track]) {
         grouped[lesson.track] = [];
