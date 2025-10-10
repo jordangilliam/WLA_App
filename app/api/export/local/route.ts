@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
           // Add journal entries if included
           let csvContent = convertToCSV(progressRows);
           
-          if (journalData?.entries?.length > 0) {
+          if (journalData?.entries && journalData.entries.length > 0) {
             csvContent += '\n\n' + convertToCSV(journalData.entries);
           }
 

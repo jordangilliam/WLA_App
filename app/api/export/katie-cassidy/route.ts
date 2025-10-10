@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
           </tr>
           <tr>
             <td style="padding: 8px;"><strong>Journal Entries:</strong></td>
-            <td style="padding: 8px;">${journalData?.entries?.length || 0}</td>
+            <td style="padding: 8px;">${(journalData?.entries && journalData.entries.length) || 0}</td>
           </tr>
           <tr>
             <td style="padding: 8px;"><strong>Last Active:</strong></td>
