@@ -43,7 +43,7 @@ export function searchLessons(query: string): Lesson[] {
     (lesson) =>
       lesson.title.toLowerCase().includes(lowerQuery) ||
       lesson.description.toLowerCase().includes(lowerQuery) ||
-      lesson.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+      (lesson.tags && lesson.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)))
   );
 }
 
