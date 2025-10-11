@@ -4,6 +4,9 @@
 
 import type { Track, TrackInfo } from '../types/lesson.types';
 
+// Re-export types for convenience
+export type { Track, TrackInfo } from '../types/lesson.types';
+
 export const TRACKS: Record<Track, TrackInfo> = {
   'Brookies': {
     id: 'Brookies',
