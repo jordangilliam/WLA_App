@@ -152,7 +152,7 @@ export default function Home() {
             border: '1px solid rgba(255,255,255,0.2)',
           }}>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.25rem' }}>10,000+</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.25rem' }}>1,000+</div>
               <div style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px' }}>Ambassadors Trained</div>
             </div>
             <div style={{ textAlign: 'center' }}>
