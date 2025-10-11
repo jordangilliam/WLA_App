@@ -17,7 +17,7 @@ export interface QuizQuestion {
 export interface Resource {
   label: string;
   url: string;
-  type?: 'video' | 'article' | 'pdf' | 'interactive';
+  type?: 'video' | 'article' | 'pdf' | 'interactive' | 'book' | 'course' | 'tool' | 'report';
 }
 
 export interface Lesson {
