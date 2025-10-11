@@ -2,33 +2,36 @@
  * Utility functions for exporting user data
  */
 
-import type { Progress } from '../types/lesson.types';
+import type { LessonProgress } from '../types/lesson.types';
 import type { ProgressExport, JournalExport } from '../types/export.types';
 
 /**
  * Format progress data for export
  */
 export function formatProgressForExport(
-  progress: Record<string, Progress>,
+  progress: Record<string, LessonProgress>,
   userId: string,
   userName: string,
   userEmail: string,
   track: string
 ): ProgressExport {
   const progressArray = Object.values(progress);
-  const completed = progressArray.filter((p) => p.completed).length;
+  const completed = progressArray.filter((p) => p.status === 'completed').length;
   const quizScores: Record<string, number> = {};
   
   progressArray.forEach((p) => {
-    if (p.quizScore !== undefined) {
-      quizScores[p.lessonId] = p.quizScore;
+    if (p.bestScore !== undefined) {
+      quizScores[p.lessonId] = p.bestScore;
     }
   });
 
-  const totalPoints = progressArray.reduce((sum, p) => sum + (p.pointsEarned || 0), 0);
+  const totalPoints = progressArray.reduce((sum, p) => {
+    // Calculate points from quiz scores (100 points max per lesson)
+    return sum + (p.bestScore || 0);
+  }, 0);
   
   const lastActiveTimestamp = Math.max(
-    ...progressArray.map((p) => new Date(p.lastViewed || p.startedAt).getTime())
+    ...progressArray.map((p) => p.lastVisited || p.startedAt || Date.now())
   );
 
   return {
