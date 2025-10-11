@@ -382,6 +382,30 @@ Your response:
         correctIndex: 1,
         explanation: 'Animal scat can contain parasites (like roundworm eggs) and pathogens that can infect humans. Always use a stick to examine scat, and wash hands thoroughly after fieldwork. Never handle scat directly—your health and safety come first.',
       },
+      {
+        id: 'q6',
+        prompt: 'What can the pattern of tracks tell you beyond just species identification?',
+        choices: [
+          'Nothing—tracks only identify the species',
+          'Speed of travel, gait (walking, running, bounding), and sometimes hunting or fleeing behavior',
+          'Only the direction of travel',
+          'Tracks contain no behavioral information',
+        ],
+        correctIndex: 1,
+        explanation: 'Track patterns reveal behavior. Widely spaced tracks indicate running or bounding. Regular, evenly spaced tracks suggest walking. Clusters of tracks or disturbed vegetation may indicate hunting, feeding, or fleeing. By reading the story in the snow or mud, you reconstruct not just what animal passed, but what it was doing and why.',
+      },
+      {
+        id: 'q7',
+        prompt: 'Why is it important to consider multiple signs (tracks, scat, browse, rubs) together rather than relying on a single observation?',
+        choices: [
+          'Single signs are always sufficient',
+          'Multiple signs provide corroborating evidence, increase confidence in identification, and reveal more about population and behavior',
+          'Only to make tracking harder',
+          'One sign is all you need',
+        ],
+        correctIndex: 1,
+        explanation: 'Individual signs can be ambiguous or misleading. Multiple corroborating signs increase confidence in your conclusions. For example, finding deer tracks, fresh browse, and rubs together confirms deer presence and provides insights into population density, behavior, and habitat use. This holistic approach is what professional wildlife biologists use for population assessments.',
+      },
     ],
     resources: [
       {
@@ -960,6 +984,30 @@ Conservation needs passionate, skilled professionals. The path isn't always line
         correctIndex: 1,
         explanation: 'WLA Ambassador experience should be listed prominently on resumes with specific skills and accomplishments detailed. In interviews, share concrete stories from fieldwork that demonstrate passion, commitment, and applied learning. This real-world experience sets you apart from other candidates.',
       },
+      {
+        id: 'q6',
+        prompt: 'Why do many conservation jobs require applicants to provide writing samples?',
+        choices: [
+          'Just a formality with no real purpose',
+          'Writing ability is critical for reports, grants, plans, and public communication',
+          'Only for office jobs',
+          'Technical knowledge is more important than writing',
+        ],
+        correctIndex: 1,
+        explanation: 'Conservation professionals spend significant time writing—field reports, management plans, grant proposals, environmental assessments, and public outreach materials. Agencies request writing samples to assess your ability to communicate clearly, organize information, and present technical content to various audiences. Strong writing skills are often as important as fieldwork skills.',
+      },
+      {
+        id: 'q7',
+        prompt: 'What is a realistic expectation about entry-level conservation salaries?',
+        choices: [
+          'All conservation jobs pay very high salaries',
+          'Entry-level salaries are often modest (30k-40k), but grow with experience and education',
+          'You can never earn a living wage in conservation',
+          'Only government jobs pay well',
+        ],
+        correctIndex: 1,
+        explanation: 'Entry-level conservation positions (seasonal technicians, AmeriCorps) typically pay modestly (30k-40k annually), and many seasonal roles do not include benefits. However, salaries increase substantially with experience, advanced degrees, and permanent positions. Many mid-career wildlife biologists earn 50k-80k, and senior professionals can exceed 100k. Passion for the work is important, but understanding salary trajectories helps with career planning and financial decisions.',
+      },
     ],
     resources: [
       {
@@ -1452,6 +1500,30 @@ Your response:
         ],
         correctIndex: 1,
         explanation: 'Always record what you actually observe, even if it seems unexpected or "wrong." Note any unusual conditions (recent storm, unusual weather, etc.) that might explain the observation. Honest mistakes happen, but intentionally altering data is unethical and undermines the entire scientific process. Unexpected data often lead to important discoveries.',
+      },
+      {
+        id: 'q6',
+        prompt: 'Why is metadata (information about how data were collected) critical for citizen science datasets?',
+        choices: [
+          'Metadata are not important',
+          'Metadata provide context about methods, timing, conditions, and equipment, enabling proper data interpretation',
+          'Only the raw data matter',
+          'Metadata just make datasets bigger',
+        ],
+        correctIndex: 1,
+        explanation: 'Metadata describe how, when, where, and by whom data were collected, plus equipment used and environmental conditions. This context is essential for interpreting data correctly and combining datasets. Without metadata, it is impossible to know if differences in data reflect real ecological change or differences in methods. Professional scientists call metadata "data about data" and consider it as important as the data itself.',
+      },
+      {
+        id: 'q7',
+        prompt: 'What is one major advantage of digital data collection tools (apps, tablets) over paper datasheets?',
+        choices: [
+          'They have no advantage',
+          'They reduce transcription errors, enable real-time upload, and often include built-in quality checks',
+          'They are only for professional scientists',
+          'Paper is always better',
+        ],
+        correctIndex: 1,
+        explanation: 'Digital tools reduce errors from transcribing handwritten notes, allow real-time data upload (eliminating lost datasheets), often include built-in quality checks (e.g., preventing impossible values), and enable GPS-tagging and photo integration. However, they require battery management and backups. Many citizen science projects now use apps like iNaturalist, eBird, or Stream Vitals for these advantages.',
       },
     ],
     resources: [

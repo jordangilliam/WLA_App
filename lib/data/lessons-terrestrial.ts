@@ -1592,6 +1592,30 @@ Your response:
         correctIndex: 1,
         explanation: 'RICE stands for Rest (stop activity), Ice (cold therapy for 20 min on/off), Compression (wrap with elastic bandage), and Elevation (keep above heart). This immediate response minimizes swelling and pain, improving recovery and ability to self-evacuate.',
       },
+      {
+        id: 'q6',
+        prompt: 'Why is it critical to leave a trip plan with someone before heading into the field?',
+        choices: [
+          'It is not necessary if you have a cell phone',
+          'If you do not return on time, search and rescue knows where to look and when to start',
+          'Just for recordkeeping purposes',
+          'Only required for overnight trips',
+        ],
+        correctIndex: 1,
+        explanation: 'A trip plan ensures that if something goes wrong, someone knows where you are, who you are with, and when to trigger emergency response. Many PA wilderness areas have no cell coverage, so a phone cannot replace a trip plan. Even day hikes warrant trip plans—most outdoor emergencies occur during short outings.',
+      },
+      {
+        id: 'q7',
+        prompt: 'When conducting a risk assessment for a field activity, which factor is MOST important to consider?',
+        choices: [
+          'The cost of equipment',
+          'Consequences of an incident combined with the likelihood it will occur',
+          'What other groups are doing',
+          'Only the weather forecast',
+        ],
+        correctIndex: 1,
+        explanation: 'Risk assessment involves evaluating both the likelihood of an incident and its potential consequences. A low-probability event with severe consequences (like a fall from a cliff) is high risk. A high-probability event with minor consequences (like mosquito bites) is lower risk. Effective risk management considers both dimensions and implements controls accordingly.',
+      },
     ],
     resources: [
       {
@@ -1985,6 +2009,30 @@ Climate change is daunting, but conservation professionals like you will lead th
         ],
         correctIndex: 1,
         explanation: 'Mitigation reduces greenhouse gas emissions to slow/prevent climate change. Adaptation prepares ecosystems and communities for unavoidable changes. Both are necessary: mitigation addresses the root cause, while adaptation helps us cope with changes already occurring. Conservation requires BOTH strategies.',
+      },
+      {
+        id: 'q6',
+        prompt: 'Why is planting genetically diverse tree seedlings an important climate adaptation strategy?',
+        choices: [
+          'Diversity has no benefit',
+          'Different genotypes may respond differently to climate stresses, increasing survival chances',
+          'It is only for aesthetic reasons',
+          'All trees respond the same to climate',
+        ],
+        correctIndex: 1,
+        explanation: 'Within a tree species, different genetic lines (genotypes) may have varying tolerances to heat, drought, or pests. Planting diverse seed sources ensures that at least some trees will possess traits that allow them to thrive under future climate conditions. This is genetic diversity as insurance—we do not know exactly which traits will be most valuable, so we maximize options.',
+      },
+      {
+        id: 'q7',
+        prompt: 'What makes a landscape-scale climate adaptation strategy more effective than site-by-site efforts?',
+        choices: [
+          'Landscape strategies are not more effective',
+          'They create habitat connectivity, allowing species to move and populations to shift as climate changes',
+          'They are just more expensive',
+          'Only site-level work matters',
+        ],
+        correctIndex: 1,
+        explanation: 'Landscape-scale strategies create networks of connected habitats (corridors, stepping stones) that allow species to move in response to climate change. Without connectivity, populations become trapped in unsuitable conditions. Coordinating across property boundaries and jurisdictions multiplies effectiveness—climate change does not respect fences, so neither should conservation responses.',
       },
     ],
     resources: [

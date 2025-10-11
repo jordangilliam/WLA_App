@@ -373,6 +373,30 @@ Macroinvertebrates benefit from healthy riparian zones:
         correctIndex: 1,
         explanation: 'Riffles (fast, shallow, rocky areas) have the highest dissolved oxygen levels due to turbulent flow. They also provide the most diverse habitat with stable substrate. This is where you\'ll find the greatest variety and abundance of macroinvertebrates, making them the best location for sampling.',
       },
+      {
+        id: 'q6',
+        prompt: 'What is the relationship between pollution tolerance and indicator value for macroinvertebrates?',
+        choices: [
+          'All macroinvertebrates have the same tolerance',
+          'Sensitive species (low tolerance) indicate clean water; tolerant species indicate degraded conditions',
+          'Tolerant species indicate clean water',
+          'Tolerance is not related to water quality',
+        ],
+        correctIndex: 1,
+        explanation: 'Pollution tolerance is the key to using macroinvertebrates as bioindicators. Sensitive species (EPT) require high water quality and disappear when streams degrade. Tolerant species (worms, certain midges) survive in polluted conditions. By comparing the ratio of sensitive to tolerant organisms, we can assess stream health without expensive chemical testing.',
+      },
+      {
+        id: 'q7',
+        prompt: 'Why is it important to design a systematic sampling protocol when conducting macroinvertebrate surveys?',
+        choices: [
+          'Protocols are not necessary',
+          'So that data collected by different people at different times can be compared scientifically',
+          'Only to make the work harder',
+          'Sampling can be done randomly without protocols',
+        ],
+        correctIndex: 1,
+        explanation: 'Standardized protocols ensure data comparability across space and time. If everyone samples differently (different habitats, methods, effort), results cannot be compared or combined. Rigorous protocols are what make citizen science data scientifically valid and useful for management decisions. Consistency is critical for detecting real trends versus sampling artifacts.',
+      },
     ],
     resources: [
       {
@@ -750,6 +774,30 @@ Practice explaining:
         ],
         correctIndex: 1,
         explanation: 'Calibration ensures your measurements are accurate and reliable. Meters can drift over time, and accurate data is essential for making informed decisions about water quality and potential problems. Poor data is worse than no data because it can lead to wrong conclusions.',
+      },
+      {
+        id: 'q6',
+        prompt: 'What is the significance of dissolved oxygen dropping below 5 mg/L?',
+        choices: [
+          'It is ideal for all fish',
+          'Most fish species become stressed and sensitive species may die',
+          'It only affects plants',
+          'Dissolved oxygen levels do not affect aquatic life',
+        ],
+        correctIndex: 1,
+        explanation: 'Dissolved oxygen below 5 mg/L causes physiological stress in most fish species. Cold-water species like trout are especially sensitive and may die. Below 3 mg/L, even warm-water species struggle. Monitoring dissolved oxygen helps identify pollution problems (organic waste, algae die-offs) and temperature stress before visible impacts occur.',
+      },
+      {
+        id: 'q7',
+        prompt: 'Why should water samples be analyzed as soon as possible after collection?',
+        choices: [
+          'There is no time constraint',
+          'Chemical and biological conditions change rapidly, affecting measurement accuracy',
+          'Only to save time',
+          'Samples remain stable indefinitely',
+        ],
+        correctIndex: 1,
+        explanation: 'Water chemistry is dynamic. Dissolved oxygen levels change as biological processes continue in the sample bottle. pH can shift. Bacteria multiply or die. Temperature warms. The longer the delay between collection and analysis, the less accurately your measurements reflect actual stream conditions. Best practice is to test immediately in the field.',
       },
     ],
     resources: [
@@ -1144,6 +1192,30 @@ Your response:
         ],
         correctIndex: 1,
         explanation: 'Impervious surfaces prevent infiltration, causing more water to run directly into streams. This creates flashy flows that rise quickly during storms and fall quickly after, causing erosion, scouring organisms, and leaving streams dry faster. Natural systems absorb rain and release it slowly.',
+      },
+      {
+        id: 'q6',
+        prompt: 'What is a floodplain and why is it ecologically important?',
+        choices: [
+          'Floodplains are wasted space that should be developed',
+          'Low-lying areas adjacent to streams that absorb overflow, recharge groundwater, and provide habitat',
+          'Floodplains only exist in coastal areas',
+          'They serve no ecological function',
+        ],
+        correctIndex: 1,
+        explanation: 'Floodplains are the low areas next to streams that flood periodically. They absorb overflow during high water, reducing downstream flooding. They filter sediment and nutrients, recharge groundwater, and provide critical wetland habitat. Development in floodplains increases flood risk and eliminates these ecosystem services. Floodplains are supposed to flood—that is their function.',
+      },
+      {
+        id: 'q7',
+        prompt: 'How can upstream activities in a watershed affect downstream water quality?',
+        choices: [
+          'Upstream activities have no effect downstream',
+          'Water flows downhill, carrying pollutants, sediment, and temperature changes to downstream reaches',
+          'Only activities directly adjacent to streams matter',
+          'Watersheds are not connected systems',
+        ],
+        correctIndex: 1,
+        explanation: 'Watersheds are integrated systems. Everything upstream affects downstream. Deforestation upstream increases sediment and temperature downstream. Fertilizer runoff upstream causes algae blooms downstream. Impervious surfaces upstream cause erosive flows downstream. This is why watershed-scale planning is essential—you cannot protect streams by managing only the stream itself.',
       },
     ],
     resources: [
@@ -1546,6 +1618,30 @@ Your response (if safe):
         ],
         correctIndex: 1,
         explanation: 'The PA Fish & Boat Commission receives NO general tax dollars. It is funded by fishing license sales and federal excise taxes on fishing equipment (paid by anglers). This is the "user-pays, public benefits" model—anglers fund conservation that benefits everyone.',
+      },
+      {
+        id: 'q6',
+        prompt: 'Why is it important to match tackle (line strength, hook size) to the species you are targeting?',
+        choices: [
+          'It is not important',
+          'Proper tackle ensures you can land fish quickly, reducing stress and injury',
+          'Only for catching bigger fish',
+          'Tackle choice has no effect on fish survival',
+        ],
+        correctIndex: 1,
+        explanation: 'Using appropriate tackle allows you to land fish quickly, minimizing fight time and stress. Light tackle that prolongs the fight can exhaust fish, reducing post-release survival. Conversely, tackle that is too heavy may result in deep hooking. Ethical anglers use gear that balances sporting challenge with the fish\'s welfare.',
+      },
+      {
+        id: 'q7',
+        prompt: 'What is the ethical approach when you observe someone violating fishing regulations?',
+        choices: [
+          'Ignore it—not your problem',
+          'Confront them aggressively',
+          'If safe, politely educate; otherwise, document and report to authorities',
+          'Take their fish away',
+        ],
+        correctIndex: 2,
+        explanation: 'If you feel safe and the person seems approachable, polite education can be effective—many violations are unintentional. However, never put yourself at risk. If the situation feels unsafe or the person is hostile, document details (location, time, description, license plate if applicable) and report to the PA Fish & Boat Commission or local law enforcement. Your safety is the priority.',
       },
     ],
     resources: [
