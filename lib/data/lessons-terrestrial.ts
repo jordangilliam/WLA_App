@@ -243,6 +243,30 @@ Practice explaining:
         correctIndex: 1,
         explanation: 'Diverse forests with multiple species and ages are more resilient to climate change impacts. However, heavy deer browsing prevents this diversity by limiting regeneration. Managing deer to sustainable levels allows diverse forest development, which is a key climate adaptation strategy.',
       },
+      {
+        id: 'q6',
+        prompt: 'When designing a forest exclosure, what is the most critical factor for demonstrating browse impact?',
+        choices: [
+          'Using the most expensive fencing material',
+          'Placing it in a location representative of the surrounding forest',
+          'Making it as large as possible',
+          'Locating it near roads for easy access',
+        ],
+        correctIndex: 1,
+        explanation: 'An exclosure must be in a location that represents typical forest conditions to demonstrate what would happen without deer browsing. If placed in an unusual spot (very wet, very dry, or atypical soil), results won\'t reflect the broader forest\'s regeneration potential. Representative placement is essential for valid comparisons.',
+      },
+      {
+        id: 'q7',
+        prompt: 'Why do hay-scented ferns persist for decades even after deer populations decrease?',
+        choices: [
+          'Ferns reproduce so quickly they can\'t be stopped',
+          'Ferns form dense rhizome networks and suppress tree seedlings through competition and allelopathy',
+          'Deer preferentially plant ferns',
+          'Ferns have no competitive advantage',
+        ],
+        correctIndex: 1,
+        explanation: 'Hay-scented ferns form dense underground rhizome networks that persist for 30+ years. They suppress tree seedlings through direct competition for light and resources, and through allelopathic chemicals that inhibit germination. Once established, fern layers can prevent regeneration even without continued deer browsing, creating a persistent ecological legacy.',
+      },
     ],
     resources: [
       {
@@ -617,6 +641,30 @@ Invasive plants displace native species, reduce wildlife food and cover, and can
         ],
         correctIndex: 1,
         explanation: 'Many invasive plant seeds can survive the composting process and remain viable for years. If you spread that compost, you are actually spreading the invasion. Seeds should be bagged and disposed of properly, and woody material should be dried in place or taken to approved disposal sites.',
+      },
+      {
+        id: 'q6',
+        prompt: 'Why is biological control of invasive species considered risky and carefully regulated?',
+        choices: [
+          'It is not risky at all',
+          'Introduced biocontrol agents can attack non-target species and become invasive themselves',
+          'Biological control always fails',
+          'It costs too much money',
+        ],
+        correctIndex: 1,
+        explanation: 'Biological control involves intentionally releasing non-native organisms (insects, fungi, etc.) to control invasives. If poorly researched, these agents can attack native species or become invasive pests themselves. Famous failures include cane toads in Australia and mongoose in Hawaii. Today, rigorous testing is required before any biocontrol release.',
+      },
+      {
+        id: 'q7',
+        prompt: 'After removing an invasive species, what is the most important follow-up action?',
+        choices: [
+          'Do nothing—the work is complete',
+          'Monitor for re-sprouts and seedlings, and plant natives to fill the gap',
+          'Apply more herbicide immediately',
+          'Wait several years before revisiting the site',
+        ],
+        correctIndex: 1,
+        explanation: 'Removal creates a disturbance that can be quickly re-colonized by invasives from seed banks or root fragments. Active restoration (monitoring for resprouts, repeated removal, planting natives) is critical. An empty niche will be filled—make sure it is filled with natives, not more invasives. Follow-up can take 3-5 years.',
       },
     ],
     resources: [
@@ -1017,6 +1065,30 @@ Your response:
         ],
         correctIndex: 1,
         explanation: 'Penn State research shows that every dollar spent on upstream prevention through riparian buffers saves $10-100 on downstream treatment and restoration. Buffers provide multifunctional benefits at a fraction of the cost of fixing problems after they occur.',
+      },
+      {
+        id: 'q6',
+        prompt: 'Why should native warm-season grasses be used in Zone 3 rather than lawn grass?',
+        choices: [
+          'Lawn grass is more expensive',
+          'Native grasses grow taller (trapping sediment), have deeper roots, and provide better wildlife cover',
+          'Native grasses require more mowing',
+          'There is no difference',
+        ],
+        correctIndex: 1,
+        explanation: 'Native warm-season grasses like switchgrass and big bluestem grow 3-6 feet tall (vs. 3 inches for lawn grass), trapping sediment effectively. Their roots extend 6-10 feet deep (vs. 6 inches), improving water infiltration and soil stability. They also provide cover and nesting habitat for birds and small mammals—lawn grass provides almost no wildlife value.',
+      },
+      {
+        id: 'q7',
+        prompt: 'How do riparian buffers function as wildlife corridors?',
+        choices: [
+          'They do not function as corridors',
+          'They connect isolated habitat patches, allowing animals to move, disperse, and find mates',
+          'They only benefit fish',
+          'Corridors are not important for wildlife',
+        ],
+        correctIndex: 1,
+        explanation: 'Riparian buffers create continuous "green highways" through the landscape, connecting otherwise isolated forest patches. This allows wildlife to move safely between habitats, find mates (genetic diversity), disperse to new territories, and escape predators. Young animals especially rely on corridors to establish new home ranges without crossing open areas.',
       },
     ],
     resources: [
