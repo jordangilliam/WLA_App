@@ -20,15 +20,17 @@ export default function Home() {
         marginTop: '1rem',
         borderRadius: '16px',
       }}>
-        {/* TODO: Background Image - Ned Smith PA Mountain Landscape */}
+        {/* Hero Background Image */}
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          opacity: 0.15,
-          background: 'url(/images/hero-pa-mountains.jpg) center/cover',
+          opacity: 0.2,
+          backgroundImage: 'url(/images/hero/Hero%20BAckground.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }} />
         
         <div style={{
@@ -233,9 +235,9 @@ export default function Home() {
               <small style={{ opacity: 0.85, marginTop: '0.5rem', display: 'block' }}>
                 {Math.round(levelProgress)}% to Level {level + 1}
               </small>
-            </div>
           </div>
-          
+        </div>
+        
           <div className="card section" style={{
             textAlign: 'center',
             background: 'linear-gradient(135deg, #2A9D8F 0%, #41B3A3 100%)',
@@ -261,8 +263,8 @@ export default function Home() {
             <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.85 }}>
               Keep logging in daily to maintain momentum
             </p>
-          </div>
-          
+        </div>
+        
           <div className="card section" style={{
             textAlign: 'center',
             background: 'linear-gradient(135deg, #FFD60A 0%, #FFC300 100%)',
@@ -318,7 +320,7 @@ export default function Home() {
             <h2 style={{ fontSize: '1.8rem', color: '#023047', margin: 0 }}>Recent Achievements</h2>
           </div>
           
-          <div className="row">
+      <div className="row">
             {recentBadges.map(badge => (
               <div key={badge.id} className={`badge badge-${badge.tier}`} style={{
                 flex: '1 1 250px',
@@ -698,20 +700,26 @@ export default function Home() {
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            {/* TODO: Replace with Brook Trout Illustration */}
             <div style={{
-              width: '120px',
-              height: '120px',
+              width: '150px',
+              height: '150px',
               margin: '0 auto 1.5rem',
-              background: 'rgba(255,255,255,0.15)',
+              background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '4rem',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}>
-              [Trout]
-            </div>
+              <Image 
+                src="/images/tracks/Brook%20Trout.png" 
+                alt="Brook Trout" 
+                width={150} 
+                height={150}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+          </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
               Brookies
             </h3>
@@ -738,20 +746,26 @@ export default function Home() {
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            {/* TODO: Replace with Largemouth Bass Illustration */}
             <div style={{
-              width: '120px',
-              height: '120px',
+              width: '150px',
+              height: '150px',
               margin: '0 auto 1.5rem',
-              background: 'rgba(255,255,255,0.15)',
+              background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '4rem',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}>
-              [Bass]
-            </div>
+              <Image 
+                src="/images/tracks/Bass.png" 
+                alt="Largemouth Bass" 
+                width={150} 
+                height={150}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+          </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
               Bass
             </h3>
@@ -778,20 +792,26 @@ export default function Home() {
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            {/* TODO: Replace with White-tailed Deer Illustration */}
             <div style={{
-              width: '120px',
-              height: '120px',
+              width: '150px',
+              height: '150px',
               margin: '0 auto 1.5rem',
-              background: 'rgba(255,255,255,0.15)',
+              background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '4rem',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}>
-              [Deer]
-            </div>
+              <Image 
+                src="/images/tracks/Deer.png" 
+                alt="White-tailed Deer" 
+                width={150} 
+                height={150}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+          </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
               Bucktails
             </h3>
@@ -818,20 +838,26 @@ export default function Home() {
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            {/* TODO: Replace with Wild Turkey Illustration */}
             <div style={{
-              width: '120px',
-              height: '120px',
+              width: '150px',
+              height: '150px',
               margin: '0 auto 1.5rem',
-              background: 'rgba(255,255,255,0.15)',
+              background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '4rem',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}>
-              [Turkey]
-            </div>
+              <Image 
+                src="/images/tracks/Turkey.png" 
+                alt="Wild Turkey" 
+                width={150} 
+                height={150}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+          </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
               Gobblers
             </h3>
@@ -858,20 +884,26 @@ export default function Home() {
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            {/* TODO: Replace with Black Bear Illustration */}
             <div style={{
-              width: '120px',
-              height: '120px',
+              width: '150px',
+              height: '150px',
               margin: '0 auto 1.5rem',
-              background: 'rgba(255,255,255,0.15)',
+              background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '4rem',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}>
-              [Bear]
-            </div>
+              <Image 
+                src="/images/tracks/Black%20Bear.png" 
+                alt="Black Bear" 
+                width={150} 
+                height={150}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+        </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
               Ursids
             </h3>
@@ -879,8 +911,8 @@ export default function Home() {
               Pennsylvania black bear ecology, large carnivore management, and human-wildlife coexistence in the Alleghenies
             </p>
           </Link>
-        </div>
-      </section>
+      </div>
+    </section>
     </>
   );
 }
