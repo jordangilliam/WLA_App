@@ -30,7 +30,7 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
           The lesson you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <Link
-          href="/learn-new"
+          href="/learn"
           style={{
             display: 'inline-block',
             padding: '1rem 2rem',
@@ -62,7 +62,7 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
       }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <Link
-            href="/learn-new"
+            href="/learn"
             style={{
               color: '#0077B6',
               textDecoration: 'none',
