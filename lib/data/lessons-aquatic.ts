@@ -311,7 +311,84 @@ Macroinvertebrates benefit from healthy riparian zones:
 - Helped prioritize stream restoration
 - Documented improvement after buffer planting
 - Identified pollution sources
-- Built community awareness`,
+- Built community awareness
+
+## Advanced Topics
+
+### Dr. Sara Mueller's Brook Trout Research
+
+**Penn State PhD Focus:**
+Dr. Sara Mueller's research on Pennsylvania brook trout populations provides critical insights into how these indicator species respond to environmental stressors.
+
+**Key Research Findings:**
+- **Temperature tolerance**: Brook trout require water <68°F; above this, stress increases dramatically
+- **Macroinvertebrate dependency**: Trout diet is 80%+ aquatic insects—healthy macro communities = healthy trout
+- **Habitat fragmentation**: Dams and culverts isolate populations, reducing genetic diversity
+- **Climate vulnerability**: Brook trout are "canaries in the coal mine" for stream warming
+
+**WLA Connection:**
+Macroinvertebrate monitoring (what Ambassadors do) directly informs brook trout management. EPT abundance predicts trout habitat quality.
+
+### Advanced Identification: Beyond EPT
+
+**Subfamily & Genus Level ID:**
+Professional biomonitoring often requires finer taxonomic resolution:
+
+**Mayfly Families (Ephemeroptera):**
+- **Heptageniidae** (flattened, under rocks) - pollution-sensitive
+- **Baetidae** (streamlined, swimmers) - moderately tolerant
+- **Caenidae** (square gills) - more tolerant
+
+**Why It Matters:**
+Within "EPT," different species have different tolerances. Genus-level ID provides more precise water quality assessment.
+
+**Career Path:**
+- Entry: Family-level ID (WLA training)
+- Professional: Genus-level ID (requires extensive practice)
+- Expert: Species-level ID (research/regulatory specialists)
+
+### Functional Feeding Groups
+
+**Advanced Classification:**
+Beyond taxonomy, ecologists classify macros by HOW they feed:
+
+- **Shredders**: Chew leaf litter (stoneflies, caddisflies)
+- **Collectors**: Filter fine particles (blackfly larvae, net-spinning caddis)
+- **Scrapers**: Graze algae from rocks (some mayflies, snails)
+- **Predators**: Eat other inverts (dragonflies, hellgrammites)
+
+**Stream Health Indicator:**
+Healthy streams have balanced representation of all feeding groups. Dominance by one group suggests ecosystem dysfunction.
+
+### Case Study: Penns Creek Wild Trout Research
+
+**The System:**
+Penns Creek (Centre County) - one of PA's premier wild trout streams
+
+**Research Questions:**
+- What macroinvertebrate densities support healthy trout populations?
+- How do trout respond to macro community shifts?
+- Can macro monitoring predict trout recruitment?
+
+**Dr. Mueller's Contributions:**
+Research demonstrated that:
+- Trout growth rates correlate with EPT biomass (not just presence)
+- Seasonal macro emergence timing affects trout feeding success
+- Preserving cold-water refugia is critical for persistence
+
+**Management Implications:**
+Protecting macro habitat = protecting trout. It's not just about water chemistry—physical habitat complexity matters enormously.
+
+### Research Frontiers
+
+**Current Questions:**
+- How do macroinvertebrate communities respond to microplastics?
+- Can we use eDNA to detect rare species without physical sampling?
+- How do pharmaceutical pollutants affect sensitive species?
+- Will climate change shift macro communities faster than fish can adapt?
+
+**Citizen Science Role:**
+Long-term datasets from volunteers (like WLA Ambassadors) are essential for detecting trends that researchers studying 2-3 year grant cycles would miss.`,
     quiz: [
       {
         id: 'q1',
@@ -713,7 +790,104 @@ Heavy precipitation events in Philadelphia are associated with increased emergen
 **Translate Data for Stakeholders**
 
 Practice explaining:
-"Our turbidity readings jumped from 15 to 120 NTUs after the storm, and stayed elevated. This suggests erosion from an unstable source upstream—possibly the construction site we noted. Sediment in the water clogs fish gills and smothers macroinvertebrates. We should investigate the source and recommend erosion controls."`,
+"Our turbidity readings jumped from 15 to 120 NTUs after the storm, and stayed elevated. This suggests erosion from an unstable source upstream—possibly the construction site we noted. Sediment in the water clogs fish gills and smothers macroinvertebrates. We should investigate the source and recommend erosion controls."
+
+## Advanced Topics
+
+### Dr. Sara Mueller's Approach: Integrating Multiple Parameters
+
+**Brook Trout Habitat Assessment:**
+Dr. Mueller's research demonstrates that NO single water quality parameter predicts trout presence—it's the combination:
+
+**Critical Parameter Relationships:**
+- **Temperature + DO**: Warm water holds less oxygen; double stress for trout
+- **pH + Aluminum**: Low pH mobilizes toxic aluminum from soil
+- **Temperature + Flow**: Low flow + warm temps = lethal combination
+- **Nutrients + Light**: Excess nutrients + sunlight = algae blooms that crash oxygen at night
+
+**Lesson for Ambassadors:**
+Don't just collect data—interpret relationships between parameters. That's where management insights emerge.
+
+### Advanced Instrumentation & Technology
+
+**Beyond Basic Meters:**
+
+**Continuous Monitoring Sondes:**
+- Deploy in stream for weeks/months
+- Record temperature, DO, pH, conductivity every 15 minutes
+- Capture diurnal cycles and storm responses
+- Cost: $5,000-15,000
+
+**Why Continuous Data Matter:**
+Grab samples (what most citizen scientists do) miss:
+- Nighttime oxygen crashes
+- Storm-driven turbidity spikes
+- Temperature fluctuations
+- Episodic pollution events
+
+**Emerging Tech:**
+- **eDNA sensors**: Detect species presence from water samples
+- **Optical sensors**: Real-time nutrient monitoring
+- **Remote sensing**: Satellite-based temperature mapping
+- **Smartphone apps**: Field data collection with built-in QA/QC
+
+### Case Study: Abandoned Mine Drainage (AMD) Monitoring
+
+**The Problem:**
+Pennsylvania has 5,500+ miles of streams impaired by acid mine drainage from abandoned coal mines.
+
+**Water Quality Signature:**
+- Very low pH (3-5)
+- High iron, aluminum, manganese
+- Orange precipitate ("yellowboy")
+- Barren stream—no macros, no fish
+
+**Monitoring Approach:**
+- pH, conductivity, metals (iron, aluminum) are key parameters
+- Above/below mine discharge comparisons
+- Document improvement after treatment (lime dosing, passive wetlands)
+
+**Student Role:**
+PA DEP relies on citizen monitoring to track 1,000s of AMD sites. WLA data contribute to prioritizing treatment projects.
+
+**Success Stories:**
+- Kettle Creek (Clinton Co.): AMD treatment restored 12 miles, now supports trout
+- Pine Creek (Tioga Co.): Volunteer monitoring guided $5M restoration investment
+
+### Understanding Water Quality Standards
+
+**Regulatory Context:**
+
+**PA Chapter 93 Water Quality Standards:**
+- **Cold Water Fishes (CWF)**: <68°F max, DO >6 mg/L
+- **Warm Water Fishes (WWF)**: <87°F max, DO >5 mg/L
+- **Trout Stocking (TSF)**: Intermediate standards
+
+**How Standards Are Set:**
+- Based on biological needs of aquatic life
+- Reviewed every 3 years (Triennial Review)
+- Can be upgraded (e.g., TSF → CWF) if water quality improves
+- Citizen science data CAN trigger upgrades
+
+**Dr. Mueller's Contribution:**
+Her research on thermal tolerance helped refine temperature criteria for wild trout waters, ensuring standards protect native populations.
+
+### Data Quality & QAPP (Quality Assurance Project Plans)
+
+**For Serious Citizen Science:**
+
+**Key Components:**
+1. **Standard Operating Procedures** (SOPs): Exactly how to sample
+2. **Calibration protocols**: When and how to calibrate meters
+3. **Chain of custody**: Who handled samples, when
+4. **Data validation**: How to identify bad data
+5. **Reporting**: How data will be used and shared
+
+**Why It Matters:**
+Data used for regulatory decisions require documented QA. Casual data = interesting. Rigorous data = actionable.
+
+**WLA Standard:**
+The WLA program uses Penn State Extension protocols, which meet PA DEP quality standards. This means Ambassador data CAN be used for management.`,
     quiz: [
       {
         id: 'q1',
@@ -1131,7 +1305,114 @@ Riffles are shallow, fast-flowing sections with rocky substrate where water surf
 Scenario: Developer wants to channelize stream to "improve drainage."
 
 Your response:
-"I understand you want efficient drainage, but straightening this stream will actually create bigger problems. Natural streams meander because that's the most stable form—the curves dissipate energy and prevent erosion. If you channelize it, you'll get faster flows that erode downstream, damage property, and cause flooding. Plus, you'll eliminate the habitat that makes this property valuable. Let's look at stormwater management alternatives that work WITH the stream, not against it—like retention basins and riparian buffers. Those protect your investment and comply with regulations."`,
+"I understand you want efficient drainage, but straightening this stream will actually create bigger problems. Natural streams meander because that's the most stable form—the curves dissipate energy and prevent erosion. If you channelize it, you'll get faster flows that erode downstream, damage property, and cause flooding. Plus, you'll eliminate the habitat that makes this property valuable. Let's look at stormwater management alternatives that work WITH the stream, not against it—like retention basins and riparian buffers. Those protect your investment and comply with regulations."
+
+## Advanced Topics
+
+### Stream Classification Systems
+
+**Rosgen Stream Classification:**
+Professional geomorphologists classify streams by channel shape, gradient, and substrate:
+
+- **A-type**: Steep, cascade/step-pool, high energy
+- **B-type**: Moderate gradient, riffle-pool, stable
+- **C-type**: Low gradient, meanders, pool-riffle (most common in PA valleys)
+- **E-type**: Very low gradient, meandering, fine substrate
+- **G-type**: Incised ("gully"), unstable
+
+**Why It Matters:**
+Each stream type requires different restoration approaches. You can't restore a B-type channel using C-type techniques.
+
+### Advanced Concept: Stream Power & Geomorphic Equilibrium
+
+**The Physics:**
+Streams adjust channel shape to balance:
+- **Discharge** (water flow)
+- **Slope** (gradient)
+- **Sediment load** (material transported)
+
+**Equilibrium Conditions:**
+A stream in equilibrium neither aggressively erodes nor excessively deposits sediment—it's in dynamic balance.
+
+**Human Impacts Break Equilibrium:**
+- Channelization → increased slope → erosion
+- Impervious surfaces → increased discharge → incision
+- Sediment inputs (construction) → aggradation (filling in)
+
+**Dr. Mueller's Research Connection:**
+Her work on brook trout habitat demonstrated that geomorphically unstable streams (incising, aggrading) provide poor trout habitat regardless of water quality. Stable channels are essential.
+
+### Case Study: Spring Creek Restoration
+
+**The System:**
+Spring Creek (Centre County) - limestone spring creek, nationally famous trout stream
+
+**The Problems (1980s-1990s):**
+- Agricultural runoff → nutrients → algae
+- Channelization → habitat loss
+- Streambank erosion → sediment
+- Declining wild trout populations
+
+**Restoration Approach:**
+- Natural channel design (restore meanders)
+- Livestock exclusion fencing + riparian buffers
+- In-stream habitat (log jams, rock vanes)
+- Agricultural BMPs (Best Management Practices)
+- Cost: $8 million over 15 years
+
+**Results:**
+- Wild trout abundance increased 400%
+- Water clarity improved dramatically
+- Recreational fishing economy thrives
+- Model for other PA stream restorations
+
+**Dr. Mueller's Analysis:**
+Multi-parameter monitoring documented that habitat complexity improvement (not just water quality) drove trout recovery. Lesson: Fix the stream channel, not just the chemistry.
+
+### Groundwater-Surface Water Interactions
+
+**Advanced Concept:**
+Streams aren't isolated from groundwater—they're connected:
+
+**Gaining Streams:**
+- Groundwater flows INTO stream
+- Cool water inputs (important for trout)
+- Baseflow during droughts
+- Spring creeks are extreme examples
+
+**Losing Streams:**
+- Stream water seeps INTO groundwater
+- Streams may go dry in summer
+- Common in karst (limestone) regions of PA
+
+**Dr. Sara Mueller's Bat Research Connection:**
+Her work on bat ecology in West Virginia mountains included studying cave systems—karst environments where surface water disappears underground. Understanding groundwater systems is critical for both bat hibernacula and stream ecology. Pollution on the surface can emerge miles away at a spring—watershed thinking includes the subsurface.
+
+### Longitudinal Zonation: River Continuum Concept
+
+**The Theory:**
+Rivers change predictably from headwaters to mouth:
+
+**Headwaters (Zones 1-3):**
+- Narrow, shaded, cold
+- Leaf litter dominant energy source
+- Shredders & collectors dominate macros
+- Brook trout zone
+
+**Mid-Reaches (Zones 4-6):**
+- Wider, more sun, warmer
+- Algae & periphyton important
+- Scrapers increase
+- Smallmouth bass, warm-water species
+
+**Lower Reaches (Zones 7-9):**
+- Wide, warm, turbid
+- Fine organic particles dominant
+- Collectors & filter feeders
+- Catfish, carp, warm-water community
+
+**PA Application:**
+From Allegheny headwaters (brook trout) to Susquehanna mainstem (warm-water) represents this continuum.`,
     quiz: [
       {
         id: 'q1',
@@ -1557,7 +1838,147 @@ Scenario: You see someone keeping undersized trout.
 Your response (if safe):
 "Hey, just a heads-up—those fish look like they're under the minimum size. The slot limit is there to let them spawn before harvest, so we all have good fishing in the future. If you're not sure, there's a measuring guide in the regulations book. I've got mine if you want to check. The fines aren't worth it, and we all benefit from sustainable fishing."
 
-(Note: If the person is hostile or situation feels unsafe, just observe and report to authorities. Your safety comes first.)"`,
+(Note: If the person is hostile or situation feels unsafe, just observe and report to authorities. Your safety comes first.)"
+
+## Advanced Topics
+
+### Dr. Sara Mueller's Brook Trout Conservation Research
+
+**Wild vs. Stocked Trout: Why It Matters**
+
+Dr. Mueller's research highlights critical differences:
+
+**Wild (Natural Reproduction):**
+- Genetically adapted to local conditions
+- Self-sustaining populations
+- High conservation value
+- Indicator of excellent habitat quality
+
+**Stocked (Hatchery-Raised):**
+- Genetically homogeneous
+- Often poor survival after stocking
+- Put-and-take fishery
+- Can harm wild populations (competition, disease, genetic dilution)
+
+**PA Policy Implications:**
+- 300+ streams designated "Class A Wild Trout" (natural reproduction, no stocking)
+- Conservation ethic: Protect wild populations, stock only where wild populations can't thrive
+- Anglers: Know the difference, adjust ethics accordingly (wild = catch-and-release preferred)
+
+### Fisheries Science: Population Dynamics
+
+**Understanding Sustainable Harvest:**
+
+**Key Concepts:**
+- **Recruitment**: Young fish entering fishable population
+- **Growth**: Individual fish size increase
+- **Mortality**: Natural death + fishing mortality
+- **Carrying capacity**: Maximum population the habitat can support
+
+**Slot Limits Explained:**
+- Protect spawners (large fish)
+- Allow harvest of mid-size fish
+- Example: Keep 12-15 inches, release <12 and >15 inches
+- Maximizes both fishing opportunity AND population sustainability
+
+**Size Limits:**
+- Allow fish to spawn at least once before harvest
+- Based on species-specific maturity
+- Brook trout: mature ~7-9 inches (hence 7-inch minimum in PA)
+
+**Dr. Mueller's Contribution:**
+Her work on brook trout population structure helped PA Fish & Boat Commission refine management strategies for wild trout streams.
+
+### Native vs. Invasive Fish
+
+**PA Native Trout:**
+- **Brook trout** (*Salvelinus fontinalis*): Only native trout
+- Cold, clean headwaters
+- Declining due to habitat loss & competition
+
+**Introduced Trout (now established):**
+- **Brown trout** (*Salmo trutta*): From Europe, 1880s
+- **Rainbow trout** (*Oncorhynchus mykiss*): From western US, 1880s
+- More temperature-tolerant than brookies
+- Can outcompete brook trout
+
+**Ethical Question:**
+Should anglers preferentially harvest brown/rainbow to benefit native brook trout? Or accept the "new normal" of mixed populations?
+
+**Current Management:**
+PA Fish & Boat focuses on protecting remaining wild brook trout populations through habitat protection and strategic stocking (avoiding stocking over wild brookies).
+
+### Case Study: Delaware River Wild Brown Trout Fishery
+
+**The Transformation:**
+- 1950s-60s: Polluted, warm, few fish
+- 1970s-90s: Clean Water Act → water quality improves
+- 2000s: Wild brown trout self-sustaining, world-class fishery
+
+**Conservation Measures:**
+- Catch-and-release zones
+- Minimum size limits
+- Seasonal closures during spawning
+- Habitat protection (cold-water releases from reservoirs)
+
+**Economic Impact:**
+- Angling tourism: ~$30 million/year
+- Guides, tackle shops, lodges
+- Demonstrates value of conservation-based fishery management
+
+**Lesson:**
+Quality over quantity—sustainable fisheries generate more economic value than put-and-take stocking.
+
+### Fish Handling Science: Stress Physiology
+
+**What Happens During Catch-and-Release:**
+
+**Physiological Stress:**
+- Lactic acid buildup (anaerobic metabolism during fight)
+- Oxygen debt
+- Elevated cortisol (stress hormone)
+- Immune suppression
+
+**Minimizing Stress:**
+- Use appropriate tackle (land fish quickly)
+- Keep fish in water as much as possible
+- Wet hands before touching
+- Support fish horizontally (don't squeeze)
+- Revive in current before release
+
+**Water Temperature Matters:**
+- Above 68°F: Don't target trout (stress mortality too high)
+- Warm water + fight = potential death even if released
+- Ethical anglers know when to stay home
+
+**Dr. Mueller's Environmental Expertise:**
+Her broader environmental research emphasizes that conservation isn't just about regulations—it's about understanding organism physiology and making informed, ethical choices even when no one is watching.
+
+### Advanced Ethics: Trophy Fish & Selective Harvest
+
+**The Dilemma:**
+Large, old fish are:
+- Most desirable trophies
+- Most valuable spawners (produce more eggs)
+- Rarest in population
+
+**Ethical Positions:**
+
+**Harvest Trophy Fish:**
+- Once-in-a-lifetime opportunity
+- Personal achievement
+- Legal if within regulations
+
+**Release Trophy Fish:**
+- Maximum reproductive value
+- Pass opportunity to others
+- Build fishery quality over time
+
+**Selective Harvest Philosophy:**
+Keep mid-size fish, release small (to grow) and large (to spawn).
+
+**Modern Trend:**
+Photo-and-release replacing kill-and-mount. GPS coordinates + photos = documented achievement without removing fish.`,
     quiz: [
       {
         id: 'q1',
