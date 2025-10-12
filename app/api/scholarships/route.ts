@@ -351,7 +351,7 @@ export async function PATCH(request: NextRequest) {
     // });
 
     // Mock data
-    const applications = [];
+    const applications: any[] = [];
 
     return NextResponse.json({
       applications,

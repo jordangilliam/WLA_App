@@ -335,7 +335,9 @@ export function registerBackgroundSync() {
       }
 
       // Register one-time sync (when coming back online)
-      registration.sync.register('sync-pending-data');
+      if ('sync' in registration) {
+        (registration as any).sync.register('sync-pending-data');
+      }
     });
   }
 }
@@ -457,7 +459,7 @@ export class PushNotificationManager {
 
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: this.urlBase64ToUint8Array(publicKey),
+      applicationServerKey: this.urlBase64ToUint8Array(publicKey) as BufferSource,
     });
 
     // Send subscription to server

@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
 
     // Get authenticated user (optional for this endpoint)
     const session = await getServerSession(authOptions);
-    const userId = session?.user?.id;
+    const userId = (session?.user as any)?.id;
 
     // TODO: Fetch locations from database using PostGIS
     // const locations = await db.$queryRaw`

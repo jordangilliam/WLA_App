@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
     // Create check-in record
     const checkIn = {
       id: crypto.randomUUID(),
-      userId: session.user.id,
+      userId: (session.user as any).id,
       locationId,
       checkInTime: new Date(),
       coordinates: userCoords,
@@ -218,7 +218,7 @@ export async function GET(request: NextRequest) {
     // });
 
     // Mock data
-    const checkIns = [];
+    const checkIns: any[] = [];
     const total = 0;
 
     return NextResponse.json({

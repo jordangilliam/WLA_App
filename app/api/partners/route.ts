@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
     
     // Check admin permission
-    if (!session?.user || session.user.role !== 'admin') {
+    if (!session?.user || (session.user as any).role !== 'admin') {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 403 }

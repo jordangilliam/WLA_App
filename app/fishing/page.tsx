@@ -437,7 +437,7 @@ const PA_WATER_BODIES: WaterBody[] = [
 ];
 
 export default function FishingPage() {
-  const { addPoints } = usePoints();
+  const { award: addPoints } = usePoints();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [activeTab, setActiveTab] = useState<'map' | 'stocking' | 'lakes' | 'species' | 'log'>('map');
