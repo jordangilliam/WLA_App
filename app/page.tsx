@@ -502,7 +502,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Field Guide Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -511,9 +510,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Book]
+                <Image 
+                  src="/images/icons/Book.png" 
+                  alt="Learn" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Learn</div>
@@ -530,7 +535,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Map Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -539,9 +543,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Map]
+                <Image 
+                  src="/images/icons/Map.jpg" 
+                  alt="Watersheds" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Watersheds</div>
@@ -558,7 +568,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Macro Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -567,9 +576,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Micro]
+                <Image 
+                  src="/images/icons/Micor(Macro).png" 
+                  alt="ID Keys" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>ID Keys</div>
@@ -586,7 +601,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Habitat Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -595,9 +609,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Habitat]
+                <Image 
+                  src="/images/icons/Habitat.png" 
+                  alt="Habitat" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Habitat</div>
@@ -614,7 +634,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Journal Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -623,9 +642,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Journal]
+                <Image 
+                  src="/images/icons/journal.jpg" 
+                  alt="Journal" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Journal</div>
@@ -642,7 +667,6 @@ export default function Home() {
               border: '2px solid #E5E7EB',
               transition: 'all 0.2s',
             }}>
-              {/* TODO: Replace with Achievement Icon */}
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -651,9 +675,15 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.5rem',
+                overflow: 'hidden',
               }}>
-                [Award]
+                <Image 
+                  src="/images/icons/award.jpg" 
+                  alt="Leaderboard" 
+                  width={48} 
+                  height={48}
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Leaderboard</div>
