@@ -295,9 +295,6 @@ export default function ClassDetailPage() {
           display: 'grid',
           gridTemplateColumns: '1fr 400px',
           gap: '2rem',
-          '@media (max-width: 1200px)': {
-            gridTemplateColumns: '1fr',
-          },
         }}>
           {/* Students Section */}
           <div>

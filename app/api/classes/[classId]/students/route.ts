@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authConfig } from '../../../auth/auth.config';
+import { authOptions } from '../../../auth/auth.config';
 import type { 
   ClassRosterStudent,
   EnrollStudentDTO,
@@ -17,7 +17,7 @@ export async function GET(
   { params }: { params: { classId: string } }
 ) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       return NextResponse.json(
@@ -115,7 +115,7 @@ export async function POST(
   { params }: { params: { classId: string } }
 ) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       return NextResponse.json(
@@ -193,7 +193,7 @@ export async function DELETE(
   { params }: { params: { classId: string } }
 ) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       return NextResponse.json(

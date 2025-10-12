@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authConfig } from '../../auth/auth.config';
+import { authOptions } from '../../auth/auth.config';
 import type { 
   ClassEnrollment,
   ApiResponse 
@@ -16,7 +16,7 @@ interface JoinClassDTO {
  */
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       return NextResponse.json(
