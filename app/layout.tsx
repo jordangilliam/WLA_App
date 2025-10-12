@@ -31,6 +31,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="WLA" />
+        
+        {/* Brook AI Assistant Integration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.chatConfig = {  
+                chatId: "FX9IIOtCFx",
+                env: "skl"
+              };
+            `,
+          }}
+        />
+        <script src="https://d36ewmyb2wrx29.cloudfront.net/index.js" async />
       </head>
       <body>
         <PointsProvider>

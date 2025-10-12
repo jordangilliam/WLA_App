@@ -79,6 +79,31 @@ export default function Home() {
             and make lasting impacts on our state&apos;s natural heritage.
           </p>
           
+          {/* Brook AI Search Bar */}
+          <div style={{
+            maxWidth: '700px',
+            margin: '0 auto 2.5rem',
+            padding: '0 1rem',
+          }}>
+            <div 
+              id="skl_id_search_hero_section" 
+              chat_id="FX9IIOtCFx" 
+              isHero="true"
+              style={{
+                borderRadius: '12px',
+                overflow: 'hidden',
+              }}
+            />
+            <p style={{
+              marginTop: '0.75rem',
+              fontSize: '0.875rem',
+              color: 'rgba(255,255,255,0.85)',
+              textAlign: 'center',
+            }}>
+              💬 <strong>Ask Brook!</strong> Your AI conservation assistant powered by Penn State Extension research
+            </p>
+          </div>
+          
           <div style={{
             display: 'flex',
             gap: '1rem',

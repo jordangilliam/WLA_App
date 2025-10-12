@@ -218,6 +218,7 @@ export default function TerrestrialsPage() {
   ];
 
   return (
+    <>
     <section className="section">
       <div style={{
         background: 'linear-gradient(135deg, #8B4513 0%, #654321 100%)',
@@ -369,14 +370,15 @@ export default function TerrestrialsPage() {
       </div>
     </section>
 
-    {/* Conservation History Section */}
-    <section className="section" style={{ marginTop: '2rem' }}>
-      <ConservationHistory history={TERRESTRIAL_CONSERVATION_HISTORY} />
-      
-      <div style={{ marginTop: '2rem' }}>
-        <LocalHistoryResearch />
-      </div>
-    </section>
+      {/* Conservation History Section */}
+      <section className="section" style={{ marginTop: '2rem' }}>
+        <ConservationHistory history={TERRESTRIAL_CONSERVATION_HISTORY} />
+        
+        <div style={{ marginTop: '2rem' }}>
+          <LocalHistoryResearch />
+        </div>
+      </section>
+    </>
   );
 }
 
