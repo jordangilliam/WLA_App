@@ -12,8 +12,18 @@ export default function PWAInstall() {
   const [showInstallBanner, setShowInstallBanner] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    // Mark as mounted (client-side only)
+    setIsMounted(true);
+    
+    // Check if dismissed this session
+    if (sessionStorage.getItem('wla-install-dismissed')) {
+      setIsDismissed(true);
+    }
+    
     // Register service worker
     if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       window.addEventListener('load', () => {
@@ -94,12 +104,13 @@ export default function PWAInstall() {
 
   const handleDismiss = () => {
     setShowInstallBanner(false);
+    setIsDismissed(true);
     // Don't show again for this session
     sessionStorage.setItem('wla-install-dismissed', 'true');
   };
 
-  // Don't show if dismissed this session
-  if (sessionStorage.getItem('wla-install-dismissed')) {
+  // Don't render until mounted (client-side only)
+  if (!isMounted || isDismissed) {
     return null;
   }
 
