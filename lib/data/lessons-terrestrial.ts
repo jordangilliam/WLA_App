@@ -183,6 +183,140 @@ Browsing pressure and low pH often limit seedlings. However, **fencing and limin
 Practice explaining:
 "Without adequate regeneration, our forests will fail to replace themselves as mature trees die. Exclosures show we have the seed source and site potential, but current deer densities prevent young trees from growing past browse height."
 
+## Field Activities
+
+### Activity 1: Forest Regeneration Assessment (30 minutes)
+
+**Materials Needed:**
+- Clipboard, pencil, data sheet
+- Measuring tape or yardstick
+- Camera/smartphone
+
+**Procedure:**
+1. Select a forested area (minimum 1 acre)
+2. Establish 3 random 10-foot diameter circular plots
+3. In each plot, count:
+   - Tree seedlings <3 feet tall (by species if possible)
+   - Saplings 3-10 feet tall
+   - Browse evidence on seedlings
+4. Measure browse line height (if present)
+5. Photograph each plot for documentation
+
+**Data Recording:**
+- Plot location (GPS if available)
+- Total seedling count per plot
+- % of seedlings showing browse damage
+- Browse line height (if present)
+- Dominant fern/grass species (note invasive species)
+
+**Analysis Questions:**
+- Is regeneration adequate (>50 seedlings per plot)?
+- What % show browse damage?
+- Are preferred species (oak, cherry, maple) present or absent?
+- Does fern/laurel dominate the understory?
+
+**Share Your Data:**
+Upload observations to iNaturalist (tag: #WLAForestRegeneration)
+
+---
+
+### Activity 2: Soil pH Field Testing (15 minutes)
+
+**Materials Needed:**
+- Soil pH test kit (available at garden centers, $10-15)
+- Small trowel or stick
+- Water bottle
+- Notepad
+
+**Procedure:**
+1. Collect soil samples from 3 locations in your study area
+2. Remove leaf litter, dig 3-4 inches deep
+3. Follow test kit instructions (typically: mix soil + water + indicator solution)
+4. Record pH for each sample
+5. Note vegetation present at each sampling point
+
+**Interpretation:**
+- pH 6.5-7.0: Optimal for most PA trees
+- pH 4.5-5.5: Common in PA, may limit regeneration
+- pH <4.5: Very acidic, limits most species
+
+**Citizen Science:**
+Submit pH data to your county conservation district's water quality program
+
+---
+
+### Activity 3: Tree Seedling Identification Challenge (20 minutes)
+
+**Materials Needed:**
+- Field guide (recommended: "Trees of Pennsylvania" by Ann Rhoads)
+- Hand lens (optional but helpful)
+- Collection bag for leaf samples (press them!)
+
+**Procedure:**
+1. Find 5 different tree seedlings (<3 feet tall)
+2. For each, note:
+   - Leaf arrangement (opposite vs. alternate)
+   - Leaf shape (simple vs. compound)
+   - Leaf margins (smooth, toothed, lobed)
+   - Bark color/texture
+3. Take clear photos of leaves and bark
+4. Use field guide to identify to species
+
+**Target Species (PA natives):**
+- Red oak, white oak
+- Black cherry
+- Red maple, sugar maple
+- Tulip poplar
+- White ash (note: threatened by emerald ash borer)
+
+**Journal Prompt:**
+"Which species are regenerating successfully? Which are absent? What might explain the pattern?"
+
+---
+
+### Activity 4: Build a Mini-Exclosure (1 hour, optional)
+
+**Materials Needed:**
+- 50 feet of chicken wire or garden fencing (3-4 ft tall)
+- 4-6 stakes or posts
+- Zip ties or wire
+- Hammer or mallet
+
+**Procedure:**
+1. Select a 10-foot diameter area representative of your forest
+2. Install posts around perimeter
+3. Attach fencing securely (must exclude deer)
+4. Label with "Educational Exclosure - [Your Name/School] - [Date]"
+5. Photograph the area INSIDE and OUTSIDE immediately
+
+**Long-Term Monitoring:**
+- Revisit quarterly for 2+ years
+- Photograph same locations inside and outside
+- Count seedlings inside vs. outside
+- Document differences over time
+
+**This is Science!**
+You're replicating Penn State's research. Your data are real. Share results with your instructor or local DCNR forester.
+
+---
+
+### Activity 5: iNaturalist Forest Health Project (Ongoing)
+
+**Setup:**
+1. Download iNaturalist app (free)
+2. Create account
+3. Join project: "PA Forest Regeneration" (or create your own!)
+
+**What to Document:**
+- Tree seedlings (with species ID)
+- Browse damage (close-up photos)
+- Invasive plants (garlic mustard, multiflora rose)
+- Deer sign (tracks, scat, rubs)
+- Exclosures (if you find any)
+
+**Why It Matters:**
+Your observations contribute to statewide forest health monitoring. DCNR and researchers use iNaturalist data for management decisions.
+
 ## Advanced Topics
 
 ### Dr. Gary Alt: Four Decades of PA Wildlife Insights
@@ -675,6 +809,147 @@ Invasive plants displace native species, reduce wildlife food and cover, and can
 
 **Practice this pitch**:
 "These plants are like a wildfire in slow motion. A small patch today becomes acres in five years. If we act now while it's manageable, we save thousands of dollars and protect the habitat for wildlife."
+
+## Field Activities
+
+### Activity 1: Invasive Plant Survey & Mapping (45 minutes)
+
+**Materials Needed:**
+- Smartphone with GPS capability
+- Field guide ("Invasive Plants of PA" - free PDF from Penn State Extension)
+- Clipboard and data sheet
+- Camera
+- Work gloves
+
+**Procedure:**
+1. Select a 1-acre survey area (park, trail, forest edge, old field)
+2. Walk slowly, searching for invasive plants
+3. For each invasive found:
+   - Take GPS coordinates
+   - Photograph (include scale object like hand or ruler)
+   - Estimate patch size (diameter or length/width)
+   - Note density (scattered, moderate, dense)
+   - Record surrounding habitat type
+4. Create rough sketch map showing invasive locations
+
+**Target Invaders (PA Priority List):**
+- Garlic mustard
+- Japanese stiltgrass
+- Multiflora rose
+- Autumn olive
+- Tree of heaven
+- Mile-a-minute weed
+
+**Citizen Science:**
+Upload all observations to iMapInvasives (www.imapinvasives.org) - PA's official invasive species reporting system
+
+---
+
+### Activity 2: Early Detection Challenge (20 minutes)
+
+**Goal:** Find the SMALLEST invasive plant population you can
+
+**Why It Matters:**
+Early detection = easy control. One garlic mustard plant this year = 1,000 next year.
+
+**Procedure:**
+1. Search property edges, trails, disturbed areas (where invasives arrive first)
+2. Look for single plants or very small patches
+3. Document thoroughly
+4. **DO NOT REMOVE** without landowner permission
+5. Report findings to property manager or local conservation district
+
+**Best Case Scenario:**
+You find a species NEW to your county. This triggers rapid response eradication.
+
+---
+
+### Activity 3: Invasive Plant Removal (Garlic Mustard) (1-2 hours)
+
+**SAFETY FIRST:**
+- Get landowner permission
+- Wear gloves, long sleeves, pants
+- Check for poison ivy first!
+- Bring tick repellent
+- Work in pairs
+
+**Materials:**
+- Work gloves
+- Large trash bags
+- Hand trowel or weeder
+- Water/snacks
+
+**Procedure (Garlic Mustard):**
+1. Pull entire plant, including roots
+2. BEFORE plants flower: Can compost
+3. AFTER flowering/seed set: Bag and trash (DO NOT COMPOST)
+4. Pile pulled plants in sun to dry (kills them)
+5. Mark area with flagging tape
+6. Return in 2 weeks to check for resprouts
+
+**Track Your Impact:**
+- Area cleared (square feet)
+- Number of bags filled
+- Hours spent
+- Photos before/after
+
+**Follow-Up:**
+This is year 1 of at least 3. Seeds remain viable 5+ years. Schedule quarterly return visits.
+
+---
+
+### Activity 4: Native Plant Restoration Plot (Ongoing project)
+
+**After removing invasives, fill the gap with natives!**
+
+**Materials:**
+- Native plant seedlings (10-20, from local nursery or conservation district)
+- Shovel, trowel
+- Mulch (leaves or wood chips)
+- Water
+- Plant labels/markers
+
+**Recommended PA Natives:**
+- Wildflowers: Black-eyed Susan, coneflower, asters, goldenrod
+- Shrubs: Spicebush, serviceberry, viburnum, elderberry
+- Grasses: Little bluestem, switchgrass
+
+**Procedure:**
+1. Plant in spring or fall (not summer)
+2. Space appropriately (check plant labels)
+3. Water thoroughly after planting
+4. Mulch around plants (3-inch layer, keep away from stems)
+5. Water weekly if no rain (first season)
+
+**Monitor:**
+- Monthly photos
+- Survival rate
+- Growth measurements
+- Wildlife use (butterflies, birds?)
+
+**This is Real Restoration:**
+You're not just removing invasives—you're rebuilding native ecosystems. Document your project for college applications or scholarships!
+
+---
+
+### Activity 5: Create an Invasive Species Alert Poster (1 hour)
+
+**Goal:** Educate your community
+
+**Content:**
+- Photos of 3-5 priority invasives in your area
+- Key ID features
+- Why they're harmful
+- What to do if you find them (don't spread them!)
+- Contact: Your county conservation district
+
+**Distribution:**
+- Post at trailheads, community centers, libraries
+- Share on social media
+- Present to scout troops, garden clubs, schools
+
+**Impact:**
+One educated gardener who stops planting invasives = prevented invasion!
 
 ## Advanced Topics
 
