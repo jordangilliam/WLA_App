@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
+import { PA_WATER_BODIES_EXPANDED } from '@/data/pa-water-bodies-expanded';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -307,7 +308,1080 @@ const PA_FISH_SPECIES: FishSpecies[] = [
 ];
 
 // Sample water bodies - in production, this would come from PFBC GIS API
-const PA_WATER_BODIES: WaterBody[] = [
+// Use expanded water bodies data
+const PA_WATER_BODIES = PA_WATER_BODIES_EXPANDED;
+
+// Warmwater/Coolwater Stocking Schedules
+const WARMWATER_STOCKING_SCHEDULE = [
+  {
+    location: 'Peace Valley Lake',
+    county: 'Bucks',
+    species: 'Channel Catfish',
+    dates: ['May 15', 'June 12', 'July 10'],
+    size: '12-16 inches',
+    quantity: 500
+  },
+  {
+    location: 'Blue Marsh Lake',
+    county: 'Berks',
+    species: 'Hybrid Striped Bass',
+    dates: ['April 20', 'May 18'],
+    size: '6-8 inches',
+    quantity: 2000
+  },
+  {
+    location: 'Lake Marburg',
+    county: 'York',
+    species: 'Muskellunge',
+    dates: ['October 5'],
+    size: '12-14 inches',
+    quantity: 100
+  },
+  {
+    location: 'Marsh Creek Lake',
+    county: 'Chester',
+    species: 'Walleye',
+    dates: ['April 15', 'October 20'],
+    size: '6-8 inches',
+    quantity: 5000
+  },
+  {
+    location: 'Glendale Lake',
+    county: 'Cambria',
+    species: 'Tiger Musky',
+    dates: ['September 15'],
+    size: '12-14 inches',
+    quantity: 75
+  },
+  {
+    location: 'Pymatuning Reservoir',
+    county: 'Crawford',
+    species: 'Walleye',
+    dates: ['April 10', 'May 5', 'October 15'],
+    size: '6-8 inches',
+    quantity: 10000
+  },
+  {
+    location: 'Lake Arthur',
+    county: 'Butler',
+    species: 'Muskellunge',
+    dates: ['October 1'],
+    size: '12-14 inches',
+    quantity: 150
+  },
+  {
+    location: 'Beltzville Lake',
+    county: 'Carbon',
+    species: 'Hybrid Striped Bass',
+    dates: ['May 1', 'June 15'],
+    size: '6-8 inches',
+    quantity: 1500
+  }
+];
+
+// Knot Tying Data with ASCII Diagrams
+const FISHING_KNOTS = [
+  {
+    id: 'improved-clinch',
+    name: 'Improved Clinch Knot',
+    difficulty: 'Beginner',
+    strength: '95%',
+    uses: ['Attaching hooks', 'Tying lures', 'Terminal tackle'],
+    discipline: 'Both',
+    steps: [
+      '1. Thread line through eye of hook',
+      '2. Make 5-7 wraps around standing line',
+      '3. Thread tag end through loop by eye',
+      '4. Thread tag end through big loop just made',
+      '5. Moisten and pull tight',
+      '6. Trim tag end'
+    ],
+    diagram: `
+    ┌──────┐
+    │ Hook │───○───────
+    └──────┘    ╲╱╲╱╲╱╲╱
+                 ╲─○─╱
+                   │
+                   ╲────
+    `,
+    videoUrl: 'https://www.youtube.com/watch?v=improved-clinch',
+    tips: 'Always moisten knot before tightening. Leave 1/8" tag end.'
+  },
+  {
+    id: 'palomar',
+    name: 'Palomar Knot',
+    difficulty: 'Beginner',
+    strength: '95%',
+    uses: ['Braided line', 'Heavy lures', 'Strong connection'],
+    discipline: 'Conventional',
+    steps: [
+      '1. Double 6" of line and pass through eye',
+      '2. Tie overhand knot with doubled line',
+      '3. Pass loop over entire lure/hook',
+      '4. Moisten and pull tight',
+      '5. Trim tag end'
+    ],
+    diagram: `
+       Loop
+        ○
+       ╱ ╲
+    ═══   ═══
+    │   ╳   │
+    │  ╱ ╲  │
+    └─┘   └─┘
+       Hook
+    `,
+    tips: 'Best for braided line. Very strong and reliable.'
+  },
+  {
+    id: 'loop-knot',
+    name: 'Non-Slip Loop Knot',
+    difficulty: 'Intermediate',
+    strength: '90%',
+    uses: ['Fly fishing', 'Lure action', 'Free movement'],
+    discipline: 'Both',
+    steps: [
+      '1. Make overhand knot in line',
+      '2. Pass tag end through hook eye and back through overhand knot',
+      '3. Wrap tag end around standing line 3-5 times',
+      '4. Pass tag end back through overhand knot',
+      '5. Moisten and tighten carefully'
+    ],
+    diagram: `
+      ╭─○─╮
+      │   │
+    ═══ ○ ═══
+      ╲─┴─╱
+       Hook
+    `,
+    tips: 'Allows lure to move freely. Great for streamers and crankbaits.'
+  },
+  {
+    id: 'blood-knot',
+    name: 'Blood Knot',
+    difficulty: 'Advanced',
+    strength: '85%',
+    uses: ['Joining tippets', 'Leader construction', 'Line-to-line'],
+    discipline: 'Fly',
+    steps: [
+      '1. Overlap two lines 6 inches',
+      '2. Wrap one end around other line 5 times',
+      '3. Bring tag back and through middle opening',
+      '4. Repeat with other line in opposite direction',
+      '5. Pull both tag ends to tighten center',
+      '6. Pull standing lines to finish'
+    ],
+    diagram: `
+    ═══╱╲╱╲╱╲╱╲╱╲═══
+       ╲───○───╱
+       ╱╲╱╲╱╲╱╲╱╲
+    `,
+    tips: 'Works best with lines of similar diameter. Practice makes perfect!'
+  },
+  {
+    id: 'surgeons-knot',
+    name: 'Surgeon&apos;s Knot',
+    difficulty: 'Beginner',
+    strength: '90%',
+    uses: ['Tippet to leader', 'Quick line joining', 'Dissimilar diameters'],
+    discipline: 'Fly',
+    steps: [
+      '1. Overlap lines 6-8 inches',
+      '2. Form loop with both lines',
+      '3. Pass both tag ends through loop twice',
+      '4. Moisten and pull all four ends',
+      '5. Trim tag ends'
+    ],
+    diagram: `
+    ═══○═══
+       │
+    ═══○═══
+    `,
+    tips: 'Faster than blood knot. Great for changing tippets quickly.'
+  },
+  {
+    id: 'arbor-knot',
+    name: 'Arbor Knot',
+    difficulty: 'Beginner',
+    strength: 'N/A',
+    uses: ['Attaching line to reel', 'Backing to arbor', 'Initial setup'],
+    discipline: 'Both',
+    steps: [
+      '1. Wrap line around reel arbor',
+      '2. Tie overhand knot around main line',
+      '3. Tie second overhand knot in tag end',
+      '4. Pull tight - second knot jams against first',
+      '5. Trim excess'
+    ],
+    diagram: `
+    ═══○═══
+       │
+       ○
+    `,
+    tips: 'Simple and secure. The second knot prevents slipping.'
+  },
+  {
+    id: 'nail-knot',
+    name: 'Nail Knot',
+    difficulty: 'Advanced',
+    strength: '90%',
+    uses: ['Fly line to leader', 'Permanent connections', 'Smooth casts'],
+    discipline: 'Fly',
+    steps: [
+      '1. Lay nail/tube alongside fly line and leader',
+      '2. Wrap leader tag end around fly line and nail 7 times',
+      '3. Thread tag end through nail/tube',
+      '4. Remove nail while holding wraps',
+      '5. Pull tight carefully',
+      '6. Trim and coat with glue'
+    ],
+    diagram: `
+    ████████
+    ╱╲╱╲╱╲╱╲
+    ═══════
+    `,
+    tips: 'Use a nail knot tool or drinking straw. Very smooth through guides.'
+  }
+];
+
+// Equipment Data - Comprehensive Guide
+const FISHING_EQUIPMENT = {
+  conventional: {
+    rods: [
+      {
+        type: 'Spinning Rod',
+        length: '6-7 feet',
+        power: 'Light to Medium',
+        action: 'Fast to Moderate',
+        uses: 'Versatile - Panfish, trout, bass',
+        price: '$50-$200',
+        bestFor: 'Beginners, general use'
+      },
+      {
+        type: 'Baitcasting Rod',
+        length: '6.6-7.6 feet',
+        power: 'Medium to Heavy',
+        action: 'Fast',
+        uses: 'Bass, pike, larger fish',
+        price: '$70-$300',
+        bestFor: 'Experienced anglers, precision'
+      },
+      {
+        type: 'Ultralight Rod',
+        length: '5-6 feet',
+        power: 'Ultralight',
+        action: 'Fast',
+        uses: 'Panfish, small trout',
+        price: '$40-$150',
+        bestFor: 'Small waters, light tackle'
+      }
+    ],
+    reels: [
+      {
+        type: 'Spinning Reel',
+        size: '1000-3000',
+        dragPower: '5-15 lbs',
+        gearRatio: '5.0:1 to 6.2:1',
+        uses: 'All-purpose fishing',
+        price: '$40-$250',
+        features: ['Easy to use', 'Versatile', 'Good for beginners']
+      },
+      {
+        type: 'Baitcasting Reel',
+        size: 'Various',
+        dragPower: '10-25 lbs',
+        gearRatio: '6.4:1 to 8.1:1',
+        uses: 'Bass, pike, accuracy',
+        price: '$80-$400',
+        features: ['Precise casts', 'More control', 'Higher drag']
+      },
+      {
+        type: 'Spincast Reel',
+        size: 'Various',
+        dragPower: '5-10 lbs',
+        gearRatio: '3.0:1 to 4.3:1',
+        uses: 'Beginners, kids',
+        price: '$20-$80',
+        features: ['Push-button casting', 'Tangle-free', 'Easy operation']
+      }
+    ],
+    line: [
+      {
+        type: 'Monofilament',
+        strength: '4-20 lb test',
+        stretch: 'High (25%)',
+        visibility: 'Medium',
+        uses: 'General purpose, topwater, crankbaits',
+        pros: ['Affordable', 'Forgiving', 'Knots well'],
+        cons: ['Stretches', 'Memory', 'UV degradation'],
+        price: '$5-$15 per spool'
+      },
+      {
+        type: 'Fluorocarbon',
+        strength: '4-20 lb test',
+        stretch: 'Low (15%)',
+        visibility: 'Low (nearly invisible)',
+        uses: 'Leader material, clear water, finesse',
+        pros: ['Invisible underwater', 'Abrasion resistant', 'Sinks fast'],
+        cons: ['Expensive', 'Stiff', 'Harder to knot'],
+        price: '$15-$30 per spool'
+      },
+      {
+        type: 'Braided',
+        strength: '10-65 lb test (thin diameter)',
+        stretch: 'None',
+        visibility: 'High (bright colors)',
+        uses: 'Heavy cover, jigs, sensitivity',
+        pros: ['No stretch', 'Super strong', 'Thin', 'Lasts years'],
+        cons: ['Visible', 'Expensive', 'Requires special knots'],
+        price: '$20-$40 per spool'
+      }
+    ],
+    lures: [
+      {
+        category: 'Crankbaits',
+        types: ['Shallow', 'Medium', 'Deep diving'],
+        uses: 'Bass, pike, walleye',
+        action: 'Steady retrieve with wobble',
+        colors: 'Match water clarity - bright or natural',
+        tips: 'Deflect off structure for reaction strikes'
+      },
+      {
+        category: 'Soft Plastics',
+        types: ['Worms', 'Grubs', 'Creatures', 'Swimbaits'],
+        uses: 'Bass, panfish, walleye',
+        action: 'Varies - slow, twitch, swim',
+        colors: 'Natural in clear, dark in murky',
+        tips: 'Rig weedless for heavy cover'
+      },
+      {
+        category: 'Spinnerbaits',
+        types: ['Single', 'Double blade', 'Buzzbait'],
+        uses: 'Bass, pike, musky',
+        action: 'Steady retrieve, flash and vibration',
+        colors: 'White, chartreuse, natural',
+        tips: 'Slow-roll in cold water, burn in warm'
+      },
+      {
+        category: 'Jigs',
+        types: ['Football', 'Flipping', 'Swim jigs'],
+        uses: 'Bass, walleye, panfish',
+        action: 'Hop, drag, swim',
+        colors: 'Match forage - crawfish, baitfish',
+        tips: 'Use trailer for bulk and action'
+      },
+      {
+        category: 'Topwater',
+        types: ['Poppers', 'Walk-the-dog', 'Buzzbaits', 'Frogs'],
+        uses: 'Bass, pike',
+        action: 'Surface disturbance',
+        colors: 'Natural, white, black',
+        tips: 'Early morning and evening, calm water'
+      }
+    ],
+    terminal: [
+      {
+        item: 'Hooks',
+        types: ['J-hook', 'Circle hook', 'Treble', 'Wide gap'],
+        sizes: '#10 (small) to 5/0 (large)',
+        uses: 'Match hook size to bait and species',
+        tips: 'Sharp hooks catch more fish - check often'
+      },
+      {
+        item: 'Weights',
+        types: ['Split shot', 'Bullet', 'Egg', 'Bank sinkers'],
+        sizes: '1/32 oz to 1 oz+',
+        uses: 'Get bait to depth, feel bottom',
+        tips: 'Use lightest weight that gets the job done'
+      },
+      {
+        item: 'Bobbers/Floats',
+        types: ['Round', 'Slip bobber', 'Pencil', 'Lighted'],
+        sizes: 'Micro to large',
+        uses: 'Suspend bait, detect strikes',
+        tips: 'Use slip bobber for deep water'
+      },
+      {
+        item: 'Swivels',
+        types: ['Barrel', 'Ball bearing', 'Snap swivels'],
+        sizes: '#10 to #1',
+        uses: 'Prevent line twist, quick changes',
+        tips: 'Ball bearing swivels work best for spinners'
+      }
+    ],
+    bait: [
+      {
+        type: 'Live Bait',
+        options: ['Nightcrawlers', 'Minnows', 'Leeches', 'Crayfish', 'Crickets', 'Grubs'],
+        storage: 'Cool, moist, oxygenated',
+        uses: 'Universal - works for almost everything',
+        tips: 'Keep fresh, check regulations on transport',
+        seasons: 'Year-round'
+      },
+      {
+        type: 'Cut Bait',
+        options: ['Chicken liver', 'Hot dogs', 'Stink bait', 'Fish chunks'],
+        storage: 'Refrigerate or freeze',
+        uses: 'Catfish, panfish',
+        tips: 'Smell attracts fish - the stinkier the better',
+        seasons: 'Warm water'
+      },
+      {
+        type: 'Prepared Bait',
+        options: ['PowerBait', 'Berkley Gulp', 'Salmon eggs', 'Corn'],
+        storage: 'Cool, sealed container',
+        uses: 'Trout, panfish',
+        tips: 'Good for stocked fish familiar with pellets',
+        seasons: 'Year-round, especially stocking season'
+      }
+    ]
+  },
+  fly: {
+    rods: [
+      {
+        weight: '3-4 wt',
+        length: '7-8 feet',
+        uses: 'Small streams, panfish, small trout',
+        action: 'Moderate to Fast',
+        price: '$100-$400',
+        bestFor: 'Delicate presentations, tight spaces'
+      },
+      {
+        weight: '5-6 wt',
+        length: '8.5-9 feet',
+        uses: 'All-purpose trout, bass, general',
+        action: 'Medium-Fast',
+        price: '$150-$600',
+        bestFor: 'Most versatile, recommended for beginners'
+      },
+      {
+        weight: '7-8 wt',
+        length: '9 feet',
+        uses: 'Bass, pike, steelhead, big water',
+        action: 'Fast',
+        price: '$200-$700',
+        bestFor: 'Larger fish, wind, heavy flies'
+      }
+    ],
+    reels: [
+      {
+        type: 'Click-and-Pawl',
+        drag: 'Light',
+        weight: '3-5 wt',
+        uses: 'Small trout, panfish',
+        price: '$50-$150',
+        features: ['Simple', 'Light', 'Classic sound']
+      },
+      {
+        type: 'Disc Drag',
+        drag: 'Adjustable, smooth',
+        weight: '5-8 wt',
+        uses: 'All-purpose, larger fish',
+        price: '$100-$500',
+        features: ['Smooth drag', 'Reliable', 'Versatile']
+      },
+      {
+        type: 'Large Arbor',
+        drag: 'Strong',
+        weight: '6-10 wt',
+        uses: 'Fast retrieve, big fish',
+        price: '$150-$800',
+        features: ['Fast line pickup', 'Less memory', 'Better drag']
+      }
+    ],
+    line: [
+      {
+        type: 'Weight Forward (WF)',
+        uses: 'All-purpose, most common',
+        casting: 'Good for distance and accuracy',
+        price: '$40-$100',
+        recommendation: 'Best for beginners'
+      },
+      {
+        type: 'Double Taper (DT)',
+        uses: 'Delicate presentations, roll casting',
+        casting: 'Gentle turnover, can reverse',
+        price: '$50-$100',
+        recommendation: 'Traditional, small streams'
+      },
+      {
+        type: 'Floating',
+        density: 'Floats on surface',
+        uses: 'Dry flies, nymphs, most situations',
+        colors: 'Various for visibility',
+        recommendation: '90% of fishing'
+      },
+      {
+        type: 'Sinking',
+        density: 'Sinks at rated speed',
+        uses: 'Streamers, deep nymphs, lakes',
+        colors: 'Usually dark',
+        recommendation: 'Specialized situations'
+      }
+    ],
+    leaders: [
+      {
+        type: 'Knotless Tapered',
+        length: '7.5-12 feet',
+        tippet: '3X to 6X',
+        uses: 'Most fly fishing',
+        price: '$5-$8 each',
+        tips: 'Replace after several fish or when worn'
+      },
+      {
+        type: 'Knotted',
+        length: 'Custom',
+        sections: '3-5 decreasing diameters',
+        uses: 'Custom tapers, save money',
+        price: 'DIY',
+        tips: 'Build your own with different monofilament'
+      },
+      {
+        type: 'Tippet Material',
+        strength: '8X to 0X (tiny to large)',
+        length: 'Add 2-4 feet to leader',
+        material: 'Monofilament or fluorocarbon',
+        uses: 'Extend leader, change fly size',
+        tips: 'Fluorocarbon for nymphs, mono for dries'
+      }
+    ],
+    flies: [
+      {
+        category: 'Dry Flies',
+        purpose: 'Imitate adult insects on surface',
+        types: ['Adams', 'Elk Hair Caddis', 'Parachute', 'Stimulator', 'Mayfly'],
+        sizes: '#12-#20',
+        when: 'Rising fish, hatches, calm water',
+        techniques: 'Dead drift, twitch, skate',
+        colors: 'Natural browns, olives, tans',
+        mustHave: ['Adams #14-16', 'Elk Hair Caddis #14-16', 'Parachute Adams #14-18']
+      },
+      {
+        category: 'Nymphs',
+        purpose: 'Imitate subsurface insects',
+        types: ['Pheasant Tail', 'Hare&apos;s Ear', 'Copper John', 'Prince Nymph', 'Stonefly'],
+        sizes: '#8-#18',
+        when: 'Most of the time - fish eat subsurface 90%',
+        techniques: 'Dead drift with indicator, Euro nymphing',
+        colors: 'Natural - olive, brown, black, copper',
+        mustHave: ['Pheasant Tail #14-16', 'Hare&apos;s Ear #12-16', 'Copper John #14-18']
+      },
+      {
+        category: 'Streamers',
+        purpose: 'Imitate baitfish, leeches, crayfish',
+        types: ['Woolly Bugger', 'Clouser Minnow', 'Muddler Minnow', 'Sculpin'],
+        sizes: '#2-#10',
+        when: 'High water, aggressive fish, big fish',
+        techniques: 'Strip retrieve, swing, jerk',
+        colors: 'Black, olive, white, natural',
+        mustHave: ['Woolly Bugger #6-8 (black, olive)', 'Clouser Minnow #4-6']
+      },
+      {
+        category: 'Emergers',
+        purpose: 'Imitate insects hatching',
+        types: ['Sparkle Dun', 'RS2', 'Klinkhamer', 'CDC Emerger'],
+        sizes: '#14-#20',
+        when: 'During hatches, transitioning insects',
+        techniques: 'In film, slight twitch, dead drift',
+        colors: 'Match natural - olives, browns, grays',
+        mustHave: ['Sparkle Dun #16-18', 'RS2 #18-20']
+      },
+      {
+        category: 'Terrestrials',
+        purpose: 'Imitate land insects that fall in water',
+        types: ['Ants', 'Beetles', 'Grasshoppers', 'Crickets', 'Inchworms'],
+        sizes: '#10-#18',
+        when: 'Summer/fall, windy days, near banks',
+        techniques: 'Dead drift, occasional twitch',
+        colors: 'Black, brown, green, tan',
+        mustHave: ['Foam Ant #14-16', 'Beetle #14-16', 'Hopper #8-12 (summer)']
+      },
+      {
+        category: 'Wet Flies',
+        purpose: 'Traditional subsurface patterns',
+        types: ['Soft Hackles', 'Classic Wets', 'Spiders'],
+        sizes: '#10-#16',
+        when: 'Swinging, streams, classic methods',
+        techniques: 'Swing, dead drift, lift',
+        colors: 'Traditional - partridge, hare, peacock',
+        mustHave: ['Partridge and Orange #12-14', 'Soft Hackle Pheasant Tail #14']
+      }
+    ]
+  }
+};
+
+// Casting Techniques Data
+const CASTING_TECHNIQUES = {
+  conventional: [
+    {
+      name: 'Overhead Cast',
+      difficulty: 'Beginner',
+      uses: 'Most common, open water',
+      steps: [
+        'Hold rod at 10 o&apos;clock position',
+        'Bring rod tip back smoothly to 1 o&apos;clock',
+        'Pause briefly as rod loads',
+        'Accelerate forward to 10 o&apos;clock',
+        'Stop rod abruptly and release line',
+        'Follow through slightly downward'
+      ],
+      tips: 'Use your wrist and forearm. Don&apos;t overpower it. Let the rod do the work.',
+      commonMistakes: ['Casting too hard', 'Not pausing on backcast', 'Poor timing'],
+      videoUrl: '/videos/overhead-cast.mp4'
+    },
+    {
+      name: 'Sidearm Cast',
+      difficulty: 'Beginner',
+      uses: 'Under trees, wind, low trajectory',
+      steps: [
+        'Lower rod to horizontal position',
+        'Sweep rod back parallel to water',
+        'Pause to load rod',
+        'Sweep forward with acceleration',
+        'Release and follow through',
+        'Keep lure low to water'
+      ],
+      tips: 'Great for windy conditions. Keeps lure under wind.',
+      commonMistakes: ['Hitting the water on backcast', 'Too high follow-through'],
+      videoUrl: '/videos/sidearm-cast.mp4'
+    },
+    {
+      name: 'Pitching',
+      difficulty: 'Intermediate',
+      uses: 'Accuracy, close targets, quiet entry',
+      steps: [
+        'Let lure hang 6-12 inches from rod tip',
+        'Hold lure in off hand',
+        'Point rod at target',
+        'Release lure while lifting rod tip smoothly',
+        'Lure swings forward like pendulum',
+        'Feather line for accuracy'
+      ],
+      tips: 'Quiet presentation. Great for docks and cover.',
+      commonMistakes: ['Releasing too early', 'Too much arm movement'],
+      videoUrl: '/videos/pitching.mp4'
+    },
+    {
+      name: 'Flipping',
+      difficulty: 'Intermediate',
+      uses: 'Very close accuracy, heavy cover',
+      steps: [
+        'Strip out 6-8 feet of line',
+        'Hold rod high at 12 o&apos;clock',
+        'Pull line with off hand',
+        'Swing lure forward with rod movement',
+        'Use wrist pop at end',
+        'Lure drops straight down'
+      ],
+      tips: 'Best for baitcasting. Very accurate for tight spots.',
+      commonMistakes: ['Too much power', 'Poor line control'],
+      videoUrl: '/videos/flipping.mp4'
+    },
+    {
+      name: 'Roll Cast (Spinning)',
+      difficulty: 'Intermediate',
+      uses: 'Obstacles behind, short casts',
+      steps: [
+        'Sweep rod back slowly',
+        'Let line hang in a curve',
+        'Don&apos;t bring rod all the way back',
+        'Accelerate forward strongly',
+        'Line rolls forward along water',
+        'No backcast needed'
+      ],
+      tips: 'Useful when you can&apos;t backcast. Works best with heavier lures.',
+      commonMistakes: ['Too fast backcast', 'Not enough power forward'],
+      videoUrl: '/videos/roll-cast-spin.mp4'
+    },
+    {
+      name: 'Skip Cast',
+      difficulty: 'Advanced',
+      uses: 'Under docks, overhangs, tight spaces',
+      steps: [
+        'Use sidearm angle',
+        'Bring rod back low',
+        'Accelerate very fast forward',
+        'Release on forward stroke',
+        'Aim at water 3-4 feet in front',
+        'Lure skips like a stone'
+      ],
+      tips: 'Takes practice. Use heavier baits. Watch for backlash.',
+      commonMistakes: ['Too much power', 'Wrong angle', 'Backlash'],
+      videoUrl: '/videos/skip-cast.mp4'
+    }
+  ],
+  fly: [
+    {
+      name: 'Basic Overhead Cast',
+      difficulty: 'Beginner',
+      uses: 'Foundation of all fly casting',
+      steps: [
+        'Start with rod at 9 o&apos;clock (horizontal)',
+        'Accelerate smoothly to 1 o&apos;clock (backcast)',
+        'Stop rod abruptly - let line straighten',
+        'Pause - WAIT for line to load',
+        'Accelerate forward to 10 o&apos;clock',
+        'Stop abruptly and let line unfurl',
+        'Lower rod tip as fly lands'
+      ],
+      tips: 'Focus on the PAUSE. Most beginners rush it. Let the line load the rod on the backcast.',
+      commonMistakes: ['Breaking the wrist', 'No pause', 'Too much power', 'Wide arc'],
+      videoUrl: '/videos/fly-overhead.mp4'
+    },
+    {
+      name: 'False Casting',
+      difficulty: 'Beginner',
+      uses: 'Working out line, drying fly, measuring distance',
+      steps: [
+        'Same as overhead cast',
+        'Don&apos;t let line land - keep in air',
+        'Back and forth motion',
+        'Pause at each end',
+        'Add line by pulling with off hand',
+        'Cast when ready'
+      ],
+      tips: 'Don&apos;t false cast too much - 2-3 times is usually enough.',
+      commonMistakes: ['Too many false casts', 'Inconsistent loops', 'Creep'],
+      videoUrl: '/videos/false-cast.mp4'
+    },
+    {
+      name: 'Roll Cast',
+      difficulty: 'Beginner',
+      uses: 'Trees/obstacles behind, sinking line, close range',
+      steps: [
+        'Slowly raise rod tip, pulling line',
+        'Let line hang behind rod forming D-loop',
+        'Line should be on water surface',
+        'Accelerate forward powerfully',
+        'Stop at 10 o&apos;clock',
+        'Line rolls forward on surface'
+      ],
+      tips: 'Essential skill. No backcast needed. Great for tight spots.',
+      commonMistakes: ['Not enough line on water', 'Too fast', 'Poor D-loop'],
+      videoUrl: '/videos/roll-cast-fly.mp4'
+    },
+    {
+      name: 'Reach Cast',
+      difficulty: 'Intermediate',
+      uses: 'Drag-free drifts, cross-currents, mending',
+      steps: [
+        'Execute normal forward cast',
+        'As line extends, reach rod upstream',
+        'Line lands with upstream curve',
+        'Provides extra drag-free drift',
+        'Follow drift with rod tip',
+        'Mend as needed'
+      ],
+      tips: 'Gives you more drag-free drift time. Essential for technical water.',
+      commonMistakes: ['Reaching too early', 'Not enough reach', 'Poor timing'],
+      videoUrl: '/videos/reach-cast.mp4'
+    },
+    {
+      name: 'Double Haul',
+      difficulty: 'Advanced',
+      uses: 'Distance, wind, heavy flies, fast casts',
+      steps: [
+        'Start backcast with line hand pull (1st haul)',
+        'Release line hand during backcast pause',
+        'Begin forward cast',
+        'Pull sharply with line hand (2nd haul)',
+        'Release for shoot',
+        'Extra line speed and distance'
+      ],
+      tips: 'Timing is everything. Practice the rhythm. Haul = more line speed.',
+      commonMistakes: ['Poor timing', 'Weak hauls', 'Not releasing on shoot'],
+      videoUrl: '/videos/double-haul.mp4'
+    },
+    {
+      name: 'Curve Cast',
+      difficulty: 'Advanced',
+      uses: 'Around obstacles, drag avoidance, precision',
+      steps: [
+        'Begin normal cast',
+        'At end of forward cast, move rod tip in curve',
+        'Hook around to side',
+        'Line follows rod tip path',
+        'Creates curve in line',
+        'Fly lands with curved leader'
+      ],
+      tips: 'Right curve: hook rod tip right. Left curve: hook left.',
+      commonMistakes: ['Too much power', 'Wrong timing', 'Inconsistent curve'],
+      videoUrl: '/videos/curve-cast.mp4'
+    }
+  ]
+};
+
+// Pennsylvania Insects for Match the Hatch
+const PA_AQUATIC_INSECTS = [
+  {
+    id: 'blue-wing-olive',
+    name: 'Blue-Winged Olive (BWO)',
+    scientificName: 'Baetis spp.',
+    type: 'Mayfly',
+    months: ['March', 'April', 'May', 'September', 'October'],
+    time: 'Afternoon, cloudy days',
+    size: '#16-#20',
+    waterTemp: '45-55°F',
+    emergence: 'Sporadic, often in bad weather',
+    nymph: {
+      appearance: 'Small, olive-brown, streamlined',
+      habitat: 'Moderate currents, rocks',
+      size: '#16-#18',
+      patterns: ['Pheasant Tail', 'RS2', 'BWO Nymph']
+    },
+    emerger: {
+      appearance: 'Olive body, emerging wings',
+      behavior: 'Stuck in surface film',
+      patterns: ['Sparkle Dun', 'RS2', 'BWO Emerger']
+    },
+    adult: {
+      appearance: 'Olive body, gray wings',
+      size: '#16-#20',
+      patterns: ['Parachute Adams', 'CDC BWO', 'Comparadun']
+    },
+    points: 15,
+    difficulty: 'Intermediate',
+    tips: 'Fish are selective during BWO hatches. Match the size carefully. Try emergers first.'
+  },
+  {
+    id: 'sulphur',
+    name: 'Sulphur',
+    scientificName: 'Ephemerella spp.',
+    type: 'Mayfly',
+    months: ['May', 'June'],
+    time: 'Evening, 7-9 PM',
+    size: '#14-#18',
+    waterTemp: '55-65°F',
+    emergence: 'Predictable, heavy hatches',
+    nymph: {
+      appearance: 'Yellow-olive, crawler type',
+      habitat: 'Slower water, silt/gravel',
+      size: '#14-#16',
+      patterns: ['Pheasant Tail', 'Hare&apos;s Ear', 'Sulphur Nymph']
+    },
+    emerger: {
+      appearance: 'Yellow body, splitting shuck',
+      behavior: 'Long emergence, vulnerable',
+      patterns: ['Sparkle Dun Sulphur', 'CDC Emerger']
+    },
+    adult: {
+      appearance: 'Yellow-cream body, pale wings',
+      size: '#16-#18',
+      patterns: ['Light Cahill', 'Sulphur Dun', 'Parachute Sulphur']
+    },
+    points: 20,
+    difficulty: 'Intermediate',
+    tips: 'Fantastic evening hatch. Fish can be very selective. Bring lights for dusk.'
+  },
+  {
+    id: 'hendrickson',
+    name: 'Hendrickson',
+    scientificName: 'Ephemerella subvaria',
+    type: 'Mayfly',
+    months: ['April', 'May'],
+    time: 'Afternoon, 2-5 PM',
+    size: '#12-#14',
+    waterTemp: '50-55°F',
+    emergence: 'First major spring hatch',
+    nymph: {
+      appearance: 'Brown, robust, crawler',
+      habitat: 'Riffles, moderate flow',
+      size: '#12-#14',
+      patterns: ['Hare&apos;s Ear', 'Hendrickson Nymph', 'Pheasant Tail']
+    },
+    emerger: {
+      appearance: 'Reddish-brown, emerging',
+      behavior: 'Quick emergence',
+      patterns: ['CDC Emerger', 'Hendrickson Emerger']
+    },
+    adult: {
+      appearance: 'Pinkish-tan body (male) or olive-brown (female)',
+      size: '#12-#14',
+      patterns: ['Red Quill (male)', 'Hendrickson Dun (female)', 'Parachute Hendrickson']
+    },
+    points: 20,
+    difficulty: 'Beginner',
+    tips: 'Signals spring fishing is ON! Larger flies are easier for beginners.'
+  },
+  {
+    id: 'march-brown',
+    name: 'March Brown',
+    scientificName: 'Maccaffertium vicarium',
+    type: 'Mayfly',
+    months: ['May', 'June'],
+    time: 'Midday to afternoon',
+    size: '#10-#12',
+    waterTemp: '52-60°F',
+    emergence: 'Good hatch in freestone streams',
+    nymph: {
+      appearance: 'Brown, mottled, flat',
+      habitat: 'Fast water, clinging to rocks',
+      size: '#10-#12',
+      patterns: ['March Brown Nymph', 'Hare&apos;s Ear', 'Stonefly Nymph']
+    },
+    emerger: {
+      appearance: 'Brown body, emerging wings',
+      behavior: 'Surface emergence',
+      patterns: ['March Brown Emerger', 'CDC Emerger']
+    },
+    adult: {
+      appearance: 'Brown body, mottled wings',
+      size: '#10-#12',
+      patterns: ['March Brown Dry', 'Light Cahill', 'Adams']
+    },
+    points: 15,
+    difficulty: 'Beginner',
+    tips: 'Large, easy to see. Great for beginners learning to match the hatch.'
+  },
+  {
+    id: 'green-drake',
+    name: 'Green Drake',
+    scientificName: 'Ephemera guttulata',
+    type: 'Mayfly',
+    months: ['May', 'June'],
+    time: 'Evening, 7-9 PM',
+    size: '#8-#10',
+    waterTemp: '60-68°F',
+    emergence: 'Short season, legendary hatch',
+    nymph: {
+      appearance: 'Large, cream-brown, burrower',
+      habitat: 'Silt, sand, slower water',
+      size: '#6-#10',
+      patterns: ['Green Drake Nymph', 'Wiggle Nymph', 'Hare&apos;s Ear']
+    },
+    emerger: {
+      appearance: 'Large, yellow-green, struggling',
+      behavior: 'Difficult emergence, vulnerable',
+      patterns: ['Green Drake Emerger', 'CDC Emerger', 'Cripple']
+    },
+    adult: {
+      appearance: 'Huge, yellow-green body, mottled wings',
+      size: '#8-#10',
+      patterns: ['Green Drake Dry', 'Extended Body Drake', 'Parachute Drake']
+    },
+    points: 30,
+    difficulty: 'Advanced',
+    tips: 'The hatch! Plan your year around it. Short window. Bring big flies and expect big fish.'
+  },
+  {
+    id: 'trico',
+    name: 'Trico',
+    scientificName: 'Tricorythodes spp.',
+    type: 'Mayfly',
+    months: ['July', 'August', 'September'],
+    time: 'Early morning, 6-10 AM',
+    size: '#20-#26',
+    waterTemp: '65-75°F',
+    emergence: 'Massive spinner falls',
+    nymph: {
+      appearance: 'Tiny, dark, crawler',
+      habitat: 'Slow water, weeds',
+      size: '#20-#24',
+      patterns: ['Tiny Pheasant Tail', 'RS2', 'Black Beauty']
+    },
+    emerger: {
+      appearance: 'Minute, dark body',
+      behavior: 'Quick emergence',
+      patterns: ['Trico Emerger', 'CDC Trico']
+    },
+    adult: {
+      appearance: 'Tiny! Black body, white wings (spinner)',
+      size: '#22-#26',
+      patterns: ['Trico Spinner', 'Black and White', 'Poly-Wing Spinner']
+    },
+    points: 25,
+    difficulty: 'Advanced',
+    tips: 'Tiny flies, picky fish. Use 6X-7X tippet. Spinner falls blanket the water. Be patient.'
+  },
+  {
+    id: 'caddis',
+    name: 'Caddis',
+    scientificName: 'Multiple families',
+    type: 'Caddisfly',
+    months: ['April', 'May', 'June', 'July', 'August', 'September'],
+    time: 'Afternoon to evening',
+    size: '#12-#18',
+    waterTemp: '50-70°F',
+    emergence: 'Sporadic, long season',
+    larva: {
+      appearance: 'Worm-like, in case or free-living',
+      habitat: 'Rocks, vegetation, bottom',
+      size: '#12-#16',
+      patterns: ['Caddis Larva', 'Green Rockworm', 'Bead Head Caddis']
+    },
+    pupa: {
+      appearance: 'Swims to surface, wings visible',
+      behavior: 'Fast emerger, vulnerable',
+      patterns: ['Soft Hackle', 'LaFontaine Sparkle Pupa', 'Emergent Caddis']
+    },
+    adult: {
+      appearance: 'Tent-wing shape, tan/olive/brown',
+      size: '#12-#18',
+      patterns: ['Elk Hair Caddis', 'Goddard Caddis', 'X-Caddis']
+    },
+    points: 15,
+    difficulty: 'Beginner',
+    tips: 'One of the most reliable hatches. Fish are aggressive. Try skating or twitching the fly.'
+  },
+  {
+    id: 'stonefly',
+    name: 'Stonefly',
+    scientificName: 'Multiple families',
+    type: 'Stonefly',
+    months: ['February', 'March', 'April'],
+    time: 'Early spring, all day',
+    size: '#6-#10',
+    waterTemp: '38-50°F',
+    emergence: 'Crawls out on rocks/shore',
+    nymph: {
+      appearance: 'Large, flat, two tails',
+      habitat: 'Fast water, well-oxygenated',
+      size: '#4-#10',
+      patterns: ['Pat&apos;s Rubber Legs', 'Kaufmann Stone', 'Prince Nymph']
+    },
+    adult: {
+      appearance: 'Large, four wings flat over back',
+      size: '#6-#10',
+      patterns: ['Stimulator', 'Adult Stonefly', 'Amy&apos;s Ant (large)']
+    },
+    points: 20,
+    difficulty: 'Beginner',
+    tips: 'Early season staple. Nymphs work year-round. Adults in spring. Big flies = big fish.'
+  },
+  {
+    id: 'midge',
+    name: 'Midge',
+    scientificName: 'Chironomidae',
+    type: 'Midge',
+    months: ['All year, especially winter'],
+    time: 'All day, esp. afternoon',
+    size: '#18-#26',
+    waterTemp: '32-80°F',
+    emergence: 'Year-round, consistent',
+    larva: {
+      appearance: 'Tiny, segmented worm',
+      habitat: 'Bottom, silt, slow water',
+      size: '#18-#22',
+      patterns: ['Zebra Midge', 'Brassie', 'Blood Midge']
+    },
+    pupa: {
+      appearance: 'Curved body, prominent head',
+      behavior: 'Hangs in film',
+      patterns: ['Zebra Midge', 'WD-40', 'Disco Midge']
+    },
+    adult: {
+      appearance: 'Tiny mosquito-like, black/olive/cream',
+      size: '#20-#26',
+      patterns: ['Griffith&apos;s Gnat', 'Midge Adult', 'Black Gnat']
+    },
+    points: 10,
+    difficulty: 'Advanced',
+    tips: 'Winter fishing lifesaver. Small and technical. Use fine tippet. Fish are sipping.'
+  }
+];
+
+// Keep original small set for backwards compatibility
+const OLD_PA_WATER_BODIES: WaterBody[] = [
   {
     id: 'spring-creek',
     name: 'Spring Creek',
@@ -440,7 +1514,7 @@ export default function FishingPage() {
   const { award: addPoints } = usePoints();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [activeTab, setActiveTab] = useState<'map' | 'stocking' | 'lakes' | 'species' | 'log'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'stocking' | 'lakes' | 'species' | 'log' | 'conventional' | 'fly' | 'knots' | 'equipment' | 'match-hatch' | 'resources'>('map');
   const [selectedWaterBody, setSelectedWaterBody] = useState<WaterBody | null>(null);
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | null>(null);
   const [filterType, setFilterType] = useState<string>('all');
@@ -464,11 +1538,33 @@ export default function FishingPage() {
   });
   const [logPhotos, setLogPhotos] = useState<string[]>([]);
 
+  // Match the Hatch game state
+  const [matchHatchScore, setMatchHatchScore] = useState(0);
+  const [matchHatchStreak, setMatchHatchStreak] = useState(0);
+  const [matchedInsects, setMatchedInsects] = useState<string[]>([]);
+  const [currentChallenge, setCurrentChallenge] = useState<typeof PA_AQUATIC_INSECTS[0] | null>(null);
+  const [showHatchGame, setShowHatchGame] = useState(false);
+  const [selectedFlyGuess, setSelectedFlyGuess] = useState<string>('');
+  
+  // Knots/Equipment/Casting state
+  const [selectedKnot, setSelectedKnot] = useState<typeof FISHING_KNOTS[0] | null>(null);
+  const [selectedCastType, setSelectedCastType] = useState<'conventional' | 'fly'>('conventional');
+  const [selectedEquipmentType, setSelectedEquipmentType] = useState<'conventional' | 'fly'>('conventional');
+
   // Load user logs from localStorage
   useEffect(() => {
     const stored = localStorage.getItem('wla-fishing-logs');
     if (stored) {
       setUserLogs(JSON.parse(stored));
+    }
+    
+    // Load Match the Hatch progress
+    const hatchData = localStorage.getItem('wla-match-hatch');
+    if (hatchData) {
+      const parsed = JSON.parse(hatchData);
+      setMatchHatchScore(parsed.score || 0);
+      setMatchedInsects(parsed.matched || []);
+      setMatchHatchStreak(parsed.streak || 0);
     }
   }, []);
 
@@ -614,18 +1710,24 @@ export default function FishingPage() {
             🎣 Pennsylvania Fishing Guide
           </h1>
           <p style={{ fontSize: '1.2rem', opacity: 0.95 }}>
-            Trout Stocking • Lake Fishing • Species Habitats • Catch Logging
+            Complete Fishing Education • Conventional & Fly • Match the Hatch • Knots & Equipment
           </p>
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           {[
-            { id: 'map', label: '🗺️ Interactive Map', icon: '🗺️' },
-            { id: 'stocking', label: '📅 Trout Stocking', icon: '🌈' },
-            { id: 'lakes', label: '🏞️ Lakes & Streams', icon: '🏞️' },
-            { id: 'species', label: '🐟 Species Guide', icon: '🐟' },
-            { id: 'log', label: '📝 My Fishing Log', icon: '📝' }
+            { id: 'map', label: '🗺️ Map', icon: '🗺️' },
+            { id: 'stocking', label: '📅 Stocking', icon: '🌈' },
+            { id: 'lakes', label: '🏞️ Waters', icon: '🏞️' },
+            { id: 'species', label: '🐟 Species', icon: '🐟' },
+            { id: 'conventional', label: '🎣 Conventional', icon: '🎣' },
+            { id: 'fly', label: '🪰 Fly Fishing', icon: '🪰' },
+            { id: 'knots', label: '🪢 Knots', icon: '🪢' },
+            { id: 'equipment', label: '🎒 Equipment', icon: '🎒' },
+            { id: 'match-hatch', label: '🦋 Match Hatch', icon: '🦋' },
+            { id: 'resources', label: '📚 Resources', icon: '📚' },
+            { id: 'log', label: '📝 Log', icon: '📝' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -1514,6 +2616,125 @@ export default function FishingPage() {
                 })}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Conventional Fishing Tab */}
+        {activeTab === 'conventional' && (
+          <div className="card section">
+            <h2>🎣 Conventional Fishing Guide</h2>
+            <p style={{ color: '#6B7280', marginBottom: '2rem' }}>
+              Master spinning, baitcasting, and conventional techniques for PA waters
+            </p>
+
+            <div style={{ display: 'grid', gap: '2rem' }}>
+              {/* Lure Fishing Section */}
+              <div className="card" style={{ background: '#F0F9FF' }}>
+                <h3>🎯 Lure Fishing Techniques</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
+                  {FISHING_EQUIPMENT.conventional.lures.map((lure, idx) => (
+                    <div key={idx} className="card" style={{ background: 'white' }}>
+                      <h4 style={{ color: '#0077B6', marginBottom: '0.75rem' }}>{lure.category}</h4>
+                      <div style={{ marginBottom: '0.75rem' }}>
+                        <strong style={{ display: 'block', fontSize: '0.9rem', color: '#6B7280' }}>Types:</strong>
+                        <p style={{ color: '#4B5563', marginTop: '0.25rem' }}>{lure.types.join(', ')}</p>
+                      </div>
+                      <div style={{ marginBottom: '0.75rem' }}>
+                        <strong style={{ display: 'block', fontSize: '0.9rem', color: '#6B7280' }}>Best For:</strong>
+                        <p style={{ color: '#4B5563', marginTop: '0.25rem' }}>{lure.uses}</p>
+                      </div>
+                      <div style={{ marginBottom: '0.75rem' }}>
+                        <strong style={{ display: 'block', fontSize: '0.9rem', color: '#6B7280' }}>Action:</strong>
+                        <p style={{ color: '#4B5563', marginTop: '0.25rem' }}>{lure.action}</p>
+                      </div>
+                      <div style={{ background: '#FEF3C7', padding: '0.75rem', borderRadius: '8px', marginTop: '0.75rem' }}>
+                        <strong style={{ fontSize: '0.9rem', color: '#92400E' }}>💡 Pro Tip:</strong>
+                        <p style={{ fontSize: '0.9rem', color: '#78350F', marginTop: '0.25rem' }}>{lure.tips}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live Bait Section */}
+              <div className="card" style={{ background: '#F0FDF4' }}>
+                <h3>🪱 Live & Prepared Bait Guide</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
+                  {FISHING_EQUIPMENT.conventional.bait.map((bait, idx) => (
+                    <div key={idx} className="card" style={{ background: 'white' }}>
+                      <h4 style={{ color: '#059669' }}>{bait.type}</h4>
+                      <div style={{ marginBottom: '0.75rem' }}>
+                        <strong style={{ display: 'block', fontSize: '0.9rem', color: '#6B7280' }}>Options:</strong>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+                          {bait.options.map((opt, i) => (
+                            <span key={i} style={{ background: '#ECFDF5', color: '#065F46', padding: '0.25rem 0.75rem', borderRadius: '6px', fontSize: '0.85rem' }}>
+                              {opt}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div style={{ marginBottom: '0.5rem' }}>
+                        <strong style={{ fontSize: '0.9rem', color: '#6B7280' }}>Storage:</strong>
+                        <p style={{ fontSize: '0.9rem', color: '#4B5563', marginTop: '0.25rem' }}>{bait.storage}</p>
+                      </div>
+                      <div style={{ marginBottom: '0.5rem' }}>
+                        <strong style={{ fontSize: '0.9rem', color: '#6B7280' }}>Best For:</strong>
+                        <p style={{ fontSize: '0.9rem', color: '#4B5563', marginTop: '0.25rem' }}>{bait.uses}</p>
+                      </div>
+                      <div style={{ background: '#FEF3C7', padding: '0.75rem', borderRadius: '8px', marginTop: '0.75rem' }}>
+                        <strong style={{ fontSize: '0.9rem', color: '#92400E' }}>💡 Tip:</strong>
+                        <p style={{ fontSize: '0.9rem', color: '#78350F', marginTop: '0.25rem' }}>{bait.tips}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Casting Guide */}
+              <div className="card" style={{ background: '#FEF2F2' }}>
+                <h3>🎯 Conventional Casting Techniques</h3>
+                <p style={{ color: '#6B7280', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+                  Master these essential casts for spinning and baitcasting setups
+                </p>
+                <div style={{ display: 'grid', gap: '1.5rem' }}>
+                  {CASTING_TECHNIQUES.conventional.map((cast, idx) => (
+                    <div key={idx} className="card" style={{ background: 'white' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
+                        <h4 style={{ color: '#DC2626' }}>{cast.name}</h4>
+                        <span style={{ 
+                          background: cast.difficulty === 'Beginner' ? '#ECFDF5' : cast.difficulty === 'Intermediate' ? '#FEF3C7' : '#FEE2E2',
+                          color: cast.difficulty === 'Beginner' ? '#065F46' : cast.difficulty === 'Intermediate' ? '#92400E' : '#991B1B',
+                          padding: '0.25rem 0.75rem',
+                          borderRadius: '6px',
+                          fontSize: '0.85rem',
+                          fontWeight: 600
+                        }}>
+                          {cast.difficulty}
+                        </span>
+                      </div>
+                      <p style={{ color: '#6B7280', fontSize: '0.95rem', marginBottom: '1rem' }}>
+                        <strong>Use:</strong> {cast.uses}
+                      </p>
+                      <div style={{ marginBottom: '1rem' }}>
+                        <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#374151' }}>Steps:</strong>
+                        <ol style={{ paddingLeft: '1.5rem', lineHeight: 1.8 }}>
+                          {cast.steps.map((step, i) => (
+                            <li key={i} style={{ color: '#4B5563', fontSize: '0.95rem' }}>{step}</li>
+                          ))}
+                        </ol>
+                      </div>
+                      <div style={{ background: '#DBEAFE', padding: '1rem', borderRadius: '8px' }}>
+                        <strong style={{ color: '#1E40AF' }}>💡 Tips:</strong>
+                        <p style={{ color: '#1E3A8A', marginTop: '0.5rem', fontSize: '0.95rem' }}>{cast.tips}</p>
+                        <p style={{ color: '#7C3AED', marginTop: '0.5rem', fontSize: '0.85rem' }}>
+                          <strong>Common Mistakes:</strong> {cast.commonMistakes.join(', ')}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
