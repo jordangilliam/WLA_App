@@ -87,8 +87,8 @@ export default function Home() {
           }}>
             <div 
               id="skl_id_search_hero_section" 
-              chat_id="FX9IIOtCFx" 
-              isHero="true"
+              data-chat-id="FX9IIOtCFx" 
+              data-is-hero="true"
               style={{
                 borderRadius: '12px',
                 overflow: 'hidden',

@@ -95,7 +95,7 @@ export interface EnrollStudentDTO {
 // ASSIGNMENTS
 // ============================================
 
-export type ActivityType = 'lesson' | 'quiz' | 'field_observation' | 'journal' | 'custom';
+export type AssignmentActivityType = 'lesson' | 'quiz' | 'field_observation' | 'journal' | 'custom';
 
 export interface Assignment {
   id: number;
@@ -105,7 +105,7 @@ export interface Assignment {
   description?: string;
   instructions?: string;
   lesson_id?: string;
-  activity_type?: ActivityType;
+  activity_type?: AssignmentActivityType;
   points_possible: number;
   rubric_url?: string;
   assigned_at: Date;
@@ -124,7 +124,7 @@ export interface CreateAssignmentDTO {
   description?: string;
   instructions?: string;
   lesson_id?: string;
-  activity_type?: ActivityType;
+  activity_type?: AssignmentActivityType;
   points_possible?: number;
   due_date?: Date;
   allow_late_submission?: boolean;
