@@ -2735,7 +2735,9 @@ export default function FishingPage() {
                 </div>
               </div>
             </div>
-          </div>```tsx
+          </div>
+        )}
+
         {/* Fly Fishing Tab */}
         {activeTab === 'fly' && (
           <div className="card section">
