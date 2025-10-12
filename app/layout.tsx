@@ -1,6 +1,5 @@
 import '../styles/globals.css';
 import Link from 'next/link';
-import Image from 'next/image';
 import { PointsProvider } from '@/ui/points/PointsProvider';
 import PWAInstall from '@/components/PWAInstall';
 
@@ -50,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               justifyContent: 'center',
               alignItems: 'center',
               position: 'relative',
-              background: 'linear-gradient(135deg, #8B7355 0%, #A0826D 25%, #D4A574 50%, #6B8E7F 75%, #4A6F5C 100%)',
+              background: 'radial-gradient(ellipse at top left, #6B8E7F 0%, #8B7355 25%, #A0826D 50%, #D4A574 75%, #4A6F5C 100%)',
               borderRadius: '16px',
               boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               border: 'none',
@@ -63,18 +62,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               left: 0,
               right: 0,
               bottom: 0,
+              backgroundImage: 'url(/images/menu/menu.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: 0.3,
               zIndex: 0,
-              borderRadius: '16px',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src="/images/menu/menu.png"
-                alt="Pennsylvania landscape"
-                fill
-                style={{ objectFit: 'cover', objectPosition: 'center' }}
-                priority
-              />
-            </div>
+              mixBlendMode: 'overlay'
+            }}></div>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
             <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌲 WLA</Link>
             <Link href="/learn" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>📚 Learn</Link>

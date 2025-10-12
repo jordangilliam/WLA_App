@@ -14,7 +14,7 @@ export default function Home() {
       <section style={{
         position: 'relative',
         minHeight: '500px',
-        background: 'linear-gradient(135deg, #023047 0%, #0077B6 50%, #0096C7 100%)',
+        background: 'radial-gradient(ellipse at center, #0096C7 0%, #0077B6 40%, #023047 100%)',
         color: 'white',
         overflow: 'hidden',
         marginTop: '1rem',
@@ -27,10 +27,11 @@ export default function Home() {
           left: 0,
           right: 0,
           bottom: 0,
-          opacity: 0.2,
+          opacity: 0.25,
           backgroundImage: 'url(/images/hero/Hero%20BAckground.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          mixBlendMode: 'overlay'
         }} />
         
         <div style={{
