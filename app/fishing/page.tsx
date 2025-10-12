@@ -5,6 +5,7 @@ import { usePoints } from '@/ui/points/PointsProvider';
 import { PA_WATER_BODIES_EXPANDED } from '@/data/pa-water-bodies-expanded';
 import { FISHING_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
 import ConservationHistory from '@/components/ConservationHistory';
+import LocalHistoryResearch from '@/components/LocalHistoryResearch';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -3881,7 +3882,14 @@ export default function FishingPage() {
 
         {/* Conservation History Tab */}
         {activeTab === 'history' && (
-          <ConservationHistory history={FISHING_CONSERVATION_HISTORY} />
+          <>
+            <ConservationHistory history={FISHING_CONSERVATION_HISTORY} />
+            
+            {/* Local History Research Exercise */}
+            <div style={{ marginTop: '2rem' }}>
+              <LocalHistoryResearch />
+            </div>
+          </>
         )}
 
       </div>
