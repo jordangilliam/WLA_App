@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
+import { TERRESTRIAL_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
+import ConservationHistory from '@/components/ConservationHistory';
+import LocalHistoryResearch from '@/components/LocalHistoryResearch';
 
 export default function TerrestrialsPage() {
   const { award } = usePoints();
@@ -363,6 +366,15 @@ export default function TerrestrialsPage() {
             <p>• Hopping pattern</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    {/* Conservation History Section */}
+    <section className="section" style={{ marginTop: '2rem' }}>
+      <ConservationHistory history={TERRESTRIAL_CONSERVATION_HISTORY} />
+      
+      <div style={{ marginTop: '2rem' }}>
+        <LocalHistoryResearch />
       </div>
     </section>
   );

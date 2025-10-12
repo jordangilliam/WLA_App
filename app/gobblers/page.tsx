@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
+import { TERRESTRIAL_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
+import ConservationHistory from '@/components/ConservationHistory';
+import LocalHistoryResearch from '@/components/LocalHistoryResearch';
 
 export default function GobblersPage() {
   const { award } = usePoints();
-  const [activeTab, setActiveTab] = useState<'about' | 'signs' | 'calls' | 'hunting' | 'quiz'>('about');
+  const [activeTab, setActiveTab] = useState<'about' | 'signs' | 'calls' | 'hunting' | 'quiz' | 'history'>('about');
 
   const completeQuiz = (score: number) => {
     if (score >= 8) {
@@ -44,7 +47,8 @@ export default function GobblersPage() {
           { id: 'signs', label: '🔍 Signs & Tracks', icon: '🔍' },
           { id: 'calls', label: '🎵 Calls & Sounds', icon: '🎵' },
           { id: 'hunting', label: '🎯 Management', icon: '🎯' },
-          { id: 'quiz', label: '📝 Quiz', icon: '📝' }
+          { id: 'quiz', label: '📝 Quiz', icon: '📝' },
+          { id: 'history', label: '📜 History', icon: '📜' }
         ].map(tab => (
           <button
             key={tab.id}
@@ -441,6 +445,17 @@ export default function GobblersPage() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* History Tab */}
+      {activeTab === 'history' && (
+        <>
+          <ConservationHistory history={TERRESTRIAL_CONSERVATION_HISTORY} />
+          
+          <div style={{ marginTop: '2rem' }}>
+            <LocalHistoryResearch />
+          </div>
+        </>
       )}
     </section>
   );

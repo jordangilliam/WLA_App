@@ -1,6 +1,9 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
+import { BIRD_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
+import ConservationHistory from '@/components/ConservationHistory';
+import LocalHistoryResearch from '@/components/LocalHistoryResearch';
 
 interface BirdObservation {
   id: string;
@@ -649,6 +652,15 @@ export default function BirdSongs() {
               <li>Compare to reference songs</li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* Conservation History Section */}
+      <section className="section" style={{ marginTop: '2rem' }}>
+        <ConservationHistory history={BIRD_CONSERVATION_HISTORY} />
+        
+        <div style={{ marginTop: '2rem' }}>
+          <LocalHistoryResearch />
         </div>
       </section>
 
