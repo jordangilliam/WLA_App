@@ -45,8 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/keys/bugs">🐛 Bugs</Link>
             <Link href="/birds">🦜 Birds</Link>
             <Link href="/habitat">🏕️ Habitat</Link>
-            <Link href="/terrestrials">🐾 Wildlife</Link>
-            <Link href="/gobblers">🦃 Turkeys</Link>
             <Link href="/journal">📸 Journal</Link>
             <Link href="/outreach">📢 Outreach</Link>
             <Link href="/jobs">💼 Jobs</Link>
