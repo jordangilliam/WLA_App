@@ -235,7 +235,7 @@ export default function OutreachPage() {
         <h1 style={{ color: 'white', fontSize: '2.5rem', marginBottom: '1rem', textAlign: 'center' }}>
           📢 Conservation Outreach & Advocacy
         </h1>
-        <p style={{ fontSize: '1.1rem', textAlign: 'center', maxWidth: '700px', margin: '0 auto', opacity: 0.95' }}>
+        <p style={{ fontSize: '1.1rem', textAlign: 'center', maxWidth: '700px', margin: '0 auto', opacity: 0.95 }}>
           Connect with PA conservation organizations, attend events, track policies, and make your voice heard!
         </p>
       </section>
