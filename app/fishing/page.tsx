@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
 import { PA_WATER_BODIES_EXPANDED } from '@/data/pa-water-bodies-expanded';
+import { FISHING_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
+import ConservationHistory from '@/components/ConservationHistory';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -1514,7 +1516,7 @@ export default function FishingPage() {
   const { award: addPoints } = usePoints();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [activeTab, setActiveTab] = useState<'map' | 'stocking' | 'lakes' | 'species' | 'log' | 'conventional' | 'fly' | 'knots' | 'equipment' | 'match-hatch' | 'resources'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'stocking' | 'lakes' | 'species' | 'log' | 'conventional' | 'fly' | 'knots' | 'equipment' | 'match-hatch' | 'resources' | 'history'>('map');
   const [selectedWaterBody, setSelectedWaterBody] = useState<WaterBody | null>(null);
   const [selectedSpecies, setSelectedSpecies] = useState<FishSpecies | null>(null);
   const [filterType, setFilterType] = useState<string>('all');
@@ -1727,6 +1729,7 @@ export default function FishingPage() {
             { id: 'equipment', label: '🎒 Equipment', icon: '🎒' },
             { id: 'match-hatch', label: '🦋 Match Hatch', icon: '🦋' },
             { id: 'resources', label: '📚 Resources', icon: '📚' },
+            { id: 'history', label: '📜 History', icon: '📜' },
             { id: 'log', label: '📝 Log', icon: '📝' }
           ].map(tab => (
             <button
@@ -3874,6 +3877,11 @@ export default function FishingPage() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Conservation History Tab */}
+        {activeTab === 'history' && (
+          <ConservationHistory history={FISHING_CONSERVATION_HISTORY} />
         )}
 
       </div>
