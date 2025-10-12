@@ -35,23 +35,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <PointsProvider>
           <PWAInstall />
-          <nav className="container">
-            <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem' }}>🌲 WLA</Link>
-            <Link href="/learn">📚 Learn</Link>
-            <Link href="/map">🗺️ Map</Link>
-            <Link href="/fishing">🎣 Fishing</Link>
-            <Link href="/keys/macro">🔬 Macro</Link>
-            <Link href="/keys/plants">🌿 Plants</Link>
-            <Link href="/keys/bugs">🐛 Bugs</Link>
-            <Link href="/birds">🦜 Birds</Link>
-            <Link href="/habitat">🏕️ Habitat</Link>
-            <Link href="/journal">📸 Journal</Link>
-            <Link href="/outreach">📢 Outreach</Link>
-            <Link href="/jobs">💼 Jobs</Link>
-            <Link href="/media">🎥 Media</Link>
-            <Link href="/leaderboard">🏆 Leaderboard</Link>
-            <Link href="/exports">💾 Export</Link>
-            <Link href="/auth">🔐 Sign In</Link>
+          <nav 
+            className="container" 
+            style={{
+              backgroundImage: 'url(/images/menu/menu.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backdropFilter: 'blur(8px)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              borderRadius: '12px',
+              padding: '1rem 1.5rem',
+              marginBottom: '1.5rem'
+            }}
+          >
+            <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🌲 WLA</Link>
+            <Link href="/learn" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📚 Learn</Link>
+            <Link href="/map" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🗺️ Map</Link>
+            <Link href="/fishing" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🎣 Fishing</Link>
+            <Link href="/gobblers" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦃 Gobblers</Link>
+            <Link href="/terrestrials" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦌 Terrestrials</Link>
+            <Link href="/keys/macro" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🔬 Macro</Link>
+            <Link href="/keys/plants" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🌿 Plants</Link>
+            <Link href="/keys/bugs" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🐛 Bugs</Link>
+            <Link href="/birds" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦜 Birds</Link>
+            <Link href="/habitat" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🏕️ Habitat</Link>
+            <Link href="/journal" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📸 Journal</Link>
+            <Link href="/outreach" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📢 Outreach</Link>
+            <Link href="/jobs" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>💼 Jobs</Link>
+            <Link href="/media" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🎥 Media</Link>
+            <Link href="/leaderboard" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🏆 Leaderboard</Link>
+            <Link href="/exports" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>💾 Export</Link>
+            <Link href="/auth" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🔐 Sign In</Link>
           </nav>
           <main className="container">{children}</main>
           <footer>
