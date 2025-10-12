@@ -36,16 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PointsProvider>
           <PWAInstall />
           <nav 
-            className="container" 
+            id="main-nav"
             style={{
-              background: 'url(/images/menu/menu.png) center/cover no-repeat',
-              backgroundImage: 'url(/images/menu/menu.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: 'transparent',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              borderRadius: '12px',
+              maxWidth: '1200px',
+              margin: '0 auto',
               padding: '2rem 1.5rem',
               marginBottom: '1.5rem',
               minHeight: '200px',
@@ -55,7 +49,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               justifyContent: 'center',
               alignItems: 'center',
               position: 'relative',
-              borderBottom: 'none'
+              background: 'linear-gradient(135deg, #8B7355 0%, #A0826D 25%, #D4A574 50%, #6B8E7F 75%, #4A6F5C 100%)',
+              backgroundImage: 'url(/images/menu/menu.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              borderRadius: '16px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+              border: 'none'
             }}
           >
             <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌲 WLA</Link>

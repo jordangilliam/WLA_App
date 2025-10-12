@@ -53,7 +53,13 @@ html { box-sizing: border-box; scroll-behavior: smooth; }
 body {
   margin: 0;
   color: var(--text);
-  background: var(--bg);
+  background: linear-gradient(135deg, 
+    #E8F4F8 0%,      /* Light sky blue */
+    #F0F9F4 25%,     /* Soft mint */
+    #FFF8E7 50%,     /* Warm cream */
+    #F4F1E8 75%,     /* Natural beige */
+    #E3F2E1 100%     /* Pale sage */
+  );
   background-attachment: fixed;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
@@ -188,8 +194,14 @@ a:hover, a:focus {
   min-width: 0;
 }
 
+/* Main Navigation with Background Image */
+#main-nav {
+  /* Background image styles are set inline in layout.tsx */
+  /* This ensures no conflicting styles */
+}
+
 /* Navigation - Enhanced with glassmorphism */
-nav:not(.container) {
+nav:not(#main-nav) {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
