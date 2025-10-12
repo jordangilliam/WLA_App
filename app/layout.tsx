@@ -38,7 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav 
             className="container" 
             style={{
-              position: 'relative',
               backgroundImage: 'url(/images/menu/menu.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -47,40 +46,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               borderRadius: '12px',
               padding: '1rem 1.5rem',
               marginBottom: '1.5rem',
-              overflow: 'hidden'
+              display: 'flex',
+              gap: '0.75rem',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignItems: 'center'
             }}
           >
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'linear-gradient(135deg, rgba(0,77,64,0.85) 0%, rgba(27,94,32,0.85) 100%)',
-              zIndex: 0,
-              borderRadius: '12px'
-            }}></div>
-            <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-              <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🌲 WLA</Link>
-              <Link href="/learn" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📚 Learn</Link>
-              <Link href="/map" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🗺️ Map</Link>
-              <Link href="/fishing" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🎣 Fishing</Link>
-              <Link href="/gobblers" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦃 Gobblers</Link>
-              <Link href="/terrestrials" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦌 Terrestrials</Link>
-              <Link href="/keys/macro" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🔬 Macro</Link>
-              <Link href="/keys/plants" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🌿 Plants</Link>
-              <Link href="/keys/bugs" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🐛 Bugs</Link>
-              <Link href="/birds" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦜 Birds</Link>
-              <Link href="/habitat" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🏕️ Habitat</Link>
-              <Link href="/journal" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📸 Journal</Link>
-              <Link href="/outreach" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📢 Outreach</Link>
-              <Link href="/jobs" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>💼 Jobs</Link>
-              <Link href="/media" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🎥 Media</Link>
-              <Link href="/leaderboard" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🏆 Leaderboard</Link>
-              <Link href="/exports" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>💾 Export</Link>
-              <Link href="/wildpraxis-export" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📊 WildPraxis Export</Link>
-              <Link href="/auth" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🔐 Sign In</Link>
-            </div>
+            <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌲 WLA</Link>
+            <Link href="/learn" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>📚 Learn</Link>
+            <Link href="/map" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🗺️ Map</Link>
+            <Link href="/fishing" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🎣 Fishing</Link>
+            <Link href="/gobblers" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🦃 Gobblers</Link>
+            <Link href="/terrestrials" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🦌 Terrestrials</Link>
+            <Link href="/keys/macro" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🔬 Macro</Link>
+            <Link href="/keys/plants" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌿 Plants</Link>
+            <Link href="/keys/bugs" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🐛 Bugs</Link>
+            <Link href="/birds" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🦜 Birds</Link>
+            <Link href="/habitat" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🏕️ Habitat</Link>
+            <Link href="/journal" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>📸 Journal</Link>
+            <Link href="/outreach" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>📢 Outreach</Link>
+            <Link href="/jobs" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>💼 Jobs</Link>
+            <Link href="/media" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🎥 Media</Link>
+            <Link href="/leaderboard" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🏆 Leaderboard</Link>
+            <Link href="/exports" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>💾 Export</Link>
+            <Link href="/wildpraxis-export" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>📊 WildPraxis Export</Link>
+            <Link href="/auth" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🔐 Sign In</Link>
           </nav>
           <main className="container">{children}</main>
           <footer>
