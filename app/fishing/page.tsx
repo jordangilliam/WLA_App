@@ -3485,7 +3485,9 @@ export default function FishingPage() {
                     <div style={{ display: 'grid', gap: '0.75rem', color: '#1E3A8A' }}>
                       <div><strong>Water Temp:</strong> {currentChallenge.waterTemp}</div>
                       <div><strong>Emergence:</strong> {currentChallenge.emergence}</div>
-                      <div><strong>Nymph Patterns:</strong> {currentChallenge.nymph.patterns.join(', ')}</div>
+                      {currentChallenge.nymph && (
+                        <div><strong>Nymph Patterns:</strong> {currentChallenge.nymph.patterns.join(', ')}</div>
+                      )}
                       {currentChallenge.emerger && (
                         <div><strong>Emerger Patterns:</strong> {currentChallenge.emerger.patterns.join(', ')}</div>
                       )}
