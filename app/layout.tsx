@@ -38,19 +38,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav 
             className="container" 
             style={{
+              background: 'url(/images/menu/menu.png) center/cover no-repeat',
               backgroundImage: 'url(/images/menu/menu.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              backgroundColor: 'transparent',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
               borderRadius: '12px',
-              padding: '1rem 1.5rem',
+              padding: '2rem 1.5rem',
               marginBottom: '1.5rem',
+              minHeight: '200px',
               display: 'flex',
               gap: '0.75rem',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              position: 'relative',
+              borderBottom: 'none'
             }}
           >
             <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌲 WLA</Link>

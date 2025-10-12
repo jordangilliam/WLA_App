@@ -189,7 +189,7 @@ a:hover, a:focus {
 }
 
 /* Navigation - Enhanced with glassmorphism */
-nav {
+nav:not(.container) {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
