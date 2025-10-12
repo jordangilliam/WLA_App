@@ -777,7 +777,7 @@ export default function HabitatBuilder() {
                     <>
                       <li>Check which parameters are outside the tolerable range</li>
                       <li>Focus on critical factors: temperature, oxygen, and pH</li>
-                      <li>Compare your values to the species' ideal ranges</li>
+                      <li>Compare your values to the species&apos; ideal ranges</li>
                     </>
                   )}
                   {score >= 60 && score < 90 && (
@@ -801,7 +801,7 @@ export default function HabitatBuilder() {
             <div className="card section" style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6B7280' }}>
               <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>🏞️</div>
               <h3 style={{ color: '#374151' }}>Set Your Parameters</h3>
-              <p>Adjust the environmental conditions and click "Evaluate Habitat" to see how well your design supports the selected species.</p>
+              <p>Adjust the environmental conditions and click &quot;Evaluate Habitat&quot; to see how well your design supports the selected species.</p>
             </div>
           )}
 

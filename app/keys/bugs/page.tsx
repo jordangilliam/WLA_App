@@ -453,7 +453,7 @@ export default function InsectID() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: '3rem', color: '#6B7280' }}>
-              <p>Key completed! Click "Start Over" to identify another insect.</p>
+              <p>Key completed! Click &quot;Start Over&quot; to identify another insect.</p>
             </div>
           )}
         </div>

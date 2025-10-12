@@ -659,7 +659,7 @@ export default function JournalPage() {
           </div>
           <div className="card section" style={{ flex: 1 }}>
             <h3>💭 Reflections</h3>
-            <p>Connect observations to what you've learned. Ask questions. Form hypotheses about patterns.</p>
+            <p>Connect observations to what you&apos;ve learned. Ask questions. Form hypotheses about patterns.</p>
           </div>
           <div className="card section" style={{ flex: 1 }}>
             <h3>📊 Data</h3>

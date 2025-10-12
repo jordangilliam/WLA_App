@@ -455,9 +455,9 @@ export default function AdminAutomations() {
           <div>
             <h4>Running Jobs</h4>
             <ul style={{ lineHeight: 1.8, fontSize: '0.9rem' }}>
-              <li>Click "Configure" to set job parameters</li>
+              <li>Click &quot;Configure&quot; to set job parameters</li>
               <li>Enter JSON data in the provided fields</li>
-              <li>Click "Run Now" to execute</li>
+              <li>Click &quot;Run Now&quot; to execute</li>
               <li>Check status indicator for results</li>
             </ul>
           </div>

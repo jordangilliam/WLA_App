@@ -434,7 +434,7 @@ export default function PlantID() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: '3rem', color: '#6B7280' }}>
-              <p>Key completed! Click "Start Over" to identify another plant.</p>
+              <p>Key completed! Click &quot;Start Over&quot; to identify another plant.</p>
             </div>
           )}
         </div>
