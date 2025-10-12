@@ -38,35 +38,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav 
             className="container" 
             style={{
+              position: 'relative',
               backgroundImage: 'url(/images/menu/menu.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              backdropFilter: 'blur(8px)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
               borderRadius: '12px',
               padding: '1rem 1.5rem',
-              marginBottom: '1.5rem'
+              marginBottom: '1.5rem',
+              overflow: 'hidden'
             }}
           >
-            <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🌲 WLA</Link>
-            <Link href="/learn" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📚 Learn</Link>
-            <Link href="/map" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🗺️ Map</Link>
-            <Link href="/fishing" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🎣 Fishing</Link>
-            <Link href="/gobblers" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦃 Gobblers</Link>
-            <Link href="/terrestrials" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦌 Terrestrials</Link>
-            <Link href="/keys/macro" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🔬 Macro</Link>
-            <Link href="/keys/plants" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🌿 Plants</Link>
-            <Link href="/keys/bugs" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🐛 Bugs</Link>
-            <Link href="/birds" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🦜 Birds</Link>
-            <Link href="/habitat" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🏕️ Habitat</Link>
-            <Link href="/journal" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📸 Journal</Link>
-            <Link href="/outreach" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>📢 Outreach</Link>
-            <Link href="/jobs" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>💼 Jobs</Link>
-            <Link href="/media" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🎥 Media</Link>
-            <Link href="/leaderboard" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🏆 Leaderboard</Link>
-            <Link href="/exports" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>💾 Export</Link>
-            <Link href="/auth" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)', color: 'white' }}>🔐 Sign In</Link>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(135deg, rgba(0,77,64,0.85) 0%, rgba(27,94,32,0.85) 100%)',
+              zIndex: 0,
+              borderRadius: '12px'
+            }}></div>
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+              <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🌲 WLA</Link>
+              <Link href="/learn" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📚 Learn</Link>
+              <Link href="/map" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🗺️ Map</Link>
+              <Link href="/fishing" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🎣 Fishing</Link>
+              <Link href="/gobblers" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦃 Gobblers</Link>
+              <Link href="/terrestrials" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦌 Terrestrials</Link>
+              <Link href="/keys/macro" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🔬 Macro</Link>
+              <Link href="/keys/plants" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🌿 Plants</Link>
+              <Link href="/keys/bugs" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🐛 Bugs</Link>
+              <Link href="/birds" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🦜 Birds</Link>
+              <Link href="/habitat" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🏕️ Habitat</Link>
+              <Link href="/journal" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📸 Journal</Link>
+              <Link href="/outreach" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📢 Outreach</Link>
+              <Link href="/jobs" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>💼 Jobs</Link>
+              <Link href="/media" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🎥 Media</Link>
+              <Link href="/leaderboard" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🏆 Leaderboard</Link>
+              <Link href="/exports" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>💾 Export</Link>
+              <Link href="/wildpraxis-export" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>📊 WildPraxis Export</Link>
+              <Link href="/auth" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>🔐 Sign In</Link>
+            </div>
           </nav>
           <main className="container">{children}</main>
           <footer>
@@ -77,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.9rem' }}>
               <Link href="/admin/automations" style={{ color: 'var(--text-muted)' }}>Admin</Link>
-              <Link href="/katie-export" style={{ color: 'var(--text-muted)' }}>Katie Export</Link>
+              <Link href="/wildpraxis-export" style={{ color: 'var(--text-muted)' }}>WildPraxis Export</Link>
               <a href="https://wildlifeleadershipacademy.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }}>WLA Website</a>
             </div>
             <div style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
