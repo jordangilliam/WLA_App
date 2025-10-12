@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - WildPraxis | Conservation Education Platform</title>
+    <meta name="description" content="WildPraxis pricing for schools, districts, and conservation organizations. Open-source core, enterprise features, and Wildlife Leadership Academy partnership.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .open-source-badge {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tier-name {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .tier-description {
+            color: #4a5568;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .price-period {
+            color: #718096;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .free-tag {
+            font-size: 2.5rem;
+            color: #48bb78;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #5568d3;
+        }
+        
+        .cta-button.secondary {
+            background: #48bb78;
+        }
+        
+        .cta-button.secondary:hover {
+            background: #38a169;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow-x: auto;
+        }
+        
+        .comparison-table h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .check {
+            color: #48bb78;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .faq-section h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-size: 1.2rem;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #4a5568;
+            padding-left: 20px;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌲 WildPraxis Pricing</h1>
+            <p class="subtitle">Empowering the next generation of conservation leaders</p>
+            <span class="open-source-badge">Open Source Core + Enterprise Features</span>
+        </header>
+
+        <div class="pricing-grid">
+            <!-- Free / Open Source -->
+            <div class="pricing-card">
+                <div class="tier-name">Open Source</div>
+                <div class="tier-description">
+                    Perfect for individuals, educators, and small conservation clubs.
+                </div>
+                <div class="free-tag">FREE</div>
+                <div class="price-period">Forever</div>
+                
+                <ul class="features-list">
+                    <li>Full platform access</li>
+                    <li>All educational content</li>
+                    <li>Gamification & badges</li>
+                    <li>Basic location check-ins</li>
+                    <li>Species identification</li>
+                    <li>Community features</li>
+                    <li>Self-hosted option</li>
+                    <li>Community support</li>
+                </ul>
+                
+                <a href="https://github.com/jordangilliam/WildPraxis" class="cta-button secondary">
+                    View on GitHub
+                </a>
+            </div>
+
+            <!-- School -->
+            <div class="pricing-card">
+                <div class="tier-name">School</div>
+                <div class="tier-description">
+                    Ideal for individual schools and small organizations.
+                </div>
+                <div class="price">$1,500</div>
+                <div class="price-period">per year</div>
+                
+                <ul class="features-list">
+                    <li>Everything in Open Source</li>
+                    <li>Up to 100 students</li>
+                    <li>Admin dashboard</li>
+                    <li>Basic analytics</li>
+                    <li>Email support</li>
+                    <li>Managed hosting</li>
+                    <li>Automatic updates</li>
+                    <li>Data export tools</li>
+                </ul>
+                
+                <a href="mailto:enterprise@wildpraxis.org?subject=School%20License%20Inquiry" class="cta-button">
+                    Get Started
+                </a>
+            </div>
+
+            <!-- District -->
+            <div class="pricing-card featured">
+                <div class="featured-badge">Most Popular</div>
+                <div class="tier-name">District</div>
+                <div class="tier-description">
+                    Best for school districts and medium-sized programs.
+                </div>
+                <div class="price">$8,000</div>
+                <div class="price-period">per year</div>
+                
+                <ul class="features-list">
+                    <li>Everything in School</li>
+                    <li>Up to 1,000 students</li>
+                    <li>Multi-school management</li>
+                    <li>Advanced analytics</li>
+                    <li>Priority support (24hr)</li>
+                    <li>API access</li>
+                    <li>Custom content upload</li>
+                    <li>Training workshops (2/yr)</li>
+                    <li>White-label options</li>
+                </ul>
+                
+                <a href="mailto:enterprise@wildpraxis.org?subject=District%20License%20Inquiry" class="cta-button">
+                    Contact Sales
+                </a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="pricing-card">
+                <div class="tier-name">Enterprise</div>
+                <div class="tier-description">
+                    For statewide programs and large-scale deployments.
+                </div>
+                <div class="price">Custom</div>
+                <div class="price-period">Contact us</div>
+                
+                <ul class="features-list">
+                    <li>Everything in District</li>
+                    <li>Unlimited students</li>
+                    <li>Dedicated account manager</li>
+                    <li>Custom feature development</li>
+                    <li>On-premise deployment</li>
+                    <li>SLA guarantees</li>
+                    <li>Phone support</li>
+                    <li>Unlimited training</li>
+                    <li>Co-branding opportunities</li>
+                </ul>
+                
+                <a href="mailto:enterprise@wildpraxis.org?subject=Enterprise%20License%20Inquiry" class="cta-button">
+                    Schedule Demo
+                </a>
+            </div>
+        </div>
+
+        <!-- Feature Comparison Table -->
+        <div class="comparison-table">
+            <h2>Feature Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Open Source</th>
+                        <th>School</th>
+                        <th>District</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Core Platform</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Educational Content</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Location Check-ins</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Gamification & Badges</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Species Identification (AI)</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administration</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Admin Dashboard</td>
+                        <td>Basic</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Multi-School Management</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Analytics</td>
+                        <td>-</td>
+                        <td>Basic</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Reports</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integrations</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>API Access</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>SSO (Single Sign-On)</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>LMS Integration</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Add-on</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Support</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Community Forums</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Email Support</td>
+                        <td>-</td>
+                        <td>48hr</td>
+                        <td>24hr</td>
+                        <td>12hr</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Support</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Dedicated Account Manager</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Documentation</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Video Tutorials</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Live Training Sessions</td>
+                        <td>-</td>
+                        <td>1/year</td>
+                        <td>2/year</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>On-site Training</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Add-on</td>
+                        <td>2/year</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Special Pricing -->
+        <div class="faq-section">
+            <h2>💚 Special Pricing & Partnerships</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Wildlife Leadership Academy Partnership</div>
+                <div class="faq-answer">
+                    As our founding partner, Wildlife Leadership Academy receives unlimited free access to all features, forever. WLA participants automatically get full platform access at no cost.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Non-Profit Discount</div>
+                <div class="faq-answer">
+                    501(c)(3) organizations receive 20% off all paid tiers. Provide your tax-exempt documentation when signing up.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Title I Schools</div>
+                <div class="faq-answer">
+                    Schools with 40%+ students qualifying for free/reduced lunch receive 30% off. We believe every student deserves access to quality conservation education.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Rural & Underserved Communities</div>
+                <div class="faq-answer">
+                    Schools in rural areas or historically underserved communities qualify for up to 40% discount. Contact us to discuss your situation.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Conservation Organizations</div>
+                <div class="faq-answer">
+                    Land trusts, watershed associations, and other conservation groups receive 25% off. Let's work together to engage youth in conservation.
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can we try before we buy?</div>
+                <div class="faq-answer">
+                    Absolutely! All paid tiers include a 30-day free trial with full feature access. No credit card required to start.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if we grow beyond our license?</div>
+                <div class="faq-answer">
+                    You can upgrade anytime. We'll pro-rate your current subscription and only charge the difference. No penalties for growth!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is our data secure and FERPA compliant?</div>
+                <div class="faq-answer">
+                    Yes! We're fully FERPA, COPPA, and GDPR compliant. All data is encrypted at rest and in transit. We never sell student data. Full compliance documentation available.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can we self-host the platform?</div>
+                <div class="faq-answer">
+                    The open-source core can be self-hosted on your own servers. Enterprise customers can also deploy on-premise with our support (additional fees apply).
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What about training and implementation?</div>
+                <div class="faq-answer">
+                    School tier includes online training. District+ includes live workshops. Enterprise includes unlimited training and dedicated implementation support. All tiers get comprehensive documentation.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can we customize the platform?</div>
+                <div class="faq-answer">
+                    District tier allows custom content and branding. Enterprise tier includes custom feature development. All customizations are scoped and priced individually.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What happens if we cancel?</div>
+                <div class="faq-answer">
+                    You have 30 days to export all your data in standard formats (CSV, JSON). After that, data is securely deleted. No lock-in, ever.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer multi-year discounts?</div>
+                <div class="faq-answer">
+                    Yes! Pay for 2 years upfront and get 10% off. Pay for 3 years and get 15% off. Great for budget planning.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h2>Ready to Get Started?</h2>
+            <p>Join Wildlife Leadership Academy and hundreds of students in transforming conservation education.</p>
+            
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:enterprise@wildpraxis.org">enterprise@wildpraxis.org</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/jordangilliam/WildPraxis">github.com/jordangilliam/WildPraxis</a></p>
+                <p><strong>Schedule a Demo:</strong> <a href="mailto:enterprise@wildpraxis.org?subject=Demo%20Request">Request Demo</a></p>
+            </div>
+            
+            <p style="margin-top: 30px; color: #718096; font-size: 0.9rem;">
+                Built with 💚 for conservation education<br>
+                In partnership with Wildlife Leadership Academy
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+
