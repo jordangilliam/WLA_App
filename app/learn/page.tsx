@@ -87,7 +87,7 @@ export default function LearnPage() {
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 800 }}>{stats.avgScore}%</div>
               <div style={{ opacity: 0.9 }}>Avg Score</div>
-            </div>
+          </div>
           </div>
         </div>
       </section>
@@ -135,7 +135,7 @@ export default function LearnPage() {
             </button>
             
             {Object.values(TRACKS).filter(t => t.id !== 'All').map(track => (
-              <button
+            <button
                 key={track.id}
                 onClick={() => setSelectedTrack(track.id)}
                 style={{
@@ -151,9 +151,9 @@ export default function LearnPage() {
                 }}
               >
                 {track.emoji} {track.name}
-              </button>
-            ))}
-          </div>
+            </button>
+          ))}
+        </div>
         </div>
 
         {/* Lessons by Track */}
@@ -168,7 +168,7 @@ export default function LearnPage() {
                 gap: '1rem',
                 marginBottom: '1.5rem',
               }}>
-                <div style={{
+              <div style={{ 
                   width: '4px',
                   height: '32px',
                   background: trackInfo.gradient,
@@ -191,7 +191,7 @@ export default function LearnPage() {
                     {trackInfo.description}
                   </p>
                 </div>
-              </div>
+                  </div>
 
               <div style={{
                 display: 'flex',
@@ -223,8 +223,8 @@ export default function LearnPage() {
             <p>Try adjusting your search or filter</p>
           </div>
         )}
-      </div>
-    </div>
+          </div>
+        </div>
   );
 }
 

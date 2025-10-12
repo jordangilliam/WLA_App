@@ -1483,6 +1483,172 @@ Scenario: Farmer concerned buffers waste productive land.
 Your response:
 "I understand you want to use every acre productively. Here's what research shows: the outer 30 feet of a field next to a stream often produces below-average yields due to wet soils and flooding. Converting that 30 feet to buffer doesn't cost you much productivity, but it filters nutrients you've paid for—keeping them on your farm instead of in the stream. Plus, USDA cost-share can pay for establishment, and you gain wildlife habitat for hunting or watching. Over time, reduced erosion means more topsoil stays put. It's a win for your farm AND the stream."
 
+## Field Activities
+
+### Activity 1: Riparian Buffer Assessment (30 minutes)
+
+**Materials Needed:**
+- Measuring tape (100 feet)
+- Clipboard and data sheet
+- Camera
+- Field guide to PA riparian plants
+
+**Procedure:**
+1. Select a stream segment (50-100 feet long)
+2. From stream edge, measure width of existing riparian vegetation:
+   - Zone 1 (streamside trees/shrubs): ____ feet
+   - Zone 2 (managed forest): ____ feet
+   - Zone 3 (grass filter): ____ feet
+3. Note vegetation type in each zone
+4. Assess conditions:
+   - Bank stability (stable, slight erosion, severe erosion)
+   - Canopy cover (% shade over stream: 0-25%, 25-50%, 50-75%, 75-100%)
+   - Invasive plants present? (Y/N, list species)
+   - Evidence of livestock access? (Y/N)
+
+**Compare to Standards:**
+- Minimum recommended: 25 feet Zone 1 + 50 feet Zone 2 + 20 feet Zone 3 = 95 feet total
+- How does your site compare?
+
+**Share Results:**
+Contact your county conservation district with assessment results—they may have funding to improve buffers!
+
+---
+
+### Activity 2: Native Riparian Plant ID (45 minutes)
+
+**Materials Needed:**
+- Field guide ("Riparian Plants of PA" - Penn State Extension, free online)
+- Hand lens
+- Plant press or plastic bags for specimens
+- Notebook
+
+**Target Species:**
+
+**Zone 1 Trees:**
+- Sycamore (white mottled bark, large leaves)
+- River birch (peeling copper-colored bark)
+- Black willow (narrow leaves, often multi-stemmed)
+- Red maple (opposite branching, 3-lobed leaves)
+
+**Zone 1 Shrubs:**
+- Spicebush (aromatic twigs when crushed)
+- Elderberry (compound leaves, white flower clusters)
+- Silky dogwood (white berries, red stems in winter)
+
+**Procedure:**
+1. Walk along stream
+2. Find and photograph 5 different woody plants
+3. Record: leaf type, bark, height, location relative to stream
+4. Use guide to identify
+5. Create simple sketch map showing plant locations
+
+**Journal Prompt:**
+"Are these native or invasive species dominating? What does this tell you about buffer health?"
+
+---
+
+### Activity 3: Stream Temperature Monitoring (15 minutes per visit, ongoing)
+
+**Materials Needed:**
+- Digital thermometer (aquarium type, $10-20)
+- Data sheet
+- Watch/phone for time
+
+**Procedure:**
+1. Select a monitoring location
+2. Measure temperature at 9am, 12pm, 3pm on a sunny day
+3. Measure in two locations:
+   - **Open** (no canopy cover)
+   - **Shaded** (under buffer trees)
+4. Record air temperature, sky conditions, water level
+
+**Data Recording:**
+| Time | Open Temp | Shaded Temp | Difference | Air Temp |
+|------|-----------|-------------|------------|----------|
+| 9am  | _____°F   | _____°F     | _____°F    | _____°F  |
+| 12pm | _____°F   | _____°F     | _____°F    | _____°F  |
+| 3pm  | _____°F   | _____°F     | _____°F    | _____°F  |
+
+**Analysis:**
+- How much cooler is the shaded section?
+- Is the shaded section cool enough for trout (<68°F)?
+- What does this tell you about buffer effectiveness?
+
+**Long-Term:**
+Repeat monthly April-October. Track seasonal patterns. Submit to StreamStats PA.
+
+---
+
+### Activity 4: Buffer Planting Project (2-3 hours + ongoing)
+
+**Planning First!**
+- Get landowner permission
+- Contact county conservation district for:
+  - Free/low-cost native seedlings
+  - Technical assistance
+  - Possible cost-share funding
+
+**Materials:**
+- Native tree/shrub seedlings (50-100, provided by conservation district)
+- Shovel, trowel
+- Stakes and tree guards (protect from deer/rodents)
+- Mulch
+- Water source
+
+**Procedure:**
+1. Mark planting area (Zone 1: trees, Zone 2: mix, Zone 3: grasses/wildflowers)
+2. Space trees 6-10 feet apart
+3. Dig holes twice as wide as root ball
+4. Plant at same depth as nursery container
+5. Install tree guards
+6. Mulch (3-inch layer, keep away from trunk)
+7. Water thoroughly
+
+**Monitoring Schedule:**
+- Weekly: Water if no rain (first year)
+- Monthly: Check survival, remove tree guards after 3 years
+- Annual: Measure height growth, photograph
+
+**This Counts!**
+Document hours for volunteer service credits. Take before/after photos for college applications.
+
+---
+
+### Activity 5: Wildlife Use Survey (30 minutes per visit)
+
+**Goal:** Demonstrate that buffers = wildlife habitat
+
+**Materials:**
+- Binoculars
+- Camera
+- Wildlife field guides
+- Notebook
+
+**Procedure:**
+1. Sit quietly near buffer for 30 minutes (early morning or dusk is best)
+2. Record every wildlife observation:
+   - Birds (species, behavior)
+   - Mammals (species, tracks, scat)
+   - Amphibians (frogs, salamanders)
+   - Insects (butterflies, dragonflies)
+3. Note wildlife use of specific features:
+   - Drinking from stream
+   - Foraging in vegetation
+   - Using as travel corridor
+
+**Repeat Seasonally:**
+- Spring: nesting birds, emerging insects
+- Summer: peak diversity
+- Fall: migration, seed/fruit feeding
+- Winter: tracks in snow
+
+**Compare:**
+Buffer area vs. nearby open area (lawn, field). Which has more wildlife? Why?
+
+**Share:**
+Upload observations to eBird (birds) and iNaturalist (everything else).
+
 ## Advanced Topics
 
 ### The Science of Nutrient Removal
@@ -2154,7 +2320,189 @@ Dr. Alt is PA's foremost black bear expert. His decades of field experience offe
 - Understanding bear behavior reduces fear and increases safety
 
 **WLA Context:**
-Ambassadors working in PA forests should understand that black bears are present but pose minimal risk when proper protocols are followed (food storage, making noise in dense cover, respecting bear space).`,
+Ambassadors working in PA forests should understand that black bears are present but pose minimal risk when proper protocols are followed (food storage, making noise in dense cover, respecting bear space).
+
+## Field Activities
+
+### Activity 1: Build Your 10 Essentials Kit (1 hour)
+
+**Goal:** Assemble a functional, field-tested emergency kit
+
+**Materials & Cost (~$50-100 if starting from scratch):**
+
+**Navigation:**
+- Topo map of your area (free from Caltopo.com or USGS)
+- Compass (basic model: $10-15)
+
+**Sun Protection:**
+- Sunscreen (SPF 30+)
+- Sunglasses
+- Hat
+
+**Insulation:**
+- Extra layer (fleece or puffy jacket, even in summer)
+- Emergency blanket ($5)
+
+**Illumination:**
+- Headlamp with extra batteries ($15-30)
+
+**First Aid Supplies:**
+- Commercial kit or DIY (see Activity 2)
+
+**Fire:**
+- Waterproof matches + lighter + fire starter ($10)
+
+**Repair Kit & Tools:**
+- Multi-tool or knife ($15-40)
+- Duct tape (wrap around water bottle)
+
+**Nutrition:**
+- Extra day's worth of food (bars, trail mix)
+
+**Hydration:**
+- Water bottle + purification (tablets or filter, $10-30)
+
+**Emergency Shelter:**
+- Emergency bivy or large trash bags
+
+**Check Your Kit:**
+- [ ] Can I navigate if my phone dies?
+- [ ] Can I stay warm if weather turns bad?
+- [ ] Can I start fire in wet conditions?
+- [ ] Do I have enough food/water for unexpected overnight?
+
+---
+
+### Activity 2: Build a Custom Field First Aid Kit (30 minutes)
+
+**Start with a Zip-Lock Bag or Small Pouch**
+
+**Wounds/Bleeding:**
+- Adhesive bandages (various sizes, 10-15)
+- Gauze pads (4x4, sterile, 4-6)
+- Rolled gauze (1 roll)
+- Medical tape (1 roll)
+- Antibiotic ointment packets
+
+**Blisters:**
+- Moleskin or Leukotape (prevent and treat)
+- Needle (sterilize for draining blisters)
+
+**Medications:**
+- Pain reliever (ibuprofen or acetaminophen)
+- Antihistamine (Benadryl for allergic reactions)
+- Anti-diarrheal (Imodium)
+- Personal prescriptions (EpiPen if allergic)
+
+**Tools:**
+- Tweezers (tick/splinter removal)
+- Small scissors
+- Safety pins
+- Nitrile gloves (2 pairs)
+
+**Documentation:**
+- Waterproof paper with emergency numbers
+- Pencil
+
+**Field Test It:**
+Bring on next 3 outdoor trips. Note what you use, what's missing. Adjust accordingly.
+
+---
+
+### Activity 3: Tick Check & Removal Practice (15 minutes)
+
+**When:** After EVERY field session in PA (April-November especially)
+
+**Procedure:**
+1. **In the field**: Quick check for crawling ticks on clothes
+2. **Back at vehicle**: Full body check
+   - Check scalp, behind ears, neck
+   - Armpits, waist, groin
+   - Behind knees, between toes
+3. **At home**: Shower within 2 hours, final thorough check
+
+**Removal Practice (Use a Tick Identification Card):**
+- Grasp tick with fine-tipped tweezers at skin level
+- Pull straight up with steady pressure (no twisting)
+- Clean bite area with soap or alcohol
+- Save tick in plastic bag with date/location
+
+**Document:**
+- Photo of tick
+- Date and location of exposure
+- Submit to TickSpotters (free ID service from Penn State)
+
+**Monitor:**
+Watch bite site for 30 days for expanding red "bull's-eye" rash. If rash or flu-like symptoms develop, see doctor immediately.
+
+---
+
+### Activity 4: Emergency Scenario Role-Play (30 minutes, requires partner or group)
+
+**Setup:** One person acts as patient, another as rescuer
+
+**Scenario 1: Sprained Ankle on Trail**
+- Patient: 1 mile from trailhead, can't put weight on ankle
+- Rescuer: Assess injury, splint/wrap, decide on evacuation method
+- Debrief: What went well? What would improve?
+
+**Scenario 2: Minor Laceration**
+- Patient: 2-inch cut on forearm, bleeding moderately
+- Rescuer: Control bleeding, clean wound, dress/bandage
+- Debrief: Did rescuer wear gloves? Explain care to patient?
+
+**Scenario 3: Sudden Illness**
+- Patient: Nausea, dizziness, confusion (heat exhaustion?)
+- Rescuer: Assess ABCs, move to shade, cool down, hydrate
+- Debrief: When would you call for help?
+
+**Scenario 4: Lost Group Member**
+- Situation: 1 person separated from group for 30 minutes
+- Group: Develop search plan, assign roles, communicate
+- Debrief: Prevention strategies? Communication protocol?
+
+**Key Learning:**
+Confidence comes from practice BEFORE real emergencies!
+
+---
+
+### Activity 5: Lightning Risk Assessment & Shelter Plan (20 minutes)
+
+**Activity A: Calculate Lightning Distance**
+
+Next thunderstorm, practice the 30-30 rule:
+1. See lightning flash
+2. Count seconds until thunder
+3. Divide by 5 = distance in miles
+4. If <30 seconds (6 miles), seek shelter
+
+**Activity B: Evaluate Your Field Sites**
+
+For 3 locations where you work/recreate, rate lightning risk:
+
+| Location | Exposure (high/med/low) | Nearest Safe Shelter | Time to Reach Shelter | Risk Level |
+|----------|-------------------------|----------------------|-----------------------|------------|
+| Ex: Lake shore | High (open water) | Pavilion | 10 min | **HIGH** |
+| 1. _____ | _____ | _____ | _____ | _____ |
+| 2. _____ | _____ | _____ | _____ | _____ |
+| 3. _____ | _____ | _____ | _____ | _____ |
+
+**High-Risk Features:**
+- Open water
+- Isolated tall trees
+- Open fields
+- Ridgetops/summits
+
+**Safer Options:**
+- Dense forest (not under tallest tree)
+- Low ground (not in flooding danger)
+- Buildings (fully enclosed)
+- Vehicles (hard-topped)
+
+**Create Escape Plans:**
+For each high-risk location, write a 1-sentence plan: "If I see/hear lightning, I will immediately..."
+
+## Advanced Topics`,
     quiz: [
       {
         id: 'q1',
@@ -2573,6 +2921,186 @@ Climate change is daunting, but conservation professionals like you will lead th
 **Penn State and DCNR are leaders in climate adaptation**—you're joining a community actively working on solutions.
 
 **The next 20 years of your career will define how PA forests and streams respond to climate change.** This is your calling.
+
+## Field Activities
+
+### Activity 1: Phenology Monitoring Project (20 minutes per observation, ongoing)
+
+**Goal:** Track seasonal timing changes in your local area
+
+**What is Phenology?**
+The timing of natural events: leaf-out, flowering, bird arrival, insect emergence, leaf color change.
+
+**Materials:**
+- Camera/smartphone
+- Notebook
+- Calendar
+- Selected "indicator" species to monitor
+
+**Procedure:**
+
+**1. Select 3-5 Indicator Species:**
+- **Tree:** Red maple (first to bloom), oak (leaf-out), sugar maple (fall color)
+- **Wildflower:** Trout lily, bloodroot, spring beauty (early spring)
+- **Shrub:** Spicebush (yellow flowers), elderberry (flowering)
+- **Bird:** First robins, first wood thrush, first hummingbird
+- **Insect:** First firefly, first monarch butterfly
+
+**2. Weekly Observations (March-November):**
+- Visit your monitoring site weekly
+- Record status of each species
+- Take weekly photos from same location
+
+**3. Document Key Events:**
+| Species | Event | Date | Notes |
+|---------|-------|------|-------|
+| Red maple | First flowers | March __ | Photo # |
+| Oak | 50% leaf-out | April __ | Compare to last year |
+| Robin | First arrival | March __ | Heard/seen |
+
+**4. Compare to Historical Data:**
+- Use USA-NPN (National Phenology Network) to compare your data to regional averages
+- Upload your observations to Nature's Notebook (free citizen science project)
+
+**Long-Term Value:**
+10 years of your data = climate change evidence!
+
+---
+
+### Activity 2: Climate Change Impact Survey (1 hour)
+
+**Goal:** Document observable changes in your local ecosystem
+
+**Interview an Elder:**
+Find someone 65+ who has spent their life in your area (farmer, hunter, angler, forester).
+
+**Questions to Ask:**
+1. "What are the biggest changes you've seen in the environment in your lifetime?"
+2. "Do winters feel different than when you were young?"
+3. "Have you noticed changes in wildlife—more of some species, fewer of others?"
+4. "How about plants—any new species showing up, or old ones disappearing?"
+5. "Have weather patterns changed—more droughts, floods, severe storms?"
+
+**Document:**
+- Name (with permission), age, years in area
+- Their observations (direct quotes are powerful)
+- Photos if allowed
+
+**Why It Matters:**
+Oral history captures changes that weren't formally studied. These stories are evidence.
+
+**Example:**
+"My grandfather said the creek used to freeze solid every winter in the 1960s—they'd drive trucks across it. Now it barely freezes. That's climate change, witnessed firsthand."
+
+---
+
+### Activity 3: Stream Temperature Baseline Study (30 minutes per visit)
+
+**Goal:** Establish temperature data for future comparison
+
+**Materials:**
+- Digital thermometer (aquarium type)
+- GPS or map
+- Data sheet
+
+**Procedure:**
+1. Select 3 stream sites:
+   - **Site 1**: Headwater/small stream (shaded)
+   - **Site 2**: Mid-size stream (mixed shade)
+   - **Site 3**: Large stream or lake (more open)
+
+2. Monthly measurements (April-October):
+   - Measure at same time of day (ideally 2-3pm, daily max)
+   - Record water temp, air temp, weather, cloud cover, water level
+
+3. Create baseline dataset:
+   - Average July/August temps by site
+   - Minimum/maximum observed
+   - Days exceeding 68°F (brook trout stress threshold)
+
+**Submit Data:**
+- Alliance for Aquatic Resource Monitoring (ALLARM) - PA citizen science
+- StreamStats PA
+- Local watershed group
+
+**Future Use:**
+Your data from 2025 will help researchers in 2035 document warming trends!
+
+---
+
+### Activity 4: Climate-Smart Planting Project (3-4 hours + ongoing monitoring)
+
+**Goal:** Plant tree species predicted to thrive under future climate
+
+**Research First:**
+- Penn State Climate Adaptation Guide (free online)
+- Identify "climate-resilient" species for your area
+
+**PA Species Likely to Thrive:**
+- **Oaks** (white, red, chestnut)
+- **Tulip poplar** (fast-growing, adaptable)
+- **Sycamore** (riparian, flood-tolerant)
+- **Hickories** (drought-tolerant)
+- **Black gum** (wetland-adaptable)
+
+**Avoid Species at Risk:**
+- Hemlock (woolly adelgid + warming)
+- Ash (emerald ash borer)
+- Sugar maple (climate envelope shifting north)
+
+**Procedure:**
+1. Get landowner permission
+2. Contact county conservation district for seedlings
+3. Plant 25-50 trees (mixed species)
+4. Label each tree with species + planting date
+5. Monitor: Annual photos, measure height growth
+
+**Monitor Climate Tolerance:**
+- Which species thrive during droughts?
+- Which handle heavy rains/flooding?
+- Any signs of stress (dieback, disease)?
+
+**You're Planting the Forest of 2075!**
+
+---
+
+### Activity 5: Create a Climate Adaptation Plan for Your Site (1-2 hours)
+
+**Select a Site:**
+Your school grounds, local park, family property, or favorite conservation area (1-10 acres).
+
+**Assessment:**
+1. **Current Conditions:**
+   - Dominant tree species
+   - Water features (stream, wetland, pond?)
+   - Wildlife observed
+   - Problem areas (erosion, invasives, lack of diversity)
+
+2. **Climate Vulnerabilities:**
+   - What species are at risk? (cold-adapted, moisture-dependent)
+   - Infrastructure at risk? (trails flooding, erosion)
+   - Invasive threats? (Japanese stiltgrass loves warming)
+
+3. **Adaptation Strategies:**
+   - **Increase Diversity**: Plant 5+ tree species (not monoculture)
+   - **Protect Water**: Establish/expand riparian buffers
+   - **Reduce Stressors**: Control invasives, prevent erosion
+   - **Create Refugia**: Identify/protect cool microclimates
+   - **Improve Connectivity**: Wildlife corridors to nearby habitat
+
+**Write a 1-Page Plan:**
+- Site description
+- Climate risks identified
+- 3-5 specific actions (with timeline)
+- Success metrics (how will you know it worked?)
+
+**Present Your Plan:**
+- To landowner/land manager
+- To school board or conservation group
+- Submit to local watershed association
+
+**Real-World Impact:**
+Your plan could actually be implemented—this is professional-level work!
 
 ## Advanced Topics
 

@@ -1,17 +1,40 @@
 import '../styles/globals.css';
 import Link from 'next/link';
 import { PointsProvider } from '@/ui/points/PointsProvider';
+import PWAInstall from '@/components/PWAInstall';
 
 export const metadata = {
   title: 'WLA Conservation Ambassadors - Youth Conservation Leadership',
-  description: 'Wildlife Leadership Academy app for PA youth to learn, explore, and become conservation leaders'
+  description: 'Wildlife Leadership Academy app for PA youth to learn, explore, and become conservation leaders',
+  manifest: '/manifest.json',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  themeColor: '#0077B6',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'WLA',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <meta name="theme-color" content="#0077B6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="WLA" />
+      </head>
       <body>
         <PointsProvider>
+          <PWAInstall />
           <nav className="container">
             <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem' }}>🌲 WLA</Link>
             <Link href="/learn">📚 Learn</Link>

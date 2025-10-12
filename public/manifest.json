@@ -1,0 +1,58 @@
+{
+  "name": "Pennsylvania Wildlife Leadership Academy",
+  "short_name": "WLA Ambassadors",
+  "description": "Conservation education platform for Pennsylvania youth ambassadors",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#023047",
+  "theme_color": "#0077B6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["education", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Learn",
+      "short_name": "Learn",
+      "description": "Access conservation lessons",
+      "url": "/learn",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Journal",
+      "short_name": "Journal",
+      "description": "Field documentation",
+      "url": "/journal",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Habitat Builder",
+      "short_name": "Habitat",
+      "description": "Design ecosystems",
+      "url": "/habitat",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
+
