@@ -39,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" style={{ fontWeight: 700, fontSize: '1.1rem' }}>🌲 WLA</Link>
             <Link href="/learn">📚 Learn</Link>
             <Link href="/map">🗺️ Map</Link>
+            <Link href="/fishing">🎣 Fishing</Link>
             <Link href="/keys/macro">🔬 Macro</Link>
             <Link href="/keys/plants">🌿 Plants</Link>
             <Link href="/keys/bugs">🐛 Bugs</Link>
