@@ -1206,7 +1206,77 @@ Penn State Extension recommends a three-zone riparian buffer system, each servin
 Scenario: Farmer concerned buffers waste productive land.
 
 Your response:
-"I understand you want to use every acre productively. Here's what research shows: the outer 30 feet of a field next to a stream often produces below-average yields due to wet soils and flooding. Converting that 30 feet to buffer doesn't cost you much productivity, but it filters nutrients you've paid for—keeping them on your farm instead of in the stream. Plus, USDA cost-share can pay for establishment, and you gain wildlife habitat for hunting or watching. Over time, reduced erosion means more topsoil stays put. It's a win for your farm AND the stream."`,
+"I understand you want to use every acre productively. Here's what research shows: the outer 30 feet of a field next to a stream often produces below-average yields due to wet soils and flooding. Converting that 30 feet to buffer doesn't cost you much productivity, but it filters nutrients you've paid for—keeping them on your farm instead of in the stream. Plus, USDA cost-share can pay for establishment, and you gain wildlife habitat for hunting or watching. Over time, reduced erosion means more topsoil stays put. It's a win for your farm AND the stream."
+
+## Advanced Topics
+
+### The Science of Nutrient Removal
+
+**How Buffers Clean Water:**
+Riparian buffers remove pollutants through multiple mechanisms:
+- **Physical filtration**: Vegetation slows water, particles settle
+- **Biological uptake**: Plant roots absorb nitrogen & phosphorus
+- **Denitrification**: Anaerobic soil bacteria convert nitrate to nitrogen gas
+- **Sorption**: Soil particles bind phosphorus
+
+**Research Results (Penn State):**
+- 60-90% sediment removal
+- 40-80% nitrogen removal
+- 45-85% phosphorus removal
+- Results depend on buffer width, vegetation density, and soil conditions
+
+### Case Study: Chesapeake Bay Restoration
+
+**The Problem:**
+The Chesapeake Bay (PA's Susquehanna River drains to it) suffers from nutrient pollution causing algae blooms and "dead zones."
+
+**The Solution:**
+Multi-state effort to install riparian buffers:
+- **Goal**: 70,000 additional miles of buffers
+- **Progress**: ~50% complete as of 2023
+- **PA's Role**: 50,000+ acres of buffers established since 2010
+- **Incentives**: USDA-NRCS pays 50-100% of establishment costs
+
+**Results:**
+- Nitrogen loads to Bay declining (but slowly)
+- Demonstrates that upstream conservation benefits downstream communities
+- Economic value: ~$50-200/acre/year in avoided water treatment costs
+
+### Advanced Restoration Techniques
+
+**When Simple Planting Isn't Enough:**
+
+**Bioengineering:**
+- Live stakes (willow, dogwood cuttings planted directly)
+- Brush mattresses (layered branches on eroding banks)
+- Coir logs (coconut fiber rolls with embedded plants)
+- Cost: $10-50/linear foot
+
+**When to Use:**
+- Active erosion where plants alone won't stabilize
+- Stream bank failure risk
+- High-energy sites
+
+**Natural Channel Design:**
+- Restore stream meandering pattern
+- Reconnect floodplain
+- Add woody debris for habitat
+- Cost: $100-500/linear foot
+- Returns stream to stable, self-maintaining condition
+
+### Research Frontiers
+
+**Current Questions:**
+- What's the minimum buffer width for different functions? (sediment ≠ nitrogen ≠ temperature)
+- How do buffers perform under climate change (heavier storms, flashier flows)?
+- Can buffers be "too wide" (diminishing returns)?
+- Do buffers increase or decrease greenhouse gas emissions (methane vs. carbon storage)?
+
+**Penn State Ongoing Work:**
+- Long-term monitoring of buffer performance
+- Optimizing species mixes for multiple benefits
+- Economic modeling of buffer programs
+- Climate adaptation through buffer design`,
     quiz: [
       {
         id: 'q1',
@@ -1324,7 +1394,7 @@ Your response:
   {
     id: 'cross-cutting-field-safety-first-aid',
     slug: 'field-safety-wilderness-first-aid',
-    track: 'Bucktails',
+    track: 'Ursids',
     title: 'Field Safety & Wilderness First Aid',
     description: 'Master prevention-first safety protocols, recognize and respond to common outdoor emergencies, and develop decision-making skills for remote situations.',
     estimatedMinutes: 40,
@@ -1732,7 +1802,84 @@ Wilderness medicine differs from urban medicine because:
 Scenario: Friend wants to continue in worsening weather despite group fatigue.
 
 Your response:
-"I hear you—we're close. But look at the conditions: temperature's dropping, rain's starting, and Sarah's already shivering. We're seeing early hypothermia signs. Summits are always there; we can come back another day when conditions are better. The smart call is to turn around now while we're still strong enough to get out safely. Pushing through tired, cold, and wet is how people get hurt. Let's make the safe choice."`,
+"I hear you—we're close. But look at the conditions: temperature's dropping, rain's starting, and Sarah's already shivering. We're seeing early hypothermia signs. Summits are always there; we can come back another day when conditions are better. The smart call is to turn around now while we're still strong enough to get out safely. Pushing through tired, cold, and wet is how people get hurt. Let's make the safe choice."
+
+## Advanced Topics
+
+### Wilderness Medicine Certification Pathways
+
+**For Conservation Careers:**
+Many outdoor education and field research positions require or strongly prefer wilderness medicine certification.
+
+**NOLS Wilderness First Responder (WFR):**
+- Gold standard for outdoor professionals
+- 8-10 day course
+- Covers extended care in remote settings
+- Scenario-based training
+- Cost: ~$800-1,200
+- Recertification every 3 years
+
+**Wilderness First Aid (WFA):**
+- Entry-level certification
+- 2-3 day course
+- Appropriate for most field work
+- Cost: ~$300-500
+- Recertification every 3 years
+
+**Wilderness EMT (WEMT):**
+- Advanced level
+- Combines EMT-Basic with wilderness protocols
+- Used by SAR teams, expedition medics
+- Several months of training
+- Cost: ~$1,500-3,000
+
+### Risk Management Frameworks
+
+**The Swiss Cheese Model:**
+Multiple layers of defense prevent incidents. No single layer is perfect, but together they catch most hazards.
+
+**Layers for Fieldwork:**
+1. **Planning**: Route selection, weather check, group assessment
+2. **Equipment**: 10 essentials, first aid, communication
+3. **Training**: Skills, first aid, navigation
+4. **Communication**: Trip plan, check-ins
+5. **Decision-Making**: Turn-back criteria, group input
+6. **Response**: First aid, evacuation plan
+
+**When ALL layers fail = incident occurs**
+
+### PA-Specific Hazards: Advanced Considerations
+
+**Tick-Borne Diseases Beyond Lyme:**
+- **Anaplasmosis**: Flu-like symptoms, can be severe
+- **Babesiosis**: Rare but serious, especially for immunocompromised
+- **Powassan virus**: Extremely rare but can cause encephalitis
+- **Prevention**: Permethrin clothing, prompt tick removal, daily checks
+
+**Venomous Snakes (3 species in PA):**
+- Timber rattlesnake
+- Eastern copperhead
+- Northern copperhead (Massasauga - endangered, very rare)
+
+**Bite Response:**
+- Keep calm, immobilize limb
+- Remove jewelry/tight clothing
+- Get to hospital immediately
+- **DO NOT**: Cut, suck, tourniquet, apply ice
+
+**Dr. Gary Alt's Bear Safety Wisdom:**
+
+Dr. Alt is PA's foremost black bear expert. His decades of field experience offer critical safety insights:
+
+**Key Principles:**
+- Black bear attacks are extraordinarily rare
+- Most "charges" are bluffs—bears testing if you're a threat
+- Fighting back (NOT playing dead) is appropriate if attacked
+- Food storage and cleanliness prevent most bear encounters
+- Understanding bear behavior reduces fear and increases safety
+
+**WLA Context:**
+Ambassadors working in PA forests should understand that black bears are present but pose minimal risk when proper protocols are followed (food storage, making noise in dense cover, respecting bear space).`,
     quiz: [
       {
         id: 'q1',
@@ -1849,7 +1996,7 @@ Your response:
   {
     id: 'cross-cutting-climate-adaptation-resilience',
     slug: 'climate-adaptation-ecosystem-resilience',
-    track: 'Gobblers',
+    track: 'Ursids',
     title: 'Climate Adaptation & Ecosystem Resilience',
     description: 'Understand observed climate changes in Pennsylvania, predict ecological impacts, and evaluate management strategies that build resilience in a changing world.',
     estimatedMinutes: 35,
@@ -2150,7 +2297,114 @@ Climate change is daunting, but conservation professionals like you will lead th
 
 **Penn State and DCNR are leaders in climate adaptation**—you're joining a community actively working on solutions.
 
-**The next 20 years of your career will define how PA forests and streams respond to climate change.** This is your calling.`,
+**The next 20 years of your career will define how PA forests and streams respond to climate change.** This is your calling.
+
+## Advanced Topics
+
+### Dr. Gary Alt's Long-Term Observations
+
+**Four Decades of Change:**
+Dr. Alt's career (spanning 1970s-present) provides a unique window into PA wildlife response to environmental change:
+
+**Black Bear Population Shifts:**
+- 1970s: ~4,000 bears, mostly in north-central PA
+- 2020s: ~20,000 bears, statewide distribution
+- **Driver**: Forest maturation + abundant food (acorns, berries) + reduced hunting pressure
+- **Climate Link**: Warmer falls may extend foraging season, improving survival
+
+**Phenological Changes Alt Has Documented:**
+- Earlier spring green-up (1-2 weeks earlier than 1970s)
+- Later fall color (1 week later)
+- Longer growing season = more food for wildlife
+- BUT: Potential phenological mismatches (e.g., bird migration timing vs. insect emergence)
+
+**Lesson:** Long-term observations by dedicated professionals reveal patterns that short studies miss. Alt's photography archive provides visual proof of change.
+
+### Advanced Climate Science: Downscaled Projections for PA
+
+**Penn State Climate Assessment (2020):**
+
+**By 2050 (Mid-Range Scenario):**
+- Average temperature: +4-5°F
+- Growing season: +3-4 weeks longer
+- Precipitation: +5-10% annual total
+- Extreme events: +40-60% frequency of 2-inch rain events
+
+**Ecological Implications:**
+- **Winners**: Southern species expanding north (oaks, tulip poplar, bass, warmwater fish)
+- **Losers**: Northern species retreating or extirpated (spruce, hemlock, brook trout, snowshoe hare)
+- **Uncertain**: How fast can species migrate? Will they find suitable habitat?
+
+### Assisted Migration: Controversial Frontier
+
+**The Dilemma:**
+If species can't migrate fast enough to track climate change, should humans help by transplanting them?
+
+**Arguments For:**
+- Prevent extinctions
+- Maintain ecosystem functions
+- Humans caused the problem, we should help
+
+**Arguments Against:**
+- Unintended consequences (invasiveness, disease spread)
+- Diverts resources from other conservation
+- "Playing God" with nature
+
+**Current PA Policy:**
+- Experimental trials only
+- Focus on southerly genotypes of native species (e.g., southern PA oak seeds planted in northern PA)
+- Not transplanting non-native species
+
+### Case Study: Brook Trout Climate Refugia
+
+**The Challenge:**
+Brook trout require water <68°F. As streams warm, they lose habitat.
+
+**Penn State & PA Fish & Boat Research:**
+- Mapped all PA brook trout streams
+- Identified "cold-water refugia" (springs, headwaters, shaded reaches)
+- Prioritized protection of these critical habitats
+
+**Management Strategies:**
+1. **Riparian buffers**: Keep water cool
+2. **Remove barriers**: Allow fish to access cold headwaters
+3. **Reduce other stressors**: Clean water, adequate flows
+4. **Prepare for losses**: Accept that some streams will become too warm
+
+**Trade-Off:**
+Resources spent protecting a species that may ultimately be lost vs. investing in species with better long-term prospects?
+
+### Ecological Memory & Novel Ecosystems
+
+**Advanced Concept:**
+As climate changes, ecosystems will reorganize into combinations of species that have never coexisted before—"novel ecosystems."
+
+**PA Example:**
+Imagine a forest with:
+- Southern oaks (expanding north)
+- Invasive plants (thriving in disturbance)
+- Northern birds (not yet extirpated)
+- New insect pests (arriving from south)
+
+**Questions:**
+- Can we "manage" novel ecosystems, or just observe?
+- Do we try to maintain historical conditions, or accept change?
+- What is "natural" in a human-altered world?
+
+### Research Frontiers
+
+**Current Studies:**
+- **Tree provenance trials**: Which seed sources will thrive under future climate?
+- **Wildlife disease**: Will warming expand tick-borne diseases, West Nile, etc.?
+- **Carbon accounting**: Do PA forests store more or less carbon as climate changes?
+- **Social dimensions**: How do we engage communities in climate adaptation when the topic is polarizing?
+
+**Dr. Alt's Perspective on Communication:**
+His work navigating controversial deer management offers lessons for climate communication:
+- Start with shared values (love of land, hunting/fishing tradition)
+- Use local, tangible examples (not abstract global data)
+- Focus on solutions within our control
+- Acknowledge uncertainty while acting on best available science`,
     quiz: [
       {
         id: 'q1',

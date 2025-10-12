@@ -4,7 +4,7 @@ export const crossCuttingLessons: Lesson[] = [
   {
     id: 'cross-cutting-wildlife-tracking',
     slug: 'wildlife-sign-tracking',
-    track: 'Bucktails',
+    track: 'Ursids',
     title: 'Wildlife Sign & Tracking',
     description: 'Learn to read the landscape through tracks, scat, browse, and other signs to understand wildlife presence, behavior, and habitat use.',
     estimatedMinutes: 30,
