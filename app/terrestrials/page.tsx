@@ -228,7 +228,7 @@ export default function TerrestrialsPage() {
           🦌 PA Terrestrial Wildlife
         </h1>
         <p style={{ fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto', opacity: 0.95 }}>
-          Discover Pennsylvania's amazing land mammals - from white-tailed deer to black bears
+          Discover Pennsylvania&apos;s amazing land mammals - from white-tailed deer to black bears
         </p>
       </div>
 

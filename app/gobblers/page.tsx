@@ -214,7 +214,7 @@ export default function GobblersPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div style={{ padding: '1.5rem', background: '#f0f9ff', borderRadius: '12px' }}>
               <h3>🎺 Gobble</h3>
-              <p><strong>Sound:</strong> "Gobble-obble-obble"</p>
+              <p><strong>Sound:</strong> &quot;Gobble-obble-obble&quot;</p>
               <p><strong>Who:</strong> Dominant males (toms)</p>
               <p><strong>When:</strong> Spring breeding season, dawn</p>
               <p><strong>Purpose:</strong> Attract hens, challenge other males</p>
@@ -223,7 +223,7 @@ export default function GobblersPage() {
 
             <div style={{ padding: '1.5rem', background: '#fff0f5', borderRadius: '12px' }}>
               <h3>🐣 Yelp</h3>
-              <p><strong>Sound:</strong> "Kee-awk, kee-awk"</p>
+              <p><strong>Sound:</strong> &quot;Kee-awk, kee-awk&quot;</p>
               <p><strong>Who:</strong> Both sexes, mainly hens</p>
               <p><strong>When:</strong> Year-round</p>
               <p><strong>Purpose:</strong> Location call, reassemble flock</p>
@@ -235,13 +235,13 @@ export default function GobblersPage() {
               <p><strong>Sound:</strong> Soft rolling sound</p>
               <p><strong>Who:</strong> Both sexes</p>
               <p><strong>When:</strong> While feeding, roosting</p>
-              <p><strong>Purpose:</strong> Contentment, "all is well"</p>
+              <p><strong>Purpose:</strong> Contentment, &quot;all is well&quot;</p>
               <p><strong>Volume:</strong> Very quiet, close range only</p>
             </div>
 
             <div style={{ padding: '1.5rem', background: '#fffacd', borderRadius: '12px' }}>
               <h3>🗣️ Cluck</h3>
-              <p><strong>Sound:</strong> Sharp "putt" or "cluck"</p>
+              <p><strong>Sound:</strong> Sharp &quot;putt&quot; or &quot;cluck&quot;</p>
               <p><strong>Who:</strong> Both sexes</p>
               <p><strong>When:</strong> Year-round</p>
               <p><strong>Purpose:</strong> Basic communication</p>
@@ -250,7 +250,7 @@ export default function GobblersPage() {
 
             <div style={{ padding: '1.5rem', background: '#fff5ee', borderRadius: '12px' }}>
               <h3>🚨 Putt/Alarm Call</h3>
-              <p><strong>Sound:</strong> Sharp, loud "putt-putt-putt"</p>
+              <p><strong>Sound:</strong> Sharp, loud &quot;putt-putt-putt&quot;</p>
               <p><strong>Who:</strong> Both sexes</p>
               <p><strong>When:</strong> When alarmed</p>
               <p><strong>Purpose:</strong> Warn flock of danger</p>
@@ -259,7 +259,7 @@ export default function GobblersPage() {
 
             <div style={{ padding: '1.5rem', background: '#e6f3ff', borderRadius: '12px' }}>
               <h3>💨 Drumming/Spitting</h3>
-              <p><strong>Sound:</strong> "Pfft, thummm"</p>
+              <p><strong>Sound:</strong> &quot;Pfft, thummm&quot;</p>
               <p><strong>Who:</strong> Males during display</p>
               <p><strong>When:</strong> Breeding season</p>
               <p><strong>Purpose:</strong> Accompany strut display</p>
@@ -271,7 +271,7 @@ export default function GobblersPage() {
             <h4>🎤 Learn to Call</h4>
             <p style={{ fontSize: '1.1rem' }}>
               Calling turkeys is an art! The basic yelp is the most important call to learn. 
-              Practice making "kee-awk" sounds with a box call, slate call, or even your voice. 
+              Practice making &quot;kee-awk&quot; sounds with a box call, slate call, or even your voice. 
               Remember: <strong>Less is more</strong> - overcalling can scare turkeys away.
             </p>
           </div>
@@ -385,7 +385,7 @@ export default function GobblersPage() {
             </div>
 
             <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px' }}>
-              <p><strong>4. What is a "gobble" used for?</strong></p>
+              <p><strong>4. What is a &quot;gobble&quot; used for?</strong></p>
               <p>A) Alarm call  B) Attract mates  C) Find food  D) Navigate</p>
             </div>
 
@@ -395,12 +395,12 @@ export default function GobblersPage() {
             </div>
 
             <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px' }}>
-              <p><strong>6. What is the turkey's primary fall/winter food?</strong></p>
+              <p><strong>6. What is the turkey&apos;s primary fall/winter food?</strong></p>
               <p>A) Insects  B) Grass  C) Acorns  D) Worms</p>
             </div>
 
             <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px' }}>
-              <p><strong>7. Pennsylvania's turkey population is approximately:</strong></p>
+              <p><strong>7. Pennsylvania&apos;s turkey population is approximately:</strong></p>
               <p>A) 50,000  B) 100,000  C) 200,000  D) 500,000</p>
             </div>
 
