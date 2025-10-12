@@ -542,9 +542,8 @@ export interface DateRange {
 // EXPORTS
 // ============================================
 
+// Note: User is already exported above, no need to re-export
 export type {
-  // Re-export all types for convenience
-  User,
   Class,
   ClassEnrollment,
   Assignment,
