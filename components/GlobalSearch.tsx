@@ -222,7 +222,7 @@ export default function GlobalSearch() {
               ))
             ) : query.trim() ? (
               <div style={{ padding: '2rem', textAlign: 'center', color: '#6B7280' }}>
-                No results found for "{query}"
+                No results found for &quot;{query}&quot;
               </div>
             ) : (
               <div style={{ padding: '2rem', textAlign: 'center', color: '#6B7280' }}>
