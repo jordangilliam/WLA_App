@@ -8,6 +8,9 @@ import QuickStats from '@/components/dashboard/QuickStats';
 import ClassCard from '@/components/dashboard/ClassCard';
 import type { Class, TeacherDashboardSummary } from '@/lib/types/dashboard.types';
 
+// Force dynamic rendering - requires authentication
+export const dynamic = 'force-dynamic';
+
 export default function TeacherDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();

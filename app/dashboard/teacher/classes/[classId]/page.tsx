@@ -12,6 +12,9 @@ import type {
   ClassOverview 
 } from '@/lib/types/dashboard.types';
 
+// Force dynamic rendering - requires authentication
+export const dynamic = 'force-dynamic';
+
 export default function ClassDetailPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
