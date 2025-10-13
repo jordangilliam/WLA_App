@@ -542,18 +542,6 @@ export interface DateRange {
 // EXPORTS
 // ============================================
 
-// Note: User is already exported above, no need to re-export
-export type {
-  Class,
-  ClassEnrollment,
-  Assignment,
-  AssignmentSubmission,
-  Group,
-  GroupMember,
-  ParentalConsent,
-  ContentFlag,
-  Activity,
-  TeacherNote,
-  ClassAnnouncement,
-};
+// All types are exported inline as interfaces/types above
+// No need for re-export block to avoid duplicate export errors
 
