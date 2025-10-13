@@ -8,6 +8,8 @@ import { useState, useMemo } from 'react';
 import { LessonCard } from '@/components/lesson/LessonCard';
 import { useProgress } from '@/lib/hooks/useProgress';
 import { allLessons } from '@/lib/data';
+import ConservationHistorySection from '@/components/ConservationHistorySection';
+import { FISHING_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
 import { TRACKS, type Track } from '@/lib/config/tracks';
 
 export default function LearnPage() {
@@ -225,6 +227,18 @@ export default function LearnPage() {
         )}
           </div>
         </div>
+
+      {/* Conservation History Section */}
+      {(selectedTrack === 'all' || selectedTrack === 'Brookies' || selectedTrack === 'Bass') && (
+        <section style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 1.5rem 3rem',
+        }}>
+          <ConservationHistorySection history={FISHING_CONSERVATION_HISTORY} />
+        </section>
+      )}
+    </div>
   );
 }
 
