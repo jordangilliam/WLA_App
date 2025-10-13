@@ -225,8 +225,8 @@ export default function LearnPage() {
             <p>Try adjusting your search or filter</p>
           </div>
         )}
-          </div>
         </div>
+      </section>
 
       {/* Conservation History Section */}
       {(selectedTrack === 'all' || selectedTrack === 'Brookies' || selectedTrack === 'Bass') && (
