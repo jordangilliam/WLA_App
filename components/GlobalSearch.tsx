@@ -109,57 +109,78 @@ export default function GlobalSearch() {
   };
 
   return (
-    <div ref={searchRef} style={{ position: 'relative' }}>
-      {/* Search Button */}
-      <button
-        onClick={() => {
-          setIsOpen(!isOpen);
-          setTimeout(() => inputRef.current?.focus(), 100);
-        }}
-        style={{
-          padding: '0.5rem 1rem',
-          background: 'rgba(255, 255, 255, 0.95)',
-          borderRadius: '8px',
-          color: '#1F2937',
-          backdropFilter: 'blur(4px)',
-          border: '2px solid rgba(255, 255, 255, 0.8)',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          fontSize: '0.9rem',
-          fontWeight: 500,
-          transition: 'all 0.2s',
-          minWidth: '200px',
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-          e.currentTarget.style.transform = 'scale(1.02)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
-          e.currentTarget.style.transform = 'scale(1)';
-        }}
-      >
-        🔍 Search... <kbd style={{ fontSize: '0.75rem', opacity: 0.6 }}>⌘K</kbd>
-      </button>
+    <>
+      <div ref={searchRef} style={{ position: 'relative', flexShrink: 0 }}>
+        {/* Search Button */}
+        <button
+          onClick={() => {
+            setIsOpen(!isOpen);
+            setTimeout(() => inputRef.current?.focus(), 100);
+          }}
+          style={{
+            padding: '0.5rem 1rem',
+            background: 'rgba(255, 255, 255, 0.95)',
+            borderRadius: '8px',
+            color: '#1F2937',
+            backdropFilter: 'blur(4px)',
+            border: '2px solid rgba(255, 255, 255, 0.8)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            fontSize: '0.9rem',
+            fontWeight: 500,
+            transition: 'all 0.2s',
+            minWidth: '200px',
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+            e.currentTarget.style.transform = 'scale(1.02)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          🔍 Search... <kbd style={{ fontSize: '0.75rem', opacity: 0.6 }}>⌘K</kbd>
+        </button>
+      </div>
 
-      {/* Search Dropdown */}
+      {/* Backdrop */}
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        />
+      )}
+
+      {/* Search Modal - Fixed positioning to overlay */}
       {isOpen && (
         <div
           style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            marginTop: '0.5rem',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             background: 'white',
             borderRadius: '12px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
             border: '2px solid #E5E7EB',
             zIndex: 10000,
-            minWidth: '320px',
-            maxWidth: '400px',
+            width: '90vw',
+            maxWidth: '500px',
+            maxHeight: '80vh',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {/* Search Input */}
@@ -254,7 +275,7 @@ export default function GlobalSearch() {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

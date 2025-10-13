@@ -45,6 +45,60 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <script src="https://d36ewmyb2wrx29.cloudfront.net/index.js" async />
+        
+        {/* Mobile fixes for Brook chat widget */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Ensure Brook chat widget is visible and functional on mobile */
+            @media (max-width: 768px) {
+              /* Fix chat button visibility */
+              [data-chat-id] {
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                z-index: 9999 !important;
+                display: block !important;
+                visibility: visible !important;
+              }
+              
+              /* Fix chat window on mobile */
+              .skl-chat-container,
+              .skl-chat-widget,
+              [class*="chat-container"],
+              [class*="chat-widget"] {
+                position: fixed !important;
+                bottom: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                top: auto !important;
+                max-width: 100vw !important;
+                max-height: 90vh !important;
+                width: 100% !important;
+                z-index: 9999 !important;
+                border-radius: 12px 12px 0 0 !important;
+              }
+              
+              /* Ensure input is visible */
+              .skl-chat-input,
+              [class*="chat-input"],
+              textarea[placeholder*="message"],
+              input[type="text"] {
+                min-height: 44px !important;
+                font-size: 16px !important;
+                -webkit-appearance: none !important;
+                padding: 12px !important;
+                display: block !important;
+                visibility: visible !important;
+              }
+            }
+            
+            /* Ensure chat widget doesn't conflict with our search */
+            [data-chat-id],
+            .skl-chat-button {
+              z-index: 9998 !important;
+            }
+          `
+        }} />
       </head>
       <body>
         <PointsProvider>
