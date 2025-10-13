@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 visibility: visible !important;
               }
               
-              /* Fix chat window on mobile */
+              /* Fix chat window on mobile - prevent keyboard overlap */
               .skl-chat-container,
               .skl-chat-widget,
               [class*="chat-container"],
@@ -70,25 +70,82 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 bottom: 0 !important;
                 right: 0 !important;
                 left: 0 !important;
-                top: auto !important;
+                top: 10vh !important;
                 max-width: 100vw !important;
+                height: 90vh !important;
                 max-height: 90vh !important;
                 width: 100% !important;
                 z-index: 9999 !important;
                 border-radius: 12px 12px 0 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
               }
               
-              /* Ensure input is visible */
+              /* Chat messages area should scroll */
+              .skl-chat-messages,
+              [class*="chat-messages"],
+              [class*="messages-container"] {
+                flex: 1 !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding-bottom: 20px !important;
+              }
+              
+              /* Input container at bottom with padding */
+              .skl-chat-input-container,
+              .skl-chat-footer,
+              [class*="chat-input-container"],
+              [class*="chat-footer"],
+              [class*="input-container"] {
+                position: sticky !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                padding: 16px !important;
+                padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+                background: white !important;
+                border-top: 1px solid #e5e7eb !important;
+                z-index: 10 !important;
+                flex-shrink: 0 !important;
+              }
+              
+              /* Ensure input is visible above keyboard */
               .skl-chat-input,
               [class*="chat-input"],
               textarea[placeholder*="message"],
               input[type="text"] {
                 min-height: 44px !important;
+                max-height: 120px !important;
                 font-size: 16px !important;
                 -webkit-appearance: none !important;
                 padding: 12px !important;
                 display: block !important;
                 visibility: visible !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 8px !important;
+                resize: none !important;
+              }
+              
+              /* Ensure buttons in input area are visible */
+              .skl-chat-input-container button,
+              [class*="chat-input-container"] button,
+              [class*="input-container"] button {
+                min-height: 44px !important;
+                min-width: 44px !important;
+              }
+              
+              /* Fix for iOS viewport when keyboard appears */
+              @supports (-webkit-touch-callout: none) {
+                .skl-chat-container,
+                .skl-chat-widget,
+                [class*="chat-container"],
+                [class*="chat-widget"] {
+                  height: -webkit-fill-available !important;
+                }
               }
             }
             
