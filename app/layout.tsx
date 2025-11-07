@@ -201,6 +201,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/fishing" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🎣 Fishing</Link>
             <Link href="/gobblers" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🦃 Gobblers</Link>
             <Link href="/terrestrials" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🦌 Terrestrials</Link>
+            <Link href="/games" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🎮 Games</Link>
             <Link href="/keys/macro" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🔬 Macro</Link>
             <Link href="/keys/plants" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🌿 Plants</Link>
             <Link href="/keys/bugs" style={{ padding: '0.5rem 1rem', background: 'rgba(71, 85, 105, 0.75)', borderRadius: '8px', color: 'white', backdropFilter: 'blur(4px)' }}>🐛 Bugs</Link>

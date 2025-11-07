@@ -967,6 +967,47 @@ export default function Home() {
               Pennsylvania black bear ecology, large carnivore management, and human-wildlife coexistence in the Alleghenies
             </p>
           </Link>
+
+          <Link href="/games" className="card" style={{
+            background: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
+            padding: '2rem',
+            textAlign: 'center',
+            border: '2px solid rgba(255,255,255,0.2)',
+            textDecoration: 'none',
+            color: 'white',
+            transition: 'all 0.3s',
+          }} onMouseOver={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+            e.currentTarget.style.transform = 'translateY(-5px)';
+          }} onMouseOut={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}>
+            <div style={{
+              width: '150px',
+              height: '150px',
+              margin: '0 auto 1.5rem',
+              background: 'white',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+              fontSize: '5rem',
+            }}>
+              🎮
+        </div>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
+              Games
+            </h3>
+            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
+              Learn through play! Challenge yourself with conservation-themed games like Trout Tower and more
+            </p>
+          </Link>
       </div>
     </section>
     </>

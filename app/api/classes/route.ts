@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/auth.config';
+import { supabaseAdmin } from '@/lib/db/client';
 import type { 
   Class, 
   CreateClassDTO, 
@@ -32,30 +33,32 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // TODO: Replace with actual database query
-    // For now, return mock data
-    const classes: Class[] = [
-      {
-        id: 1,
-        teacher_id: user.id,
-        name: 'Environmental Science 7A',
-        description: 'Introduction to ecology and conservation',
-        grade_level: '7',
-        subject: 'Science',
-        class_code: 'FISH2025',
-        school_name: 'Central Middle School',
-        school_district: 'State College Area SD',
-        allow_location_sharing: false,
-        require_assignment_approval: true,
-        created_at: new Date('2025-01-15'),
-        updated_at: new Date('2025-01-15'),
-        archived: false,
-      },
-    ];
+    // Query classes from Supabase
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
+
+    const { data: classes, error: dbError } = await supabaseAdmin
+      .from('classes')
+      .select('*')
+      .eq('teacher_id', user.id)
+      .eq('archived', false)
+      .order('created_at', { ascending: false });
+
+    if (dbError) {
+      console.error('Supabase error fetching classes:', dbError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to fetch classes' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json<ApiResponse<Class[]>>({
       success: true,
-      data: classes,
+      data: classes as Class[],
     });
   } catch (error) {
     console.error('Error fetching classes:', error);
@@ -101,32 +104,46 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Generate unique class code
-    const classCode = generateClassCode();
+    // Generate unique class code
+    const classCode = await generateUniqueClassCode();
 
-    // TODO: Insert into database
-    // For now, return mock created class
-    const newClass: Class = {
-      id: Date.now(), // Temporary ID
-      teacher_id: user.id,
-      name: body.name,
-      description: body.description,
-      grade_level: body.grade_level,
-      subject: body.subject || 'Environmental Science',
-      class_code: classCode,
-      school_name: body.school_name,
-      school_district: body.school_district,
-      allow_location_sharing: body.allow_location_sharing || false,
-      require_assignment_approval: body.require_assignment_approval || false,
-      created_at: new Date(),
-      updated_at: new Date(),
-      archived: false,
-    };
+    // Insert into database
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
+
+    const { data: newClass, error: insertError } = await supabaseAdmin
+      .from('classes')
+      .insert({
+        teacher_id: user.id,
+        name: body.name,
+        description: body.description,
+        grade_level: body.grade_level,
+        subject: body.subject || 'Environmental Science',
+        class_code: classCode,
+        school_name: body.school_name,
+        school_district: body.school_district,
+        allow_location_sharing: body.allow_location_sharing || false,
+        require_assignment_approval: body.require_assignment_approval !== false,
+      })
+      .select()
+      .single();
+
+    if (insertError) {
+      console.error('Supabase error creating class:', insertError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to create class' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json<ApiResponse<Class>>(
       {
         success: true,
-        data: newClass,
+        data: newClass as Class,
         message: `Class created successfully with code: ${classCode}`,
       },
       { status: 201 }
@@ -144,18 +161,36 @@ export async function POST(request: NextRequest) {
  * Generate a unique 8-character class code
  * Format: XXXX-XXXX (e.g., FISH-2025)
  */
-function generateClassCode(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Exclude similar-looking chars (I, O, 0, 1)
-  let code = '';
+async function generateUniqueClassCode(): Promise<string> {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Exclude similar-looking chars
   
-  for (let i = 0; i < 8; i++) {
-    if (i === 4) {
-      code += '-'; // Add separator for readability
+  // Try up to 10 times to generate a unique code
+  for (let attempt = 0; attempt < 10; attempt++) {
+    let code = '';
+    
+    for (let i = 0; i < 8; i++) {
+      if (i === 4) {
+        code += '-'; // Add separator for readability
+      }
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
+    
+    // Check if code already exists in database
+    if (supabaseAdmin) {
+      const { data: existing } = await supabaseAdmin
+        .from('classes')
+        .select('id')
+        .eq('class_code', code)
+        .maybeSingle();
+      
+      if (!existing) {
+        return code; // Code is unique!
+      }
+    }
   }
   
-  // TODO: Check database for uniqueness and regenerate if needed
-  return code;
+  // Fallback: add timestamp to ensure uniqueness
+  const timestamp = Date.now().toString(36).toUpperCase().slice(-4);
+  return `WLA-${timestamp}`;
 }
 
