@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "FieldQuest",
+    "slug": "fieldquest",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2E7D32"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "org.wildlifeleadership.fieldquest",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "FieldQuest needs your location to show nearby wildlife and field sites.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "FieldQuest tracks your location to detect when you're near wildlife encounters.",
+        "NSCameraUsageDescription": "FieldQuest uses your camera for AR wildlife encounters and journal photos.",
+        "NSPhotoLibraryUsageDescription": "FieldQuest needs access to save your wildlife photos."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2E7D32"
+      },
+      "package": "org.wildlifeleadership.fieldquest",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-location",
+      "expo-camera",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "YOUR_MAPBOX_DOWNLOAD_TOKEN"
+        }
+      ]
+    ],
+    "scheme": "fieldquest"
+  }
+}
+
