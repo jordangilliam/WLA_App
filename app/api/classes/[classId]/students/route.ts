@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../auth/auth.config';
+import { supabaseAdmin } from '@/lib/db/client';
 import type { 
   ClassRosterStudent,
   EnrollStudentDTO,
@@ -44,54 +45,75 @@ export async function GET(
       );
     }
 
-    // TODO: Check if user is teacher of this class
-    // TODO: Fetch from database using class_roster view
+    // Database connection check
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
 
-    // Mock roster data
-    const roster: ClassRosterStudent[] = [
-      {
-        class_id: classId,
-        class_name: 'Environmental Science 7A',
-        teacher_id: user.id,
-        student_id: 101,
-        student_name: 'Emily Johnson',
-        student_email: 'emily.j@student.edu',
-        grade_level: '7',
-        consent_status: 'verified',
-        enrolled_at: new Date('2025-01-20'),
-        enrollment_status: 'active',
-        badges_earned: 5,
-        last_active: new Date('2025-10-11'),
-      },
-      {
-        class_id: classId,
-        class_name: 'Environmental Science 7A',
-        teacher_id: user.id,
-        student_id: 102,
-        student_name: 'Marcus Williams',
-        student_email: 'marcus.w@student.edu',
-        grade_level: '7',
-        consent_status: 'verified',
-        enrolled_at: new Date('2025-01-20'),
-        enrollment_status: 'active',
-        badges_earned: 3,
-        last_active: new Date('2025-10-10'),
-      },
-      {
-        class_id: classId,
-        class_name: 'Environmental Science 7A',
-        teacher_id: user.id,
-        student_id: 103,
-        student_name: 'Sofia Martinez',
-        student_email: 'sofia.m@student.edu',
-        grade_level: '7',
-        consent_status: 'pending',
-        enrolled_at: new Date('2025-01-22'),
-        enrollment_status: 'active',
-        badges_earned: 1,
-        last_active: new Date('2025-10-09'),
-      },
-    ];
+    // Check if user is teacher of this class (unless admin)
+    if (user.role === 'teacher') {
+      const { data: classCheck, error: classCheckError } = await supabaseAdmin
+        .from('classes')
+        .select('teacher_id')
+        .eq('id', classId)
+        .maybeSingle();
+
+      if (classCheckError || !classCheck) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Class not found' },
+          { status: 404 }
+        );
+      }
+
+      if (classCheck.teacher_id !== user.id) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'You do not teach this class' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Fetch roster from database with user details
+    const { data: enrollments, error: rosterError } = await supabaseAdmin
+      .from('class_enrollments')
+      .select(`
+        *,
+        users!student_id (
+          id,
+          name,
+          email,
+          grade_level
+        )
+      `)
+      .eq('class_id', classId)
+      .eq('status', 'active')
+      .order('enrolled_at', { ascending: true });
+
+    if (rosterError) {
+      console.error('Error fetching roster:', rosterError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to fetch class roster' },
+        { status: 500 }
+      );
+    }
+
+    // Transform into ClassRosterStudent format
+    const roster: ClassRosterStudent[] = (enrollments || []).map((enrollment: any) => ({
+      class_id: classId,
+      student_id: enrollment.student_id,
+      student_name: enrollment.users?.name || 'Unknown Student',
+      student_email: enrollment.users?.email || '',
+      grade_level: enrollment.users?.grade_level || '',
+      enrolled_at: new Date(enrollment.enrolled_at),
+      enrollment_status: enrollment.status,
+      // TODO: Add these from user profile/activity tables
+      consent_status: 'verified',
+      badges_earned: 0,
+      last_active: new Date(),
+    }));
 
     return NextResponse.json<ApiResponse<ClassRosterStudent[]>>({
       success: true,
@@ -152,25 +174,146 @@ export async function POST(
       );
     }
 
-    // TODO: Check if user is teacher of this class
-    // TODO: Look up student by ID or email
-    // TODO: Check if already enrolled
-    // TODO: Insert into class_enrollments
+    // Database connection check
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
 
-    // Mock enrollment
-    const enrollment: ClassEnrollment = {
-      id: Date.now(),
-      class_id: classId,
-      student_id: body.student_id || 999,
-      enrolled_at: new Date(),
-      enrolled_by: 'teacher_added',
-      status: 'active',
-    };
+    // Check if user is teacher of this class (unless admin)
+    if (user.role === 'teacher') {
+      const { data: classCheck, error: classCheckError } = await supabaseAdmin
+        .from('classes')
+        .select('teacher_id')
+        .eq('id', classId)
+        .maybeSingle();
+
+      if (classCheckError || !classCheck) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Class not found' },
+          { status: 404 }
+        );
+      }
+
+      if (classCheck.teacher_id !== user.id) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'You do not teach this class' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Look up student by ID or email
+    let studentId: number;
+    
+    if (body.student_id) {
+      studentId = body.student_id;
+    } else if (body.student_email) {
+      const { data: studentUser, error: studentError } = await supabaseAdmin
+        .from('users')
+        .select('id, role')
+        .eq('email', body.student_email)
+        .maybeSingle();
+
+      if (studentError || !studentUser) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Student not found with that email' },
+          { status: 404 }
+        );
+      }
+
+      if (studentUser.role !== 'student') {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'User is not a student' },
+          { status: 400 }
+        );
+      }
+
+      studentId = studentUser.id;
+    } else {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Student ID or email required' },
+        { status: 400 }
+      );
+    }
+
+    // Check if already enrolled
+    const { data: existing, error: checkError } = await supabaseAdmin
+      .from('class_enrollments')
+      .select('id, status')
+      .eq('class_id', classId)
+      .eq('student_id', studentId)
+      .maybeSingle();
+
+    if (checkError) {
+      console.error('Error checking enrollment:', checkError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to check enrollment status' },
+        { status: 500 }
+      );
+    }
+
+    if (existing && existing.status === 'active') {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Student is already enrolled in this class' },
+        { status: 400 }
+      );
+    }
+
+    // Insert or reactivate enrollment
+    let enrollment: any;
+
+    if (existing && existing.status === 'withdrawn') {
+      // Reactivate
+      const { data: reactivated, error: reactivateError } = await supabaseAdmin
+        .from('class_enrollments')
+        .update({ 
+          status: 'active',
+          withdrawn_at: null
+        })
+        .eq('id', existing.id)
+        .select()
+        .single();
+
+      if (reactivateError) {
+        console.error('Error reactivating enrollment:', reactivateError);
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Failed to add student' },
+          { status: 500 }
+        );
+      }
+
+      enrollment = reactivated;
+    } else {
+      // Create new enrollment
+      const { data: newEnrollment, error: insertError } = await supabaseAdmin
+        .from('class_enrollments')
+        .insert({
+          class_id: classId,
+          student_id: studentId,
+          enrolled_by: 'teacher_added',
+          status: 'active',
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error('Error creating enrollment:', insertError);
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Failed to add student' },
+          { status: 500 }
+        );
+      }
+
+      enrollment = newEnrollment;
+    }
 
     return NextResponse.json<ApiResponse<ClassEnrollment>>(
       {
         success: true,
-        data: enrollment,
+        data: enrollment as ClassEnrollment,
         message: 'Student added successfully',
       },
       { status: 201 }
@@ -224,8 +367,54 @@ export async function DELETE(
       );
     }
 
-    // TODO: Check if user is teacher of this class
-    // TODO: Update enrollment status to 'withdrawn' in database
+    // Database connection check
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
+
+    // Check if user is teacher of this class (unless admin)
+    if (user.role === 'teacher') {
+      const { data: classCheck, error: classCheckError } = await supabaseAdmin
+        .from('classes')
+        .select('teacher_id')
+        .eq('id', classId)
+        .maybeSingle();
+
+      if (classCheckError || !classCheck) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'Class not found' },
+          { status: 404 }
+        );
+      }
+
+      if (classCheck.teacher_id !== user.id) {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'You do not teach this class' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Update enrollment status to 'withdrawn'
+    const { error: withdrawError } = await supabaseAdmin
+      .from('class_enrollments')
+      .update({ 
+        status: 'withdrawn',
+        withdrawn_at: new Date().toISOString()
+      })
+      .eq('class_id', classId)
+      .eq('student_id', studentId);
+
+    if (withdrawError) {
+      console.error('Error removing student:', withdrawError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to remove student' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json<ApiResponse<{ removed: boolean }>>({
       success: true,

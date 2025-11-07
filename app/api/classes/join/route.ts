@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
+import { supabaseAdmin } from '@/lib/db/client';
 import type { 
   ClassEnrollment,
   ApiResponse 
@@ -47,27 +48,122 @@ export async function POST(request: NextRequest) {
 
     const classCode = body.class_code.trim().toUpperCase();
 
-    // TODO: Look up class by class_code
-    // TODO: Check if class is archived
-    // TODO: Check if student already enrolled
-    // TODO: Check if student needs parental consent
-    // TODO: Insert into class_enrollments
+    // Database connection check
+    if (!supabaseAdmin) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
 
-    // Mock enrollment
-    const enrollment: ClassEnrollment = {
-      id: Date.now(),
-      class_id: 1,
-      student_id: user.id,
-      enrolled_at: new Date(),
-      enrolled_by: 'class_code',
-      status: 'active',
-    };
+    // Look up class by class_code
+    const { data: classData, error: classError } = await supabaseAdmin
+      .from('classes')
+      .select('id, name, archived, teacher_id')
+      .eq('class_code', classCode)
+      .maybeSingle();
+
+    if (classError) {
+      console.error('Error looking up class:', classError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to look up class' },
+        { status: 500 }
+      );
+    }
+
+    if (!classData) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Invalid class code' },
+        { status: 404 }
+      );
+    }
+
+    // Check if class is archived
+    if (classData.archived) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'This class is no longer accepting students' },
+        { status: 400 }
+      );
+    }
+
+    // Check if student is already enrolled
+    const { data: existingEnrollment, error: enrollCheckError } = await supabaseAdmin
+      .from('class_enrollments')
+      .select('id, status')
+      .eq('class_id', classData.id)
+      .eq('student_id', user.id)
+      .maybeSingle();
+
+    if (enrollCheckError) {
+      console.error('Error checking enrollment:', enrollCheckError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to check enrollment status' },
+        { status: 500 }
+      );
+    }
+
+    if (existingEnrollment) {
+      if (existingEnrollment.status === 'active') {
+        return NextResponse.json<ApiResponse<null>>(
+          { success: false, error: 'You are already enrolled in this class' },
+          { status: 400 }
+        );
+      } else if (existingEnrollment.status === 'withdrawn') {
+        // Re-activate withdrawn enrollment
+        const { data: reactivated, error: reactivateError } = await supabaseAdmin
+          .from('class_enrollments')
+          .update({ 
+            status: 'active',
+            withdrawn_at: null
+          })
+          .eq('id', existingEnrollment.id)
+          .select()
+          .single();
+
+        if (reactivateError) {
+          console.error('Error reactivating enrollment:', reactivateError);
+          return NextResponse.json<ApiResponse<null>>(
+            { success: false, error: 'Failed to rejoin class' },
+            { status: 500 }
+          );
+        }
+
+        return NextResponse.json<ApiResponse<ClassEnrollment>>(
+          {
+            success: true,
+            data: reactivated as ClassEnrollment,
+            message: `Welcome back to ${classData.name}!`,
+          },
+          { status: 200 }
+        );
+      }
+    }
+
+    // Create new enrollment
+    const { data: enrollment, error: insertError } = await supabaseAdmin
+      .from('class_enrollments')
+      .insert({
+        class_id: classData.id,
+        student_id: user.id,
+        enrolled_by: 'class_code',
+        status: 'active',
+      })
+      .select()
+      .single();
+
+    if (insertError) {
+      console.error('Error creating enrollment:', insertError);
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Failed to join class' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json<ApiResponse<ClassEnrollment>>(
       {
         success: true,
-        data: enrollment,
-        message: `Successfully joined class!`,
+        data: enrollment as ClassEnrollment,
+        message: `Successfully joined ${classData.name}!`,
       },
       { status: 201 }
     );
