@@ -1,10 +1,68 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { supabaseAdmin } from "@/lib/db/client";
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    // Simple email/password for testing
+    CredentialsProvider({
+      name: "Email",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "admin@test.com" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        // For testing: any password works, email creates/finds user
+        // In production, you'd verify password properly
+        try {
+          const { data: existingUser } = await supabaseAdmin
+            .from('users')
+            .select('*')
+            .eq('email', credentials.email)
+            .maybeSingle();
+
+          if (existingUser) {
+            return {
+              id: existingUser.id,
+              email: existingUser.email,
+              name: existingUser.name,
+              image: existingUser.avatar_url
+            };
+          }
+
+          // Create new user
+          const { data: newUser } = await supabaseAdmin
+            .from('users')
+            .insert({
+              email: credentials.email,
+              name: credentials.email.split('@')[0],
+              role: 'student',
+              auth_provider: 'credentials',
+            })
+            .select()
+            .single();
+
+          if (newUser) {
+            return {
+              id: newUser.id,
+              email: newUser.email,
+              name: newUser.name,
+              image: newUser.avatar_url
+            };
+          }
+        } catch (error) {
+          console.error('Auth error:', error);
+        }
+        
+        return null;
+      }
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
