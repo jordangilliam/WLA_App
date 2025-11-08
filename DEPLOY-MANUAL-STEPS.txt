@@ -1,0 +1,109 @@
+==============================================
+SIMPLE MANUAL DEPLOYMENT - DO THIS NOW!
+==============================================
+
+Since we're using portable Node, here's the simple way:
+
+STEP 1: Open a NEW PowerShell Window
+-------------------------------------
+Close this one and open a fresh PowerShell window in your project folder.
+
+
+STEP 2: Run These Commands (One at a Time)
+-------------------------------------------
+
+# Login to Vercel (opens browser)
+vercel login
+
+# Deploy to production
+vercel --prod
+
+
+STEP 3: Answer the Prompts
+---------------------------
+When vercel asks:
+
+? Set up and deploy?  
+→ Type: y (yes)
+
+? Which scope?  
+→ Choose your personal account
+
+? Link to existing project?  
+→ Type: n (no)
+
+? What's your project's name?  
+→ Type: wla-app (or whatever you want)
+
+? In which directory is your code located?  
+→ Press ENTER (uses current directory)
+
+? Want to override the settings?  
+→ Type: n (no)
+
+
+STEP 4: Wait for Build (2-3 minutes)
+-------------------------------------
+Vercel will:
+✓ Upload your code
+✓ Install dependencies
+✓ Build Next.js app
+✓ Deploy to production
+
+You'll get a URL like:
+https://wla-app-xxx.vercel.app
+
+
+STEP 5: Add Environment Variables
+----------------------------------
+1. Go to: https://vercel.com/dashboard
+2. Click your project (wla-app)
+3. Go to: Settings → Environment Variables
+4. Open file: PRODUCTION-ENV-VARS.txt
+5. Copy ALL variables (update NEXTAUTH_URL to your Vercel URL!)
+6. Paste each one in Vercel
+7. Click "Save" for each
+8. Go to Deployments → Click "Redeploy"
+
+
+STEP 6: Update Stripe Webhook
+------------------------------
+1. Go to: https://dashboard.stripe.com/webhooks
+2. Click your webhook
+3. Change URL to: https://YOUR-VERCEL-URL.vercel.app/api/webhooks/stripe
+4. Save
+
+
+STEP 7: Test!
+-------------
+Visit: https://YOUR-VERCEL-URL.vercel.app
+
+✓ Sign in with email/password
+✓ Make yourself admin in Supabase
+✓ Access admin dashboard
+✓ Test payment with: 4242 4242 4242 4242
+
+
+🎉 YOU'RE LIVE IN PRODUCTION!
+==============================
+
+Your app is now:
+✅ Running on Vercel
+✅ Accessible worldwide
+✅ Processing payments
+✅ Auto-deploys on git push
+
+Next: Build mobile apps → Launch! 🚀
+
+
+TROUBLESHOOTING
+---------------
+If "vercel" command not found:
+1. Close PowerShell
+2. Open NEW PowerShell
+3. Try: vercel --version
+4. If still not found: npm install -g vercel
+5. Close and reopen PowerShell again
+
+==============================================
+
