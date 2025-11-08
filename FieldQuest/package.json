@@ -11,6 +11,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "seed": "tsx scripts/seed-data.ts",
+    "seed:pittsburgh": "tsx scripts/seed-pittsburgh-sites.ts",
+    "seed:all": "npm run seed && npm run seed:pittsburgh",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
@@ -19,6 +21,9 @@
     "expo-router": "~3.5.0",
     "expo-location": "~17.0.0",
     "expo-sensors": "~13.0.0",
+    "expo-notifications": "~0.28.0",
+    "expo-task-manager": "~11.8.0",
+    "expo-camera": "~15.0.0",
     "react": "18.3.1",
     "react-native": "0.74.0",
     "react-native-maps": "1.14.0",
