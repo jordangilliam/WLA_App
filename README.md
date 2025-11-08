@@ -348,3 +348,5 @@ If you find WildPraxis useful, please consider giving us a star on GitHub! It he
 **Built with 💚 for conservation education**
 
 *WildPraxis • Where Conservation Meets Adventure • Est. 2024*
+#   F o r c e   V e r c e l   d e p l o y m e n t  
+ 
