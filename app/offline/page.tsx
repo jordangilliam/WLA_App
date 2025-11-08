@@ -26,12 +26,12 @@ export default function OfflinePage() {
         </div>
 
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          You're Offline
+          You&apos;re Offline
         </h1>
 
         <p className="text-gray-600 mb-8">
-          This page isn't available offline yet. Check your internet connection
-          or visit a page you've accessed before.
+          This page isn&apos;t available offline yet. Check your internet connection
+          or visit a page you&apos;ve accessed before.
         </p>
 
         <div className="space-y-3">
