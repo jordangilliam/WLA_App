@@ -1,69 +1,39 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
-
-const navItems = [
-  { href: '/dashboard/teacher', label: '📊 Dashboard', icon: '📊' },
-  { href: '/dashboard/teacher/classes', label: '📚 My Classes', icon: '📚' },
-  { href: '/dashboard/teacher/groups', label: '👥 Groups', icon: '👥' },
-  { href: '/dashboard/teacher/reports', label: '📈 Reports', icon: '📈' },
-  { href: '/dashboard/teacher/settings', label: '⚙️ Settings', icon: '⚙️' },
-];
 
 export default function TeacherNav() {
   const pathname = usePathname();
 
+  const navItems = [
+    { href: '/dashboard/teacher', label: 'Overview', icon: '📊' },
+    { href: '/dashboard/teacher/classes', label: 'Classes', icon: '👥' },
+    { href: '/dashboard/teacher/students', label: 'Students', icon: '🎓' },
+    { href: '/dashboard/teacher/assignments', label: 'Assignments', icon: '📝' },
+    { href: '/dashboard/teacher/reports', label: 'Reports', icon: '📈' },
+  ];
+
   return (
-    <nav style={{
-      background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
-      padding: '1rem 0',
-      marginBottom: '2rem',
-      borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'flex',
-        gap: '1rem',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '0 1rem',
-      }}>
+    <nav className="bg-white shadow-sm rounded-lg p-4 mb-6">
+      <div className="flex flex-wrap gap-2">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
-          
+          const isActive = pathname === item.href;
           return (
             <Link
               key={item.href}
               href={item.href}
-              style={{
-                padding: '0.75rem 1.5rem',
-                background: isActive ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.15)',
-                color: isActive ? '#1E40AF' : 'white',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                fontWeight: 600,
-                fontSize: '1rem',
-                transition: 'all 0.3s ease',
-                border: isActive ? '2px solid white' : '2px solid transparent',
-                backdropFilter: 'blur(8px)',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+              className={`
+                flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors
+                ${isActive 
+                  ? 'bg-green-600 text-white' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                }
-              }}
+              `}
             >
-              {item.label}
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}
@@ -71,4 +41,3 @@ export default function TeacherNav() {
     </nav>
   );
 }
-
