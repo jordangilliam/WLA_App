@@ -1,0 +1,127 @@
+==============================================
+VERCEL ENVIRONMENT VARIABLE FIX REQUIRED
+==============================================
+
+ERROR:
+Environment Variable "NEXT_PUBLIC_SUPABASE_URL" references Secret "supabase_url", which does not exist.
+
+PROBLEM:
+When you added environment variables in Vercel dashboard, they were set
+to "Reference" a secret instead of using direct "Plaintext" values.
+
+SOLUTION:
+==========
+
+STEP 1: Delete All Environment Variables
+-----------------------------------------
+1. Go to: https://vercel.com/jordan-gilliams-projects/wla-app/settings/environment-variables
+
+2. Click the TRASH ICON next to each variable to delete:
+   - NEXT_PUBLIC_SUPABASE_URL
+   - NEXT_PUBLIC_SUPABASE_ANON_KEY  
+   - SUPABASE_SERVICE_ROLE_KEY
+   - NEXTAUTH_URL
+   - NEXTAUTH_SECRET
+   - STRIPE_SECRET_KEY
+   - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+   - STRIPE_WEBHOOK_SECRET
+   - STRIPE_PRICE_SCHOOL_BASIC
+   - STRIPE_PRICE_SCHOOL_PRO
+   - STRIPE_PRICE_SCHOOL_UNLIMITED
+   - STRIPE_PRICE_DISTRICT
+   - NEXT_PUBLIC_APP_VERSION
+   - NODE_ENV
+   - NEXT_PUBLIC_MAPBOX_TOKEN (if present)
+
+
+STEP 2: Re-Add with PLAINTEXT (not Reference!)
+-----------------------------------------------
+For EACH variable, click "Add New":
+
+1. Name: NEXT_PUBLIC_SUPABASE_URL
+   Value: (paste from your .env.local)
+   Type: PLAINTEXT ← IMPORTANT!
+   Environment: Production
+   
+2. Name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+   Value: (paste from your .env.local)
+   Type: PLAINTEXT
+   Environment: Production
+
+3. Name: SUPABASE_SERVICE_ROLE_KEY
+   Value: (paste from your .env.local)
+   Type: PLAINTEXT
+   Environment: Production
+
+4. Name: NEXTAUTH_URL
+   Value: https://wla-app.vercel.app
+   Type: PLAINTEXT
+   Environment: Production
+
+5. Name: NEXTAUTH_SECRET
+   Value: (paste from your .env.local)
+   Type: PLAINTEXT
+   Environment: Production
+
+6. Name: STRIPE_SECRET_KEY
+   Value: (paste from YOUR-STRIPE-KEYS.txt)
+   Type: PLAINTEXT
+   Environment: Production
+
+7. Name: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+   Value: (paste from YOUR-STRIPE-KEYS.txt)
+   Type: PLAINTEXT
+   Environment: Production
+
+8. Name: STRIPE_WEBHOOK_SECRET
+   Value: (paste from YOUR-STRIPE-KEYS.txt)
+   Type: PLAINTEXT
+   Environment: Production
+
+9. Name: STRIPE_PRICE_SCHOOL_BASIC
+   Value: price_1SR0V1Lxnej9R7UU8Sc99IJr
+   Type: PLAINTEXT
+   Environment: Production
+
+10. Name: STRIPE_PRICE_SCHOOL_PRO
+    Value: price_1SR0VPLxnej9R7UUu72O5kB1
+    Type: PLAINTEXT
+    Environment: Production
+
+11. Name: STRIPE_PRICE_SCHOOL_UNLIMITED
+    Value: price_1SR0VqLxnej9R7UUUTiPYQdd
+    Type: PLAINTEXT
+    Environment: Production
+
+12. Name: STRIPE_PRICE_DISTRICT
+    Value: price_1SR0WlLxnej9R7UULmdjGR6d
+    Type: PLAINTEXT
+    Environment: Production
+
+13. Name: NEXT_PUBLIC_APP_VERSION
+    Value: 1.0.0
+    Type: PLAINTEXT
+    Environment: Production
+
+14. Name: NODE_ENV
+    Value: production
+    Type: PLAINTEXT
+    Environment: Production
+
+
+STEP 3: Deploy Again
+---------------------
+Once all variables are re-added as PLAINTEXT:
+
+  .\node-portable\npx.cmd vercel --prod --yes
+
+
+IMPORTANT NOTE:
+===============
+When adding environment variables in Vercel:
+  
+  ✅ CORRECT: Select "Plaintext" → Paste value directly
+  ❌ WRONG: Select "Reference" → Points to non-existent secret
+
+==============================================
+

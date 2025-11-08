@@ -1,0 +1,51 @@
+==============================================
+YOUR 14 ENVIRONMENT VARIABLE VALUES
+==============================================
+
+Copy these values when adding to Vercel website:
+
+
+SUPABASE (from .env.local):
+---------------------------
+1. NEXT_PUBLIC_SUPABASE_URL = https://vaqcsbneypmdhrqnnjph.supabase.co
+
+2. NEXT_PUBLIC_SUPABASE_ANON_KEY = (COPY FROM .env.local)
+
+3. SUPABASE_SERVICE_ROLE_KEY = (COPY FROM .env.local)
+
+
+NEXTAUTH (from .env.local):
+---------------------------
+4. NEXTAUTH_URL = https://wla-app.vercel.app
+
+5. NEXTAUTH_SECRET = (COPY FROM .env.local)
+
+
+STRIPE (from YOUR-STRIPE-KEYS.txt):
+------------------------------------
+6. STRIPE_SECRET_KEY = (COPY FROM YOUR-STRIPE-KEYS.txt)
+
+7. NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = (COPY FROM YOUR-STRIPE-KEYS.txt)
+
+8. STRIPE_WEBHOOK_SECRET = (COPY FROM YOUR-STRIPE-KEYS.txt)
+
+
+STRIPE PRICE IDs:
+-----------------
+9. STRIPE_PRICE_SCHOOL_BASIC = price_1SR0V1Lxnej9R7UU8Sc99IJr
+
+10. STRIPE_PRICE_SCHOOL_PRO = price_1SR0VPLxnej9R7UUu72O5kB1
+
+11. STRIPE_PRICE_SCHOOL_UNLIMITED = price_1SR0VqLxnej9R7UUUTiPYQdd
+
+12. STRIPE_PRICE_DISTRICT = price_1SR0WlLxnej9R7UULmdjGR6d
+
+
+OTHER:
+------
+13. NEXT_PUBLIC_APP_VERSION = 1.0.0
+
+14. NODE_ENV = production
+
+==============================================
+

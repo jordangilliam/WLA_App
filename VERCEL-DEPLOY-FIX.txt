@@ -1,0 +1,55 @@
+==============================================
+VERCEL DEPLOYMENT - QUICK FIX
+==============================================
+
+OPTION 1: Use Branch Name Instead
+----------------------------------
+In the "Commit or Branch Reference" field, type:
+
+  main
+
+(Not the commit hash, just the word "main")
+
+Then click "Create Deployment"
+
+
+OPTION 2: Trigger Auto-Deploy
+------------------------------
+Since your GitHub is connected, just push a small change:
+
+1. In PowerShell, run:
+   echo "# Trigger deploy" >> README.md
+   git add README.md
+   git commit -m "Trigger Vercel deployment"
+   git push origin main
+
+2. Wait 30 seconds
+
+3. Check Vercel deployments page - it should auto-deploy
+
+
+OPTION 3: Use Vercel's Git Integration
+---------------------------------------
+1. Go to: https://vercel.com/jordan-gilliams-projects/wla-app
+
+2. Look for "Visit Git Repository" button
+
+3. Or go to Settings → Git → Reconnect if needed
+
+
+OPTION 4: Fresh Deploy Button
+------------------------------
+1. Go to: https://vercel.com/jordan-gilliams-projects/wla-app
+
+2. Look for a simple "Deploy" button (not "Create Deployment")
+
+3. This might be in the Overview or Deployments tab
+
+4. Click it - it will use the latest main branch automatically
+
+
+RECOMMENDED: Try Option 1 first (type "main")
+If that fails, try Option 2 (git push)
+
+==============================================
+

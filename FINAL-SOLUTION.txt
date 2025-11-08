@@ -1,0 +1,129 @@
+==============================================
+FINAL SOLUTION - DEPLOY VIA VERCEL WEBSITE
+==============================================
+
+The CLI has a bug and there's a typo in your variable names.
+We MUST use the Vercel website to fix this.
+
+
+STEP 1: Delete ALL Environment Variables
+-----------------------------------------
+Go to: https://vercel.com/jordan-gilliams-projects/wla-app/settings/environment-variables
+
+Click the TRASH icon for EVERY variable except NEXT_PUBLIC_MAPBOX_TOKEN
+
+Delete these (there's a TYPO in one!):
+- NEXT_PUBLIC_SUPABASE_URL
+- EXT_PUBLIC_SUPABASE_ANON_KEY (TYPO! Missing "N")
+- SUPABASE_SERVICE_ROLE_KEY
+- NEXTAUTH_URL
+- NEXTAUTH_SECRET
+- STRIPE_SECRET_KEY
+- NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+- STRIPE_WEBHOOK_SECRET
+- STRIPE_PRICE_SCHOOL_BASIC
+- STRIPE_PRICE_SCHOOL_PRO
+- STRIPE_PRICE_SCHOOL_UNLIMITED
+- STRIPE_PRICE_DISTRICT
+- NEXT_PUBLIC_APP_VERSION
+- NODE_ENV
+
+DELETE THEM ALL!
+
+
+STEP 2: Add Variables via Website (One by One)
+-----------------------------------------------
+On the same page, click "Add New" for each variable.
+
+In the form:
+- Key: (variable name)
+- Value: (paste the value)
+- Environments: Check "Production" ONLY
+- Click "Save"
+
+Add these 14 variables:
+
+1. NEXT_PUBLIC_SUPABASE_URL
+   https://vaqcsbneypmdhrqnnjph.supabase.co
+
+2. NEXT_PUBLIC_SUPABASE_ANON_KEY
+   (Get from your .env.local file - the anon key)
+
+3. SUPABASE_SERVICE_ROLE_KEY
+   (Get from your .env.local file - the service role key)
+
+4. NEXTAUTH_URL
+   https://wla-app.vercel.app
+
+5. NEXTAUTH_SECRET
+   (Get from your .env.local file)
+
+6. STRIPE_SECRET_KEY
+   (Get from YOUR-STRIPE-KEYS.txt - starts with sk_test_)
+
+7. NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+   (Get from YOUR-STRIPE-KEYS.txt - starts with pk_test_)
+
+8. STRIPE_WEBHOOK_SECRET
+   (Get from YOUR-STRIPE-KEYS.txt - starts with whsec_)
+
+9. STRIPE_PRICE_SCHOOL_BASIC
+   price_1SR0V1Lxnej9R7UU8Sc99IJr
+
+10. STRIPE_PRICE_SCHOOL_PRO
+    price_1SR0VPLxnej9R7UUu72O5kB1
+
+11. STRIPE_PRICE_SCHOOL_UNLIMITED
+    price_1SR0VqLxnej9R7UUUTiPYQdd
+
+12. STRIPE_PRICE_DISTRICT
+    price_1SR0WlLxnej9R7UULmdjGR6d
+
+13. NEXT_PUBLIC_APP_VERSION
+    1.0.0
+
+14. NODE_ENV
+    production
+
+
+STEP 3: Trigger Deployment
+---------------------------
+After ALL 14 variables are added:
+
+Option A (Easiest):
+- Go to: https://vercel.com/jordan-gilliams-projects/wla-app
+- Click "Deploy" or "Redeploy" button
+- Wait for build
+
+Option B (Git trigger):
+- Push ANY small change to GitHub
+- Vercel will auto-deploy
+
+
+STEP 4: Verify Success
+-----------------------
+Once deployed, visit:
+https://wla-app.vercel.app
+
+You should see your app!
+
+
+WHY THIS WILL WORK:
+===================
+- CLI has bugs with secret references
+- Youhad a typo (EXT instead of NEXT)
+- Website UI adds variables correctly
+- Fresh start removes all conflicts
+
+==============================================
+
+QUICK CHECKLIST:
+✓ Delete all environment variables (except Mapbox)
+✓ Add 14 new variables via website
+✓ Deploy
+✓ Test app
+
+TIME ESTIMATE: 10 minutes
+
+==============================================
+
