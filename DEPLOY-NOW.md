@@ -1,244 +1,153 @@
-# 🚀 Deploy to Vercel NOW (Bypass Firewall!)
+# 🚀 Deploy to Production - RIGHT NOW!
 
-Since your firewall blocks local dev server, let's deploy straight to production!
-
-Once live, you can access it from anywhere.
-
----
-
-## Step 1: Push to GitHub (5 minutes)
-
-### If you haven't initialized git yet:
+## Step 1: Deploy to Vercel (5 minutes)
 
 ```powershell
-cd C:\Users\JerrelTGilliam\.cursor\WLA_App
-git init
-git add .
-git commit -m "Database connected, ready for production"
+# Login to Vercel (opens browser)
+vercel login
+
+# Deploy to production
+vercel --prod
 ```
 
-### Connect to your existing GitHub repo:
+When prompted:
+- **Set up and deploy?** → Yes
+- **Which scope?** → Your personal account
+- **Link to existing project?** → No
+- **Project name?** → `wla-app` (or whatever you want)
+- **Directory?** → `./` (press Enter)
+- **Override settings?** → No
 
-```powershell
-git remote add origin https://github.com/jordangilliam/WLA_App.git
-git branch -M main
-git push -u origin main
+Vercel will:
+1. Build your app
+2. Deploy it
+3. Give you a URL like: `https://wla-app-xxx.vercel.app`
+
+---
+
+## Step 2: Add Environment Variables (3 minutes)
+
+After deployment, go to: https://vercel.com/dashboard
+
+1. Click your project (`wla-app`)
+2. Go to **Settings** → **Environment Variables**
+3. Add ALL these variables (copy from your `.env.local`):
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+
+NEXTAUTH_URL=https://your-vercel-url.vercel.app
+NEXTAUTH_SECRET=tR3N7Arb+tYrgbKvH7Z/t3a8BZ/MtNPmI8BuhwhSNvQ=
+
+STRIPE_SECRET_KEY=sk_test_51S5DqK...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51S5DqK...
+STRIPE_WEBHOOK_SECRET=whsec_Q7qeaq...
+STRIPE_PRICE_SCHOOL_BASIC=price_1SR0V1...
+STRIPE_PRICE_SCHOOL_PRO=price_1SR0VP...
+STRIPE_PRICE_SCHOOL_UNLIMITED=price_1SR0Vq...
+STRIPE_PRICE_DISTRICT=price_1SR0Wl...
 ```
 
-**Note:** If it asks for credentials, use GitHub personal access token (not password).
+4. Click **Save** for each
+5. Go to **Deployments** tab
+6. Click **Redeploy** (to use new env vars)
 
 ---
 
-## Step 2: Deploy to Vercel (10 minutes)
+## Step 3: Update Stripe Webhook (2 minutes)
 
-### 2a. Sign up / Sign in to Vercel
-
-1. Go to: **https://vercel.com**
-2. Click "Sign Up" or "Log In"
-3. **Use "Continue with GitHub"** (easiest!)
-4. Authorize Vercel to access your GitHub
-
-### 2b. Import Your Project
-
-1. Click **"Add New..."** → **"Project"**
-2. Find **"jordangilliam/WLA_App"** in the list
-3. Click **"Import"**
-
-### 2c. Configure Build Settings
-
-Vercel should auto-detect Next.js. Just verify:
-
-- **Framework Preset:** Next.js (should be auto-selected)
-- **Build Command:** `npm run build` (default)
-- **Output Directory:** `.next` (default)
-- **Install Command:** `npm install` (default)
-
-Click **"Deploy"** (DON'T click yet - need env vars first!)
+1. Go to: https://dashboard.stripe.com/webhooks
+2. Click your webhook endpoint
+3. Click **Edit**
+4. Change URL to: `https://your-vercel-url.vercel.app/api/webhooks/stripe`
+5. Click **Update endpoint**
 
 ---
 
-## Step 3: Add Environment Variables (5 minutes)
+## Step 4: Test Production! (2 minutes)
 
-**BEFORE clicking Deploy**, scroll down to **"Environment Variables"** section.
+Visit your Vercel URL:
+1. **Homepage**: `https://your-vercel-url.vercel.app`
+2. **Sign in**: Use email/password
+3. **Make admin**: Update role in Supabase
+4. **Admin dashboard**: `https://your-vercel-url.vercel.app/admin/dashboard`
+5. **Test payment**: Subscribe with test card `4242...`
 
-Add these (get values from your `.env.local`):
+---
 
-### Required Variables:
+## ✅ YOU'RE LIVE!
 
+Your app is now:
+- ✅ Deployed to production
+- ✅ Running on Vercel's CDN (fast worldwide)
+- ✅ HTTPS enabled
+- ✅ Custom domain ready (can add later)
+- ✅ Auto-deploys on git push
+
+---
+
+## 🎯 What's Next?
+
+### Immediate:
+- [ ] Test all features in production
+- [ ] Share URL with beta testers
+- [ ] Get feedback
+
+### This Week:
+- [ ] Add custom domain (optional)
+- [ ] Build mobile apps
+- [ ] Submit to app stores
+
+### This Month:
+- [ ] Onboard first schools
+- [ ] Start generating revenue!
+
+---
+
+## 🔗 Quick Links After Deployment
+
+- **Live App**: https://your-vercel-url.vercel.app
+- **Vercel Dashboard**: https://vercel.com/dashboard
+- **Admin Panel**: https://your-vercel-url.vercel.app/admin/dashboard
+- **Supabase**: https://supabase.com/dashboard
+- **Stripe**: https://dashboard.stripe.com
+
+---
+
+## 💡 Pro Tips
+
+**Custom Domain:**
 ```
-NEXT_PUBLIC_SUPABASE_URL = https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY = eyJhbG...your-anon-key
-SUPABASE_SERVICE_ROLE_KEY = eyJhbG...your-service-key
-
-NEXTAUTH_SECRET = your-nextauth-secret
-NEXTAUTH_URL = https://your-app.vercel.app (Vercel will show you this URL)
-
-GOOGLE_CLIENT_ID = your-google-client-id
-GOOGLE_CLIENT_SECRET = your-google-client-secret
-
-AZURE_AD_CLIENT_ID = your-azure-client-id
-AZURE_AD_CLIENT_SECRET = your-azure-client-secret
-AZURE_AD_TENANT_ID = common
-
-NEXT_PUBLIC_MAPBOX_TOKEN = your-mapbox-token
-```
-
-**For each variable:**
-1. Type the name in "Key"
-2. Paste the value in "Value"
-3. Click "Add"
-4. Repeat for all
-
-**Important:** For `NEXTAUTH_URL`, use the URL Vercel will give you (like `https://wla-app.vercel.app`). You can update this after first deployment.
-
----
-
-## Step 4: Deploy! (2-3 minutes)
-
-1. After adding all environment variables, click **"Deploy"**
-2. Wait 2-3 minutes while Vercel builds your app
-3. Watch the build logs (cool to see!)
-4. When done, you'll see: **"Congratulations! Your project has been deployed."**
-
----
-
-## Step 5: Get Your Live URL (instant!)
-
-Vercel gives you a URL like:
-- `https://wla-app.vercel.app`
-- OR `https://wla-app-jordangilliam.vercel.app`
-
-**Click "Visit"** to open your live site!
-
----
-
-## Step 6: Update NEXTAUTH_URL (2 minutes)
-
-Now that you have your real URL:
-
-1. In Vercel dashboard, go to your project
-2. Click **"Settings"** → **"Environment Variables"**
-3. Find `NEXTAUTH_URL`
-4. Click "Edit"
-5. Change to your actual Vercel URL
-6. Click "Save"
-7. Redeploy (Vercel will prompt you)
-
----
-
-## Step 7: Configure OAuth Callbacks (5 minutes)
-
-### For Google OAuth:
-
-1. Go to: https://console.cloud.google.com/apis/credentials
-2. Find your OAuth 2.0 Client
-3. Add to **"Authorized redirect URIs"**:
-   - `https://your-app.vercel.app/api/auth/callback/google`
-4. Save
-
-### For Azure AD:
-
-1. Go to: https://portal.azure.com
-2. Navigate to Azure AD → App registrations → Your app
-3. Add to **"Redirect URIs"**:
-   - `https://your-app.vercel.app/api/auth/callback/azure-ad`
-4. Save
-
----
-
-## 🎉 YOU'RE LIVE!
-
-Your app is now accessible at: `https://your-app.vercel.app`
-
-**No firewall issues!** It's on the public internet.
-
----
-
-## ✅ Test It:
-
-1. Go to your Vercel URL
-2. Sign in with Google/Azure
-3. Try creating a class
-4. Check Supabase Table Editor to see the data
-
-**It should work!**
-
----
-
-## 🔥 Automatic Deployments
-
-Now whenever you push to GitHub:
-- Vercel automatically detects changes
-- Rebuilds your app
-- Deploys new version
-- Takes ~2 minutes
-- No manual steps needed!
-
-**Workflow:**
-```
-Edit code in Cursor → Save → Git commit → Git push → Auto-deploy!
+1. Go to Vercel → Settings → Domains
+2. Add: wildpraxis.org (or whatever you own)
+3. Update DNS records (Vercel shows you how)
+4. Update NEXTAUTH_URL in env vars
+5. Update Stripe webhook URL
 ```
 
----
+**Automatic Deployments:**
+- Every `git push` to main → auto-deploys!
+- Preview deployments for branches
+- Rollback anytime
 
-## 💰 Cost:
-
-**FREE!** Vercel's hobby plan includes:
-- Unlimited deployments
-- 100GB bandwidth/month
-- Automatic SSL (HTTPS)
-- Custom domain support
-- Preview deployments for every PR
-
-Perfect for your needs!
+**Monitoring:**
+- Vercel Analytics: See traffic
+- Sentry: See errors
+- Stripe Dashboard: See revenue
 
 ---
 
-## 🐛 Troubleshooting
+## 🎉 CONGRATULATIONS!
 
-### Build fails
-- Check build logs in Vercel
-- Usually missing environment variable
-- Or TypeScript error
+You just deployed a production-ready app with:
+- Payment processing
+- User authentication
+- Admin dashboard
+- Database integration
+- Mobile support
 
-### Can't sign in
-- Check OAuth redirect URIs are correct
-- Verify NEXTAUTH_URL matches your Vercel URL
-- Check NEXTAUTH_SECRET is set
+**Time to celebrate!** 🎊
 
-### Database errors
-- Verify Supabase environment variables are correct
-- Check Supabase project is active (not paused)
-- Check Table Editor to verify tables exist
-
----
-
-## 🚀 Next Steps After Deployment:
-
-### Custom Domain (Optional)
-1. Buy a domain (like `wildpraxis.org`)
-2. In Vercel → Settings → Domains
-3. Add your custom domain
-4. Update DNS records
-5. Vercel handles SSL automatically!
-
-### Share with WLA
-Send them the URL and get feedback!
-
-### Continue Building
-Now you can develop locally (if firewall allows later) or:
-- Edit directly in Cursor
-- Commit and push
-- Auto-deploys to production
-- Test on live site
-
----
-
-**Ready to deploy?**
-
-1. Push to GitHub
-2. Import to Vercel
-3. Add environment variables
-4. Click Deploy
-5. **Live in 10 minutes!** 🎉
-
+Then: Build mobile apps → Submit to stores → LAUNCH! 🚀

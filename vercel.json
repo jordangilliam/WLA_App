@@ -5,50 +5,17 @@
   "framework": "nextjs",
   "regions": ["iad1"],
   "env": {
-    "NEXTAUTH_URL": "https://wla-app.vercel.app"
-  },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/cron/daily-digest",
-      "schedule": "0 12 * * *"
-    },
-    {
-      "path": "/api/cron/anomaly-scan",
-      "schedule": "0 6 * * 1"
-    }
-  ]
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_key",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "NEXTAUTH_URL": "@nextauth_url",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
+    "STRIPE_PRICE_SCHOOL_BASIC": "@stripe_price_basic",
+    "STRIPE_PRICE_SCHOOL_PRO": "@stripe_price_pro",
+    "STRIPE_PRICE_SCHOOL_UNLIMITED": "@stripe_price_unlimited",
+    "STRIPE_PRICE_DISTRICT": "@stripe_price_district"
+  }
 }
-
