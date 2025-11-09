@@ -1,0 +1,109 @@
+==============================================
+RECONNECT GITHUB TO VERCEL
+==============================================
+
+Your GitHub connection to Vercel is broken.
+Let's fix it NOW.
+
+
+OPTION 1: Reconnect via Vercel Dashboard (FASTEST)
+---------------------------------------------------
+1. Go to: https://vercel.com/dashboard
+
+2. Click your profile icon (top right)
+
+3. Go to: Settings → Git
+
+4. Look for "GitHub" section
+
+5. Click "Disconnect" (if shown)
+
+6. Click "Connect" or "Reconnect GitHub"
+
+7. Authorize Vercel to access your GitHub repos
+
+8. Select "jordangilliam/WLA_App" repository
+
+9. Click "Import" or "Add"
+
+
+OPTION 2: Import Fresh (RECOMMENDED)
+-------------------------------------
+1. Go to: https://vercel.com/new
+
+2. Click "Add New..." → "Project"
+
+3. Under "Import Git Repository":
+   - Click "Adjust GitHub App Permissions"
+   - Or click "Connect GitHub Account"
+
+4. Authorize Vercel access
+
+5. Search for or select: jordangilliam/WLA_App
+
+6. Click "Import"
+
+7. Configure project:
+   - Framework Preset: Next.js
+   - Root Directory: ./
+   - Build Command: npm run build
+   - Output Directory: .next
+   
+8. DO NOT add environment variables yet
+
+9. Click "Deploy"
+
+10. It will fail (expected - no env vars)
+
+11. Go to Settings → Environment Variables
+
+12. Add all 14 variables (from YOUR-14-VALUES.txt)
+
+13. Redeploy
+
+
+OPTION 3: Fix GitHub App Permissions
+-------------------------------------
+1. Go to: https://github.com/settings/installations
+
+2. Find "Vercel" in the list
+
+3. Click "Configure"
+
+4. Under "Repository access":
+   - Select "Only select repositories"
+   - Add: jordangilliam/WLA_App
+   - Click "Save"
+
+5. Go back to Vercel
+
+6. Try importing again
+
+
+OPTION 4: Use Vercel CLI (Fallback)
+------------------------------------
+Since CLI is already logged in:
+
+.\node-portable\npx.cmd vercel link
+
+Follow prompts:
+- Link to existing project? Y
+- What's your project name? wla-app
+- Link to production? Y
+
+Then:
+.\node-portable\npx.cmd vercel --prod --yes
+
+
+WHICH OPTION TO TRY:
+====================
+Try Option 2 (Import Fresh) - it's the cleanest!
+
+This will:
+✓ Ensure proper GitHub connection
+✓ Create fresh project configuration
+✓ Remove any broken settings
+✓ Take 5-10 minutes total
+
+==============================================
+

@@ -1,0 +1,122 @@
+==============================================
+ULTRA-DETAILED VERCEL ENVIRONMENT VARIABLE SETUP
+==============================================
+
+CRITICAL: There's likely a dropdown or toggle you're 
+accidentally clicking that creates "secret references"
+instead of plaintext values.
+
+
+WHAT THE UI SHOULD LOOK LIKE:
+==============================
+
+When you click "Add New" you should see:
+
+┌─────────────────────────────────────┐
+│ Key                                 │
+│ [________________]                  │
+│                                     │
+│ Value                               │
+│ [________________]                  │
+│                                     │
+│ □ Production                        │
+│ □ Preview                           │
+│ □ Development                       │
+│                                     │
+│ [Save]  [Cancel]                    │
+└─────────────────────────────────────┘
+
+
+CRITICAL INSTRUCTIONS:
+======================
+
+For Variable #1:
+
+1. Click "Add New" button
+
+2. In the KEY field, type exactly:
+   NEXT_PUBLIC_SUPABASE_URL
+
+3. Click DIRECTLY in the VALUE field
+   (DO NOT click any dropdowns!)
+   (DO NOT select "Reference")
+   (IGNORE any auto-suggestions)
+
+4. Paste exactly:
+   https://vaqcsbneypmdhrqnnjph.supabase.co
+
+5. Check ONLY "Production" checkbox
+
+6. Click "Save" or "Add"
+
+
+WHAT YOU SHOULD NOT SEE/CLICK:
+==============================
+
+❌ DO NOT see: "Type" dropdown (Plaintext/Reference)
+❌ DO NOT see: "Select Secret" dropdown
+❌ DO NOT click: Any button that says "Reference"
+❌ DO NOT click: Any auto-suggestion popups
+
+
+IF YOU SEE A DROPDOWN OR "TYPE" SELECTOR:
+==========================================
+
+If there IS a dropdown that says "Plaintext" or "Reference":
+- Make sure "Plaintext" is selected
+- NOT "Reference"!
+
+
+ALTERNATIVE: Use Vercel CLI (Guaranteed to Work)
+=================================================
+
+If the website keeps creating secret references,
+use this method instead:
+
+In PowerShell, for each variable run:
+
+echo "VALUE_HERE" | .\node-portable\npx.cmd vercel env add KEY_NAME production
+
+Examples:
+
+echo "https://vaqcsbneypmdhrqnnjph.supabase.co" | .\node-portable\npx.cmd vercel env add NEXT_PUBLIC_SUPABASE_URL production
+
+echo "YOUR_ANON_KEY_HERE" | .\node-portable\npx.cmd vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production
+
+echo "YOUR_SERVICE_KEY_HERE" | .\node-portable\npx.cmd vercel env add SUPABASE_SERVICE_ROLE_KEY production
+
+echo "https://wla-app.vercel.app" | .\node-portable\npx.cmd vercel env add NEXTAUTH_URL production
+
+echo "sQRBPk1xTj+gtcmj6hiAXZqFCUT+FDwLQ/oMFp73lcs=" | .\node-portable\npx.cmd vercel env add NEXTAUTH_SECRET production
+
+(Continue for all 14 variables...)
+
+
+VERIFY AFTER ADDING:
+====================
+
+After adding each variable, run:
+
+.\node-portable\npx.cmd vercel env ls production
+
+Look for the variable you just added.
+If it says "Encrypted" - that's GOOD (it's plaintext, just encrypted at rest)
+If it says "References Secret xyz" - that's BAD!
+
+
+QUESTION FOR YOU:
+=================
+
+Can you describe EXACTLY what you see on the screen
+when you click "Add New" in Vercel?
+
+Do you see:
+- Just Key and Value fields?
+- A "Type" dropdown?
+- A "Select Secret" option?
+- Any other UI elements?
+
+This will help me figure out what's going wrong!
+
+==============================================
+

@@ -1,0 +1,172 @@
+==============================================
+SIMPLE FIX - DO THIS NOW (10 MINUTES)
+==============================================
+
+The environment variables in Vercel are broken.
+You MUST fix them via the website.
+
+
+STEP 1: Open Vercel Settings
+-----------------------------
+https://vercel.com/jordan-gilliams-projects/wla-app/settings/environment-variables
+
+
+STEP 2: Delete EVERY Variable
+------------------------------
+You should see a list of variables.
+
+For EACH variable (except NEXT_PUBLIC_MAPBOX_TOKEN if you want to keep it):
+
+1. Look for a TRASH icon or "..." menu on the right
+2. Click it
+3. Select "Delete" or "Remove"
+4. Confirm
+
+Delete ALL of these:
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY (might show as EXT_PUBLIC - typo!)
+- SUPABASE_SERVICE_ROLE_KEY
+- NEXTAUTH_URL
+- NEXTAUTH_SECRET
+- STRIPE_SECRET_KEY
+- NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+- STRIPE_WEBHOOK_SECRET
+- STRIPE_PRICE_SCHOOL_BASIC
+- STRIPE_PRICE_SCHOOL_PRO
+- STRIPE_PRICE_SCHOOL_UNLIMITED
+- STRIPE_PRICE_DISTRICT
+- NEXT_PUBLIC_APP_VERSION
+- NODE_ENV
+
+
+STEP 3: Add Variables Back
+---------------------------
+On the SAME page, look for "Add New" or "+" button.
+
+For EACH variable below:
+
+1. Click "Add New"
+2. Type the KEY (variable name)
+3. Paste the VALUE
+4. Select Environment: PRODUCTION (check the box)
+5. Click "Save"
+
+HERE ARE THE 14 VARIABLES:
+
+Variable 1:
+-----------
+KEY: NEXT_PUBLIC_SUPABASE_URL
+VALUE: https://vaqcsbneypmdhrqnnjph.supabase.co
+
+
+Variable 2:
+-----------
+KEY: NEXT_PUBLIC_SUPABASE_ANON_KEY
+VALUE: (Open .env.local file, copy the anon key value)
+
+
+Variable 3:
+-----------
+KEY: SUPABASE_SERVICE_ROLE_KEY
+VALUE: (From .env.local, copy the service role key)
+
+
+Variable 4:
+-----------
+KEY: NEXTAUTH_URL
+VALUE: https://wla-app.vercel.app
+
+
+Variable 5:
+-----------
+KEY: NEXTAUTH_SECRET
+VALUE: (From .env.local, copy the NEXTAUTH_SECRET value)
+
+
+Variable 6:
+-----------
+KEY: STRIPE_SECRET_KEY
+VALUE: (Open YOUR-STRIPE-KEYS.txt, copy the sk_test_ key)
+
+
+Variable 7:
+-----------
+KEY: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+VALUE: (From YOUR-STRIPE-KEYS.txt, copy the pk_test_ key)
+
+
+Variable 8:
+-----------
+KEY: STRIPE_WEBHOOK_SECRET
+VALUE: (From YOUR-STRIPE-KEYS.txt, copy the whsec_ key)
+
+
+Variable 9:
+-----------
+KEY: STRIPE_PRICE_SCHOOL_BASIC
+VALUE: price_1SR0V1Lxnej9R7UU8Sc99IJr
+
+
+Variable 10:
+------------
+KEY: STRIPE_PRICE_SCHOOL_PRO
+VALUE: price_1SR0VPLxnej9R7UUu72O5kB1
+
+
+Variable 11:
+------------
+KEY: STRIPE_PRICE_SCHOOL_UNLIMITED
+VALUE: price_1SR0VqLxnej9R7UUUTiPYQdd
+
+
+Variable 12:
+------------
+KEY: STRIPE_PRICE_DISTRICT
+VALUE: price_1SR0WlLxnej9R7UULmdjGR6d
+
+
+Variable 13:
+------------
+KEY: NEXT_PUBLIC_APP_VERSION
+VALUE: 1.0.0
+
+
+Variable 14:
+------------
+KEY: NODE_ENV
+VALUE: production
+
+
+STEP 4: Deploy
+--------------
+After ALL 14 variables are added:
+
+Option A - Via Website:
+- Go to https://vercel.com/jordan-gilliams-projects/wla-app
+- Click "Deployments" tab
+- Click "Redeploy" on latest deployment
+
+Option B - Via CLI (in PowerShell):
+.\node-portable\npx.cmd vercel --prod --yes
+
+
+STEP 5: Wait & Test
+-------------------
+Wait 2-3 minutes for build.
+
+Then visit: https://wla-app.vercel.app
+
+Your app should be LIVE!
+
+
+SUMMARY:
+========
+1. Delete ALL variables in Vercel
+2. Add 14 variables back (one by one)
+3. Deploy
+4. Done!
+
+TIME: 10 minutes
+
+==============================================
+

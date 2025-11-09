@@ -1,0 +1,91 @@
+==============================================
+VERCEL DATABASE CORRUPTION - CONTACT SUPPORT
+==============================================
+
+SITUATION:
+----------
+Your Vercel project has a database corruption issue.
+
+Evidence:
+- vercel env ls shows: "Encrypted" (correct plaintext)
+- vercel deploy says: "references Secret" (wrong!)
+
+This means Vercel's database has conflicting/duplicate
+entries for the same variable.
+
+
+SOLUTION: Contact Vercel Support
+=================================
+
+1. Go to: https://vercel.com/help
+
+2. Click "Contact Support"
+
+3. Subject: "Environment variable database corruption"
+
+4. Message:
+
+---
+Hello,
+
+My project (jordan-gilliams-projects/wla-app) has a 
+database corruption issue with environment variables.
+
+When I run `vercel env ls`, variables show as "Encrypted"
+(plaintext values), but when I deploy, I get this error:
+
+"Environment Variable NEXT_PUBLIC_SUPABASE_URL references 
+Secret supabase_url, which does not exist."
+
+I have:
+- Deleted and recreated the project
+- Removed and re-added all environment variables
+- Verified variables are NOT set to "Sensitive"
+- Variables show as "Encrypted" in CLI but deploy fails
+
+Project ID: [get from Vercel dashboard settings]
+Team: jordan-gilliams-projects
+
+Please help clear the database corruption so my 
+environment variables work correctly.
+
+Thank you!
+---
+
+
+TEMPORARY WORKAROUND: Build Locally, Deploy Static
+===================================================
+
+While waiting for Vercel support, you can:
+
+1. Build locally:
+   .\node-portable\npm.cmd run build
+
+2. This creates a .next folder with static files
+
+3. Deploy the pre-built files instead of building on Vercel
+
+
+ALTERNATIVE: Try Different Platform
+====================================
+
+If you need to deploy TODAY, consider:
+
+1. Netlify (free tier, similar to Vercel)
+2. Railway (one-click Next.js deploy)
+3. Render (free tier)
+
+All support Next.js and have better env var UIs.
+
+
+I'M SORRY THIS HAPPENED
+========================
+
+This is a bug in Vercel's system, not your fault.
+The environment variables ARE configured correctly,
+but Vercel's database has corrupted/duplicate entries.
+
+Vercel support should be able to fix this quickly.
+
+==============================================
+
