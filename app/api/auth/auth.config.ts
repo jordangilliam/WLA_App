@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
                 .from('users')
                 .select('*')
                 .eq('email', credentials.email)
-                .maybeSingle();
+                .maybeSingle() as { data: { id: string; email: string; name: string; avatar_url: string } | null };
 
               if (existingUser) {
                 return {
@@ -42,24 +42,24 @@ export const authOptions: NextAuthOptions = {
 
               // Create new user
               const { data: newUser } = await supabaseAdmin
-            .from('users')
-            .insert({
-              email: credentials.email,
-              name: credentials.email.split('@')[0],
-              role: 'student',
-              auth_provider: 'credentials',
-            })
-            .select()
-            .single();
+                .from('users')
+                .insert({
+                  email: credentials.email,
+                  name: credentials.email.split('@')[0],
+                  role: 'student',
+                  auth_provider: 'credentials',
+                })
+                .select()
+                .single() as { data: { id: string; email: string; name: string; avatar_url: string } | null };
 
-          if (newUser) {
-            return {
-              id: newUser.id,
-              email: newUser.email,
-              name: newUser.name,
-              image: newUser.avatar_url
-            };
-          }
+              if (newUser) {
+                return {
+                  id: newUser.id,
+                  email: newUser.email,
+                  name: newUser.name,
+                  image: newUser.avatar_url
+                };
+              }
         } catch (error) {
           console.error('Auth error:', error);
         }
