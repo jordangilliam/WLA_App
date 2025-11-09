@@ -5,13 +5,13 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { authConfig } from '@/app/api/auth/auth.config'
+import { authOptions } from '@/app/api/auth/auth.config'
 import { supabaseAdmin } from '@/lib/db/client'
 
 // GET /api/admin/organizations - List all organizations
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig)
+    const session = await getServerSession(authOptions)
 
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -87,7 +87,7 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/organizations - Create new organization
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig)
+    const session = await getServerSession(authOptions)
 
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

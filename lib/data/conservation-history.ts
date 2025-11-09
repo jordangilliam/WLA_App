@@ -45,3 +45,64 @@ export const BIRD_CONSERVATION_HISTORY = {
     },
   ],
 };
+
+export const FISHING_CONSERVATION_HISTORY = {
+  title: "Fisheries Conservation in Pennsylvania",
+  timeline: [
+    {
+      year: 1866,
+      event: "PA Fish Commission Founded",
+      description: "One of the first state fish commissions in the nation, established to protect and restore fish populations.",
+    },
+    {
+      year: 1950,
+      event: "Trout Stocking Program",
+      description: "Pennsylvania begins intensive trout stocking program, now releasing over 3 million trout annually.",
+    },
+    {
+      year: 1980,
+      event: "Wild Trout Program",
+      description: "Focus shifts to protecting and enhancing wild trout populations through habitat restoration.",
+    },
+  ],
+  keySpecies: [
+    {
+      name: "Brook Trout",
+      status: "State Fish",
+      conservation: "Habitat restoration and stream protection",
+    },
+  ],
+};
+
+export const TERRESTRIAL_CONSERVATION_HISTORY = {
+  title: "Wildlife Conservation in Pennsylvania",
+  timeline: [
+    {
+      year: 1895,
+      event: "PA Game Commission Founded",
+      description: "Established to protect and manage Pennsylvania's wildlife resources.",
+    },
+    {
+      year: 1905,
+      event: "White-tailed Deer Recovery",
+      description: "Deer population rebounds from near-extinction through hunting regulations and habitat management.",
+    },
+    {
+      year: 1984,
+      event: "Wild Turkey Restoration Success",
+      description: "Turkey population restored throughout Pennsylvania through successful trap-and-transfer program.",
+    },
+  ],
+  keySpecies: [
+    {
+      name: "White-tailed Deer",
+      status: "State Mammal",
+      conservation: "Population management through regulated hunting",
+    },
+    {
+      name: "Wild Turkey",
+      status: "Recovered",
+      conservation: "Habitat management and hunting regulations",
+    },
+  ],
+};
