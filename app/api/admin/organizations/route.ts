@@ -48,6 +48,10 @@ export async function GET(request: NextRequest) {
     // Enhance with student counts
     const orgsWithCounts = await Promise.all(
       (organizations || []).map(async (org) => {
+        if (!supabaseAdmin) {
+          return { ...org, studentCount: 0, teacherCount: 0, classCount: 0 }
+        }
+        
         // Count students in this organization
         const { count: studentCount } = await supabaseAdmin
           .from('organization_users')
