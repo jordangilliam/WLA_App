@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       .from('users')
       .select('role')
       .eq('email', session.user.email)
-      .single()
+      .single() as { data: { role: string } | null }
 
     if (user?.role !== 'admin') {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
