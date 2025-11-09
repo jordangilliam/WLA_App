@@ -25,6 +25,13 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     })
 
+    // Explicitly set @ alias for path resolution
+    const path = require('path')
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname),
+    }
+
     return config
   },
 
