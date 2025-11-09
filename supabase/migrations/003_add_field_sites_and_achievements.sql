@@ -1,4 +1,5 @@
 -- Migration: Add field_sites and achievements tables for FieldQuest integration
+-- SIMPLIFIED VERSION - Works without class_enrollments table
 -- This enables location-based features and gamification in the main WLA_App
 
 -- Enable PostGIS for geospatial queries
@@ -208,21 +209,10 @@ CREATE POLICY "Admins can update field sites"
     )
   );
 
--- User Visits: Users can view their own visits, teachers can view their students' visits
+-- User Visits: Users can view and manage their own visits
 CREATE POLICY "Users can view own visits"
   ON user_visits FOR SELECT
   USING (user_id = auth.uid());
-
-CREATE POLICY "Teachers can view student visits"
-  ON user_visits FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM class_enrollments ce
-      JOIN classes c ON ce.class_id = c.id
-      WHERE ce.user_id = user_visits.user_id
-      AND c.teacher_id = auth.uid()
-    )
-  );
 
 CREATE POLICY "Users can create own visits"
   ON user_visits FOR INSERT
@@ -247,21 +237,10 @@ CREATE POLICY "Admins can manage achievements"
     )
   );
 
--- User Achievements: Users can view their own, teachers can view their students'
+-- User Achievements: Users can view their own achievements
 CREATE POLICY "Users can view own achievements"
   ON user_achievements FOR SELECT
   USING (user_id = auth.uid());
-
-CREATE POLICY "Teachers can view student achievements"
-  ON user_achievements FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM class_enrollments ce
-      JOIN classes c ON ce.class_id = c.id
-      WHERE ce.user_id = user_achievements.user_id
-      AND c.teacher_id = auth.uid()
-    )
-  );
 
 CREATE POLICY "System can award achievements"
   ON user_achievements FOR INSERT
