@@ -18,26 +18,30 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        // For testing: any password works, email creates/finds user
-        // In production, you'd verify password properly
-        try {
-          const { data: existingUser } = await supabaseAdmin
-            .from('users')
-            .select('*')
-            .eq('email', credentials.email)
-            .maybeSingle();
+            // For testing: any password works, email creates/finds user
+            // In production, you'd verify password properly
+            if (!supabaseAdmin) {
+              return null;
+            }
 
-          if (existingUser) {
-            return {
-              id: existingUser.id,
-              email: existingUser.email,
-              name: existingUser.name,
-              image: existingUser.avatar_url
-            };
-          }
+            try {
+              const { data: existingUser } = await supabaseAdmin
+                .from('users')
+                .select('*')
+                .eq('email', credentials.email)
+                .maybeSingle();
 
-          // Create new user
-          const { data: newUser } = await supabaseAdmin
+              if (existingUser) {
+                return {
+                  id: existingUser.id,
+                  email: existingUser.email,
+                  name: existingUser.name,
+                  image: existingUser.avatar_url
+                };
+              }
+
+              // Create new user
+              const { data: newUser } = await supabaseAdmin
             .from('users')
             .insert({
               email: credentials.email,
