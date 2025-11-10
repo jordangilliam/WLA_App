@@ -1,1015 +1,290 @@
 'use client';
+
+import { useSession } from 'next-auth/react';
 import { usePoints } from '@/ui/points/PointsProvider';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const { total, award, level, levelProgress, currentStreak, badges, getRecentBadges } = usePoints();
-  const earnedBadges = badges.filter(b => b.earned);
-  const recentBadges = getRecentBadges();
-  
+  const { data: session, status } = useSession();
+  const { total: points, level, currentStreak } = usePoints();
+  const router = useRouter();
+
+  // If logged in, show personalized dashboard
+  if (status === 'authenticated') {
+    return <LoggedInHome points={points} level={level} streak={currentStreak} />;
+  }
+
+  // If not logged in, show landing page
+  return <LandingPage />;
+}
+
+function LandingPage() {
   return (
-    <>
-      {/* Hero Section - Immersive PA Conservation */}
-      <section style={{
-        position: 'relative',
-        minHeight: '500px',
-        background: 'radial-gradient(ellipse at center, #0096C7 0%, #0077B6 40%, #023047 100%)',
-        color: 'white',
-        overflow: 'hidden',
-        marginTop: '1rem',
-        borderRadius: '16px',
-      }}>
-        {/* Hero Background Image */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0.25,
-          backgroundImage: 'url(/images/hero/Hero%20BAckground.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          mixBlendMode: 'overlay'
-        }} />
+    <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-r from-green-600 via-green-700 to-blue-700 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
         
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '4rem 2rem',
-          textAlign: 'center',
-        }}>
-          <div style={{
-            display: 'inline-block',
-            padding: '0.5rem 1.5rem',
-            background: 'rgba(255,193,7,0.9)',
-            color: '#023047',
-            borderRadius: '50px',
-            fontWeight: 700,
-            fontSize: '0.9rem',
-            marginBottom: '1.5rem',
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-          }}>
-            Pennsylvania Wildlife Leadership Academy
+        <div className="relative max-w-4xl mx-auto px-4 py-16 sm:py-24 text-center">
+          <div className="inline-block px-4 py-2 bg-yellow-400 text-green-900 rounded-full text-sm font-bold mb-6">
+            Wildlife Leadership Academy
           </div>
           
-          <h1 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-            fontWeight: 900,
-            marginBottom: '1.5rem',
-            lineHeight: 1.2,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-          }}>
-            Become a Conservation Leader
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
+            Explore Nature.<br />Earn Achievements.<br />Make an Impact.
           </h1>
           
-          <p style={{
-            fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
-            maxWidth: '800px',
-            margin: '0 auto 2rem',
-            lineHeight: 1.6,
-            color: 'rgba(255,255,255,0.95)',
-          }}>
-            Join Pennsylvania&apos;s elite program training the next generation of wildlife biologists, 
-            habitat managers, and conservation scientists. Learn from experts, conduct real field research, 
-            and make lasting impacts on our state&apos;s natural heritage.
+          <p className="text-xl sm:text-2xl text-green-100 mb-8 max-w-2xl mx-auto">
+            Join Pennsylvania's premier conservation app for youth. Check in at field sites, document wildlife, and become a conservation leader.
           </p>
-          
-          {/* Brook AI Search Bar */}
-          <div style={{
-            maxWidth: '700px',
-            margin: '0 auto 2.5rem',
-            padding: '0 1rem',
-          }}>
-            <div 
-              id="skl_id_search_hero_section" 
-              data-chat-id="FX9IIOtCFx" 
-              data-is-hero="true"
-              style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-              }}
-            />
-            <p style={{
-              marginTop: '0.75rem',
-              fontSize: '0.875rem',
-              color: 'rgba(255,255,255,0.85)',
-              textAlign: 'center',
-            }}>
-              💬 <strong>Ask Brook!</strong> Your AI conservation assistant powered by Penn State Extension research
-            </p>
-          </div>
-          
-          <div style={{
-            display: 'flex',
-            gap: '1rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            marginBottom: '3rem',
-          }}>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/learn"
-              style={{
-                padding: '1.25rem 2.5rem',
-                background: '#FFD60A',
-                color: '#023047',
-                textDecoration: 'none',
-                borderRadius: '12px',
-                fontWeight: 700,
-                fontSize: '1.1rem',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                transition: 'all 0.3s',
-                display: 'inline-block',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-              }}
+              href="/auth"
+              className="px-8 py-4 bg-yellow-400 text-green-900 rounded-full font-bold text-lg hover:bg-yellow-300 transition-all shadow-lg hover:shadow-xl"
             >
-              Start Learning →
+              Get Started Free
             </Link>
-            
             <Link
-              href="/map"
-              style={{
-                padding: '1.25rem 2.5rem',
-                background: 'rgba(255,255,255,0.15)',
-                backdropFilter: 'blur(10px)',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '12px',
-                fontWeight: 700,
-                fontSize: '1.1rem',
-                border: '2px solid rgba(255,255,255,0.3)',
-                transition: 'all 0.3s',
-                display: 'inline-block',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
-              }}
+              href="/explore"
+              className="px-8 py-4 bg-white bg-opacity-20 text-white rounded-full font-bold text-lg hover:bg-opacity-30 transition-all backdrop-blur-sm"
             >
-              Explore Watersheds
+              Explore Sites
             </Link>
           </div>
 
-          {/* Program Stats */}
-          <div style={{
-            display: 'flex',
-            gap: '3rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            padding: '2rem',
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.2)',
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.25rem' }}>1,000+</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px' }}>Ambassadors Trained</div>
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-4 mt-12 max-w-2xl mx-auto">
+            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+              <div className="text-3xl font-bold">140+</div>
+              <div className="text-sm text-green-100">Field Sites</div>
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.25rem' }}>500+</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px' }}>Field Projects</div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+              <div className="text-3xl font-bold">500+</div>
+              <div className="text-sm text-green-100">Active Users</div>
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.25rem' }}>67</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px' }}>PA Counties</div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+              <div className="text-3xl font-bold">67</div>
+              <div className="text-sm text-green-100">PA Counties</div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Your Progress Dashboard */}
-      <section style={{ margin: '3rem 0' }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: '2rem',
-          marginBottom: '2rem',
-          color: '#023047',
-        }}>
-          Your Conservation Journey
+      {/* Features Section */}
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          How WildPraxis Works
         </h2>
-        
-        <div className="row animate-fade-in">
-          <div className="card section" style={{
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)',
-            color: 'white',
-            border: 'none',
-          }}>
-            {/* TODO: Replace with Oak Leaf Icon */}
-            <div style={{
-              width: '80px',
-              height: '80px',
-              margin: '0 auto 1rem',
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2.5rem',
-            }}>
-              [Oak Leaf]
-            </div>
-            <div className="points-display" style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '0.5rem' }}>{total}</div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 600, opacity: 0.95 }}>Conservation Points</div>
-            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.85 }}>
-              Earned through field work, lessons, and habitat projects
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Feature 1 */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+            <div className="text-5xl mb-4">🗺️</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Explore</h3>
+            <p className="text-gray-600 mb-4">
+              Discover 140+ field sites across Pennsylvania—parks, streams, libraries, and conservation areas.
             </p>
+            <Link href="/explore" className="text-green-600 font-medium hover:text-green-700">
+              View Map →
+            </Link>
           </div>
-          
-          <div className="card section" style={{
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #7209B7 0%, #9D4EDD 100%)',
-            color: 'white',
-            border: 'none',
-          }}>
-            {/* TODO: Replace with Tree Rings Icon */}
-            <div style={{
-              width: '80px',
-              height: '80px',
-              margin: '0 auto 1rem',
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2.5rem',
-            }}>
-              [Tree Rings]
-            </div>
-            <div style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '0.5rem' }}>Level {level}</div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 600, opacity: 0.95 }}>Ambassador Rank</div>
-            <div style={{ marginTop: '1rem' }}>
-              <div className="progress-bar" style={{ background: 'rgba(255,255,255,0.3)', height: '12px' }}>
-                <div className="progress-fill" style={{ width: `${levelProgress}%`, background: 'white', height: '12px' }}></div>
-              </div>
-              <small style={{ opacity: 0.85, marginTop: '0.5rem', display: 'block' }}>
-                {Math.round(levelProgress)}% to Level {level + 1}
-              </small>
-          </div>
-        </div>
-        
-          <div className="card section" style={{
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #2A9D8F 0%, #41B3A3 100%)',
-            color: 'white',
-            border: 'none',
-          }}>
-            {/* TODO: Replace with Grouse Icon */}
-            <div style={{
-              width: '80px',
-              height: '80px',
-              margin: '0 auto 1rem',
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2.5rem',
-            }}>
-              [Grouse]
-            </div>
-            <div style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '0.5rem' }}>{currentStreak}</div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 600, opacity: 0.95 }}>Day Streak</div>
-            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.85 }}>
-              Keep logging in daily to maintain momentum
+
+          {/* Feature 2 */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+            <div className="text-5xl mb-4">📸</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Document</h3>
+            <p className="text-gray-600 mb-4">
+              Check in at sites, take photos, record observations, and contribute to citizen science.
             </p>
-        </div>
-        
-          <div className="card section" style={{
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #FFD60A 0%, #FFC300 100%)',
-            color: '#023047',
-            border: 'none',
-          }}>
-            {/* TODO: Replace with Badge Collection Icon */}
-            <div style={{
-              width: '80px',
-              height: '80px',
-              margin: '0 auto 1rem',
-              background: 'rgba(2,48,71,0.1)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2.5rem',
-            }}>
-              [Badges]
-            </div>
-            <div style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '0.5rem' }}>
-              {earnedBadges.length}<span style={{ fontSize: '1.5rem', opacity: 0.6 }}>/{badges.length}</span>
-            </div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 600 }}>Achievements Unlocked</div>
-            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.85 }}>
-              Earn badges through mastery and dedication
+            <Link href="/journal-new" className="text-green-600 font-medium hover:text-green-700">
+              Start Journal →
+            </Link>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+            <div className="text-5xl mb-4">🏆</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Achieve</h3>
+            <p className="text-gray-600 mb-4">
+              Earn points, unlock achievements, build streaks, and compete on leaderboards.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Recent Achievements */}
-      {recentBadges.length > 0 && (
-        <section className="section animate-slide-up" style={{
-          background: 'linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)',
-          borderRadius: '16px',
-          padding: '2rem',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            {/* TODO: Replace with Wildflower Celebration Icon */}
-            <div style={{
-              fontSize: '2.5rem',
-              background: 'white',
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              [Flowers]
-            </div>
-            <h2 style={{ fontSize: '1.8rem', color: '#023047', margin: 0 }}>Recent Achievements</h2>
-          </div>
-          
-      <div className="row">
-            {recentBadges.map(badge => (
-              <div key={badge.id} className={`badge badge-${badge.tier}`} style={{
-                flex: '1 1 250px',
-                padding: '1.5rem',
-                background: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}>
-                <span style={{ fontSize: '3rem', display: 'block', marginBottom: '0.5rem' }}>{badge.icon}</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem', color: '#023047' }}>
-                    {badge.name}
-                  </div>
-                  <div style={{ fontSize: '0.9rem', color: '#6B7280' }}>{badge.description}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Today's Missions - Redesigned */}
-      <div className="row" style={{ marginTop: '3rem', gap: '2rem' }}>
-        <div className="section card" style={{ flex: '2 1 400px' }}>
-          <h2 style={{ fontSize: '1.8rem', color: '#023047', marginBottom: '0.5rem' }}>
-            Today&apos;s Field Missions
-          </h2>
-          <p style={{ color: '#6B7280', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-            Complete hands-on conservation activities to earn points and advance your skills
-          </p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{
-              padding: '1.25rem',
-              background: 'linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%)',
-              borderRadius: '12px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              border: '2px solid #FFD54F',
-            }}>
-              <div>
-                {/* TODO: Replace with Conservation History Icon */}
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem', color: '#023047' }}>
-                  [Field Guide Icon] PA Conservation History
-                </div>
-                <div style={{ fontSize: '0.95rem', color: '#5D4037' }}>
-                  Learn about Gifford Pinchot and the birth of modern forestry
-                </div>
-              </div>
-              <button
-                className="btn-success"
-                onClick={() => award(10, 'history-lesson')}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                +10 pts
-              </button>
-            </div>
-            
-            <div style={{
-              padding: '1.25rem',
-              background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
-              borderRadius: '12px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              border: '2px solid #64B5F6',
-            }}>
-              <div>
-                {/* TODO: Replace with Water Droplet Icon */}
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem', color: '#023047' }}>
-                  [Water Drop Icon] Water Quality Monitoring
-                </div>
-                <div style={{ fontSize: '0.95rem', color: '#01579B' }}>
-                  Collect temperature, pH, and dissolved oxygen readings
-                </div>
-              </div>
-              <button
-                className="btn-success"
-                onClick={() => award(15, 'water-reading')}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                +15 pts
-              </button>
-            </div>
-            
-            <div style={{
-              padding: '1.25rem',
-              background: 'linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%)',
-              borderRadius: '12px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              border: '2px solid #BA68C8',
-            }}>
-              <div>
-                {/* TODO: Replace with Macro Icon */}
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem', color: '#023047' }}>
-                  [Macro Icon] Macroinvertebrate Survey
-                </div>
-                <div style={{ fontSize: '0.95rem', color: '#4A148C' }}>
-                  Photograph and identify aquatic invertebrates for iNaturalist
-                </div>
-              </div>
-              <button
-                className="btn-success"
-                onClick={() => award(5, 'macro-upload')}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                +5 pts
-              </button>
-            </div>
-
-            <div style={{
-              padding: '1.25rem',
-              background: 'linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)',
-              borderRadius: '12px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              border: '2px solid #81C784',
-            }}>
-              <div>
-                {/* TODO: Replace with Habitat Icon */}
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem', color: '#023047' }}>
-                  [Habitat Icon] Design Wildlife Habitat
-                </div>
-                <div style={{ fontSize: '0.95rem', color: '#1B5E20' }}>
-                  Use the simulator to create a balanced Pennsylvania ecosystem
-                </div>
-              </div>
-              <button
-                className="btn-success"
-                onClick={() => award(8, 'habitat-sim')}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                +8 pts
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Platform Features */}
-        <div className="section card" style={{ flex: '1 1 300px' }}>
-          <h2 style={{ fontSize: '1.8rem', color: '#023047', marginBottom: '0.5rem' }}>
-            Explore Platform
-          </h2>
-          <p style={{ color: '#6B7280', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-            Access all conservation tools and resources
-          </p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <Link href="/learn" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#FFF8E1',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/Book.png" 
-                  alt="Learn" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Learn</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>12 comprehensive lessons</div>
-              </div>
-            </Link>
-            
-            <Link href="/map" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#E3F2FD',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/Map.jpg" 
-                  alt="Watersheds" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Watersheds</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Interactive PA map</div>
-              </div>
-            </Link>
-            
-            <Link href="/keys/macro" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#F3E5F5',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/Micor(Macro).png" 
-                  alt="ID Keys" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>ID Keys</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Species identification</div>
-              </div>
-            </Link>
-            
-            <Link href="/habitat" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#E8F5E9',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/Habitat.png" 
-                  alt="Habitat" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Habitat</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Ecosystem builder</div>
-              </div>
-            </Link>
-            
-            <Link href="/journal" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#FFF3E0',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/journal.jpg" 
-                  alt="Journal" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Journal</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Field documentation</div>
-              </div>
-            </Link>
-            
-            <Link href="/leaderboard" className="btn btn-outline" style={{
-              textAlign: 'left',
-              padding: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              border: '2px solid #E5E7EB',
-              transition: 'all 0.2s',
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: '#FFF8E1',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                <Image 
-                  src="/images/icons/award.jpg" 
-                  alt="Leaderboard" 
-                  width={48} 
-                  height={48}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.1rem' }}>Leaderboard</div>
-                <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Team standings</div>
-              </div>
+            <Link href="/achievements" className="text-green-600 font-medium hover:text-green-700">
+              View Achievements →
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Conservation Tracks - Redesigned */}
-      <section style={{
-        marginTop: '4rem',
-        background: 'linear-gradient(135deg, #023047 0%, #0077B6 100%)',
-        borderRadius: '16px',
-        padding: '3rem 2rem',
-        color: 'white',
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem', color: 'white' }}>
-            Choose Your Conservation Track
-          </h2>
-          <p style={{ fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto', opacity: 0.95 }}>
-            Specialize in a specific area of Pennsylvania wildlife management and become an expert in your field
-          </p>
+      {/* Special Features */}
+      <div className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                🎣 Trout Stocking Calendar
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Get real-time updates on trout stocking schedules across 16+ Pennsylvania waters. Plan your fishing trips with accurate, up-to-date information from the PA Fish & Boat Commission.
+              </p>
+              <Link
+                href="/stocking"
+                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                View Stocking Schedule
+              </Link>
+            </div>
+
+            <div className="bg-blue-50 rounded-lg p-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✓</span>
+                  <span className="text-gray-700">12 Streams & 4 Lakes</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✓</span>
+                  <span className="text-gray-700">Auto-Updated Schedules</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✓</span>
+                  <span className="text-gray-700">Stocking Notifications</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✓</span>
+                  <span className="text-gray-700">Regulations & Safety Info</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="row" style={{ gap: '1.5rem' }}>
-          <Link href="/learn?track=Brookies" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}>
-              <Image 
-                src="/images/tracks/Brook%20Trout.png" 
-                alt="Brook Trout" 
-                width={150} 
-                height={150}
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-          </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Brookies
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              Cold-water stream ecology, brook trout conservation, and wild trout management in Pennsylvania&apos;s pristine mountain waters
-            </p>
-          </Link>
-
-          <Link href="/learn?track=Bass" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}>
-              <Image 
-                src="/images/tracks/Bass.png" 
-                alt="Largemouth Bass" 
-                width={150} 
-                height={150}
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-          </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Bass
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              Warm-water fisheries management, lake and reservoir ecology, and largemouth bass population dynamics in PA waters
-            </p>
-          </Link>
-
-          <Link href="/learn?track=Bucktails" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}>
-              <Image 
-                src="/images/tracks/Deer.png" 
-                alt="White-tailed Deer" 
-                width={150} 
-                height={150}
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-          </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Bucktails
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              White-tailed deer management, wildlife population monitoring, and forest regeneration in Pennsylvania hardwoods
-            </p>
-          </Link>
-
-          <Link href="/learn?track=Gobblers" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}>
-              <Image 
-                src="/images/tracks/Turkey.png" 
-                alt="Wild Turkey" 
-                width={150} 
-                height={150}
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-          </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Gobblers
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              Wild turkey restoration, upland game bird management, and Pennsylvania&apos;s forest-field edge habitats
-            </p>
-          </Link>
-
-          <Link href="/learn?track=Ursids" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}>
-              <Image 
-                src="/images/tracks/Black%20Bear.png" 
-                alt="Black Bear" 
-                width={150} 
-                height={150}
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-        </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Ursids
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              Pennsylvania black bear ecology, large carnivore management, and human-wildlife coexistence in the Alleghenies
-            </p>
-          </Link>
-
-          <Link href="/games" className="card" style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '2rem',
-            textAlign: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-            textDecoration: 'none',
-            color: 'white',
-            transition: 'all 0.3s',
-          }} onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-            e.currentTarget.style.transform = 'translateY(-5px)';
-          }} onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}>
-            <div style={{
-              width: '150px',
-              height: '150px',
-              margin: '0 auto 1.5rem',
-              background: 'white',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-              fontSize: '5rem',
-            }}>
-              🎮
-        </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'white' }}>
-              Games
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-              Learn through play! Challenge yourself with conservation-themed games like Trout Tower and more
-            </p>
-          </Link>
       </div>
-    </section>
-    </>
+
+      {/* CTA Section */}
+      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          Ready to Start Your Conservation Journey?
+        </h2>
+        <p className="text-xl text-gray-600 mb-8">
+          Join hundreds of students exploring Pennsylvania's natural heritage.
+        </p>
+        <Link
+          href="/auth"
+          className="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-xl"
+        >
+          Sign Up Now - It's Free
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function LoggedInHome({ points, level, streak }: { points: number; level: number; streak: number }) {
+  const router = useRouter();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
+      {/* Welcome Banner */}
+      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-6">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold mb-2">Welcome Back! 🌲</h1>
+          <p className="text-green-100">Ready to explore and make an impact today?</p>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <button
+            onClick={() => router.push('/explore?action=checkin')}
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6 text-center hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
+          >
+            <div className="text-3xl mb-2">📍</div>
+            <div className="font-bold">Check In</div>
+          </button>
+
+          <button
+            onClick={() => router.push('/explore')}
+            className="bg-white border-2 border-green-600 text-green-700 rounded-lg p-6 text-center hover:bg-green-50 transition-all"
+          >
+            <div className="text-3xl mb-2">🗺️</div>
+            <div className="font-bold">Explore</div>
+          </button>
+
+          <button
+            onClick={() => router.push('/journal-new')}
+            className="bg-white border-2 border-blue-600 text-blue-700 rounded-lg p-6 text-center hover:bg-blue-50 transition-all"
+          >
+            <div className="text-3xl mb-2">📝</div>
+            <div className="font-bold">Journal</div>
+          </button>
+
+          <button
+            onClick={() => router.push('/stocking')}
+            className="bg-white border-2 border-purple-600 text-purple-700 rounded-lg p-6 text-center hover:bg-purple-50 transition-all"
+          >
+            <div className="text-3xl mb-2">🎣</div>
+            <div className="font-bold">Stocking</div>
+          </button>
+        </div>
+      </div>
+
+      {/* Featured Sites */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Featured Locations</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-gray-900 mb-1">Schenley Park</h3>
+            <p className="text-sm text-gray-600 mb-3">456 acres of urban nature in Pittsburgh</p>
+            <button
+              onClick={() => router.push('/explore')}
+              className="text-green-600 text-sm font-medium hover:text-green-700"
+            >
+              View on Map →
+            </button>
+          </div>
+
+          <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-gray-900 mb-1">Yellow Creek State Park</h3>
+            <p className="text-sm text-gray-600 mb-3">722-acre lake perfect for fishing</p>
+            <button
+              onClick={() => router.push('/stocking')}
+              className="text-blue-600 text-sm font-medium hover:text-blue-700"
+            >
+              View Stocking →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Activity */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Continue Your Journey</h2>
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-bold text-gray-900">Build Your Streak!</h3>
+              <p className="text-sm text-gray-600">Visit a new site to keep your streak alive</p>
+            </div>
+            <div className="text-4xl">🔥</div>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => router.push('/explore')}
+              className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+            >
+              Find Sites Nearby
+            </button>
+            <button
+              onClick={() => router.push('/achievements')}
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+            >
+              View Progress
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
