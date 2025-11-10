@@ -1,9 +1,10 @@
 import '../styles/globals.css';
 import Link from 'next/link';
 import { PointsProvider } from '@/ui/points/PointsProvider';
+import { NavigationProvider } from '@/lib/contexts/NavigationContext';
 import PWAInstall from '@/components/PWAInstall';
-import GlobalSearch from '@/components/GlobalSearch';
-import MainNav from '@/components/layout/MainNav';
+import GamificationBar from '@/components/layout/GamificationBar';
+import BottomNav from '@/components/layout/BottomNav';
 
 export const metadata = {
   title: 'WLA Conservation Ambassadors - Youth Conservation Leadership',
@@ -160,24 +161,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <PointsProvider>
-          <PWAInstall />
-          <MainNav />
-          <main className="container">{children}</main>
-          <footer>
-            <div style={{ marginBottom: '1rem', fontSize: '2rem' }}>🌲🦌🐟🦃🐻</div>
-            <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Wildlife Leadership Academy</div>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Empowering PA youth to become conservation leaders
-            </div>
-            <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.9rem' }}>
-              <Link href="/admin/automations" style={{ color: 'var(--text-muted)' }}>Admin</Link>
-              <Link href="/wildpraxis-export" style={{ color: 'var(--text-muted)' }}>WildPraxis Export</Link>
-              <a href="https://wildlifeleadershipacademy.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }}>WLA Website</a>
-            </div>
-            <div style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              © {new Date().getFullYear()} Wildlife Leadership Academy
-            </div>
-          </footer>
+          <NavigationProvider>
+            <PWAInstall />
+            <GamificationBar />
+            <main className="min-h-screen">{children}</main>
+            <BottomNav />
+          </NavigationProvider>
+            <footer className="hidden md:block bg-gray-50 border-t border-gray-200 py-8 mt-12">
+              <div className="max-w-7xl mx-auto px-4 text-center">
+                <div className="text-4xl mb-4">🌲🦌🐟🦃🐻</div>
+                <div className="font-semibold text-gray-900 mb-2">Wildlife Leadership Academy</div>
+                <div className="text-sm text-gray-600 mb-6">
+                  Empowering PA youth to become conservation leaders
+                </div>
+                <div className="flex gap-6 justify-center text-sm">
+                  <Link href="/admin/automations" className="text-gray-600 hover:text-green-600">Admin</Link>
+                  <a href="https://wildlifeleadershipacademy.org" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-green-600">WLA Website</a>
+                </div>
+                <div className="mt-4 text-xs text-gray-500">
+                  © {new Date().getFullYear()} Wildlife Leadership Academy
+                </div>
+              </div>
+            </footer>
+          </NavigationProvider>
         </PointsProvider>
       </body>
     </html>
