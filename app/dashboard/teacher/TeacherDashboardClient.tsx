@@ -3,9 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import TeacherNav from '@/components/dashboard/TeacherNav';
-import QuickStats from '@/components/dashboard/QuickStats';
-import ClassCard from '@/components/dashboard/ClassCard';
+import Link from 'next/link';
 import type { Class, TeacherDashboardSummary } from '@/lib/types/dashboard.types';
 
 export default function TeacherDashboardClient() {
@@ -47,7 +45,7 @@ export default function TeacherDashboardClient() {
       // TODO: Create /api/dashboard/summary endpoint
       setSummary({
         teacher_id: 1,
-        teacher_name: 'Sarah Johnson',
+        teacher_name: session?.user?.name || 'Teacher',
         total_classes: 3,
         active_classes: 3,
         total_students: 52,
@@ -65,263 +63,201 @@ export default function TeacherDashboardClient() {
 
   if (status === 'loading' || loading) {
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #E8F4F8 0%, #F0F9F4 100%)',
-      }}>
-        <div style={{
-          textAlign: 'center',
-        }}>
-          <div style={{
-            fontSize: '3rem',
-            marginBottom: '1rem',
-          }}>⏳</div>
-          <div style={{
-            fontSize: '1.25rem',
-            color: '#6B7280',
-          }}>Loading your dashboard...</div>
-        </div>
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-green-50 flex items-center justify-center pb-20 md:pb-6">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #E8F4F8 0%, #F0F9F4 25%, #FFF8E7 50%, #F4F1E8 75%, #E3F2E1 100%)',
-      padding: '2rem 1rem',
-    }}>
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
-      }}>
-        {/* Header */}
-        <div style={{
-          marginBottom: '2rem',
-        }}>
-          <h1 style={{
-            fontSize: '2.5rem',
-            fontWeight: 'bold',
-            color: '#1E40AF',
-            marginBottom: '0.5rem',
-          }}>
-            🎓 Teacher Dashboard
-          </h1>
-          <p style={{
-            fontSize: '1.125rem',
-            color: '#6B7280',
-          }}>
-            Welcome back, {session?.user?.name || 'Teacher'}! Here&apos;s your overview.
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-green-50 pb-20 md:pb-6">
+      {/* Hero Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-2">🎓 Teacher Dashboard</h1>
+          <p className="text-blue-100">
+            Welcome back, {session?.user?.name || 'Teacher'}! Manage your classes and track student progress.
           </p>
         </div>
+      </div>
 
-        {/* Navigation */}
-        <TeacherNav />
-
-        {/* Quick Stats */}
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        {/* Quick Stats Cards */}
         {summary && (
-          <QuickStats
-            totalClasses={summary.active_classes}
-            totalStudents={summary.total_students}
-            activeStudentsWeek={summary.active_students_week}
-            totalAssignments={summary.total_assignments}
-            pointsEarnedWeek={summary.points_earned_week}
-          />
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+              <div className="text-3xl mb-2">📚</div>
+              <div className="text-2xl font-bold text-gray-900">{summary.active_classes}</div>
+              <div className="text-xs text-gray-600">Active Classes</div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+              <div className="text-3xl mb-2">👥</div>
+              <div className="text-2xl font-bold text-gray-900">{summary.total_students}</div>
+              <div className="text-xs text-gray-600">Total Students</div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+              <div className="text-3xl mb-2">✅</div>
+              <div className="text-2xl font-bold text-gray-900">{summary.active_students_week}</div>
+              <div className="text-xs text-gray-600">Active This Week</div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+              <div className="text-3xl mb-2">📝</div>
+              <div className="text-2xl font-bold text-gray-900">{summary.total_assignments}</div>
+              <div className="text-xs text-gray-600">Assignments</div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+              <div className="text-3xl mb-2">🪙</div>
+              <div className="text-2xl font-bold text-gray-900">{summary.points_earned_week}</div>
+              <div className="text-xs text-gray-600">Points This Week</div>
+            </div>
+          </div>
         )}
 
         {/* Quick Actions */}
-        <div style={{
-          background: 'white',
-          borderRadius: '12px',
-          padding: '1.5rem',
-          marginBottom: '2rem',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: '#1E40AF',
-            marginBottom: '1rem',
-          }}>
-            ⚡ Quick Actions
-          </h2>
-          <div style={{
-            display: 'flex',
-            gap: '1rem',
-            flexWrap: 'wrap',
-          }}>
+        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">⚡ Quick Actions</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <button
               onClick={() => router.push('/dashboard/teacher/classes/new')}
-              style={{
-                padding: '0.75rem 1.5rem',
-                background: 'linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontWeight: 600,
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'transform 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
+              className="flex flex-col items-center gap-2 p-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              ➕ Create New Class
+              <span className="text-2xl">➕</span>
+              <span className="font-medium text-sm">Create Class</span>
             </button>
+
             <button
               onClick={() => router.push('/dashboard/teacher/assignments/new')}
-              style={{
-                padding: '0.75rem 1.5rem',
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontWeight: 600,
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'transform 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
+              className="flex flex-col items-center gap-2 p-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
-              📝 Create Assignment
+              <span className="text-2xl">📝</span>
+              <span className="font-medium text-sm">New Assignment</span>
             </button>
+
+            <button
+              onClick={() => router.push('/exports')}
+              className="flex flex-col items-center gap-2 p-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              <span className="text-2xl">💾</span>
+              <span className="font-medium text-sm">Export Data</span>
+            </button>
+
+            <button
+              onClick={() => router.push('/dashboard/teacher/students')}
+              className="flex flex-col items-center gap-2 p-4 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <span className="text-2xl">👥</span>
+              <span className="font-medium text-sm">All Students</span>
+            </button>
+
             <button
               onClick={() => router.push('/dashboard/teacher/reports')}
-              style={{
-                padding: '0.75rem 1.5rem',
-                background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontWeight: 600,
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'transform 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
+              className="flex flex-col items-center gap-2 p-4 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             >
-              📊 View Reports
+              <span className="text-2xl">📊</span>
+              <span className="font-medium text-sm">Reports</span>
+            </button>
+
+            <button
+              onClick={() => router.push('/explore')}
+              className="flex flex-col items-center gap-2 p-4 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <span className="text-2xl">🗺️</span>
+              <span className="font-medium text-sm">Field Sites</span>
             </button>
           </div>
         </div>
 
-        {/* Classes Section */}
-        <div>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '1.5rem',
-          }}>
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: '#1E40AF',
-            }}>
-              📚 My Classes
-            </h2>
+        {/* My Classes */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-900">My Classes</h2>
             <button
-              onClick={() => router.push('/dashboard/teacher/classes')}
-              style={{
-                padding: '0.5rem 1rem',
-                background: 'transparent',
-                color: '#3B82F6',
-                border: '2px solid #3B82F6',
-                borderRadius: '8px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#3B82F6';
-                e.currentTarget.style.color = 'white';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = '#3B82F6';
-              }}
+              onClick={() => router.push('/dashboard/teacher/classes/new')}
+              className="text-sm font-medium text-blue-600 hover:text-blue-700"
             >
-              View All →
+              + Create New Class
             </button>
           </div>
 
           {classes.length === 0 ? (
-            <div style={{
-              background: 'white',
-              borderRadius: '12px',
-              padding: '3rem 2rem',
-              textAlign: 'center',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            }}>
-              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📚</div>
-              <h3 style={{
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                color: '#1E40AF',
-                marginBottom: '0.5rem',
-              }}>
-                No classes yet
-              </h3>
-              <p style={{
-                fontSize: '1rem',
-                color: '#6B7280',
-                marginBottom: '1.5rem',
-              }}>
-                Get started by creating your first class!
-              </p>
+            <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+              <div className="text-4xl mb-3">📚</div>
+              <h3 className="font-bold text-gray-900 mb-2">No Classes Yet</h3>
+              <p className="text-gray-600 mb-4">Create your first class to get started</p>
               <button
                 onClick={() => router.push('/dashboard/teacher/classes/new')}
-                style={{
-                  padding: '0.75rem 2rem',
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontWeight: 600,
-                  fontSize: '1.125rem',
-                  cursor: 'pointer',
-                }}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
               >
-                ➕ Create Your First Class
+                Create Class
               </button>
             </div>
           ) : (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-              gap: '1.5rem',
-            }}>
-              {classes.slice(0, 3).map((classData) => (
-                <ClassCard
-                  key={classData.id}
-                  classData={classData}
-                  studentCount={18}
-                  activeStudents={15}
-                  pendingSubmissions={3}
-                />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {classes.map((cls: any) => (
+                <div
+                  key={cls.id}
+                  className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                >
+                  <div className="mb-3">
+                    <h3 className="font-bold text-gray-900 mb-1">{cls.class_name}</h3>
+                    <p className="text-sm text-gray-600">{cls.class_code}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm mb-4">
+                    <span className="text-gray-600">
+                      {cls.student_count || 0} students
+                    </span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      cls.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {cls.active ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => router.push(`/dashboard/teacher/classes/${cls.id}`)}
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Manage Class
+                  </button>
+                </div>
               ))}
             </div>
           )}
+        </div>
+
+        {/* Field Trip Planner Teaser */}
+        <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6 mb-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold mb-2">🚌 Field Trip Planner</h3>
+              <p className="text-green-100 mb-4">
+                Plan and organize field trips to 140+ sites across Pennsylvania
+              </p>
+              <button
+                onClick={() => router.push('/explore')}
+                className="px-6 py-2 bg-white text-green-600 rounded-lg font-medium hover:bg-green-50 transition-colors"
+              >
+                Browse Field Sites
+              </button>
+            </div>
+            <div className="hidden md:block text-6xl opacity-50">🗺️</div>
+          </div>
+        </div>
+
+        {/* Recent Activity Placeholder */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">📈 Recent Activity</h2>
+          <div className="text-center py-8 text-gray-500">
+            <div className="text-4xl mb-2">📊</div>
+            <p>Student activity feed coming soon</p>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
