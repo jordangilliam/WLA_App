@@ -17,7 +17,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15213',
  'Urban green space with native plantings. Gardens designed to attract pollinators including bees, butterflies, and hummingbirds. Excellent spot for observing urban wildlife adaptation.',
  ARRAY['American Robin', 'House Sparrow', 'Monarch Butterfly', 'Ruby-throated Hummingbird', 'Eastern Gray Squirrel'],
- 'Urban/Gardens'),
+ ARRAY['Urban/Gardens']),
 
 ('Carnegie Library - Allegheny',
  'Historic North Side library with nearby riverfront access. Adjacent to parks with mature trees attracting diverse bird species.',
