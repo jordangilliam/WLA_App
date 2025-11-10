@@ -7,7 +7,7 @@
 -- ============================================================================
 -- Safe, accessible, indoor/outdoor locations perfect for all ages
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Carnegie Library - Main (Oakland)', 
  'Historic main library with beautiful architecture and extensive natural history collection. Outdoor gardens attract songbirds and butterflies. Safe indoor viewing areas for weather observation.',
@@ -164,7 +164,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 -- Diverse natural areas with trails, habitats, and educational opportunities
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Frick Park - Braddock Trail',
  'Pittsburgh''s largest historic park with 644 acres of forests, meadows, and streams. Excellent trail system with diverse habitats. Safe, well-maintained paths suitable for all skill levels.',
@@ -321,7 +321,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 -- Campus settings perfect for urban ecology and environmental science
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('University of Pittsburgh - Cathedral of Learning',
  'Iconic 42-story academic building surrounded by landscaped grounds. Safe campus environment with security. Excellent for urban architecture and green space integration studies.',
@@ -418,7 +418,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 -- Three Rivers Heritage Trail system and waterfront locations
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Three Rivers Heritage Trail - Point State Park',
  'Start of 24-mile trail system at three rivers confluence. Flat, paved, fully accessible. Perfect for all ages and abilities.',
@@ -525,7 +525,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 -- Larger natural areas within day-trip distance
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Raccoon Creek State Park',
  '7,572-acre state park with Raccoon Creek Lake, forests, and extensive trail system. Wildflower reserve with 700+ species. Safe, well-maintained facilities.',
@@ -582,7 +582,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 -- Urban locations that combine recreation with nature observation
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_likely, habitat_type) VALUES
+INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('PNC Park - North Shore',
  'Baseball stadium with riverfront location. Green roof and sustainable design. Great views of city and rivers. Very safe during events.',
