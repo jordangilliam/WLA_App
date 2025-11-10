@@ -157,7 +157,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15220',
  'Adjacent to one of Pittsburgh''s largest parks. Old-growth forest remnants nearby.',
  ARRAY['Barred Owl', 'Scarlet Tanager', 'Wood Thrush', 'Flying Squirrel'],
- 'Urban/Woodland');
+ ARRAY['Urban/Woodland']);
 
 -- ============================================================================
 -- MAJOR PITTSBURGH PARKS (20 locations)
@@ -314,7 +314,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15220',
  'Large contiguous forest with minimal disturbance. Old-growth characteristics in some areas. Stream corridors support salamanders.',
  ARRAY['Pileated Woodpecker', 'Wood Thrush', 'Scarlet Tanager', 'Red-backed Salamander', 'Northern Dusky Salamander'],
- 'Mature Forest/Stream');
+ ARRAY['Mature Forest/Stream']);
 
 -- ============================================================================
 -- UNIVERSITIES & EDUCATIONAL INSTITUTIONS (10 locations)
@@ -411,7 +411,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15237',
  'Campus preserves significant wooded acreage. Deer population visible. Good for studying suburban wildlife.',
  ARRAY['White-tailed Deer', 'Wild Turkey', 'Red-tailed Hawk', 'Tufted Titmouse', 'White-breasted Nuthatch'],
- 'Suburban Campus/Woodland');
+ ARRAY['Suburban Campus/Woodland']);
 
 -- ============================================================================
 -- RIVERFRONT & TRAILS (15 locations)
@@ -518,7 +518,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15213',
  'Deep ravine with mature forest and flowing stream. Excellent salamander habitat. Cool microclimate even in summer.',
  ARRAY['Red Salamander', 'Northern Dusky Salamander', 'Red-backed Salamander', 'Wood Thrush', 'Louisiana Waterthrush'],
- 'Ravine/Stream/Forest');
+ ARRAY['Ravine/Stream/Forest']);
 
 -- ============================================================================
 -- STATE PARKS NEAR PITTSBURGH (8 locations)
@@ -575,7 +575,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Frazer', 'PA', '15044',
  'Multiple lakes provide diverse aquatic habitat. Forests and meadows support varied wildlife. Nature center offers educational programs.',
  ARRAY['Great Blue Heron', 'Green Heron', 'Belted Kingfisher', 'Eastern Bluebird', 'Tree Swallow', 'Beaver', 'Muskrat'],
- 'Multiple Lakes/Forest');
+ ARRAY['Multiple Lakes/Forest']);
 
 -- ============================================================================
 -- SPORTS VENUES & COMMUNITY CENTERS (8 locations)
@@ -632,7 +632,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Pittsburgh', 'PA', '15213',
  'Premier botanical education facility. Demonstrates plant diversity, conservation, and sustainable horticulture. Outdoor gardens attract pollinators and birds.',
  ARRAY['Ruby-throated Hummingbird', 'American Goldfinch', 'Common Eastern Bumble Bee', 'Monarch Butterfly', 'Eastern Tiger Swallowtail', 'Luna Moth'],
- 'Botanical Gardens/Conservatory');
+ ARRAY['Botanical Gardens/Conservatory']);
 
 -- ============================================================================
 -- COMPLETION MESSAGE

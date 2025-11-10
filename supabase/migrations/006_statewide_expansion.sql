@@ -28,7 +28,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'University Park', 'PA', '16802',
  'Campus location provides urban ecology study opportunities. Access to arboretum and research forests.',
  ARRAY['Northern Cardinal', 'American Goldfinch', 'Red-bellied Woodpecker', 'White-breasted Nuthatch'],
- 'University Campus');
+ ARRAY['University Campus']);
 
 -- Museums & Nature Centers
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -51,7 +51,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'University Park', 'PA', '16802',
  'Diverse plantings attract pollinators and birds. Demonstration gardens show sustainable practices. Children''s garden with nature play.',
  ARRAY['Ruby-throated Hummingbird', 'Baltimore Oriole', 'Cedar Waxwing', 'Common Eastern Bumble Bee', 'Monarch Butterfly'],
- 'Arboretum/Gardens');
+ ARRAY['Arboretum/Gardens']);
 
 -- State Parks
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -74,7 +74,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Philipsburg', 'PA', '16866',
  'Rare mountain bog ecosystem. Insectivorous plants. Unique wildlife adapted to acidic conditions. Important conservation area.',
  ARRAY['Hermit Thrush', 'Winter Wren', 'Dark-eyed Junco', 'Snowshoe Hare', 'Pitcher Plant', 'Sundew', 'Bog Turtle'],
- 'Mountain Bog/Boreal');
+ ARRAY['Mountain Bog/Boreal']);
 
 -- YMCAs
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -87,7 +87,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'State College', 'PA', '16801',
  'Urban community center with outdoor program space. Connects to trail system. Youth programming includes outdoor education.',
  ARRAY['American Robin', 'Northern Cardinal', 'Mourning Dove', 'Eastern Gray Squirrel'],
- 'Community Center');
+ ARRAY['Community Center']);
 
 -- ============================================================================
 -- HARRISBURG AREA (Dauphin County)
@@ -114,7 +114,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Harrisburg', 'PA', '17109',
  'Residential area with mature trees. Access to riverfront trails. Good for neighborhood wildlife observation.',
  ARRAY['American Robin', 'Northern Cardinal', 'Blue Jay', 'Downy Woodpecker', 'Eastern Chipmunk'],
- 'Urban/Residential');
+ ARRAY['Urban/Residential']);
 
 -- Museums
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -137,7 +137,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Harrisburg', 'PA', '17101',
  'Interactive science exhibits include local ecosystems, water cycle, energy. Excellent for supplementing field observations.',
  ARRAY['Educational exhibits and displays'],
- 'Science Center/Museum');
+ ARRAY['Science Center/Museum']);
 
 -- State Parks
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -160,7 +160,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Harrisburg', 'PA', '17101',
  'Susquehanna River island park. Excellent for river ecology studies. Waterfowl viewing, fishing access. Connects to trail system.',
  ARRAY['Bald Eagle', 'Osprey', 'Double-crested Cormorant', 'Common Merganser', 'Smallmouth Bass', 'Channel Catfish'],
- 'River Island/Urban Park');
+ ARRAY['River Island/Urban Park']);
 
 -- YMCAs
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -173,7 +173,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Harrisburg', 'PA', '17101',
  'Urban community center serving diverse population. Outdoor activities connect to nearby parks and trails.',
  ARRAY['Common urban bird species'],
- 'Community Center/Urban');
+ ARRAY['Community Center/Urban']);
 
 -- ============================================================================
 -- PHILADELPHIA AREA
@@ -200,7 +200,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Philadelphia', 'PA', '19106',
  'Historic district with urban green spaces. Near Delaware River waterfront. Excellent for combining history and ecology.',
  ARRAY['Ring-billed Gull', 'Rock Pigeon', 'European Starling', 'House Sparrow'],
- 'Historic Urban');
+ ARRAY['Historic Urban']);
 
 -- Museums & Nature Centers
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -233,7 +233,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Philadelphia', 'PA', '19153',
  'Critical urban wildlife habitat. Tidal marsh ecosystem. Over 300 bird species recorded. Important migration stopover. Educational programs available.',
  ARRAY['Great Blue Heron', 'Great Egret', 'Osprey', 'Bald Eagle', 'Northern Harrier', 'Muskrat', 'River Otter', 'Diamondback Terrapin'],
- 'Tidal Marsh/National Refuge');
+ ARRAY['Tidal Marsh/National Refuge']);
 
 -- Major Parks
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -256,7 +256,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Philadelphia', 'PA', '19143',
  'Historic garden with native and exotic plants. Tidal Schuylkill River edge. Wetland restoration areas. Excellent plant diversity.',
  ARRAY['Ruby-throated Hummingbird', 'Baltimore Oriole', 'Warbling Vireo', 'Great Blue Heron', 'Monarch Butterfly'],
- 'Historic Garden/Riverfront');
+ ARRAY['Historic Garden/Riverfront']);
 
 -- YMCAs
 INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
@@ -269,7 +269,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Philadelphia', 'PA', '19118',
  'Community center with connections to nearby parks and trails. Urban outdoor programming.',
  ARRAY['Common urban species'],
- 'Community Center');
+ ARRAY['Community Center']);
 
 -- ============================================================================
 -- COATESVILLE AREA (Chester County)
@@ -315,7 +315,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Coatesville', 'PA', '19320',
  'Community center serving youth and families. Connection to outdoor spaces.',
  ARRAY['Common urban species'],
- 'Community Center');
+ ARRAY['Community Center']);
 
 -- ============================================================================
 -- EAST STROUDSBURG AREA (Monroe County - Pocono Mountains)
@@ -381,7 +381,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Stroudsburg', 'PA', '18360',
  'Mountain community center. Programs connect to abundant nearby natural areas.',
  ARRAY['Common species'],
- 'Community Center/Mountain');
+ ARRAY['Community Center/Mountain']);
 
 -- ============================================================================
 -- ADDITIONAL MAJOR STATE PARKS (Statewide)
@@ -437,7 +437,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Wellsboro', 'PA', '16901',
  '800-foot deep gorge carved by Pine Creek. Old-growth forest on slopes. Pine Creek Trail follows creek bottom. Premier scenic and ecological site.',
  ARRAY['Turkey Vulture', 'Common Raven', 'Peregrine Falcon', 'Black Bear', 'Wild Turkey', 'Brook Trout', 'Timber Rattlesnake'],
- 'Gorge/Canyon/Scenic Vista');
+ ARRAY['Gorge/Canyon/Scenic Vista']);
 
 -- ============================================================================
 -- COMPLETION MESSAGE & STATISTICS

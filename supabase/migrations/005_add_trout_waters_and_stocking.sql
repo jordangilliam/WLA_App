@@ -487,7 +487,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  'Hookstown', 'PA', '15050',
  'Creek flows through 7,500+ acre park. Heavily stocked with consistent water flow. Cool temps from tree canopy. One of region''s best stocked trout fisheries.',
  ARRAY['Rainbow Trout', 'Brown Trout', 'Brook Trout', 'Creek Chub', 'Darter', 'Crayfish', 'Hellgrammite'],
- 'Stocked Trout Stream/Park');
+ ARRAY['Stocked Trout Stream/Park']);
 
 -- ============================================================================
 -- ADD WATER BODY DETAILS FOR TROUT LOCATIONS
