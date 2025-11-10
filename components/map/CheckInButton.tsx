@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CheckInFlow from '../checkin/CheckInFlow';
 
 interface FieldSite {
   id: string;
   name: string;
   latitude: number;
   longitude: number;
+  species_likely?: string[];
 }
 
 interface CheckInButtonProps {
@@ -39,7 +41,7 @@ function calculateDistance(
 
 export default function CheckInButton({ site, userLocation, onSuccess }: CheckInButtonProps) {
   const router = useRouter();
-  const [isChecking In, setIsCheckingIn] = useState(false);
+  const [showCheckInFlow, setShowCheckInFlow] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Calculate distance from user to site
@@ -55,7 +57,7 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
   // Check if user is within check-in radius (100 meters)
   const withinRadius = distance !== null && distance <= 100;
 
-  const handleCheckIn = async () => {
+  const handleCheckIn = () => {
     if (!userLocation) {
       setError('Location not available. Please enable location services.');
       return;
@@ -66,53 +68,8 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
       return;
     }
 
-    try {
-      setIsCheckingIn(true);
-      setError(null);
-
-      // Call check-in API
-      const response = await fetch('/api/check-in', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          locationId: site.id,
-          coordinates: {
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude,
-            accuracy: 10, // Will be enhanced with actual GPS accuracy
-          },
-          verificationMethod: 'gps',
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || data.message || 'Check-in failed');
-      }
-
-      // Success! Show success screen
-      if (data.success && data.checkIn) {
-        // Navigate to success screen
-        router.push(
-          `/check-in/success?points=${data.checkIn.pointsEarned}&firstVisit=${data.checkIn.isFirstVisit}&siteName=${encodeURIComponent(site.name)}`
-        );
-
-        // Call onSuccess callback
-        if (onSuccess) {
-          onSuccess();
-        }
-      } else {
-        throw new Error('Unexpected response format');
-      }
-    } catch (err: any) {
-      console.error('Check-in error:', err);
-      setError(err.message || 'Failed to check in. Please try again.');
-    } finally {
-      setIsCheckingIn(false);
-    }
+    // Open check-in flow modal
+    setShowCheckInFlow(true);
   };
 
   // Loading location
@@ -153,29 +110,18 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
 
   // Within radius - can check in!
   return (
-    <div className="space-y-3">
-      {/* Check-in Button */}
-      <button
-        onClick={handleCheckIn}
-        disabled={isCheckingIn}
-        className={`w-full px-6 py-4 rounded-lg font-bold text-lg transition-all ${
-          isCheckingIn
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105'
-        }`}
-      >
-        {isCheckingIn ? (
-          <span className="flex items-center justify-center gap-2">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-            Checking In...
-          </span>
-        ) : (
+    <>
+      <div className="space-y-3">
+        {/* Check-in Button */}
+        <button
+          onClick={handleCheckIn}
+          className="w-full px-6 py-4 rounded-lg font-bold text-lg transition-all bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
           <span className="flex items-center justify-center gap-2">
             <span>✓</span>
             Check In Now
           </span>
-        )}
-      </button>
+        </button>
 
       {/* Success Indicator */}
       {withinRadius && !error && (
@@ -192,25 +138,39 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
         </div>
       )}
 
-      {/* Error Message */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-          <div className="flex items-start gap-2">
-            <span className="text-xl">⚠️</span>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-red-900">Check-in Failed</p>
-              <p className="text-xs text-red-700">{error}</p>
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="flex items-start gap-2">
+              <span className="text-xl">⚠️</span>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-red-900">Check-in Failed</p>
+                <p className="text-xs text-red-700">{error}</p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                className="text-red-400 hover:text-red-600"
+              >
+                ✕
+              </button>
             </div>
-            <button
-              onClick={() => setError(null)}
-              className="text-red-400 hover:text-red-600"
-            >
-              ✕
-            </button>
           </div>
-        </div>
+        )}
+      </div>
+
+      {/* Check-In Flow Modal */}
+      {showCheckInFlow && userLocation && (
+        <CheckInFlow
+          site={site}
+          userLocation={userLocation}
+          onClose={() => setShowCheckInFlow(false)}
+          onSuccess={() => {
+            setShowCheckInFlow(false);
+            if (onSuccess) onSuccess();
+          }}
+        />
       )}
-    </div>
+    </>
   );
 }
 
