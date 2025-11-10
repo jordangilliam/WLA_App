@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { usePoints } from '@/ui/points/PointsProvider';
+import SoundSettings from '@/components/settings/SoundSettings';
 
 export default function ProfileMenu() {
   const { data: session, status } = useSession();
@@ -240,6 +241,9 @@ export default function ProfileMenu() {
                 </div>
               </div>
             </div>
+
+            {/* Sound Settings */}
+            <SoundSettings />
 
             {(isTeacher || isAdmin) && (
               <div className="bg-white rounded-lg border border-gray-200 p-4">
