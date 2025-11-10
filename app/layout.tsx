@@ -5,6 +5,7 @@ import { NavigationProvider } from '@/lib/contexts/NavigationContext';
 import PWAInstall from '@/components/PWAInstall';
 import GamificationBar from '@/components/layout/GamificationBar';
 import BottomNav from '@/components/layout/BottomNav';
+import GlobalSearchWrapper from '@/components/search/GlobalSearchWrapper';
 
 export const metadata = {
   title: 'WLA Conservation Ambassadors - Youth Conservation Leadership',
@@ -164,6 +165,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NavigationProvider>
             <PWAInstall />
             <GamificationBar />
+            <GlobalSearchWrapper />
             <main className="min-h-screen">{children}</main>
             <BottomNav />
           </NavigationProvider>

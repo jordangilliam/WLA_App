@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { usePoints } from '@/ui/points/PointsProvider';
+import { useNavigation } from '@/lib/contexts/NavigationContext';
 
 interface GamificationBarProps {
   notificationCount?: number;
-  onSearchClick?: () => void;
 }
 
 export default function GamificationBar({
   notificationCount = 0,
-  onSearchClick,
 }: GamificationBarProps) {
+  const { setShowSearch } = useNavigation();
   const pathname = usePathname();
   const { total: points, currentStreak } = usePoints();
   
@@ -125,7 +125,7 @@ export default function GamificationBar({
 
             {/* Search Icon */}
             <button
-              onClick={onSearchClick}
+              onClick={() => setShowSearch(true)}
               className="flex items-center justify-center w-9 h-9 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all backdrop-blur-sm"
               title="Search content"
             >
