@@ -1,354 +1,286 @@
-# 🌲 WildPraxis
+# 🌲 WildPraxis - Youth Conservation Education Platform
 
-**Next-Generation Conservation Education Platform**
+> **The most engaging conservation app for Gen Alpha students**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
-[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black)]()
+WildPraxis (WLA_App) is a mobile-first Progressive Web App designed to engage middle school students in environmental conservation through gamification, social learning, and real-world field experiences.
 
-> Where Conservation Meets Adventure
-
-WildPraxis is an innovative conservation education platform that gamifies outdoor learning for youth through location-based challenges, AI-powered species identification, and immersive experiences. Built in partnership with the **Wildlife Leadership Academy** (WLA).
+Built for the Wildlife Leadership Academy and optimized for iPad library deployments across Pennsylvania.
 
 ---
 
-## 🎯 Mission
+## ✨ **Features**
 
-Inspire the next generation of conservation leaders through engaging, technology-enhanced outdoor experiences that drive real-world environmental action.
+### 🎮 **Engagement & Gamification**
+- **Celebration Animations** - Full-screen confetti for achievements, level-ups, first check-ins
+- **Sound Effects & Haptics** - Multi-sensory feedback for every action
+- **Points & Levels** - Earn XP, level up, unlock rewards
+- **Streaks** - Build daily engagement habits
+- **Achievements** - 50+ badges to collect
+
+### 📦 **Collections (Pokemon-Style)**
+- **Field Sites** - Collect all 140+ locations across PA
+- **Species Cards** - 3D flip animation trading cards for 150+ PA wildlife
+- **Rarity System** - Common → Uncommon → Rare → Epic → Legendary
+- **Progress Tracking** - Visual collection completion
+
+### 🎯 **Challenges**
+- **Daily Challenges** - Quick 5-10 min tasks
+- **Weekly Challenges** - Longer-term goals
+- **Team Challenges** - Collective class goals with shared rewards
+- **Photo Challenges** - Scavenger hunts with teacher approval
+
+### 🏆 **Competition & Social**
+- **Class Leaderboards** - Weekly rankings across classes
+- **Real-Time Feed** - See classmates' recent activities
+- **Top Contributors** - Recognize active students
+- **Class-Only Social** - Safe, moderated environment
+
+### 📍 **Field Work**
+- **Interactive Map** - 140+ field sites with Mapbox
+- **Check-In System** - Geofenced location verification
+- **Observation Journal** - Document species, weather, notes
+- **Photo Documentation** - Capture and share field observations
+- **Offline Mode** - Work without internet, sync later
+
+### 🗺️ **140+ Pennsylvania Field Sites**
+- **Pittsburgh Area** - 64 sites (parks, libraries, universities)
+- **Statewide Coverage** - State College, Harrisburg, Philadelphia, Coatesville, East Stroudsburg
+- **Trout Waters** - 16 stocked streams and lakes with schedules
+- **State Parks** - Ricketts Glen, Worlds End, Cherry Springs, Presque Isle, Pine Creek Gorge
+
+### 👩‍🏫 **Teacher Tools**
+- **Live Monitoring** - Real-time student activity feed
+- **Field Trip Mode** - Coordinate group outdoor experiences
+- **Approval Workflow** - Review and approve student submissions
+- **Class Management** - Create classes, add students, track progress
+- **Reports & Exports** - CSV downloads, analytics
+
+### 📱 **iPad Optimization**
+- **Touch Targets** - 60px minimum (WCAG AA)
+- **Landscape Mode** - Adaptive layouts
+- **Split-Screen Support** - Works in multitasking
+- **Multi-User** - Quick PIN switching for shared devices
+- **Offline-First** - IndexedDB queue for remote locations
 
 ---
 
-## ✨ Features
+## 🚀 **Tech Stack**
 
-### 🗺️ **Pokemon GO-Style Location System**
-- GPS-based check-ins at parks, trails, and conservation sites
-- Geofencing for location-triggered content
-- Distance-based bonuses and rare location discoveries
-- Route tracking and expedition logging
-- 50+ Pennsylvania locations (growing to 500+)
+### **Frontend**
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first styling
+- **Mapbox GL** - Interactive maps
+- **React Confetti** - Celebration animations
+- **IDB** - IndexedDB wrapper for offline storage
 
-### 🎮 **Advanced Gamification**
-- 25-level progression system
-- Multi-tier badge system (Bronze → Elite)
-- Ambassador titles (Novice → Legend)
-- Streak tracking with milestone rewards
-- Real-world scholarships and prizes
-- Team challenges and competitions
-- Leaderboards (global, regional, school)
+### **Backend**
+- **Supabase** - PostgreSQL database, Auth, Edge Functions
+- **PostGIS** - Geospatial queries
+- **Row Level Security** - Fine-grained access control
+- **NextAuth.js** - Authentication
 
-### 🤖 **AI-Powered Features**
-- Real-time species identification (TensorFlow.js)
-- AI conservation tutor (local LLM via Ollama)
-- Personalized learning recommendations
-- Predictive engagement analytics
-- Offline-capable AI (runs in browser)
-
-### 🥽 **AR/VR Integration** (Coming Soon)
-- WebXR location-based augmented reality
-- Virtual field trips to PA ecosystems
-- 3D species models and anatomy
-- Underwater exploration experiences
-- Seasonal ecosystem transformations
-
-### 📱 **Progressive Web App**
-- Works offline in remote areas
-- Background sync for data collection
-- Push notifications for nearby opportunities
-- Install as native app (iOS/Android)
-- Battery-optimized GPS tracking
-
-### 🏆 **Real-World Rewards**
-- Scholarship opportunities ($5,000+)
-- Summer internships with conservation agencies
-- Workshop and certification access
-- Outdoor gear from sponsor partners
-- Park passes and experiences
+### **Deployment**
+- **Vercel / Netlify** - Web hosting
+- **PWA** - Progressive Web App (installable)
+- **Capacitor** - Future native iOS/Android builds
 
 ---
 
-## 🚀 Getting Started
+## 📦 **Installation**
 
-### Prerequisites
+### **Prerequisites**
+- Node.js 18+ (or portable Node for Windows)
+- npm or yarn
+- Supabase account
+- Mapbox account (free tier)
 
+### **Setup**
+
+1. **Clone Repository**
 ```bash
-Node.js 18+ and npm/yarn
-PostgreSQL 14+ with PostGIS extension
-Git
+git clone https://github.com/jordangilliam/WLA_App.git
+cd WLA_App
 ```
 
-### Installation
-
+2. **Install Dependencies**
 ```bash
-# Clone the repository
-git clone https://github.com/jordangilliam/WildPraxis.git
-cd WildPraxis
-
-# Install dependencies
 npm install
+```
 
-# Set up environment variables
-cp env.template .env.local
-# Edit .env.local with your configuration
+3. **Environment Variables**
 
-# Set up database
-npm run db:setup
+Create `.env.local`:
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-# Run development server
+# NextAuth
+NEXTAUTH_SECRET=generate_with_openssl_rand_base64_32
+NEXTAUTH_URL=http://localhost:3000
+
+# Mapbox
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token
+
+# App
+NEXT_PUBLIC_APP_VERSION=1.0.0
+NODE_ENV=development
+```
+
+4. **Run Database Migrations**
+
+See `MIGRATION_ORDER.md` for detailed instructions.
+
+Run migrations 003-006, 012-015 in Supabase SQL Editor.
+
+5. **Start Development Server**
+```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000` to see your local instance.
+Visit `http://localhost:3000`
 
-### Docker Setup (Alternative)
+---
+
+## 📚 **Documentation**
+
+- **[Deployment Checklist](DEPLOYMENT_CHECKLIST.md)** - Step-by-step deployment guide
+- **[Migration Order](MIGRATION_ORDER.md)** - Database setup instructions
+- **[3-Week Sprint Progress](3-WEEK-SPRINT-PROGRESS.md)** - Development timeline
+- **[API Audit Report](API_AUDIT_REPORT.md)** - API security review
+
+---
+
+## 🎯 **Target Audience**
+
+### **Primary Users**
+- **Students** - Middle school (ages 11-14)
+- **Teachers** - Science, biology, environmental ed
+- **Libraries** - iPad lending programs
+
+### **Use Cases**
+- Classroom learning
+- Field trips
+- After-school programs
+- Library educational programs
+- Home learning
+
+---
+
+## 🏫 **Deployment Scenarios**
+
+### **School Deployment**
+- Teacher creates classes
+- Students join with class code
+- Class-based leaderboards and team challenges
+- Teacher monitors and approves submissions
+
+### **Library Deployment**
+- Multi-user iPad setup
+- PIN-based quick login
+- Offline-first for borrowing
+- No account required for browsing
+
+### **Field Trip Mode**
+- Teacher creates trip with goals
+- Students check in at location
+- Real-time progress tracking
+- Collective challenges
+- Trip report generation
+
+---
+
+## 🔒 **Privacy & Safety**
+
+- **Class-Only Social** - No public profiles or posts
+- **Teacher Moderation** - All submissions require approval
+- **COPPA Compliant** - Parental consent for under-13
+- **Data Privacy** - Student data never sold or shared
+- **Location Privacy** - Coarse location outside check-ins
+
+---
+
+## 🧪 **Testing**
 
 ```bash
-# Coming soon
-docker-compose up
+# Run linter
+npm run lint
+
+# Run type check
+npm run type-check
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
 ---
 
-## 📖 Documentation
+## 📈 **Roadmap**
 
-- **[Getting Started Guide](./QUICK_START.md)** - Quick setup for developers
-- **[API Documentation](./API_DOCS.md)** - API endpoints and usage (coming soon)
-- **[Deployment Guide](./DEPLOYMENT_GUIDE.md)** - Production deployment
-- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute (coming soon)
-- **[Business Plan](./WILDPRAXIS_BUSINESS_PLAN.md)** - Vision and strategy
+### **Phase 1 (Complete)** ✅
+- Core check-in and observation features
+- Pokemon-style collections
+- Daily/weekly challenges
+- Class leaderboards
 
----
+### **Phase 2 (Complete)** ✅
+- Species trading cards
+- Photo challenges
+- iPad optimizations
+- Offline mode
 
-## 💼 Business Model
+### **Phase 3 (Complete)** ✅
+- Teacher live monitoring
+- Field trip mode
+- Multi-user support
+- Team challenges
 
-### Open Core Licensing
-
-**WildPraxis uses a dual-licensing model:**
-
-#### **Open Source (MIT License)**
-The core platform is **free and open source** under the MIT License:
-- All educational content
-- Gamification engine
-- Location-based features
-- Species identification
-- Community features
-- Self-hosting capability
-
-Perfect for individuals, educators, and small organizations.
-
-#### **Enterprise Edition (Proprietary)**
-Advanced features for schools and organizations require a [paid license](./ENTERPRISE_LICENSE.md):
-- Multi-tenant administration
-- Advanced analytics & reporting  
-- White-label branding
-- SSO and LMS integration
-- Priority support
-- Custom feature development
-
-See our **[Pricing Page](./public/pricing.html)** for details.
+### **Phase 4 (Future)**
+- Native iOS/Android apps (Capacitor)
+- AR wildlife encounters
+- Video submissions
+- Parent dashboard
+- District analytics
 
 ---
 
-## 🤝 Partnership with Wildlife Leadership Academy
+## 🤝 **Contributing**
 
-WildPraxis is built in partnership with the **Wildlife Leadership Academy** (WLA), Pennsylvania's premier conservation education program.
+Built for Wildlife Leadership Academy by String Theory Solutions.
 
-**WLA receives**:
-- ✅ Unlimited free access (all features)
-- ✅ Priority feature development
-- ✅ Co-branding opportunities
-- ✅ Revenue sharing on referrals
-
-[Learn more about our partnership](./WLA_PARTNERSHIP_AGREEMENT.md)
+For feature requests or bug reports, contact: stringtheorysolutionsllc@gmail.com
 
 ---
 
-## 🛠️ Technology Stack
+## 📄 **License**
 
-### Frontend
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI
-- **Maps**: MapLibre GL JS (open-source)
-- **3D/AR**: Three.js, A-Frame, WebXR
-
-### Backend
-- **API**: Next.js API Routes
-- **Database**: PostgreSQL with PostGIS
-- **Cache**: Redis
-- **Auth**: NextAuth.js
-- **Storage**: Cloud storage (AWS S3/similar)
-
-### AI/ML
-- **Computer Vision**: TensorFlow.js (client-side)
-- **NLP**: Ollama (local LLM)
-- **APIs**: iNaturalist, PlantNet, GBIF
-
-### Infrastructure
-- **Hosting**: Vercel (frontend)
-- **Backend Services**: AWS/GCP
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Sentry, Posthog
+© 2025 Wildlife Leadership Academy. All rights reserved.
 
 ---
 
-## 🗺️ Roadmap
+## 🙏 **Acknowledgments**
 
-### ✅ Phase 1: Foundation (Complete)
-- Core platform architecture
-- Educational content system
-- Basic gamification
-- GPS location system
-- Database schema
-- Type system and APIs
-
-### 🚧 Phase 2: WLA Launch (In Progress - Q1 2025)
-- Deploy for Wildlife Leadership Academy
-- Beta testing with students
-- Feedback integration
-- Case study development
-
-### 📋 Phase 3: Enterprise Features (Q2 2025)
-- Multi-tenant architecture
-- Admin dashboards
-- Advanced analytics
-- API access
-- Payment integration
-
-### 🎯 Phase 4: Market Entry (Q3 2025)
-- First paying customers
-- Sales materials
-- Conference presentations
-- Marketing website
-
-### 🚀 Phase 5: Scale (Q4 2025+)
-- AR/VR experiences
-- National expansion
-- Mobile apps (native)
-- Advanced AI features
-- International localization
-
-[View detailed roadmap](./NEXT_GENERATION_PLATFORM_ROADMAP.md)
+- **Wildlife Leadership Academy** - 20 years of conservation officer education
+- **Dr. Sara Mueller** - Educational partnerships
+- **PA Game Commission** - Conservation content
+- **PA Fish & Boat Commission** - Trout stocking data
+- **DCNR & PA Outdoor Corps** - Field site partnerships
 
 ---
 
-## 📊 Impact
+## 📞 **Support**
 
-### Target Metrics (Year 1)
-- **5,000+** active students
-- **50,000+** location check-ins
-- **25,000+** species observations
-- **15,000+** learning modules completed
-- **All 121** PA State Parks visited
-
-### Educational Outcomes
-- **+30%** increase in conservation knowledge
-- **+50%** increase in outdoor activity
-- **+25%** increase in conservation career interest
-- **+40%** increase in environmental awareness
+- **Email**: stringtheorysolutionsllc@gmail.com
+- **GitHub**: https://github.com/jordangilliam/WLA_App
+- **Website**: wildlifeleadershipacademy.org
 
 ---
 
-## 🤲 Contributing
+**Built with ❤️ for the next generation of conservation leaders**
 
-We welcome contributions from the community! Whether you're a developer, educator, conservationist, or student, there are many ways to help.
-
-### Ways to Contribute
-- 🐛 Report bugs and issues
-- 💡 Suggest new features
-- 📝 Improve documentation
-- 🎨 Design UI/UX improvements
-- 🧪 Write tests
-- 🌍 Add location data
-- 📚 Create educational content
-- 🌐 Translate to other languages
-
-### Development Setup
-See our [Contributing Guidelines](./CONTRIBUTING.md) (coming soon) for detailed instructions.
-
----
-
-## 📜 License
-
-This project uses a **dual licensing model**:
-
-### Open Source Core
-The core WildPraxis platform is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
-
-### Enterprise Features  
-Enterprise features are proprietary and require a commercial license. See [ENTERPRISE_LICENSE.md](./ENTERPRISE_LICENSE.md) for details.
-
-### Summary
-- ✅ Free to use, modify, and self-host the core platform
-- ✅ Open source contributions welcome
-- ✅ Enterprise features available for purchase
-- ✅ WLA partnership includes full access
-
----
-
-## 🙏 Acknowledgments
-
-### Built With Love By
-- **Jordan Gilliam** - Founder & Developer
-
-### In Partnership With
-- **Wildlife Leadership Academy** - Conservation education expertise
-- **Ned Smith Center for Nature & Art** - Content and artwork
-
-### Powered By
-- Pennsylvania Department of Conservation & Natural Resources (DCNR)
-- PA Fish & Boat Commission (PFBC)
-- PA Game Commission (PGC)
-- Open source community
-
-### Special Thanks
-- All contributors and testers
-- Conservation educators providing feedback
-- Students using the platform
-- Open source projects we build upon
-
----
-
-## 📞 Contact
-
-### For General Inquiries
-- **Email**: info@wildpraxis.org
-- **GitHub**: [github.com/jordangilliam/WildPraxis](https://github.com/jordangilliam/WildPraxis)
-
-### For Enterprise/Schools
-- **Email**: enterprise@wildpraxis.org
-- **Demo Request**: [Schedule a demo](mailto:enterprise@wildpraxis.org?subject=Demo%20Request)
-
-### For Partnerships
-- **Email**: partners@wildpraxis.org
-
-### For Support
-- **Email**: support@wildpraxis.org
-- **Issues**: [GitHub Issues](https://github.com/jordangilliam/WildPraxis/issues)
-
----
-
-## 🌟 Star Us!
-
-If you find WildPraxis useful, please consider giving us a star on GitHub! It helps us reach more people and grow the community.
-
-[![GitHub Stars](https://img.shields.io/github/stars/jordangilliam/WildPraxis?style=social)](https://github.com/jordangilliam/WildPraxis)
-
----
-
-## 📱 Stay Connected
-
-- **Website**: wildpraxis.org (coming soon)
-- **Twitter**: @wildpraxis (coming soon)
-- **LinkedIn**: /company/wildpraxis (coming soon)
-- **Newsletter**: [Subscribe](https://wildpraxis.org/newsletter) (coming soon)
-
----
-
-**Built with 💚 for conservation education**
-
-*WildPraxis • Where Conservation Meets Adventure • Est. 2024*
-#   F o r c e   V e r c e l   d e p l o y m e n t  
- D e p l o y   t r i g g e r  
- #   F o r c e   r e d e p l o y  
- 
+🌲 Protect. Conserve. Inspire. 🦋
