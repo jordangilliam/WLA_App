@@ -230,7 +230,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15214',
  'Some of Pittsburgh''s oldest trees (300+ years). Steep hillside creates microclimates supporting diverse plant communities. River view allows waterfowl observation.',
  ARRAY['Pileated Woodpecker', 'Barred Owl', 'Wild Turkey', 'Ruffed Grouse', 'Black Rat Snake', 'Five-lined Skink', 'Timber Rattlesnake (rare)'],
- 'Old-growth Forest/Hillside'),
+ ARRAY['Old-growth Forest/Hillside']),
 
 ('Highland Park - Reservoir Trail',
  '380-acre park with reservoir, woodlands, and meadows. Popular loop trail around reservoir (1.8 miles). Safe, family-friendly paths.',
@@ -242,7 +242,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15206',
  'Reservoir attracts migrating waterfowl. Wooded areas support breeding songbirds. Meadows restored with native grasses and wildflowers.',
  ARRAY['Ring-necked Duck', 'Hooded Merganser', 'Baltimore Oriole', 'Indigo Bunting', 'Meadow Vole', 'Monarch Butterfly', 'Eastern Tiger Swallowtail'],
- 'Reservoir/Meadow/Forest'),
+ ARRAY['Reservoir/Meadow/Forest']),
 
 ('Point State Park',
  'Historic 36-acre urban park at confluence of three rivers. Iconic fountain. Excellent for geography, history, and urban wildlife study. Fully accessible.',
@@ -266,7 +266,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'South Park', 'PA', '15129',
  'Large contiguous forest supports interior forest bird species. Wetlands provide amphibian breeding habitat. Meadows managed for pollinators and grassland birds.',
  ARRAY['Scarlet Tanager', 'Wood Thrush', 'Eastern Bluebird', 'Bobolink', 'American Woodcock', 'Gray Treefrog', 'Spotted Salamander'],
- 'Mixed Forest/Wetland/Meadow'),
+ ARRAY['Mixed Forest/Wetland/Meadow']),
 
 ('North Park - Pie Traynor Field Area',
  '3,075-acre county park with extensive trail system, lake, and diverse habitats. Boating, fishing, and nature study opportunities. Very safe and well-maintained.',
@@ -278,7 +278,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Allison Park', 'PA', '15101',
  'Large park supports wide range of species including less common forest dwellers. Lake provides waterfowl habitat. Excellent for tracking seasonal changes.',
  ARRAY['Red-shouldered Hawk', 'Belted Kingfisher', 'Warbling Vireo', 'Yellow-throated Vireo', 'Beaver', 'Mink', 'River Otter'],
- 'Large Forest/Lake'),
+ ARRAY['Large Forest/Lake']),
 
 ('Emerald View Park - Grandview Overlook',
  '287-acre park spanning Mt. Washington hillsides. Spectacular views and restored habitats. Challenging terrain but worth it for older students.',
@@ -290,7 +290,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15211',
  'Steep slopes demonstrate succession following coal mining. Native wildflower meadows attract pollinators. Viewshed education opportunity.',
  ARRAY['Cedar Waxwing', 'Gray Catbird', 'American Goldfinch', 'Cabbage White Butterfly', 'Question Mark Butterfly'],
- 'Hillside Meadow/Forest'),
+ ARRAY['Hillside Meadow/Forest']),
 
 ('Hartwood Acres Park',
  '629-acre park with mansion, gardens, and extensive trails. Mix of formal and natural landscapes. Safe trails and interpretive signage.',
