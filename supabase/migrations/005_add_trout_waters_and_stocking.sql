@@ -364,7 +364,7 @@ GRANT EXECUTE ON FUNCTION get_best_fishing_spots TO authenticated;
 -- ============================================================================
 
 -- Add trout streams and stocked lakes to field_sites
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 -- STOCKED TROUT STREAMS
 ('Deer Creek - Harmarville',

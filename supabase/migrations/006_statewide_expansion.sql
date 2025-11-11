@@ -8,7 +8,7 @@
 -- ============================================================================
 
 -- Libraries
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Schlow Centre Region Library - Main',
  'Modern community library with nature programming. Adjacent to trails and parks. Safe, accessible location for all ages.',
@@ -35,7 +35,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['University Campus']);
 
 -- Museums & Nature Centers
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Millbrook Marsh Nature Center',
  '52-acre nature preserve with boardwalk trails through wetland. Excellent educational facility. Safe, accessible trails. Free admission.',
@@ -62,7 +62,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Arboretum/Gardens']);
 
 -- State Parks
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Bald Eagle State Park',
  '5,900-acre park with 1,730-acre lake. Excellent boating, fishing, hiking. Nature center on-site. Very family-friendly.',
@@ -89,7 +89,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Mountain Bog/Boreal']);
 
 -- YMCAs
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('YMCA of Centre County',
  'Community center with outdoor spaces and programming. Safe, supervised environment. Year-round nature activities.',
@@ -108,7 +108,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 
 -- Libraries
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Dauphin County Library System - McCormick',
  'Modern riverside library with riverfront views. Access to Capital Area Greenbelt. Safe downtown location.',
@@ -135,7 +135,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Urban/Residential']);
 
 -- Museums
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('State Museum of Pennsylvania',
  'Comprehensive natural history exhibits including PA wildlife, geology, ecology. Indoor education perfect for any weather. Free admission.',
@@ -162,7 +162,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Science Center/Museum']);
 
 -- State Parks
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Wildwood Park and Lake',
  '229-acre nature sanctuary in Harrisburg. Boardwalk loop around lake. Nature center. Free, accessible. Excellent urban wildlife refuge.',
@@ -189,7 +189,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['River Island/Urban Park']);
 
 -- YMCAs
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('YMCA of the Roses - Harrisburg Branch',
  'Full-service community center with outdoor programming. Safe, supervised activities. Youth programs include nature exploration.',
@@ -208,7 +208,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ============================================================================
 
 -- Libraries
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Free Library of Philadelphia - Parkway Central',
  'Major urban library with extensive resources. Next to Logan Square and Franklin Institute. Very accessible location.',
@@ -235,7 +235,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Historic Urban']);
 
 -- Museums & Nature Centers
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Academy of Natural Sciences - Drexel University',
  'America''s oldest natural history museum. World-class dinosaur and wildlife exhibits. Live animal center. Admission required.',
@@ -274,7 +274,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Tidal Marsh/National Refuge']);
 
 -- Major Parks
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Fairmount Park - Wissahickon Valley',
  '1,800-acre gorge with creek, trails, and mature forest. Extensive trail system. Historic and natural landmark. Very accessible.',
@@ -301,7 +301,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
  ARRAY['Historic Garden/Riverfront']);
 
 -- YMCAs
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Philadelphia Freedom Valley YMCA',
  'Large community center serving diverse neighborhoods. Youth programs include environmental education. Safe, supervised space.',
@@ -319,7 +319,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- COATESVILLE AREA (Chester County)
 -- ============================================================================
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Coatesville Area Public Library',
  'Community library serving Chester County. Safe, accessible location. Programming for all ages.',
@@ -373,7 +373,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- EAST STROUDSBURG AREA (Monroe County - Pocono Mountains)
 -- ============================================================================
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Eastern Monroe Public Library',
  'Regional library serving Pocono communities. Programs focused on local nature and history. Accessible location.',
@@ -451,7 +451,7 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- ADDITIONAL MAJOR STATE PARKS (Statewide)
 -- ============================================================================
 
-INSERT INTO field_sites (name, description, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
+INSERT INTO field_sites (name, description, latitude, longitude, location, site_type, address, city, state, zip_code, ecological_notes, species_commonly_found, habitat_types) VALUES
 
 ('Ricketts Glen State Park',
  '13,050-acre park famous for 22 named waterfalls. Falls Trail System is challenging but spectacular. Premier natural area.',
