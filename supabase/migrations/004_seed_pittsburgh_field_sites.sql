@@ -302,7 +302,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15238',
  'Large property includes diverse habitats from formal gardens to mature forest. Creek corridors support aquatic life. Great for comparing managed vs natural landscapes.',
  ARRAY['Eastern Phoebe', 'Rose-breasted Grosbeak', 'Ruby-throated Hummingbird', 'Groundhog', 'Red-backed Salamander'],
- 'Mixed Forest/Gardens'),
+ ARRAY['Mixed Forest/Gardens']),
 
 ('Boyce Park',
  '1,096-acre county park with nature center, trails, and diverse habitats. Educational programs available. Very family-friendly.',
@@ -314,7 +314,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Plum', 'PA', '15239',
  'Large park with both developed and wild areas. Stream corridors and wetlands support amphibians. Forest provides raptor nesting habitat.',
  ARRAY['Cooper''s Hawk', 'Red-bellied Woodpecker', 'Hermit Thrush', 'Eastern Box Turtle', 'Northern Water Snake'],
- 'Mixed Forest/Stream'),
+ ARRAY['Mixed Forest/Stream']),
 
 ('Frick Environmental Center',
  'State-of-the-art green building with living roof, native gardens, and environmental education exhibits. Perfect introduction to sustainability. Fully accessible.',
@@ -326,7 +326,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15217',
  'Demonstration site for green infrastructure including rain gardens, living roof, and native plantings. Excellent for understanding human-environment interactions.',
  ARRAY['Ruby-throated Hummingbird', 'Common Eastern Bumble Bee', 'Monarch Butterfly', 'American Goldfinch', 'House Wren'],
- 'Green Building/Native Gardens'),
+ ARRAY['Green Building/Native Gardens']),
 
 ('McKinley Park',
  '22-acre neighborhood park with trails through wooded hillside. Hidden gem with surprising biodiversity. Safe neighborhood access.',
@@ -338,7 +338,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15232',
  'Steep ravine creates cool microclimate. Spring wildflowers abundant. Good example of urban forest fragment.',
  ARRAY['Black-capped Chickadee', 'Carolina Wren', 'Northern Cardinal', 'Eastern Chipmunk', 'Bloodroot (spring)', 'Trillium (spring)'],
- 'Urban Ravine/Woodland'),
+ ARRAY['Urban Ravine/Woodland']),
 
 ('Mellon Park',
  '11-acre park with formal gardens and natural areas. Excellent for studying plant diversity. Very safe, well-lit area.',
@@ -350,7 +350,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15232',
  'Mix of formal ornamental gardens and informal natural areas. Great for comparing native and exotic plants. Pollinator garden demonstrates conservation.',
  ARRAY['Anna''s Hummingbird', 'European Honey Bee', 'Swallowtail Butterfly', 'Mourning Cloak Butterfly'],
- 'Formal Gardens/Parkland'),
+ ARRAY['Formal Gardens/Parkland']),
 
 ('Arsenal Park',
  '42-acre riverfront park with trails and green spaces. Great river access and views. Safe community park.',
@@ -362,7 +362,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15201',
  'Allegheny River access provides aquatic ecosystem study. Floodplain ecology visible. Good for water quality observation.',
  ARRAY['Double-crested Cormorant', 'Spotted Sandpiper', 'Great Blue Heron', 'Smallmouth Bass', 'Crayfish'],
- 'Riverfront/Floodplain'),
+ ARRAY['Riverfront/Floodplain']),
 
 ('West End Valley Park',
  '223-acre park with extensive trail system through mature forest. One of Pittsburgh''s hidden gems. Well-maintained trails.',
@@ -405,7 +405,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15213',
  'Rain gardens and bioswales demonstrate stormwater management. Native plantings support pollinators. Tech campus with environmental consciousness.',
  ARRAY['House Finch', 'Cedar Waxwing', 'Common Eastern Bumble Bee', 'Painted Lady Butterfly'],
- 'Urban Campus/Green Infrastructure'),
+ ARRAY['Urban Campus/Green Infrastructure']),
 
 ('Duquesne University - Bluff Street',
  'Urban campus on hillside overlooking rivers. Spectacular views and interesting topography. Safe campus environment.',
@@ -417,7 +417,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15282',
  'Bluff edge provides unique vantage point. Campus planning integrates steep topography. Good for geography and geology observations.',
  ARRAY['Chimney Swift', 'Rock Pigeon', 'European Starling', 'Peregrine Falcon (overhead)'],
- 'Urban Campus/Bluff'),
+ ARRAY['Urban Campus/Bluff']),
 
 ('Chatham University - Woodland Road',
  'Eden Hall Campus focuses on sustainability and environmental studies. Living laboratory for green building and ecology. Educational tours available.',
@@ -429,7 +429,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Gibsonia', 'PA', '15044',
  'Sustainable campus design includes living building, native landscapes, forest conservation, and organic farm. Premier environmental education site.',
  ARRAY['Eastern Bluebird', 'Tree Swallow', 'American Kestrel', 'Red Fox', 'Eastern Cottontail', 'Monarch Butterfly'],
- 'Sustainable Campus/Forest/Farm'),
+ ARRAY['Sustainable Campus/Forest/Farm']),
 
 ('Point Park University - Downtown',
  'Downtown urban campus. Excellent for studying urban adaptation and human-dominated ecosystems. Very accessible location.',
@@ -441,7 +441,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15222',
  'Highly urbanized environment demonstrates species that thrive in cities. Proximity to rivers provides wildlife corridor.',
  ARRAY['Rock Pigeon', 'House Sparrow', 'European Starling', 'Peregrine Falcon', 'Norway Rat'],
- 'Urban Core'),
+ ARRAY['Urban Core']),
 
 ('Robert Morris University - Moon Township',
  'Suburban campus with mix of developed and natural areas. Sports facilities and green spaces. Safe campus environment.',
@@ -453,7 +453,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Moon Township', 'PA', '15108',
  'Campus edges border forest and stream corridors. Good example of suburban development and habitat fragmentation.',
  ARRAY['Song Sparrow', 'Field Sparrow', 'Eastern Meadowlark', 'Red-winged Blackbird', 'Groundhog'],
- 'Suburban Campus/Edge Habitat'),
+ ARRAY['Suburban Campus/Edge Habitat']),
 
 ('Community College of Allegheny County - Boyce',
  'Campus with natural areas and trails. Accessible educational environment. Nature study areas on grounds.',
@@ -465,7 +465,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Monroeville', 'PA', '15146',
  'Mix of campus landscaping and preserved natural areas. Stream corridor provides aquatic habitat.',
  ARRAY['Northern Cardinal', 'American Goldfinch', 'Downy Woodpecker', 'Eastern Chipmunk'],
- 'Campus/Stream Corridor'),
+ ARRAY['Campus/Stream Corridor']),
 
 ('Carlow University - Oakland',
  'Urban campus with emphasis on sustainability. Rooftop gardens and green infrastructure. Safe neighborhood setting.',
@@ -477,7 +477,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15213',
  'Green roof and rain gardens demonstrate urban sustainability. Part of Oakland''s institutional green network.',
  ARRAY['Chimney Swift', 'Ruby-throated Hummingbird', 'Common Eastern Bumble Bee', 'Monarch Butterfly'],
- 'Urban Campus/Green Roof'),
+ ARRAY['Urban Campus/Green Roof']),
 
 ('LaRoche University - McCandless',
  'Suburban campus with preserved woodlands and wildlife. Nature trails on campus. Very safe environment.',
@@ -508,7 +508,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15222',
  'Rivers confluence creates unique ecosystem. Observe river currents, sediment, and aquatic life. Important bird migration route.',
  ARRAY['Bald Eagle', 'Osprey', 'Ring-billed Gull', 'Bank Swallow', 'Carp', 'Catfish'],
- 'River Confluence'),
+ ARRAY['River Confluence']),
 
 ('North Shore Riverfront Park',
  'Allegheny riverfront with trails, marina, and green spaces. Sports stadiums nearby. Very safe, well-trafficked area.',
@@ -520,7 +520,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15212',
  'Urban riverfront demonstrates habitat restoration. Watching for fish jumping indicates water quality improvements.',
  ARRAY['Double-crested Cormorant', 'Great Blue Heron', 'Common Merganser', 'Smallmouth Bass', 'Northern Pike'],
- 'Urban Riverfront'),
+ ARRAY['Urban Riverfront']),
 
 ('Washington''s Landing',
  '42-acre island in Allegheny River. Row houses, marina, and green spaces. Safe island community with trail access.',
@@ -532,7 +532,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15212',
  'Island ecosystem with river on all sides. Nesting sites for water birds. Good for studying island biogeography.',
  ARRAY['Canada Goose', 'Mute Swan', 'Wood Duck', 'Green Heron', 'Snapping Turtle', 'Painted Turtle'],
- 'River Island'),
+ ARRAY['River Island']),
 
 ('South Side Trail - Hot Metal Bridge',
  'Monongahela riverfront trail with industrial heritage. Bridge crossing provides river views. Safe paved trail.',
@@ -544,7 +544,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15203',
  'Demonstrates ecological recovery from industrial past. River habitat improving with cleaner water. Historic industrial landscape.',
  ARRAY['Belted Kingfisher', 'Osprey', 'Common Merganser', 'Rock Bass', 'Channel Catfish'],
- 'Urban Riverfront/Industrial'),
+ ARRAY['Urban Riverfront/Industrial']),
 
 ('Eliza Furnace Trail',
  '3-mile trail from Oakland to South Side. Follows historic railway. Safe, separated bike/pedestrian path.',
@@ -556,7 +556,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15213',
  'Rail-to-trail conversion demonstrates urban habitat corridor. Vegetation attracts birds and insects despite urban setting.',
  ARRAY['American Kestrel', 'Killdeer', 'House Finch', 'Cabbage White Butterfly', 'Question Mark Butterfly'],
- 'Urban Trail Corridor'),
+ ARRAY['Urban Trail Corridor']),
 
 ('Jail Trail - Woods Run',
  'Trail along Allegheny River through industrial area. Interesting contrasts between nature and development. Safe trail.',
@@ -568,7 +568,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15212',
  'River corridor habitat persists despite industrial surroundings. Good for discussing conservation in working landscapes.',
  ARRAY['Spotted Sandpiper', 'Killdeer', 'Tree Swallow', 'Barn Swallow', 'Muskrat'],
- 'Industrial Riverfront'),
+ ARRAY['Industrial Riverfront']),
 
 ('Duck Hollow Trail',
  'Nature trail along Junction Hollow. Connects neighborhoods to Schenley Park. Stream and forest habitat.',
@@ -580,7 +580,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15217',
  'Stream corridor with forest cover. Good for aquatic macroinvertebrate sampling. Urban wildlife corridor.',
  ARRAY['Louisiana Waterthrush', 'Northern Dusky Salamander', 'Crayfish', 'Wood Frog', 'Spring Peeper'],
- 'Urban Stream/Forest'),
+ ARRAY['Urban Stream/Forest']),
 
 ('Great Allegheny Passage - Sandcastle',
  'Start of 150-mile trail to Cumberland, MD. Flat riverfront section. Very popular and safe trail.',
@@ -592,7 +592,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15120',
  'River corridor provides consistent habitat along long distance trail. Migration route for birds following river valley.',
  ARRAY['Cedar Waxwing', 'Warbling Vireo', 'Yellow Warbler', 'Cliff Swallow', 'Beaver'],
- 'Riverfront Trail'),
+ ARRAY['Riverfront Trail']),
 
 ('Montour Trail - Moon Township',
  '63-mile loop trail system. Suburban and rural landscapes. Rails-to-trails conversion. Very safe multi-use trail.',
@@ -604,7 +604,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Moon Township', 'PA', '15108',
  'Trail passes through diverse habitats: forest, stream, meadow, wetland. Excellent for long-distance nature observation.',
  ARRAY['Eastern Bluebird', 'Tree Swallow', 'Red-winged Blackbird', 'Bobolink', 'Eastern Meadowlark', 'Groundhog'],
- 'Rail Trail/Multiple Habitats'),
+ ARRAY['Rail Trail/Multiple Habitats']),
 
 ('Panther Hollow Trail',
  'Natural trail through Schenley Park ravine. Stream and forest. More rugged but very rewarding. Suitable for experienced hikers.',
@@ -635,7 +635,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Hookstown', 'PA', '15050',
  'Largest state park near Pittsburgh. Wildflower reserve protects globally significant diversity. Lake habitat, mature forest, and meadows provide diverse study opportunities.',
  ARRAY['Prothonotary Warbler', 'Cerulean Warbler', 'Wild Turkey', 'White-tailed Deer', 'River Otter', 'Timber Rattlesnake', 'Pink Lady''s Slipper'],
- 'Large Forest/Lake/Wildflower Reserve'),
+ ARRAY['Large Forest/Lake/Wildflower Reserve']),
 
 ('Moraine State Park',
  '16,725-acre park around Lake Arthur. Excellent boating, fishing, and wildlife viewing. Multiple access points and facilities. Very family-friendly.',
@@ -647,7 +647,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Portersville', 'PA', '16051',
  'Large lake created by glacial moraine. Important waterfowl stopover during migration. Bald eagle nesting site. Excellent for studying glacial geology.',
  ARRAY['Bald Eagle', 'Osprey', 'Common Loon', 'Red-necked Grebe', 'Great Egret', 'Largemouth Bass', 'Northern Pike'],
- 'Glacial Lake/Forest'),
+ ARRAY['Glacial Lake/Forest']),
 
 ('McConnells Mill State Park',
  '2,546-acre park with dramatic gorge. Slippery Rock Creek flows through 400-foot deep gorge. Beautiful scenery but challenging terrain. Best for older, experienced students.',
@@ -659,7 +659,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Portersville', 'PA', '16051',
  'Spectacular gorge cut through sandstone. Demonstrates erosion and geology. Cool, moist gorge supports unique plant communities. Challenging but rewarding hikes.',
  ARRAY['Louisiana Waterthrush', 'Winter Wren', 'Common Raven', 'Black Rat Snake', 'Northern Water Snake', 'Brook Trout'],
- 'Gorge/Creek/Rock Outcrop'),
+ ARRAY['Gorge/Creek/Rock Outcrop']),
 
 ('Keystone State Park',
  '1,200-acre park with Keystone Lake. Boating, swimming, fishing. Accessible facilities. Very safe and family-oriented.',
@@ -671,7 +671,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Derry', 'PA', '15627',
  'Mid-sized lake with forest and meadow habitats. Good for water quality study. Accessible trails suitable for all abilities.',
  ARRAY['Wood Duck', 'Hooded Merganser', 'Green Heron', 'Painted Turtle', 'Bluegill', 'Largemouth Bass'],
- 'Lake/Forest/Meadow'),
+ ARRAY['Lake/Forest/Meadow']),
 
 ('Deer Lakes Park',
  '1,180-acre county park with multiple lakes, trails, and natural areas. Nature center on-site. Very accessible and safe.',
@@ -702,7 +702,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15212',
  'Urban green space integrated with sports facility. River access attracts waterfowl. Good for discussing urban planning and sustainability.',
  ARRAY['Ring-billed Gull', 'Rock Pigeon', 'House Sparrow', 'Peregrine Falcon (nesting nearby)'],
- 'Urban/Riverfront/Stadium'),
+ ARRAY['Urban/Riverfront/Stadium']),
 
 ('Acrisure Stadium - North Shore',
  'Football stadium with large footprint. Part of North Shore development. Adjacent to trails and parks.',
@@ -714,7 +714,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15212',
  'Large developed area shows contrast with adjacent natural riverfront. Part of North Shore redevelopment project.',
  ARRAY['Rock Pigeon', 'European Starling', 'House Sparrow', 'Peregrine Falcon'],
- 'Urban/Stadium'),
+ ARRAY['Urban/Stadium']),
 
 ('PPG Paints Arena - Downtown',
  'Hockey/event arena in downtown core. Surrounded by urban landscape. Very accessible location.',
@@ -726,7 +726,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Pittsburgh', 'PA', '15219',
  'Urban core environment. Demonstrates species adapted to human activity. Rooftop may support nesting birds.',
  ARRAY['Rock Pigeon', 'European Starling', 'House Sparrow', 'Peregrine Falcon'],
- 'Urban Core'),
+ ARRAY['Urban Core']),
 
 ('Petersen Events Center - Oakland',
  'University basketball arena. Campus setting with green space. Safe, accessible location.',

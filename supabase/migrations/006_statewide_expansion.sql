@@ -499,7 +499,7 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
  'Erie', 'PA', '16505',
  'Unique Great Lakes ecosystem. Important bird migration stopover. Rare dune and swale habitat. Excellent for beach ecology and waterfowl.',
  ARRAY['Bald Eagle', 'Osprey', 'Common Loon', 'Horned Grebe', 'Common Tern', 'Piping Plover (rare)', 'Lake Erie fish species'],
- 'Great Lakes/Peninsula/Beach'),
+ ARRAY['Great Lakes/Peninsula/Beach']),
 
 ('Pine Creek Gorge - Pennsylvania Grand Canyon',
  '47-mile gorge with spectacular views. Leonard Harrison and Colton Point State Parks provide overlooks. Truly impressive landscape.',
