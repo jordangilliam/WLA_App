@@ -12,6 +12,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 ('Carnegie Library - Main (Oakland)', 
  'Historic main library with beautiful architecture and extensive natural history collection. Outdoor gardens attract songbirds and butterflies. Safe indoor viewing areas for weather observation.',
  40.4395, -79.9497,
+ 40.4395, -79.9497,
+
  ST_SetSRID(ST_MakePoint(-79.9497, 40.4395), 4326)::geography,
  'library',
  '4400 Forbes Ave',
@@ -23,6 +25,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 ('Carnegie Library - Allegheny',
  'Historic North Side library with nearby riverfront access. Adjacent to parks with mature trees attracting diverse bird species.',
  40.4525, -80.0090,
+ 40.4525, -80.0090,
+
  ST_SetSRID(ST_MakePoint(-80.0090, 40.4525), 4326)::geography,
  'library',
  '1230 Federal St',
@@ -33,6 +37,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Squirrel Hill',
  'Community hub in tree-lined neighborhood. Excellent location for observing seasonal changes and urban forest ecology.',
+ 40.4243, -79.9217,
+
  ST_SetSRID(ST_MakePoint(-79.9217, 40.4243), 4326)::geography,
  'library',
  '5801 Forbes Ave',
@@ -43,6 +49,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - East Liberty',
  'Modern facility with green roof and rain gardens. Exemplifies sustainable urban design and stormwater management.',
+ 40.4606, -79.9265,
+
  ST_SetSRID(ST_MakePoint(-79.9265, 40.4606), 4326)::geography,
  'library',
  '130 S Whitfield St',
@@ -53,6 +61,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Beechview',
  'Neighborhood library with hilltop views. Surrounded by residential gardens attracting birds and butterflies.',
+ 40.4048, -80.0349,
+
  ST_SetSRID(ST_MakePoint(-80.0349, 40.4048), 4326)::geography,
  'library',
  '1910 Broadway Ave',
@@ -63,6 +73,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Brookline',
  'Community library near Boulevard of the Allies. Access to urban greenways and stream corridors.',
+ 40.3932, -80.0180,
+
  ST_SetSRID(ST_MakePoint(-80.0180, 40.3932), 4326)::geography,
  'library',
  '708 Brookline Blvd',
@@ -73,6 +85,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Carrick',
  'Hilltop location with panoramic views. Great for weather observation and cloud identification.',
+ 40.3960, -79.9801,
+
  ST_SetSRID(ST_MakePoint(-79.9801, 40.3960), 4326)::geography,
  'library',
  '1811 Brownsville Rd',
@@ -83,6 +97,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Hazelwood',
  'Riverfront community library. Close to Three Rivers Heritage Trail for nature walks.',
+ 40.4058, -79.9385,
+
  ST_SetSRID(ST_MakePoint(-79.9385, 40.4058), 4326)::geography,
  'library',
  '4748 Monongahela St',
@@ -93,6 +109,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Homewood',
  'Community center with adjacent park space. Urban wildlife observation point.',
+ 40.4563, -79.9002,
+
  ST_SetSRID(ST_MakePoint(-79.9002, 40.4563), 4326)::geography,
  'library',
  '7101 Hamilton Ave',
@@ -103,6 +121,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Knoxville',
  'Historic neighborhood library with mature street trees. Urban forestry observation site.',
+ 40.4175, -79.9765,
+
  ST_SetSRID(ST_MakePoint(-79.9765, 40.4175), 4326)::geography,
  'library',
  '100 Brownsville Rd',
@@ -113,6 +133,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Lawrenceville',
  'Riverfront location near parks and trails. Excellent for urban ecology studies.',
+ 40.4661, -79.9611,
+
  ST_SetSRID(ST_MakePoint(-79.9611, 40.4661), 4326)::geography,
  'library',
  '279 Fisk St',
@@ -123,6 +145,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Mt. Washington',
  'Hilltop library with spectacular views. Geography and geology education site.',
+ 40.4303, -80.0108,
+
  ST_SetSRID(ST_MakePoint(-80.0108, 40.4303), 4326)::geography,
  'library',
  '315 Grandview Ave',
@@ -133,6 +157,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Sheraden',
  'Community library near Sheraden Park. Access to woodlands and stream habitat.',
+ 40.4445, -80.0777,
+
  ST_SetSRID(ST_MakePoint(-80.0777, 40.4445), 4326)::geography,
  'library',
  '720 Sheraden Ave',
@@ -143,6 +169,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - South Side',
  'Historic library on Pittsburgh''s South Side. Near Monongahela River trails.',
+ 40.4280, -79.9762,
+
  ST_SetSRID(ST_MakePoint(-79.9762, 40.4280), 4326)::geography,
  'library',
  '2205 E Carson St',
@@ -153,6 +181,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - West End',
  'Community library near West End Valley Park. Excellent trail access.',
+ 40.4398, -80.0463,
+
  ST_SetSRID(ST_MakePoint(-80.0463, 40.4398), 4326)::geography,
  'library',
  '47 Wabash St',
@@ -170,6 +200,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Frick Park - Braddock Trail',
  'Pittsburgh''s largest historic park with 644 acres of forests, meadows, and streams. Excellent trail system with diverse habitats. Safe, well-maintained paths suitable for all skill levels.',
+ 40.4337, -79.8987,
+
  ST_SetSRID(ST_MakePoint(-79.8987, 40.4337), 4326)::geography,
  'park',
  'Beechwood Blvd',
@@ -180,6 +212,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Schenley Park - Panther Hollow',
  '456-acre park with diverse landscapes including forests, meadows, and Panther Hollow Lake. Historic olmsted design. Multiple safe trails and educational signage.',
+ 40.4363, -79.9442,
+
  ST_SetSRID(ST_MakePoint(-79.9442, 40.4363), 4326)::geography,
  'park',
  'Schenley Dr',
@@ -190,6 +224,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Riverview Park - Observatory Hill',
  '287-acre park with dramatic views, old-growth forest, and the Allegheny Observatory. Historic Allegheny River overlook. Safe paved and natural trails.',
+ 40.4874, -80.0117,
+
  ST_SetSRID(ST_MakePoint(-80.0117, 40.4874), 4326)::geography,
  'park',
  'Riverview Ave',
@@ -200,6 +236,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Highland Park - Reservoir Trail',
  '380-acre park with reservoir, woodlands, and meadows. Popular loop trail around reservoir (1.8 miles). Safe, family-friendly paths.',
+ 40.4808, -79.9175,
+
  ST_SetSRID(ST_MakePoint(-79.9175, 40.4808), 4326)::geography,
  'park',
  'Highland Ave',
@@ -210,6 +248,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Point State Park',
  'Historic 36-acre urban park at confluence of three rivers. Iconic fountain. Excellent for geography, history, and urban wildlife study. Fully accessible.',
+ 40.4414, -80.0094,
+
  ST_SetSRID(ST_MakePoint(-80.0094, 40.4414), 4326)::geography,
  'park',
  '101 Commonwealth Pl',
@@ -220,6 +260,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('South Park - Wave Pool Area',
  '2,042-acre county park with diverse habitats including forests, meadows, streams, and wetlands. Multiple entry points and safe trails. Nature center on-site.',
+ 40.2987, -79.9892,
+
  ST_SetSRID(ST_MakePoint(-79.9892, 40.2987), 4326)::geography,
  'park',
  '3735 Buffalo Dr',
@@ -230,6 +272,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('North Park - Pie Traynor Field Area',
  '3,075-acre county park with extensive trail system, lake, and diverse habitats. Boating, fishing, and nature study opportunities. Very safe and well-maintained.',
+ 40.6181, -79.9645,
+
  ST_SetSRID(ST_MakePoint(-79.9645, 40.6181), 4326)::geography,
  'park',
  '10300 Pearce Mill Rd',
@@ -240,6 +284,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Emerald View Park - Grandview Overlook',
  '287-acre park spanning Mt. Washington hillsides. Spectacular views and restored habitats. Challenging terrain but worth it for older students.',
+ 40.4273, -80.0042,
+
  ST_SetSRID(ST_MakePoint(-80.0042, 40.4273), 4326)::geography,
  'park',
  'Grandview Ave',
@@ -250,6 +296,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Hartwood Acres Park',
  '629-acre park with mansion, gardens, and extensive trails. Mix of formal and natural landscapes. Safe trails and interpretive signage.',
+ 40.6223, -79.9094,
+
  ST_SetSRID(ST_MakePoint(-79.9094, 40.6223), 4326)::geography,
  'park',
  '215 Saxonburg Blvd',
@@ -260,6 +308,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Boyce Park',
  '1,096-acre county park with nature center, trails, and diverse habitats. Educational programs available. Very family-friendly.',
+ 40.4931, -79.7542,
+
  ST_SetSRID(ST_MakePoint(-79.7542, 40.4931), 4326)::geography,
  'park',
  '675 Old Frankstown Rd',
@@ -270,6 +320,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Frick Environmental Center',
  'State-of-the-art green building with living roof, native gardens, and environmental education exhibits. Perfect introduction to sustainability. Fully accessible.',
+ 40.4378, -79.9020,
+
  ST_SetSRID(ST_MakePoint(-79.9020, 40.4378), 4326)::geography,
  'park',
  '2005 Beechwood Blvd',
@@ -280,6 +332,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('McKinley Park',
  '22-acre neighborhood park with trails through wooded hillside. Hidden gem with surprising biodiversity. Safe neighborhood access.',
+ 40.4276, -79.8862,
+
  ST_SetSRID(ST_MakePoint(-79.8862, 40.4276), 4326)::geography,
  'park',
  '300 Summerlea St',
@@ -290,6 +344,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Mellon Park',
  '11-acre park with formal gardens and natural areas. Excellent for studying plant diversity. Very safe, well-lit area.',
+ 40.4483, -79.9159,
+
  ST_SetSRID(ST_MakePoint(-79.9159, 40.4483), 4326)::geography,
  'park',
  '1047 Shady Ave',
@@ -300,6 +356,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Arsenal Park',
  '42-acre riverfront park with trails and green spaces. Great river access and views. Safe community park.',
+ 40.4654, -79.9350,
+
  ST_SetSRID(ST_MakePoint(-79.9350, 40.4654), 4326)::geography,
  'park',
  '40th St',
@@ -310,6 +368,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('West End Valley Park',
  '223-acre park with extensive trail system through mature forest. One of Pittsburgh''s hidden gems. Well-maintained trails.',
+ 40.4431, -80.0489,
+
  ST_SetSRID(ST_MakePoint(-80.0489, 40.4431), 4326)::geography,
  'park',
  'Wabash St',
@@ -327,6 +387,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('University of Pittsburgh - Cathedral of Learning',
  'Iconic 42-story academic building surrounded by landscaped grounds. Safe campus environment with security. Excellent for urban architecture and green space integration studies.',
+ 40.4443, -79.9533,
+
  ST_SetSRID(ST_MakePoint(-79.9533, 40.4443), 4326)::geography,
  'university',
  '4200 Fifth Ave',
@@ -337,6 +399,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Mellon University - The Cut',
  'Central campus green space with walking paths and native plantings. Very safe campus with 24/7 security. Demonstrates sustainable campus design.',
+ 40.4435, -79.9451,
+
  ST_SetSRID(ST_MakePoint(-79.9451, 40.4435), 4326)::geography,
  'university',
  '5000 Forbes Ave',
@@ -347,6 +411,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Duquesne University - Bluff Street',
  'Urban campus on hillside overlooking rivers. Spectacular views and interesting topography. Safe campus environment.',
+ 40.4393, -79.9941,
+
  ST_SetSRID(ST_MakePoint(-79.9941, 40.4393), 4326)::geography,
  'university',
  '600 Forbes Ave',
@@ -357,6 +423,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Chatham University - Woodland Road',
  'Eden Hall Campus focuses on sustainability and environmental studies. Living laboratory for green building and ecology. Educational tours available.',
+ 40.5426, -79.8895,
+
  ST_SetSRID(ST_MakePoint(-79.8895, 40.5426), 4326)::geography,
  'university',
  '6035 Ridge Rd',
@@ -367,6 +435,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Point Park University - Downtown',
  'Downtown urban campus. Excellent for studying urban adaptation and human-dominated ecosystems. Very accessible location.',
+ 40.4420, -80.0028,
+
  ST_SetSRID(ST_MakePoint(-80.0028, 40.4420), 4326)::geography,
  'university',
  '201 Wood St',
@@ -377,6 +447,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Robert Morris University - Moon Township',
  'Suburban campus with mix of developed and natural areas. Sports facilities and green spaces. Safe campus environment.',
+ 40.5220, -80.1842,
+
  ST_SetSRID(ST_MakePoint(-80.1842, 40.5220), 4326)::geography,
  'university',
  '6001 University Blvd',
@@ -387,6 +459,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Community College of Allegheny County - Boyce',
  'Campus with natural areas and trails. Accessible educational environment. Nature study areas on grounds.',
+ 40.4941, -79.7567,
+
  ST_SetSRID(ST_MakePoint(-79.7567, 40.4941), 4326)::geography,
  'university',
  '595 Beatty Rd',
@@ -397,6 +471,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carlow University - Oakland',
  'Urban campus with emphasis on sustainability. Rooftop gardens and green infrastructure. Safe neighborhood setting.',
+ 40.4372, -79.9541,
+
  ST_SetSRID(ST_MakePoint(-79.9541, 40.4372), 4326)::geography,
  'university',
  '3333 Fifth Ave',
@@ -407,6 +483,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('LaRoche University - McCandless',
  'Suburban campus with preserved woodlands and wildlife. Nature trails on campus. Very safe environment.',
+ 40.6047, -80.0469,
+
  ST_SetSRID(ST_MakePoint(-80.0469, 40.6047), 4326)::geography,
  'university',
  '9000 Babcock Blvd',
@@ -424,6 +502,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Three Rivers Heritage Trail - Point State Park',
  'Start of 24-mile trail system at three rivers confluence. Flat, paved, fully accessible. Perfect for all ages and abilities.',
+ 40.4407, -80.0104,
+
  ST_SetSRID(ST_MakePoint(-80.0104, 40.4407), 4326)::geography,
  'greenway',
  'Commonwealth Pl',
@@ -434,6 +514,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('North Shore Riverfront Park',
  'Allegheny riverfront with trails, marina, and green spaces. Sports stadiums nearby. Very safe, well-trafficked area.',
+ 40.4469, -80.0067,
+
  ST_SetSRID(ST_MakePoint(-80.0067, 40.4469), 4326)::geography,
  'greenway',
  'North Shore Dr',
@@ -444,6 +526,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Washington''s Landing',
  '42-acre island in Allegheny River. Row houses, marina, and green spaces. Safe island community with trail access.',
+ 40.4623, -79.9836,
+
  ST_SetSRID(ST_MakePoint(-79.9836, 40.4623), 4326)::geography,
  'greenway',
  'Washington''s Landing',
@@ -454,6 +538,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('South Side Trail - Hot Metal Bridge',
  'Monongahela riverfront trail with industrial heritage. Bridge crossing provides river views. Safe paved trail.',
+ 40.4286, -79.9628,
+
  ST_SetSRID(ST_MakePoint(-79.9628, 40.4286), 4326)::geography,
  'greenway',
  'S Water St',
@@ -464,6 +550,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Eliza Furnace Trail',
  '3-mile trail from Oakland to South Side. Follows historic railway. Safe, separated bike/pedestrian path.',
+ 40.4333, -79.9439,
+
  ST_SetSRID(ST_MakePoint(-79.9439, 40.4333), 4326)::geography,
  'greenway',
  'Boulevard of the Allies',
@@ -474,6 +562,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Jail Trail - Woods Run',
  'Trail along Allegheny River through industrial area. Interesting contrasts between nature and development. Safe trail.',
+ 40.4666, -80.0189,
+
  ST_SetSRID(ST_MakePoint(-80.0189, 40.4666), 4326)::geography,
  'greenway',
  'Woods Run Ave',
@@ -484,6 +574,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Duck Hollow Trail',
  'Nature trail along Junction Hollow. Connects neighborhoods to Schenley Park. Stream and forest habitat.',
+ 40.4385, -79.9548,
+
  ST_SetSRID(ST_MakePoint(-79.9548, 40.4385), 4326)::geography,
  'greenway',
  'Boundary St',
@@ -494,6 +586,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Great Allegheny Passage - Sandcastle',
  'Start of 150-mile trail to Cumberland, MD. Flat riverfront section. Very popular and safe trail.',
+ 40.4058, -79.9092,
+
  ST_SetSRID(ST_MakePoint(-79.9092, 40.4058), 4326)::geography,
  'greenway',
  'E Waterfront Dr',
@@ -504,6 +598,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Montour Trail - Moon Township',
  '63-mile loop trail system. Suburban and rural landscapes. Rails-to-trails conversion. Very safe multi-use trail.',
+ 40.5145, -80.2106,
+
  ST_SetSRID(ST_MakePoint(-80.2106, 40.5145), 4326)::geography,
  'greenway',
  'Montour Trail',
@@ -514,6 +610,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Panther Hollow Trail',
  'Natural trail through Schenley Park ravine. Stream and forest. More rugged but very rewarding. Suitable for experienced hikers.',
+ 40.4337, -79.9424,
+
  ST_SetSRID(ST_MakePoint(-79.9424, 40.4337), 4326)::geography,
  'greenway',
  'Panther Hollow Rd',
@@ -531,6 +629,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Raccoon Creek State Park',
  '7,572-acre state park with Raccoon Creek Lake, forests, and extensive trail system. Wildflower reserve with 700+ species. Safe, well-maintained facilities.',
+ 40.5014, -80.3689,
+
  ST_SetSRID(ST_MakePoint(-80.3689, 40.5014), 4326)::geography,
  'state_park',
  '3000 State Route 18',
@@ -541,6 +641,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Moraine State Park',
  '16,725-acre park around Lake Arthur. Excellent boating, fishing, and wildlife viewing. Multiple access points and facilities. Very family-friendly.',
+ 40.9497, -80.0897,
+
  ST_SetSRID(ST_MakePoint(-80.0897, 40.9497), 4326)::geography,
  'state_park',
  '225 Pleasant Valley Rd',
@@ -551,6 +653,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('McConnells Mill State Park',
  '2,546-acre park with dramatic gorge. Slippery Rock Creek flows through 400-foot deep gorge. Beautiful scenery but challenging terrain. Best for older, experienced students.',
+ 40.9608, -80.1631,
+
  ST_SetSRID(ST_MakePoint(-80.1631, 40.9608), 4326)::geography,
  'state_park',
  '2660 McConnells Mill Rd',
@@ -561,6 +665,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Keystone State Park',
  '1,200-acre park with Keystone Lake. Boating, swimming, fishing. Accessible facilities. Very safe and family-oriented.',
+ 40.6561, -79.3544,
+
  ST_SetSRID(ST_MakePoint(-79.3544, 40.6561), 4326)::geography,
  'state_park',
  '1150 Keystone Park Rd',
@@ -571,6 +677,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Deer Lakes Park',
  '1,180-acre county park with multiple lakes, trails, and natural areas. Nature center on-site. Very accessible and safe.',
+ 40.6114, -79.8194,
+
  ST_SetSRID(ST_MakePoint(-79.8194, 40.6114), 4326)::geography,
  'park',
  '2751 Gilespie Rd',
@@ -588,6 +696,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('PNC Park - North Shore',
  'Baseball stadium with riverfront location. Green roof and sustainable design. Great views of city and rivers. Very safe during events.',
+ 40.4468, -80.0058,
+
  ST_SetSRID(ST_MakePoint(-80.0058, 40.4468), 4326)::geography,
  'sports',
  '115 Federal St',
@@ -598,6 +708,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Acrisure Stadium - North Shore',
  'Football stadium with large footprint. Part of North Shore development. Adjacent to trails and parks.',
+ 40.4468, -80.0158,
+
  ST_SetSRID(ST_MakePoint(-80.0158, 40.4468), 4326)::geography,
  'sports',
  '100 Art Rooney Ave',
@@ -608,6 +720,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('PPG Paints Arena - Downtown',
  'Hockey/event arena in downtown core. Surrounded by urban landscape. Very accessible location.',
+ 40.4394, -79.9892,
+
  ST_SetSRID(ST_MakePoint(-79.9892, 40.4394), 4326)::geography,
  'sports',
  '1001 Fifth Ave',
@@ -618,6 +732,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Petersen Events Center - Oakland',
  'University basketball arena. Campus setting with green space. Safe, accessible location.',
+ 40.4421, -79.9582,
+
  ST_SetSRID(ST_MakePoint(-79.9582, 40.4421), 4326)::geography,
  'sports',
  '3719 Terrace St',
@@ -628,6 +744,8 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Phipps Conservatory - Schenley Park',
  'Historic botanical conservatory with extensive gardens. World-class plant collection and sustainable design. Educational programs available. Admission required but worth it.',
+ 40.4380, -79.9485,
+
  ST_SetSRID(ST_MakePoint(-79.9485, 40.4380), 4326)::geography,
  'landmark',
  '1 Schenley Park',

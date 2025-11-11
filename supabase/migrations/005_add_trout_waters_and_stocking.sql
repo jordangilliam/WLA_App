@@ -369,6 +369,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- STOCKED TROUT STREAMS
 ('Deer Creek - Harmarville',
  'Popular stocked trout stream with excellent access. Flows through suburban area with multiple fishing spots. Safe creek-side trails and parking. Great for beginners and educational trips.',
+ 40.5389, -79.8194,
+
  ST_SetSRID(ST_MakePoint(-79.8194, 40.5389), 4326)::geography,
  'park',
  'Guys Run Rd',
@@ -379,6 +381,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Glade Run - Valencia',
  'Scenic stream with good trout habitat. Mix of pools and riffles. Multiple access points with parking. Family-friendly fishing location.',
+ 40.6678, -79.9856,
+
  ST_SetSRID(ST_MakePoint(-79.9856, 40.6678), 4326)::geography,
  'park',
  'Route 228',
@@ -389,6 +393,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Little Sewickley Creek - Sewickley',
  'Beautiful woodland stream with consistent flow. Popular with fly fishermen. Challenging terrain but rewarding. Best for older students.',
+ 40.5536, -80.1847,
+
  ST_SetSRID(ST_MakePoint(-80.1847, 40.5536), 4326)::geography,
  'park',
  'Little Sewickley Creek Rd',
@@ -399,6 +405,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Montour Run - Moon Township',
  'Accessible stream along Montour Trail. Easy parking and walking access. Perfect for school groups. Gentle flow with good pools.',
+ 40.5236, -80.1728,
+
  ST_SetSRID(ST_MakePoint(-80.1728, 40.5236), 4326)::geography,
  'park',
  'Montour Trail',
@@ -409,6 +417,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Pine Creek - North Park',
  'North Park stream section stocked for Mentored Youth Trout Fishing Day. Excellent for introducing young anglers. Very safe, supervised location.',
+ 40.6045, -79.9689,
+
  ST_SetSRID(ST_MakePoint(-79.9689, 40.6045), 4326)::geography,
  'park',
  'Pearce Mill Rd',
@@ -420,6 +430,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- STOCKED LAKES
 ('North Park Lake',
  '75-acre scenic lake stocked with trout spring and fall. Excellent shore access all around lake. Boat rentals available. Safe, accessible, family-friendly.',
+ 40.6253, -79.9556,
+
  ST_SetSRID(ST_MakePoint(-79.9556, 40.6253), 4326)::geography,
  'park',
  '10300 Pearce Mill Rd',
@@ -430,6 +442,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('South Park Lake',
  '18-acre lake heavily stocked with trout. Multiple fishing piers and shore access. Paddle boats available. Great for families and school groups.',
+ 40.2956, -79.9872,
+
  ST_SetSRID(ST_MakePoint(-79.9872, 40.2956), 4326)::geography,
  'park',
  '3735 Buffalo Dr',
@@ -440,6 +454,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Boyce Park Lake',
  '12-acre lake in Boyce Park. Peaceful setting with good access. Nature center nearby offers educational programs. Very family-friendly.',
+ 40.4875, -79.7589,
+
  ST_SetSRID(ST_MakePoint(-79.7589, 40.4875), 4326)::geography,
  'park',
  '675 Old Frankstown Rd',
@@ -450,6 +466,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Deer Lakes - Upper Lake',
  '32-acre lake with regular trout stockings. Electric motors only - peaceful fishing. Multiple access points. Excellent for kayak fishing.',
+ 40.6089, -79.8167,
+
  ST_SetSRID(ST_MakePoint(-79.8167, 40.6089), 4326)::geography,
  'park',
  '2751 Gilespie Rd',
@@ -461,6 +479,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 -- SPECIAL REGULATION WATERS
 ('Loyalhanna Creek - Ligonier',
  'Delayed Harvest Artificial Lures Only section. High-quality trout fishing. Heavily stocked. Advanced fishing techniques. Best for experienced anglers.',
+ 40.2439, -79.2328,
+
  ST_SetSRID(ST_MakePoint(-79.2328, 40.2439), 4326)::geography,
  'park',
  'Route 711',
@@ -471,6 +491,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Youghiogheny River - McKeesport',
  'Warm-water fishery with seasonal trout stockings in spring. Excellent smallmouth bass fishing. River access from trails. Multiple launch points.',
+ 40.3489, -79.8267,
+
  ST_SetSRID(ST_MakePoint(-79.8267, 40.3489), 4326)::geography,
  'greenway',
  'Youghiogheny River Trail',
@@ -481,6 +503,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Raccoon Creek - Raccoon State Park',
  'Long section of stocked water flowing through state park. Multiple access points and pools. Excellent habitat diversity. Safe trails throughout.',
+ 40.4989, -80.3697,
+
  ST_SetSRID(ST_MakePoint(-80.3697, 40.4989), 4326)::geography,
  'state_park',
  '3000 State Route 18',

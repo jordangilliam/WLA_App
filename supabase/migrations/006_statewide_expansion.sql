@@ -12,6 +12,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Schlow Centre Region Library - Main',
  'Modern community library with nature programming. Adjacent to trails and parks. Safe, accessible location for all ages.',
+ 40.7934, -77.8597,
+
  ST_SetSRID(ST_MakePoint(-77.8597, 40.7934), 4326)::geography,
  'library',
  '211 S Allen St',
@@ -22,6 +24,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Penn State Pattee Library',
  'Major university library with extensive natural history resources. Campus setting with diverse habitats nearby. Very safe environment.',
+ 40.7996, -77.8611,
+
  ST_SetSRID(ST_MakePoint(-77.8611, 40.7996), 4326)::geography,
  'university',
  'Curtin Rd',
@@ -35,6 +39,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Millbrook Marsh Nature Center',
  '52-acre nature preserve with boardwalk trails through wetland. Excellent educational facility. Safe, accessible trails. Free admission.',
+ 40.8139, -77.8422,
+
  ST_SetSRID(ST_MakePoint(-77.8422, 40.8139), 4326)::geography,
  'park',
  '1031 Roberts Rd',
@@ -45,6 +51,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Penn State Arboretum',
  '370-acre living laboratory with gardens and natural areas. Educational signage throughout. Multiple themed gardens. Free, open daily.',
+ 40.8089, -77.8656,
+
  ST_SetSRID(ST_MakePoint(-77.8656, 40.8089), 4326)::geography,
  'park',
  'Bigler Rd',
@@ -58,6 +66,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Bald Eagle State Park',
  '5,900-acre park with 1,730-acre lake. Excellent boating, fishing, hiking. Nature center on-site. Very family-friendly.',
+ 41.0481, -77.7881,
+
  ST_SetSRID(ST_MakePoint(-77.7881, 41.0481), 4326)::geography,
  'state_park',
  '149 Main Park Rd',
@@ -68,6 +78,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Black Moshannon State Park',
  '3,480-acre park with unique bog ecosystem. Boardwalk through bog. Dark sky preserve. Exceptional natural area.',
+ 40.9236, -78.0597,
+
  ST_SetSRID(ST_MakePoint(-78.0597, 40.9236), 4326)::geography,
  'state_park',
  '4216 Beaver Rd',
@@ -81,6 +93,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('YMCA of Centre County',
  'Community center with outdoor spaces and programming. Safe, supervised environment. Year-round nature activities.',
+ 40.7856, -77.8686,
+
  ST_SetSRID(ST_MakePoint(-77.8686, 40.7856), 4326)::geography,
  'sports',
  '677 W Whitehall Rd',
@@ -98,6 +112,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Dauphin County Library System - McCormick',
  'Modern riverside library with riverfront views. Access to Capital Area Greenbelt. Safe downtown location.',
+ 40.2669, -76.8853,
+
  ST_SetSRID(ST_MakePoint(-76.8853, 40.2669), 4326)::geography,
  'library',
  '101 Walnut St',
@@ -108,6 +124,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('East Shore Area Library',
  'Community library across river from Harrisburg. River access and trails. Family-friendly location.',
+ 40.2564, -76.8522,
+
  ST_SetSRID(ST_MakePoint(-76.8522, 40.2564), 4326)::geography,
  'library',
  '4501 Ethel St',
@@ -121,6 +139,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('State Museum of Pennsylvania',
  'Comprehensive natural history exhibits including PA wildlife, geology, ecology. Indoor education perfect for any weather. Free admission.',
+ 40.2644, -76.8875,
+
  ST_SetSRID(ST_MakePoint(-76.8875, 40.2644), 4326)::geography,
  'landmark',
  '300 North St',
@@ -131,6 +151,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Whitaker Center for Science and Arts',
  'Science center with environmental exhibits and IMAX theater. Hands-on learning. Downtown location. Admission required.',
+ 40.2619, -76.8836,
+
  ST_SetSRID(ST_MakePoint(-76.8836, 40.2619), 4326)::geography,
  'landmark',
  '222 Market St',
@@ -144,6 +166,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Wildwood Park and Lake',
  '229-acre nature sanctuary in Harrisburg. Boardwalk loop around lake. Nature center. Free, accessible. Excellent urban wildlife refuge.',
+ 40.2939, -76.8494,
+
  ST_SetSRID(ST_MakePoint(-76.8494, 40.2939), 4326)::geography,
  'park',
  '100 Wildwood Way',
@@ -154,6 +178,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Riverfront Park - Harrisburg',
  'Mile-long riverfront park on City Island. Walking trails, river access. Very safe, popular area. Great river ecology site.',
+ 40.2514, -76.8833,
+
  ST_SetSRID(ST_MakePoint(-76.8833, 40.2514), 4326)::geography,
  'park',
  'City Island',
@@ -167,6 +193,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('YMCA of the Roses - Harrisburg Branch',
  'Full-service community center with outdoor programming. Safe, supervised activities. Youth programs include nature exploration.',
+ 40.2775, -76.8528,
+
  ST_SetSRID(ST_MakePoint(-76.8528, 40.2775), 4326)::geography,
  'sports',
  '20 S 3rd St',
@@ -184,6 +212,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Free Library of Philadelphia - Parkway Central',
  'Major urban library with extensive resources. Next to Logan Square and Franklin Institute. Very accessible location.',
+ 39.9584, -75.1719,
+
  ST_SetSRID(ST_MakePoint(-75.1719, 39.9584), 4326)::geography,
  'library',
  '1901 Vine St',
@@ -194,6 +224,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Independence Branch - Free Library',
  'Historic Old City library. Walkable to Independence Hall, Liberty Bell. Rich history and nature integration.',
+ 39.9486, -75.1472,
+
  ST_SetSRID(ST_MakePoint(-75.1472, 39.9486), 4326)::geography,
  'library',
  '18 S 7th St',
@@ -207,6 +239,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Academy of Natural Sciences - Drexel University',
  'America''s oldest natural history museum. World-class dinosaur and wildlife exhibits. Live animal center. Admission required.',
+ 39.9578, -75.1725,
+
  ST_SetSRID(ST_MakePoint(-75.1725, 39.9578), 4326)::geography,
  'landmark',
  '1900 Benjamin Franklin Pkwy',
@@ -217,6 +251,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Schuylkill Center for Environmental Education',
  '365-acre nature preserve with 7 miles of trails. Environmental education center. Wildlife rehabilitation. Truly special place.',
+ 40.0522, -75.2278,
+
  ST_SetSRID(ST_MakePoint(-75.2278, 40.0522), 4326)::geography,
  'park',
  '8480 Hagy''s Mill Rd',
@@ -227,6 +263,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('John Heinz National Wildlife Refuge at Tinicum',
  '1,000-acre urban refuge - largest remaining freshwater tidal marsh in PA. Boardwalk trails. Free admission. Exceptional location.',
+ 39.8936, -75.2642,
+
  ST_SetSRID(ST_MakePoint(-75.2642, 39.8936), 4326)::geography,
  'park',
  '8601 Lindbergh Blvd',
@@ -240,6 +278,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Fairmount Park - Wissahickon Valley',
  '1,800-acre gorge with creek, trails, and mature forest. Extensive trail system. Historic and natural landmark. Very accessible.',
+ 40.0367, -75.2064,
+
  ST_SetSRID(ST_MakePoint(-75.2064, 40.0367), 4326)::geography,
  'park',
  'Forbidden Dr',
@@ -250,6 +290,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Bartram''s Garden',
  '50-acre historic botanical garden on Schuylkill River. America''s oldest surviving botanic garden (1728). Educational programs. Admission required.',
+ 39.9267, -75.2208,
+
  ST_SetSRID(ST_MakePoint(-75.2208, 39.9267), 4326)::geography,
  'landmark',
  '5400 Lindbergh Blvd',
@@ -263,6 +305,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Philadelphia Freedom Valley YMCA',
  'Large community center serving diverse neighborhoods. Youth programs include environmental education. Safe, supervised space.',
+ 39.9969, -75.2303,
+
  ST_SetSRID(ST_MakePoint(-75.2303, 39.9969), 4326)::geography,
  'sports',
  '8200 Flourtown Ave',
@@ -279,6 +323,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Coatesville Area Public Library',
  'Community library serving Chester County. Safe, accessible location. Programming for all ages.',
+ 39.9831, -75.8236,
+
  ST_SetSRID(ST_MakePoint(-75.8236, 39.9831), 4326)::geography,
  'library',
  '501 E Lincoln Hwy',
@@ -289,6 +335,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Hibernia County Park',
  '800-acre park with lake, forest, and historic features. Excellent trails. Very family-friendly. Free admission.',
+ 40.0483, -75.8528,
+
  ST_SetSRID(ST_MakePoint(-75.8528, 40.0483), 4326)::geography,
  'park',
  '1 Park Rd',
@@ -299,6 +347,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Brandywine Creek - Coatesville Section',
  'Scenic creek with fishing access. Part of famous Brandywine watershed. Beautiful riparian corridor.',
+ 39.9794, -75.8194,
+
  ST_SetSRID(ST_MakePoint(-75.8194, 39.9794), 4326)::geography,
  'park',
  'Brandywine Rd',
@@ -309,6 +359,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('YMCA of Coatesville',
  'Community wellness center with youth programs. Safe environment for activities. Outdoor programming available.',
+ 39.9772, -75.8144,
+
  ST_SetSRID(ST_MakePoint(-75.8144, 39.9772), 4326)::geography,
  'sports',
  '100 Gateway Blvd',
@@ -325,6 +377,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Eastern Monroe Public Library',
  'Regional library serving Pocono communities. Programs focused on local nature and history. Accessible location.',
+ 41.0008, -75.1878,
+
  ST_SetSRID(ST_MakePoint(-75.1878, 41.0008), 4326)::geography,
  'library',
  '1002 N 9th St',
@@ -335,6 +389,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Delaware Water Gap National Recreation Area',
  '70,000-acre national park along Delaware River. Waterfalls, trails, river access. Exceptional natural area. Free admission.',
+ 40.9697, -75.1397,
+
  ST_SetSRID(ST_MakePoint(-75.1397, 40.9697), 4326)::geography,
  'state_park',
  '1978 River Rd',
@@ -345,6 +401,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Pocono Environmental Education Center',
  '38-acre campus in Delaware Water Gap. Dormitories, dining, classrooms. Perfect for overnight field trips. Premier environmental ed facility.',
+ 40.9789, -75.1367,
+
  ST_SetSRID(ST_MakePoint(-75.1367, 40.9789), 4326)::geography,
  'landmark',
  '538 Emery Rd',
@@ -355,6 +413,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Big Pocono State Park',
  '1,306-acre mountain park. Drive to summit (2,131 ft elevation). Spectacular views. Unique mountain ecosystem.',
+ 41.1192, -75.3503,
+
  ST_SetSRID(ST_MakePoint(-75.3503, 41.1192), 4326)::geography,
  'state_park',
  'Camelback Rd',
@@ -365,6 +425,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Shawnee River Adventures',
  'Delaware River outfitter. Canoeing, kayaking, tubing. Water-based ecology education. Seasonal operation, safe supervised activities.',
+ 40.9522, -75.1361,
+
  ST_SetSRID(ST_MakePoint(-75.1361, 40.9522), 4326)::geography,
  'landmark',
  '1 River Rd',
@@ -375,6 +437,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('YMCA of the Pocono Mountains',
  'Community center serving Monroe County. Youth programs include outdoor education. Safe, supervised environment.',
+ 41.0400, -75.1797,
+
  ST_SetSRID(ST_MakePoint(-75.1797, 41.0400), 4326)::geography,
  'sports',
  '809 Main St',
@@ -391,6 +455,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Ricketts Glen State Park',
  '13,050-acre park famous for 22 named waterfalls. Falls Trail System is challenging but spectacular. Premier natural area.',
+ 41.3358, -76.2828,
+
  ST_SetSRID(ST_MakePoint(-76.2828, 41.3358), 4326)::geography,
  'state_park',
  '695 State Route 487',
@@ -401,6 +467,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Worlds End State Park',
  '780-acre park in Loyalsock State Forest. Deep gorge, high vistas. Excellent trails. Beautiful fall colors.',
+ 41.4664, -76.5819,
+
  ST_SetSRID(ST_MakePoint(-76.5819, 41.4664), 4326)::geography,
  'state_park',
  '24 Cabin Rd',
@@ -411,6 +479,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Cherry Springs State Park',
  '82-acre park known as best stargazing in eastern US. Dark Sky Park. Night programs. Open field with mountain views.',
+ 41.6628, -77.8206,
+
  ST_SetSRID(ST_MakePoint(-77.8206, 41.6628), 4326)::geography,
  'state_park',
  '4639 Cherry Springs Rd',
@@ -421,6 +491,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Presque Isle State Park',
  '3,200-acre sandy peninsula on Lake Erie. 13 beaches. Excellent birding - over 320 species. Very accessible, flat terrain.',
+ 42.1547, -80.1208,
+
  ST_SetSRID(ST_MakePoint(-80.1208, 42.1547), 4326)::geography,
  'state_park',
  '1 Peninsula Dr',
@@ -431,6 +503,8 @@ INSERT INTO field_sites (name, description, location, site_type, address, city, 
 
 ('Pine Creek Gorge - Pennsylvania Grand Canyon',
  '47-mile gorge with spectacular views. Leonard Harrison and Colton Point State Parks provide overlooks. Truly impressive landscape.',
+ 41.7103, -77.4461,
+
  ST_SetSRID(ST_MakePoint(-77.4461, 41.7103), 4326)::geography,
  'state_park',
  '4797 Route 660',
