@@ -12,7 +12,6 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 ('Carnegie Library - Main (Oakland)', 
  'Historic main library with beautiful architecture and extensive natural history collection. Outdoor gardens attract songbirds and butterflies. Safe indoor viewing areas for weather observation.',
  40.4395, -79.9497,
- 40.4395, -79.9497,
 
  ST_SetSRID(ST_MakePoint(-79.9497, 40.4395), 4326)::geography,
  'library',
@@ -24,7 +23,6 @@ INSERT INTO field_sites (name, description, latitude, longitude, location, site_
 
 ('Carnegie Library - Allegheny',
  'Historic North Side library with nearby riverfront access. Adjacent to parks with mature trees attracting diverse bird species.',
- 40.4525, -80.0090,
  40.4525, -80.0090,
 
  ST_SetSRID(ST_MakePoint(-80.0090, 40.4525), 4326)::geography,
