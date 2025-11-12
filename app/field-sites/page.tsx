@@ -46,6 +46,13 @@ export default function FieldSitesPage() {
   const [loading, setLoading] = useState(true);
   const [filterType, setFilterType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Page container styles for desktop
+  const pageStyles = {
+    maxWidth: '1400px',
+    margin: '0 auto',
+    padding: '0 1rem',
+  };
 
   // Get user location
   useEffect(() => {
@@ -116,7 +123,7 @@ export default function FieldSitesPage() {
   const siteTypes = Array.from(new Set(sites.map((s) => s.site_type))).sort();
 
   return (
-    <div>
+    <div style={pageStyles}>
       {/* Header */}
       <section
         style={{
@@ -234,9 +241,17 @@ export default function FieldSitesPage() {
       </div>
 
       {/* Main Content */}
-      <div className="row" style={{ alignItems: 'start', gap: '2rem' }}>
+      <div style={{ 
+        display: 'flex', 
+        gap: '2rem', 
+        alignItems: 'flex-start',
+        flexWrap: 'wrap'
+      }}>
         {/* Map */}
-        <div className="card section" style={{ flex: '2 1 600px' }}>
+        <div className="card section" style={{ 
+          flex: '2 1 700px',
+          minWidth: '0', // Important for flex shrinking
+        }}>
           <h3 style={{ marginBottom: '1rem' }}>Interactive Map</h3>
           {loading ? (
             <div style={{ textAlign: 'center', padding: '4rem', color: '#6B7280' }}>
@@ -244,7 +259,13 @@ export default function FieldSitesPage() {
               <p>Loading field sites...</p>
             </div>
           ) : (
-            <div style={{ height: '600px', borderRadius: '12px', overflow: 'hidden' }}>
+            <div style={{ 
+              height: '700px', 
+              width: '100%',
+              borderRadius: '12px', 
+              overflow: 'hidden',
+              position: 'relative'
+            }}>
               <InteractiveMap
                 sites={filteredSites}
                 userLocation={userLocation}
@@ -256,7 +277,11 @@ export default function FieldSitesPage() {
         </div>
 
         {/* Site Details */}
-        <div style={{ flex: '1 1 400px' }}>
+        <div style={{ 
+          flex: '1 1 400px',
+          minWidth: '320px',
+          maxWidth: '500px'
+        }}>
           {selectedSite ? (
             <div className="card section">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
