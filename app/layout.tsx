@@ -1,5 +1,7 @@
+import React from 'react';
 import '../styles/globals.css';
 import Link from 'next/link';
+import SessionProviderWrapper from '@/components/providers/SessionProviderWrapper';
 import { PointsProvider } from '@/ui/points/PointsProvider';
 import { NavigationProvider } from '@/lib/contexts/NavigationContext';
 import PWAInstall from '@/components/PWAInstall';
@@ -161,15 +163,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
       </head>
       <body>
-        <PointsProvider>
-          <NavigationProvider>
-            <PWAInstall />
-            <GamificationBar />
-            <GlobalSearchWrapper />
-            <main className="min-h-screen">{children}</main>
-            <BottomNav />
-          </NavigationProvider>
-            <footer className="hidden md:block bg-gray-50 border-t border-gray-200 py-8 mt-12">
+        <SessionProviderWrapper>
+          <PointsProvider>
+            <NavigationProvider>
+              <PWAInstall />
+              <GamificationBar />
+              <GlobalSearchWrapper />
+              <main className="min-h-screen">{children}</main>
+              <BottomNav />
+              <footer className="hidden md:block bg-gray-50 border-t border-gray-200 py-8 mt-12">
               <div className="max-w-7xl mx-auto px-4 text-center">
                 <div className="text-4xl mb-4">🌲🦌🐟🦃🐻</div>
                 <div className="font-semibold text-gray-900 mb-2">Wildlife Leadership Academy</div>
@@ -184,9 +186,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   © {new Date().getFullYear()} Wildlife Leadership Academy
                 </div>
               </div>
-            </footer>
-          </NavigationProvider>
-        </PointsProvider>
+              </footer>
+            </NavigationProvider>
+          </PointsProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
