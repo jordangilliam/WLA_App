@@ -4,13 +4,19 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface PointsContextType {
   points: number;
+  total: number; // Alias for points
+  currentStreak: number;
   addPoints: (amount: number, activity: string) => void;
+  award: (amount: number, activity: string) => void; // Alias for addPoints
   resetPoints: () => void;
 }
 
 const PointsContext = createContext<PointsContextType>({
   points: 0,
+  total: 0,
+  currentStreak: 0,
   addPoints: () => {},
+  award: () => {},
   resetPoints: () => {},
 });
 
@@ -20,12 +26,19 @@ export function usePoints() {
 
 export function PointsProvider({ children }: { children: React.ReactNode }) {
   const [points, setPoints] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   useEffect(() => {
     // Load points from localStorage
     const saved = localStorage.getItem('user-points');
     if (saved) {
       setPoints(parseInt(saved, 10));
+    }
+
+    // Load streak from localStorage
+    const savedStreak = localStorage.getItem('user-streak');
+    if (savedStreak) {
+      setCurrentStreak(parseInt(savedStreak, 10));
     }
   }, []);
 
@@ -44,7 +57,14 @@ export function PointsProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <PointsContext.Provider value={{ points, addPoints, resetPoints }}>
+    <PointsContext.Provider value={{ 
+      points, 
+      total: points, // Provide alias
+      currentStreak,
+      addPoints, 
+      award: addPoints, // Provide alias
+      resetPoints 
+    }}>
       {children}
     </PointsContext.Provider>
   );

@@ -19,22 +19,23 @@ export default function GamificationBar({
   
   const [showPointsAnimation, setShowPointsAnimation] = useState(false);
   const [pointsDelta, setPointsDelta] = useState(0);
-  const [prevPoints, setPrevPoints] = useState(points);
+  const [prevPoints, setPrevPoints] = useState(0);
   const [streakPulsing, setStreakPulsing] = useState(false);
 
   // Detect points change and show animation
   useEffect(() => {
-    if (points > prevPoints) {
-      const delta = points - prevPoints;
+    const currentPoints = points || 0;
+    if (currentPoints > prevPoints && prevPoints > 0) {
+      const delta = currentPoints - prevPoints;
       setPointsDelta(delta);
       setShowPointsAnimation(true);
       
       setTimeout(() => {
         setShowPointsAnimation(false);
-        setPrevPoints(points);
+        setPrevPoints(currentPoints);
       }, 2000);
-    } else {
-      setPrevPoints(points);
+    } else if (currentPoints !== prevPoints) {
+      setPrevPoints(currentPoints);
     }
   }, [points, prevPoints]);
 
@@ -86,7 +87,7 @@ export default function GamificationBar({
               className="relative flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all backdrop-blur-sm"
             >
               <span className="text-amber-300 text-lg">🪙</span>
-              <span className="font-bold text-white">{points.toLocaleString()}</span>
+              <span className="font-bold text-white">{(points || 0).toLocaleString()}</span>
               
               {/* Points gain animation */}
               {showPointsAnimation && (
