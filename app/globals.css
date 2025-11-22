@@ -5,38 +5,18 @@
 @tailwind utilities;
 
 /* ============================================
-   WLA APP - CUSTOM DESIGN SYSTEM
-   Inspired by Koala Sampler & BandLab
+   WLA APP - RESPONSIVE DESIGN SYSTEM
+   Desktop-first, mobile-friendly
    Brand Colors from WLA, String Theory, WildPraxis
    ============================================ */
 
 @layer base {
-  :root {
-    /* Primary Brand Colors - From WLA Logo */
-    --wla-blue: 8 145 178;        /* Vibrant cyan from fish */
-    --wla-orange: 234 88 12;      /* Warm orange from bird */
-    --wla-olive: 132 169 140;     /* Olive/sage from deer */
-    --wla-forest: 47 79 79;       /* Deep forest green */
-    
-    /* Accent Colors - From String Theory & WildPraxis */
-    --string-gold: 212 175 55;    /* Brass/gold from String Theory */
-    --string-black: 26 26 26;     /* Sophisticated black */
-    --wild-sunset: 245 158 11;    /* Sunset orange from WildPraxis */
-    --wild-earth: 146 64 14;      /* Earth brown */
-    
-    /* Semantic Colors */
-    --success: 16 185 129;
-    --warning: 245 158 11;
-    --error: 239 68 68;
-    --info: 59 130 246;
-  }
-
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    @apply bg-neutral-50 text-neutral-900 antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
@@ -97,7 +77,7 @@
   
   .card {
     @apply bg-white rounded-2xl shadow-md border border-neutral-200
-           transition-all duration-250 ease-out;
+           transition-all duration-200 ease-out;
   }
 
   .card-hover {
@@ -362,30 +342,60 @@
   .shadow-floating {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
   }
+
+  /* Safe areas for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - Mobile-friendly
    ============================================ */
 
-@media (max-width: 768px) {
-  .btn {
+/* Mobile: Full width with proper spacing */
+@media (max-width: 640px) {
+  .btn:not(.btn-sm) {
     @apply w-full justify-center;
   }
+}
 
-  .card {
-    @apply rounded-xl;
+/* Tablet and up: Centered content with max-width */
+@media (min-width: 768px) {
+  .page-container {
+    @apply max-w-7xl mx-auto px-6;
   }
+  
+  .content-container {
+    @apply max-w-4xl mx-auto;
+  }
+}
 
-  .nav-link.active::after {
-    @apply bottom-auto top-0 w-full left-0 translate-x-0 h-0.5;
+/* Desktop: Wider content area */
+@media (min-width: 1024px) {
+  .page-container {
+    @apply max-w-screen-2xl mx-auto px-8;
   }
 }
 
 /* ============================================
-   DARK MODE SUPPORT (Future Enhancement)
+   ACCESSIBILITY
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  /* Add dark mode styles here if needed */
+*:focus-visible {
+  @apply outline-none ring-2 ring-cyan-500 ring-offset-2 rounded;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

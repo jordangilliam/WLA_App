@@ -11,20 +11,20 @@ const config: Config = {
       colors: {
         // WLA Brand Colors (from logo)
         wla: {
-          blue: 'rgb(8 145 178)',        // Vibrant cyan from fish
-          orange: 'rgb(234 88 12)',      // Warm orange from bird
-          olive: 'rgb(132 169 140)',     // Olive/sage from deer
-          forest: 'rgb(47 79 79)',       // Deep forest green
+          blue: '#0891B2',        // Vibrant cyan from fish
+          orange: '#EA580C',      // Warm orange from bird
+          olive: '#84A98C',       // Olive/sage from deer
+          forest: '#2F4F4F',      // Deep forest green
         },
         // String Theory (developer brand)
         string: {
-          gold: 'rgb(212 175 55)',       // Brass/gold
-          black: 'rgb(26 26 26)',        // Sophisticated black
+          gold: '#D4AF37',        // Brass/gold
+          black: '#1A1A1A',       // Sophisticated black
         },
         // WildPraxis Colors
         wild: {
-          sunset: 'rgb(245 158 11)',     // Sunset orange
-          earth: 'rgb(146 64 14)',       // Earth brown
+          sunset: '#F59E0B',      // Sunset orange
+          earth: '#92400E',       // Earth brown
         },
       },
       fontFamily: {
@@ -67,4 +67,3 @@ const config: Config = {
 };
 
 export default config;
-

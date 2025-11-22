@@ -1,12 +1,28 @@
 'use client';
 
+import Image from 'next/image';
+
 export default function StyleGuidePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header with Logos */}
         <div className="text-center mb-16 animate-slide-up">
-          <h1 className="text-5xl font-bold mb-4 text-gradient">
+          <div className="flex justify-center items-center gap-8 mb-8 flex-wrap">
+            <div className="bg-white p-4 rounded-2xl shadow-lg">
+              <div className="text-6xl">🐟🦅🦌</div>
+              <p className="text-xs mt-2 font-bold text-neutral-600">WLA</p>
+            </div>
+            <div className="bg-string-black p-6 rounded-2xl shadow-lg">
+              <div className="text-4xl" style={{ color: '#D4AF37' }}>⚡</div>
+              <p className="text-xs mt-2 font-bold text-string-gold">String Theory</p>
+            </div>
+            <div className="bg-white p-4 rounded-2xl shadow-lg">
+              <div className="text-6xl">🌲</div>
+              <p className="text-xs mt-2 font-bold text-neutral-600">WildPraxis</p>
+            </div>
+          </div>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-wla-blue to-wla-orange bg-clip-text text-transparent">
             WLA Design System
           </h1>
           <p className="text-xl text-neutral-600">
@@ -17,7 +33,7 @@ export default function StyleGuidePage() {
         {/* Buttons Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Buttons</h2>
-          <div className="card p-8">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8">
             <div className="flex flex-wrap gap-4">
               <button className="btn-primary">Primary Button</button>
               <button className="btn-secondary">Secondary Button</button>
@@ -30,7 +46,7 @@ export default function StyleGuidePage() {
               <button className="btn-accent btn-lg">Large Button</button>
             </div>
             <div className="mt-4">
-              <button className="btn-primary" disabled>Disabled Button</button>
+              <button className="btn-primary opacity-50 cursor-not-allowed">Disabled Button</button>
             </div>
           </div>
         </section>
@@ -80,7 +96,7 @@ export default function StyleGuidePage() {
         {/* Badges Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Badges & Tags</h2>
-          <div className="card p-8">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8">
             <div className="flex flex-wrap gap-3 mb-6">
               <span className="badge-blue">Blue Badge</span>
               <span className="badge-orange">Orange Badge</span>
@@ -107,7 +123,7 @@ export default function StyleGuidePage() {
         {/* Progress Bars Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Progress Bars</h2>
-          <div className="card p-8 space-y-6">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8 space-y-6">
             <div>
               <div className="flex justify-between mb-2">
                 <span className="font-semibold">Species Identified</span>
@@ -145,7 +161,7 @@ export default function StyleGuidePage() {
           <h2 className="text-3xl font-bold mb-6">Species Cards</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="species-card">
-              <div className="species-card-image bg-gradient-to-br from-cyan-400 to-cyan-600"></div>
+              <div className="species-card-image bg-gradient-to-br from-wla-blue to-cyan-700"></div>
               <div className="species-card-overlay">
                 <h3 className="species-card-title">Brook Trout</h3>
                 <p className="species-card-subtitle">Salvelinus fontinalis</p>
@@ -153,7 +169,7 @@ export default function StyleGuidePage() {
             </div>
 
             <div className="species-card">
-              <div className="species-card-image bg-gradient-to-br from-orange-400 to-orange-600"></div>
+              <div className="species-card-image bg-gradient-to-br from-wla-orange to-orange-700"></div>
               <div className="species-card-overlay">
                 <h3 className="species-card-title">Wild Turkey</h3>
                 <p className="species-card-subtitle">Meleagris gallopavo</p>
@@ -161,7 +177,7 @@ export default function StyleGuidePage() {
             </div>
 
             <div className="species-card">
-              <div className="species-card-image bg-gradient-to-br from-emerald-400 to-emerald-600"></div>
+              <div className="species-card-image bg-gradient-to-br from-emerald-500 to-wla-olive"></div>
               <div className="species-card-overlay">
                 <h3 className="species-card-title">White-tailed Deer</h3>
                 <p className="species-card-subtitle">Odocoileus virginianus</p>
@@ -173,7 +189,7 @@ export default function StyleGuidePage() {
         {/* Map Markers Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Map Markers</h2>
-          <div className="card p-8">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8">
             <div className="flex gap-6 items-center">
               <div className="map-marker">
                 <span className="text-xl">🐟</span>
@@ -194,7 +210,7 @@ export default function StyleGuidePage() {
         {/* Forms Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Form Elements</h2>
-          <div className="card p-8 max-w-md">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8 max-w-md">
             <div className="mb-4">
               <label className="label">Username</label>
               <input
@@ -230,7 +246,7 @@ export default function StyleGuidePage() {
         {/* Loading States Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Loading States</h2>
-          <div className="card p-8">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8">
             <div className="flex items-center gap-6">
               <div className="spinner"></div>
               <div className="space-y-3 flex-1">
@@ -245,7 +261,7 @@ export default function StyleGuidePage() {
         {/* Typography Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Typography</h2>
-          <div className="card p-8 space-y-4">
+          <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-8 space-y-4">
             <h1 className="text-4xl font-bold">Heading 1</h1>
             <h2 className="text-3xl font-bold">Heading 2</h2>
             <h3 className="text-2xl font-bold">Heading 3</h3>
@@ -257,7 +273,7 @@ export default function StyleGuidePage() {
             <p className="text-sm text-neutral-600">
               Small text for secondary information or captions.
             </p>
-            <p className="text-gradient text-2xl font-bold">
+            <p className="bg-gradient-to-r from-wla-blue to-wla-orange bg-clip-text text-transparent text-2xl font-bold">
               Gradient text for special emphasis!
             </p>
           </div>
@@ -267,28 +283,32 @@ export default function StyleGuidePage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Brand Colors</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="card p-6 text-center">
-              <div className="w-full h-24 bg-cyan-600 rounded-lg mb-4"></div>
+            <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-6 text-center">
+              <div className="w-full h-24 bg-wla-blue rounded-lg mb-4"></div>
               <h4 className="font-bold">WLA Blue</h4>
               <p className="text-sm text-neutral-600">From the fish</p>
+              <code className="text-xs text-neutral-500">#0891B2</code>
             </div>
 
-            <div className="card p-6 text-center">
-              <div className="w-full h-24 bg-orange-600 rounded-lg mb-4"></div>
+            <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-6 text-center">
+              <div className="w-full h-24 bg-wla-orange rounded-lg mb-4"></div>
               <h4 className="font-bold">WLA Orange</h4>
               <p className="text-sm text-neutral-600">From the bird</p>
+              <code className="text-xs text-neutral-500">#EA580C</code>
             </div>
 
-            <div className="card p-6 text-center">
-              <div className="w-full h-24 rounded-lg mb-4" style={{ backgroundColor: 'rgb(132, 169, 140)' }}></div>
+            <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-6 text-center">
+              <div className="w-full h-24 bg-wla-olive rounded-lg mb-4"></div>
               <h4 className="font-bold">WLA Olive</h4>
               <p className="text-sm text-neutral-600">From the deer</p>
+              <code className="text-xs text-neutral-500">#84A98C</code>
             </div>
 
-            <div className="card p-6 text-center">
-              <div className="w-full h-24 bg-amber-500 rounded-lg mb-4"></div>
+            <div className="bg-white rounded-2xl shadow-md border border-neutral-200 p-6 text-center">
+              <div className="w-full h-24 bg-string-gold rounded-lg mb-4"></div>
               <h4 className="font-bold">String Gold</h4>
               <p className="text-sm text-neutral-600">From String Theory</p>
+              <code className="text-xs text-neutral-500">#D4AF37</code>
             </div>
           </div>
         </section>
@@ -303,4 +323,3 @@ export default function StyleGuidePage() {
     </div>
   );
 }
-
