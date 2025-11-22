@@ -18,12 +18,13 @@ export async function GET(
   try {
     // For now, return media from mission hero_image_url
     // In the future, this could query a mission_media table
-    const { data: mission } = await supabaseAdmin
+    const { data: missionData } = await supabaseAdmin
       .from('story_missions')
       .select('hero_image_url')
       .eq('id', missionId)
       .single()
 
+    const mission = missionData as { hero_image_url: string | null } | null
     const media: any[] = []
     
     if (mission?.hero_image_url) {

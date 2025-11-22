@@ -248,11 +248,11 @@ async function main() {
   const summary = {
     syncedAt: new Date().toISOString(),
     sources: {
-      stocking: stocking ? stocking.length : 0,
-      accessPoints: accessPoints ? accessPoints.length : 0,
-      bestWaters: bestWaters ? bestWaters.length : 0,
-      regulations: regulations ? regulations.length : 0,
-      habitat: habitat ? habitat.length : 0,
+      stocking: stocking ? (stocking as any[]).length : 0,
+      accessPoints: accessPoints ? (accessPoints as any[]).length : 0,
+      bestWaters: bestWaters ? (bestWaters as any[]).length : 0,
+      regulations: regulations ? (regulations as any[]).length : 0,
+      habitat: habitat ? (habitat as any[]).length : 0,
     },
     note: 'Some data sources require PASDA dataset IDs or API access. Using sample data where needed.',
   };

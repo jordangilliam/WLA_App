@@ -4,11 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/db/client';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -20,7 +17,7 @@ export async function GET(request: NextRequest) {
   const hasClasses = searchParams.get('hasClasses') === 'true';
 
   try {
-    let query = supabase
+    let query = supabaseAdmin
       .from('fly_fishing_shops')
       .select('*');
 
@@ -46,13 +43,13 @@ export async function GET(request: NextRequest) {
     let shops = data || [];
     if (lat && lng && shops.length > 0) {
       shops = shops
-        .filter((shop) => shop.latitude && shop.longitude)
-        .map((shop) => {
+        .filter((shop: any) => shop.latitude && shop.longitude)
+        .map((shop: any) => {
           const distance = calculateDistance(lat, lng, shop.latitude, shop.longitude);
           return { ...shop, distance };
         })
-        .filter((shop) => shop.distance <= radius)
-        .sort((a, b) => a.distance - b.distance);
+        .filter((shop: any) => shop.distance <= radius)
+        .sort((a: any, b: any) => a.distance - b.distance);
     }
 
     return NextResponse.json({

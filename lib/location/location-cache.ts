@@ -161,7 +161,7 @@ class LocationCacheManager {
 
     const tx = this.db.transaction('user_location_history', 'readwrite')
     for (const ts of timestamps) {
-      const visit = await tx.store.get(ts)
+      const visit = await tx.store.get(ts.toString())
       if (visit) {
         visit.synced = true
         await tx.store.put(visit)
@@ -179,11 +179,10 @@ class LocationCacheManager {
 
     // Clear old mission locations
     const missionTx = this.db.transaction('mission_locations', 'readwrite')
-    const missionIndex = missionTx.store.index('by-cached')
-    const oldMissions = await missionIndex.getAll()
+    const oldMissions = await missionTx.store.getAll()
     for (const mission of oldMissions) {
-      if (mission.cachedAt < sevenDaysAgo) {
-        await missionTx.store.delete(mission.id)
+      if (mission.cachedAt && mission.cachedAt < sevenDaysAgo) {
+        await missionTx.store.delete(mission.id as string)
       }
     }
     await missionTx.done
@@ -195,7 +194,8 @@ class LocationCacheManager {
     const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000
     for (const visit of oldHistory) {
       if (visit.timestamp < thirtyDaysAgo) {
-        await historyTx.store.delete(visit.timestamp)
+        // Key is timestamp-locationId format
+        await historyTx.store.delete(`${visit.timestamp}-${visit.locationId}`)
       }
     }
     await historyTx.done

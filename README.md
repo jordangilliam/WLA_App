@@ -48,6 +48,22 @@ Built for the Wildlife Leadership Academy and optimized for iPad library deploym
 - **Trout Waters** - 16 stocked streams and lakes with schedules
 - **State Parks** - Ricketts Glen, Worlds End, Cherry Springs, Presque Isle, Pine Creek Gorge
 
+### 🎣 **Fly Fishing Features**
+- **Expert Knowledge System** - Techniques and patterns from Joe Humphreys and George Daniel
+- **Macroinvertebrate Hatch Data** - Comprehensive hatch information for 254+ waterways
+- **Seasonal Waterway Data** - Best seasons, water temperatures, and fishing notes
+- **60+ Fly Fishing Shops** - Complete database of PA fly shops with services and locations
+- **Expert Techniques** - High-stick nymphing, French nymphing, Leisenring lift, and more
+- **Expert Patterns** - Proven fly patterns from legendary anglers
+
+### 🐟 **PFBC Data Integration**
+- **Stocking Schedules** - Complete PFBC trout and species stocking data
+- **Access Points** - Boat launches, shore access, and wade access locations
+- **Fishing Regulations** - Catch & release, delayed harvest, trophy trout sections
+- **Habitat Installations** - Lunker structures, fish attractors, and habitat enhancements
+- **Mapping Layers** - Class A trout streams, wild trout, bass waters, and species designations
+- **254 Waterways** - Comprehensive waterway database with full PFBC integration
+
 ### 👩‍🏫 **Teacher Tools**
 - **Live Monitoring** - Real-time student activity feed
 - **Field Trip Mode** - Coordinate group outdoor experiences
@@ -133,7 +149,15 @@ NODE_ENV=development
 
 See `MIGRATION_ORDER.md` for detailed instructions.
 
-Run migrations 003-006, 012-015 in Supabase SQL Editor.
+Run migrations 003-006, 012-015, 027-030 in Supabase SQL Editor.
+
+**New Migrations (027-030):**
+- **027**: Seasonal waterway data and macroinvertebrate hatch information
+- **028**: Fly fishing experts (Joe Humphreys, George Daniel), techniques, patterns, and shops
+- **029**: PFBC mapping layers (trout streams, bass waters, species designations)
+- **030**: Complete PFBC integration (stocking, access points, regulations, habitat)
+
+See `docs/MIGRATIONS_027_030.md` for detailed migration guide.
 
 5. **Start Development Server**
 ```bash
@@ -148,6 +172,7 @@ Visit `http://localhost:3000`
 
 ## 📚 **Documentation**
 
+### Core Documentation
 - **[Deployment Checklist](DEPLOYMENT_CHECKLIST.md)** - Step-by-step deployment guide
 - **[Migration Order](MIGRATION_ORDER.md)** - Database setup instructions
 - **[3-Week Sprint Progress](3-WEEK-SPRINT-PROGRESS.md)** - Development timeline
@@ -157,6 +182,18 @@ Visit `http://localhost:3000`
 - **[AI Identification Guide](AI_IDENTIFICATION_GUIDE.md)** - Provider setup + teacher review workflow
 - **[Soundscapes Playbook](SOUNDSCAPES_PLAYBOOK.md)** - Purdue export workflow + fallback repo
 - **[QA & Deployment Playbook](QA_DEPLOY_PLAYBOOK.md)** - Release checklist
+
+### API & Technical Documentation
+- **[API Documentation](API_DOCUMENTATION.md)** - Complete API endpoint reference
+- **[Migration Guide 027-030](docs/MIGRATIONS_027_030.md)** - Fly fishing and PFBC migration guide
+- **[Architecture Documentation](ARCHITECTURE.md)** - System architecture and design
+
+### User Guides
+- **[Fly Fishing Guide](docs/FLY_FISHING_GUIDE.md)** - How to use fly fishing features
+- **[PFBC Data Guide](docs/PFBC_DATA_GUIDE.md)** - How to access PFBC data
+- **[Expert Knowledge Guide](docs/EXPERT_KNOWLEDGE_GUIDE.md)** - Using expert techniques and patterns
+
+### Tools & Monitoring
 - **Env Verification Script:** `npm run verify:env`
 - **Health Check Endpoint:** `GET /api/health` (returns Supabase + NextAuth status for monitoring)
 

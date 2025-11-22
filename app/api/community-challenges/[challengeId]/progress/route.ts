@@ -19,17 +19,18 @@ export async function GET(
     )
   }
 
-  const { data: challenge, error: challengeError } = await supabaseAdmin
+  const { data: challengeData, error: challengeError } = await supabaseAdmin
     .from('community_challenges')
     .select('*, community_challenge_participants (*)')
     .eq('id', params.challengeId)
     .single()
 
-  if (challengeError || !challenge) {
+  if (challengeError || !challengeData) {
     return NextResponse.json({ error: 'Challenge not found' }, { status: 404 })
   }
 
-  const participants = (challenge as any).community_challenge_participants || []
+  const challenge = challengeData as any
+  const participants = challenge.community_challenge_participants || []
   participants.sort((a: any, b: any) => b.progress - a.progress)
 
   return NextResponse.json({

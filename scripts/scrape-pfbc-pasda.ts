@@ -222,7 +222,7 @@ async function main() {
     ),
   };
 
-  await saveTransformedData(summary, 'scraping-summary.json');
+  await saveTransformedData([summary], 'scraping-summary.json');
 
   console.log('\n✅ PASDA scraping complete!');
   console.log(`📊 Summary:`);

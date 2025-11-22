@@ -40,7 +40,12 @@
     "import:pfbc:stocking": "tsx scripts/import-pfbc-data.ts stocking",
     "import:pfbc:access": "tsx scripts/import-pfbc-data.ts access-points",
     "import:pfbc:habitat": "tsx scripts/import-pfbc-data.ts habitat",
-    "apply-migrations": "tsx scripts/apply-migrations.ts"
+    "apply-migrations": "tsx scripts/apply-migrations.ts",
+    "pre-deploy-check": "tsx scripts/pre-deploy-check.ts",
+    "test:api": "tsx scripts/test-api-endpoints.ts",
+    "test:integration": "tsx scripts/integration-tests.ts",
+    "verify:db": "tsx scripts/verify-database.ts",
+    "test:all": "npm run test:api && npm run verify:db && npm run test:integration"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.4",

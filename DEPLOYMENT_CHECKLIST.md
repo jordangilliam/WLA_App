@@ -26,45 +26,41 @@ This will install the new `idb` package (v8.0.0) for offline queue functionality
 - ✓ `002_initial_schema.sql` - Base tables (if you have this)
 - ✓ `003_add_field_sites_and_achievements.sql` - Field sites system
 
+#### Core Migrations (Already Run?)
+- ✓ `001_add_organizations.sql` - Organizations and user management
+- ✓ `002_initial_schema.sql` - Base tables (if you have this)
+- ✓ `003_add_field_sites_and_achievements.sql` - Field sites system
+- ✓ `004_seed_pittsburgh_field_sites.sql` - 64+ Pittsburgh area field sites
+- ✓ `005_add_trout_waters_and_stocking.sql` - 16 trout fishing locations
+- ✓ `006_statewide_expansion.sql` - 50+ locations across PA
+- ✓ `012_challenges_system.sql` - Daily/weekly challenges
+- ✓ `013_class_leaderboards.sql` - Class team stats
+- ✓ `014_species_cards.sql` - Species cards with rarity system
+- ✓ `015_photo_challenges.sql` - Photo challenge prompts
+
 #### New Migrations (Run These Now)
-1. **`004_seed_pittsburgh_field_sites.sql`**
-   - 64+ Pittsburgh area field sites
-   - Libraries, parks, universities, trails
-
-2. **`005_add_trout_waters_and_stocking.sql`**
-   - 16 trout fishing locations
-   - Stocking schedules and water body details
-
-3. **`006_statewide_expansion.sql`**
-   - 50+ locations across PA
-   - State College, Harrisburg, Philadelphia, etc.
-   - **Total: 140+ field sites**
-
-4. **`012_challenges_system.sql`**
-   - Daily/weekly challenges
-   - Challenge types and progress tracking
-   - 6 seed challenges
-
-5. **`013_class_leaderboards.sql`**
-   - Class team stats
-   - Student leaderboard
-   - Weekly rankings
-
-6. **`014_species_cards.sql`**
-   - Species cards with rarity system
-   - User collection tracking
-   - **13 PA species seeded**
-
-7. **`015_photo_challenges.sql`**
-   - Photo challenge prompts
-   - Submission approval workflow
-   - 3 seed photo challenges
+- ✅ `027_seasonal_waterway_data.sql` - Seasonal data and macroinvertebrate hatches
+- ✅ `028_fly_fishing_experts.sql` - Experts, shops, and TU chapters
+- ✅ `029_pfbc_mapping_layers.sql` - PFBC trout streams, bass waters, other species
+- ✅ `030_pfbc_complete_integration.sql` - Stocking, access points, regulations, habitat
 
 **How to Run:**
 1. Open Supabase Dashboard → SQL Editor
 2. Copy each migration file content
 3. Paste and execute in order
 4. Verify no errors before proceeding to next
+
+**Verification Queries:**
+After running migrations 027-030, verify data was loaded correctly:
+```sql
+-- Verify migrations 027-030
+SELECT COUNT(*) FROM macroinvertebrate_hatches; -- Should be 9+
+SELECT COUNT(*) FROM fly_fishing_experts; -- Should be 2+
+SELECT COUNT(*) FROM fly_fishing_shops; -- Should be 60+
+SELECT COUNT(*) FROM pfbc_trout_streams; -- Should be 110+
+SELECT COUNT(*) FROM pfbc_stocking_schedules; -- Should be 13+
+SELECT COUNT(*) FROM pfbc_access_points; -- Should be 15+
+```
 
 ---
 

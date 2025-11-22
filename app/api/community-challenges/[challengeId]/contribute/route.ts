@@ -45,19 +45,21 @@ export async function POST(
     )
   }
 
-  const { data: participant, error: participantError } = await supabaseAdmin
+  const { data: participantData, error: participantError } = await supabaseAdmin
     .from('community_challenge_participants')
     .select('id, challenge_id')
     .eq('id', payload.participantId)
     .eq('challenge_id', params.challengeId)
     .single()
 
-  if (participantError || !participant) {
+  if (participantError || !participantData) {
     return NextResponse.json(
       { error: 'Participant not found in this challenge' },
       { status: 404 }
     )
   }
+
+  const participant = participantData as { id: string; challenge_id: string }
 
   const { error: insertError } = await supabaseAdmin
     .from('community_challenge_events')
@@ -68,7 +70,7 @@ export async function POST(
       event_type: payload.eventType,
       value: payload.value,
       metadata: payload.metadata ?? null,
-    } as never)
+    } as any)
 
   if (insertError) {
     console.error('Failed to record challenge contribution', insertError)

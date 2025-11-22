@@ -119,7 +119,7 @@ export default function MissionsPage() {
         });
         if (!response.ok) throw new Error('Unable to load mission progress');
         const data = await response.json();
-        if (mounted) {
+        if (mounted && selectedMissionId) {
           setProgressMap((prev) => ({
             ...prev,
             [selectedMissionId]: data,
@@ -199,10 +199,12 @@ export default function MissionsPage() {
         throw new Error(details?.error || 'Unable to update stage');
       }
       const data = await response.json();
-      setProgressMap((prev) => ({
-        ...prev,
-        [selectedMissionId]: data,
-      }));
+      if (selectedMissionId) {
+        setProgressMap((prev) => ({
+          ...prev,
+          [selectedMissionId]: data,
+        }));
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -349,14 +351,16 @@ export default function MissionsPage() {
                     onActionComplete={(action) => {
                       setCompletedLocations((prev) => new Set(prev).add(selectedLocation.id));
                       // Refresh progress
-                      const response = fetch(`/api/story-missions/${selectedMissionId}/progress`, {
-                        cache: 'no-store',
-                      }).then((r) => r.json()).then((data) => {
-                        setProgressMap((prev) => ({
-                          ...prev,
-                          [selectedMissionId]: data,
-                        }));
-                      });
+                      if (selectedMissionId) {
+                        const response = fetch(`/api/story-missions/${selectedMissionId}/progress`, {
+                          cache: 'no-store',
+                        }).then((r) => r.json()).then((data) => {
+                          setProgressMap((prev) => ({
+                            ...prev,
+                            [selectedMissionId]: data,
+                          }));
+                        });
+                      }
                     }}
                   />
                 </div>
@@ -381,7 +385,7 @@ export default function MissionsPage() {
                         revealOrder: loc.orderIndex,
                       }))}
                     missionId={selectedMission.id}
-                    currentStage={progressMap[selectedMissionId]?.missionProgress?.completedStages || 0}
+                    currentStage={selectedMissionId ? (progressMap[selectedMissionId]?.missionProgress?.completedStages || 0) : 0}
                     completedLocations={Array.from(completedLocations)}
                     onClueUnlocked={(clueId) => {
                       setCompletedLocations((prev) => new Set(prev).add(clueId));
@@ -411,6 +415,7 @@ export default function MissionsPage() {
               </div>
             </div>
           </section>
+          </>
         )}
 
         {/* Location-based Proximity Alerts (Pokémon GO style) */}

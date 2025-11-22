@@ -4,11 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/db/client';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -17,7 +14,7 @@ export async function GET(request: NextRequest) {
   const waterType = searchParams.get('waterType');
 
   try {
-    let query = supabase
+    let query = supabaseAdmin
       .from('waterway_hatches')
       .select(`
         *,

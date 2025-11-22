@@ -840,6 +840,237 @@ Vercel Detects Change
 - README for setup instructions
 - This ARCHITECTURE.md for system overview
 
+## Fly Fishing Data Model
+
+### Database Schema
+
+**Macroinvertebrate Hatches:**
+```sql
+macroinvertebrate_hatches
+  ├── id (UUID, PK)
+  ├── species (TEXT) - Scientific name
+  ├── common_name (TEXT) - Common name
+  ├── hatch_start_month (TEXT)
+  ├── hatch_end_month (TEXT)
+  ├── peak_month (TEXT)
+  ├── time_of_day (TEXT)
+  ├── water_temp_min_f (INTEGER)
+  ├── water_temp_optimal_f (INTEGER)
+  ├── water_temp_max_f (INTEGER)
+  ├── water_types (TEXT[]) - limestone, freestone, spring-fed, tailwater
+  ├── hook_size (TEXT)
+  └── color_description (TEXT)
+
+waterway_hatches (association table)
+  ├── field_site_id (FK → field_sites)
+  ├── hatch_id (FK → macroinvertebrate_hatches)
+  ├── intensity (TEXT) - light, moderate, heavy, sporadic
+  └── notes (TEXT)
+```
+
+**Expert Knowledge System:**
+```sql
+fly_fishing_experts
+  ├── id (UUID, PK)
+  ├── name (TEXT)
+  ├── type (TEXT) - expert, shop, organization
+  ├── location (TEXT)
+  ├── region (TEXT)
+  ├── specialties (TEXT[])
+  └── bio (TEXT)
+
+expert_techniques
+  ├── expert_id (FK → fly_fishing_experts)
+  ├── name (TEXT)
+  ├── description (TEXT)
+  ├── water_types (TEXT[])
+  ├── best_seasons (TEXT[])
+  └── difficulty (TEXT) - beginner, intermediate, advanced
+
+expert_patterns
+  ├── expert_id (FK → fly_fishing_experts)
+  ├── name (TEXT)
+  ├── pattern_type (TEXT) - dry-fly, nymph, streamer, wet-fly, terrestrial
+  ├── target_species (TEXT[])
+  ├── hook_size (TEXT)
+  └── materials (TEXT[])
+
+fly_fishing_shops
+  ├── id (UUID, PK)
+  ├── name (TEXT)
+  ├── location (TEXT)
+  ├── region (TEXT)
+  ├── services (TEXT[])
+  ├── has_guides (BOOLEAN)
+  ├── has_fly_tying (BOOLEAN)
+  └── has_classes (BOOLEAN)
+```
+
+**Seasonal Waterway Data:**
+```sql
+water_body_details (extended)
+  ├── best_seasons (TEXT[])
+  ├── spring_notes (TEXT)
+  ├── summer_notes (TEXT)
+  ├── fall_notes (TEXT)
+  ├── winter_notes (TEXT)
+  ├── ice_fishing (BOOLEAN)
+  ├── spring_stocking (BOOLEAN)
+  ├── fall_stocking (BOOLEAN)
+  ├── avg_water_temp_spring_f (INTEGER)
+  ├── avg_water_temp_summer_f (INTEGER)
+  ├── avg_water_temp_fall_f (INTEGER)
+  └── avg_water_temp_winter_f (INTEGER)
+```
+
+## PFBC Integration Architecture
+
+### Data Sources
+
+**PFBC Data Tables:**
+```sql
+pfbc_stocking_schedules
+  ├── waterway_name (TEXT)
+  ├── county (TEXT)
+  ├── region (TEXT)
+  ├── species (TEXT)
+  ├── stocking_date (DATE)
+  ├── quantity (INTEGER)
+  └── size_class (TEXT) - Fingerling, Adult, Trophy
+
+pfbc_access_points
+  ├── waterway_name (TEXT)
+  ├── name (TEXT)
+  ├── access_type (TEXT) - Boat Launch, Shore Access, Wade Access
+  ├── amenities (TEXT[])
+  └── wheelchair_accessible (BOOLEAN)
+
+pfbc_regulations
+  ├── waterway_name (TEXT)
+  ├── regulation_type (TEXT) - Catch & Release, Delayed Harvest, etc.
+  ├── description (TEXT)
+  └── season (TEXT)
+
+pfbc_habitat_installations
+  ├── waterway_name (TEXT)
+  ├── installation_type (TEXT) - Lunker Structure, Fish Attractor, etc.
+  ├── target_species (TEXT[])
+  └── installation_date (DATE)
+```
+
+**PFBC Mapping Layers:**
+```sql
+pfbc_trout_streams
+  ├── name (TEXT)
+  ├── classification (TEXT) - Class A, Wild Trout, Delayed Harvest, etc.
+  ├── county (TEXT)
+  └── species (TEXT[])
+
+pfbc_bass_waters
+  ├── name (TEXT)
+  ├── classification (TEXT) - Best Bass Water, etc.
+  └── species (TEXT[])
+
+pfbc_other_species_waters
+  ├── name (TEXT)
+  ├── species (TEXT)
+  └── classification (TEXT)
+```
+
+### Data Sync Strategy
+
+**Production Sync:**
+- **Stocking Schedules**: Sync with PFBC API weekly
+  - Endpoint: `https://apps.fishandboat.pa.gov/StockingSchedule/`
+  - Edge Function: `supabase/functions/sync-pfbc-stocking/`
+- **Access Points**: Sync with PASDA GeoJSON annually
+  - Source: https://www.pasda.psu.edu/
+- **Regulations**: Manual update annually (PFBC Summary Book)
+- **Mapping Layers**: Manual update as PFBC publishes new classifications
+
+**Current Implementation:**
+- Uses sample data from `data/pfbc-complete-data.ts`
+- Ready for production sync integration
+
+## Expert Knowledge System
+
+### Architecture
+
+**Expert Data Structure:**
+- **Experts**: Joe Humphreys, George Daniel, Trout Unlimited chapters
+- **Techniques**: High-stick nymphing, French nymphing, Leisenring lift, etc.
+- **Patterns**: Perdigon, Humphreys Nymph, Joe's Hopper, etc.
+- **Publications**: Books, videos, articles
+- **Favorite Locations**: Expert-recommended fishing spots
+
+**API Endpoints:**
+- `/api/experts/techniques` - Get expert techniques
+- `/api/experts/patterns` - Get expert patterns
+- `/api/shops/nearby` - Find nearby fly shops
+- `/api/shops/all` - Get all PA fly shops
+
+**Data Flow:**
+1. Expert data stored in `fly_fishing_experts` table
+2. Techniques and patterns linked via foreign keys
+3. API routes query Supabase with filters
+4. Frontend displays expert knowledge in UI
+
+## Database Schema Updates
+
+### New Tables (Migrations 027-030)
+
+**Migration 027:**
+- `macroinvertebrate_hatches` - Hatch species data
+- `waterway_hatches` - Waterway-hatch associations
+- Extended `water_body_details` with seasonal fields
+
+**Migration 028:**
+- `fly_fishing_experts` - Expert information
+- `expert_techniques` - Expert techniques
+- `expert_patterns` - Expert fly patterns
+- `expert_favorite_locations` - Expert favorite spots
+- `expert_publications` - Expert publications
+- `fly_fishing_shops` - Fly shop database
+
+**Migration 029:**
+- `pfbc_trout_streams` - Trout stream classifications
+- `pfbc_bass_waters` - Bass water designations
+- `pfbc_other_species_waters` - Other species waters
+
+**Migration 030:**
+- `pfbc_stocking_schedules` - Stocking schedule data
+- `pfbc_access_points` - Access point data
+- `pfbc_regulations` - Fishing regulations
+- `pfbc_habitat_installations` - Habitat installation data
+
+### Indexes
+
+**Performance Optimizations:**
+```sql
+-- Hatch queries
+CREATE INDEX idx_hatches_months ON macroinvertebrate_hatches(hatch_start_month, hatch_end_month);
+CREATE INDEX idx_hatches_water_type ON macroinvertebrate_hatches USING GIN(water_types);
+
+-- Expert queries
+CREATE INDEX idx_experts_type ON fly_fishing_experts(type);
+CREATE INDEX idx_experts_region ON fly_fishing_experts(region);
+CREATE INDEX idx_techniques_expert ON expert_techniques(expert_id);
+CREATE INDEX idx_patterns_expert ON expert_patterns(expert_id);
+
+-- PFBC queries
+CREATE INDEX idx_pfbc_stocking_waterway ON pfbc_stocking_schedules(waterway_name);
+CREATE INDEX idx_pfbc_stocking_date ON pfbc_stocking_schedules(stocking_date);
+CREATE INDEX idx_pfbc_access_waterway ON pfbc_access_points(waterway_name);
+CREATE INDEX idx_pfbc_reg_waterway ON pfbc_regulations(waterway_name);
+```
+
+### Row Level Security
+
+All new tables have public read access:
+```sql
+CREATE POLICY "Public can view [table_name]" ON [table_name] FOR SELECT USING (true);
+```
+
 ## Future Enhancements
 
 - [ ] GraphQL API (alternative to REST)
@@ -850,6 +1081,10 @@ Vercel Detects Change
 - [ ] Offline-first with CRDTs
 - [ ] Multiplayer features
 - [ ] Video streaming for lessons
+- [ ] PFBC API sync automation
+- [ ] User-submitted hatch reports
+- [ ] Expert video integration
+- [ ] Fly pattern tying instructions with images
 
 ## References
 
@@ -858,4 +1093,6 @@ Vercel Detects Change
 - [Capacitor Documentation](https://capacitorjs.com/docs)
 - [Expo Documentation](https://docs.expo.dev)
 - [NextAuth.js Documentation](https://next-auth.js.org)
+- [PFBC Stocking Schedule API](https://apps.fishandboat.pa.gov/StockingSchedule/)
+- [PASDA GeoJSON Data](https://www.pasda.psu.edu/)
 

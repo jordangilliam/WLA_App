@@ -82,7 +82,7 @@ export default function AROverlay({
 
       // Draw AR marker overlay (simplified - in production use AR.js or similar)
       if (markerUrl) {
-        const img = new Image()
+        const img = document.createElement('img')
         img.src = markerUrl
         img.onload = () => {
           const size = Math.min(canvas.width, canvas.height) * 0.3

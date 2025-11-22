@@ -36,15 +36,17 @@ export async function POST(
 
   const { data } = validation
 
-  const { data: challenge, error: challengeError } = await supabaseAdmin
+  const { data: challengeData, error: challengeError } = await supabaseAdmin
     .from('community_challenges')
     .select('id, is_active, start_at, end_at, scope')
     .eq('id', params.challengeId)
     .single()
 
-  if (challengeError || !challenge) {
+  if (challengeError || !challengeData) {
     return NextResponse.json({ error: 'Challenge not found' }, { status: 404 })
   }
+
+  const challenge = challengeData as { id: string; is_active: boolean; start_at: string | null; end_at: string | null; scope: string }
 
   if (challenge.end_at && new Date(challenge.end_at) < new Date()) {
     return NextResponse.json(
@@ -64,16 +66,17 @@ export async function POST(
       )
     }
 
-    const { data: classroom, error: classError } = await supabaseAdmin
+    const { data: classroomData, error: classError } = await supabaseAdmin
       .from('classes')
       .select('id, name, teacher_id')
       .eq('id', data.entityId)
       .single()
 
-    if (classError || !classroom) {
+    if (classError || !classroomData) {
       return NextResponse.json({ error: 'Class not found' }, { status: 404 })
     }
 
+    const classroom = classroomData as { id: string; name: string; teacher_id: string }
     const teacherId = (authResult as any).user?.id
     if (teacherId !== classroom.teacher_id) {
       return NextResponse.json(

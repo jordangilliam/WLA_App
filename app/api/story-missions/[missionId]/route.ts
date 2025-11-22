@@ -25,11 +25,13 @@ export async function GET(
     .eq('id', params.missionId)
     .single()
 
-  const { data, error } = await query
+  const { data: missionData, error } = await query
 
-  if (error || !data) {
+  if (error || !missionData) {
     return NextResponse.json({ error: 'Mission not found' }, { status: 404 })
   }
+
+  const data = missionData as any
 
   const mission = {
     id: data.id,

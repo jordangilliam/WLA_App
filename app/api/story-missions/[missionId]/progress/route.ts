@@ -38,25 +38,28 @@ export async function GET(
     return NextResponse.json({ error: 'Mission or stages not found' }, { status: 404 })
   }
 
-  const { data: stageProgress } = await supabaseAdmin
+  const { data: stageProgressData } = await supabaseAdmin
     .from('story_mission_stage_progress')
     .select('*')
     .eq('mission_id', params.missionId)
     .eq('user_id', userId)
 
+  const stageProgress = (stageProgressData || []) as any[]
   const stageStatusMap = new Map(
-    (stageProgress || []).map((row) => [row.stage_id, row])
+    stageProgress.map((row: any) => [row.stage_id, row])
   )
 
-  const { data: missionProgressRow } = await supabaseAdmin
+  const { data: missionProgressRowData } = await supabaseAdmin
     .from('story_mission_progress')
     .select('*')
     .eq('mission_id', params.missionId)
     .eq('user_id', userId)
     .single()
 
-  const completedStages = (stageProgress || []).filter(
-    (row) => row.status === 'completed'
+  const missionProgressRow = missionProgressRowData as any
+
+  const completedStages = stageProgress.filter(
+    (row: any) => row.status === 'completed'
   ).length
 
   const missionProgress = missionProgressRow || {

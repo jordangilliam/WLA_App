@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  const response = (data || []).map((mission) => ({
+  const response = ((data || []) as any[]).map((mission: any) => ({
     id: mission.id,
     title: mission.title,
     synopsis: mission.synopsis,
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
   const startAt = payload.startAt ? new Date(payload.startAt) : now
   const endAt = payload.endAt ? new Date(payload.endAt) : null
 
-  const { data: mission, error: insertError } = await supabaseAdmin
+  const { data: missionData, error: insertError } = await supabaseAdmin
     .from('story_missions')
     .insert({
       title: payload.title,
@@ -131,13 +131,15 @@ export async function POST(request: NextRequest) {
     .select()
     .single()
 
-  if (insertError || !mission) {
+  if (insertError || !missionData) {
     console.error('Failed to create mission', insertError)
     return NextResponse.json(
       { error: 'Unable to create mission' },
       { status: 500 }
     )
   }
+
+  const mission = missionData as { id: string }
 
   const stagesPayload = payload.stages.map((stage, idx) => ({
     mission_id: mission.id,

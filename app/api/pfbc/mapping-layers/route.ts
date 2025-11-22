@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/db/client';
 import {
   PFBC_CLASS_A_TROUT_STREAMS,
   PFBC_WILD_TROUT_STREAMS,
@@ -22,9 +22,6 @@ import {
   EXPANDED_OTHER_SPECIES_WATERS,
 } from '@/data/pfbc-mapping-layers-expanded';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

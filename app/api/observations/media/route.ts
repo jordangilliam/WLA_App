@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
   const { data: signedUpload, error: signedError } = await supabaseAdmin.storage
     .from(OBSERVATION_MEDIA_BUCKET)
-    .createSignedUploadUrl(storagePath, 60 * 10)
+    .createSignedUploadUrl(storagePath, { upsert: false })
 
   if (signedError || !signedUpload) {
     console.error('Failed to create signed upload URL', signedError)

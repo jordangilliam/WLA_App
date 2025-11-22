@@ -473,7 +473,7 @@ async function seedSecretMissions() {
 
         if (fieldSite) {
           locationData.field_site_id = fieldSite.id
-        } else if (loc.customName) {
+        } else if ('customName' in loc && loc.customName) {
           locationData.custom_name = loc.customName
           locationData.custom_latitude = loc.customLatitude
           locationData.custom_longitude = loc.customLongitude

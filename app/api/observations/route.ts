@@ -91,9 +91,6 @@ export async function GET(request: NextRequest) {
       media: mediaByObservation[obs.id] || [],
       verified: false, // TODO: Add verification system
       teacher_feedback: null, // TODO: Add feedback system
-      // Weather and temperature would come from stored data
-      weather: undefined,
-      temperature: undefined,
     }));
 
     return NextResponse.json({
@@ -153,7 +150,7 @@ export async function POST(request: NextRequest) {
     // For now, we'll update an existing visit or create a standalone observation
     // TODO: Enhance this to properly link with check-ins
 
-    const { data: observation, error } = await supabaseAdmin
+    const { data: observationData, error } = await supabaseAdmin
       .from('user_visits')
       .insert({
         user_id: userId,
@@ -178,6 +175,8 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    const observation = observationData as { id: string } | null
 
     if (
       observation &&

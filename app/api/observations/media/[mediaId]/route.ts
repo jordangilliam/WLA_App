@@ -67,16 +67,17 @@ export async function PATCH(
     )
   }
 
-  const { data: existing, error: fetchError } = await supabaseAdmin
+  const { data: existingData, error: fetchError } = await supabaseAdmin
     .from('observation_media')
     .select('*')
     .eq('id', params.mediaId)
     .single()
 
-  if (fetchError || !existing) {
+  if (fetchError || !existingData) {
     return NextResponse.json({ error: 'Media not found' }, { status: 404 })
   }
 
+  const existing = existingData as ObservationMedia
   const isOwner = existing.user_id === userId
   const canModerate = role ? MODERATOR_ROLES.has(role) : false
 
@@ -101,20 +102,22 @@ export async function PATCH(
     return NextResponse.json({ error: 'No updates supplied' }, { status: 400 })
   }
 
-  const { data: updated, error: updateError } = await supabaseAdmin
+  const { data: updatedData, error: updateError } = await supabaseAdmin
     .from('observation_media')
     .update(updates as never)
     .eq('id', params.mediaId)
     .select()
     .single()
 
-  if (updateError || !updated) {
+  if (updateError || !updatedData) {
     console.error('Failed to update observation media', updateError)
     return NextResponse.json(
       { error: 'Failed to update media record' },
       { status: 500 }
     )
   }
+
+  const updated = updatedData as ObservationMedia
 
   let analysisResults: IdentificationResult[] | null = null
   const shouldAnalyze =
@@ -156,16 +159,17 @@ export async function DELETE(
     )
   }
 
-  const { data: existing, error: fetchError } = await supabaseAdmin
+  const { data: existingData, error: fetchError } = await supabaseAdmin
     .from('observation_media')
     .select('*')
     .eq('id', params.mediaId)
     .single()
 
-  if (fetchError || !existing) {
+  if (fetchError || !existingData) {
     return NextResponse.json({ error: 'Media not found' }, { status: 404 })
   }
 
+  const existing = existingData as ObservationMedia
   const isOwner = existing.user_id === userId
   const canModerate = role ? MODERATOR_ROLES.has(role) : false
 

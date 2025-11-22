@@ -4,11 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabaseAdmin } from '@/lib/db/client';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -19,7 +15,7 @@ export async function GET(request: NextRequest) {
   const season = searchParams.get('season');
 
   try {
-    let query = supabase
+    let query = supabaseAdmin
       .from('expert_techniques')
       .select(`
         *,

@@ -35,19 +35,21 @@ export async function POST(
 
   try {
     // Get location details
-    const { data: location, error: locationError } = await supabaseAdmin
+    const { data: locationData, error: locationError } = await supabaseAdmin
       .from('mission_locations')
       .select('*')
       .eq('id', locationId)
       .eq('mission_id', missionId)
       .single()
 
-    if (locationError || !location) {
+    if (locationError || !locationData) {
       return NextResponse.json(
         { error: 'Location not found' },
         { status: 404 }
       )
     }
+
+    const location = locationData as any
 
     // Verify geofence if location provided
     if (latitude && longitude) {

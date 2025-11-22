@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  const formatted = (data || []).map((challenge) => ({
+  const formatted = ((data || []) as any[]).map((challenge: any) => ({
     id: challenge.id,
     title: challenge.title,
     description: challenge.description,
@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
     reward: challenge.reward,
     startAt: challenge.start_at,
     endAt: challenge.end_at,
-    participants: (challenge as any).community_challenge_participants
+    participants: challenge.community_challenge_participants
       ? (challenge as any).community_challenge_participants.sort(
           (a: any, b: any) => b.progress - a.progress
         )

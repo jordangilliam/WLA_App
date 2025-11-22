@@ -32,19 +32,21 @@ export async function POST(
 
   try {
     // Find mission location with matching QR code
-    const { data: location, error: locationError } = await supabaseAdmin
+    const { data: locationData, error: locationError } = await supabaseAdmin
       .from('mission_locations')
       .select('*')
       .eq('mission_id', missionId)
       .eq('qr_code_data', qrCodeData)
       .single()
 
-    if (locationError || !location) {
+    if (locationError || !locationData) {
       return NextResponse.json(
         { error: 'Invalid QR code or location not found' },
         { status: 404 }
       )
     }
+
+    const location = locationData as any
 
     // Verify user is within geofence (if location provided)
     if (latitude && longitude && location.latitude && location.longitude) {

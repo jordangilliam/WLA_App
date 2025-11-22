@@ -17,13 +17,14 @@ export async function GET(
 
   try {
     // Get stage content which may contain media references
-    const { data: stage } = await supabaseAdmin
+    const { data: stageData } = await supabaseAdmin
       .from('story_mission_stages')
       .select('content')
       .eq('id', stageId)
       .eq('mission_id', missionId)
       .single()
 
+    const stage = stageData as { content: any } | null
     const media: any[] = []
 
     // Extract media from stage content if present
