@@ -5,10 +5,29 @@
 
 import Stripe from 'stripe'
 
-// Initialize Stripe with secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16' as any,
-})
+// Lazy-init Stripe client
+let _stripe: Stripe | null = null;
+
+function getStripeClient(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) {
+      throw new Error('STRIPE_SECRET_KEY environment variable is required');
+    }
+    _stripe = new Stripe(key, {
+      apiVersion: '2023-10-16' as any,
+    });
+  }
+  return _stripe;
+}
+
+// Export a proxy that initializes on first use
+export const stripe = new Proxy({} as Stripe, {
+  get(_target, prop) {
+    const client = getStripeClient();
+    return (client as any)[prop];
+  }
+});
 
 export interface SubscriptionPlan {
   id: string
@@ -256,6 +275,4 @@ export function getPlans(): SubscriptionPlan[] {
 export function getPlan(planId: string): SubscriptionPlan | undefined {
   return SUBSCRIPTION_PLANS.find((p) => p.id === planId)
 }
-
-export { stripe }
 
