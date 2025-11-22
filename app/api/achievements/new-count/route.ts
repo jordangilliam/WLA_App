@@ -3,10 +3,13 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ count: 0 });
     }
 

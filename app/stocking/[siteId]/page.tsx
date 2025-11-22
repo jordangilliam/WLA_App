@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -42,11 +42,7 @@ export default function StockingSiteDetailPage({ params }: { params: { siteId: s
   const [allStockings, setAllStockings] = useState<StockingEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchSiteDetail();
-  }, [params.siteId]);
-
-  const fetchSiteDetail = async () => {
+  const fetchSiteDetail = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/stocking/site/${params.siteId}`);
@@ -65,7 +61,11 @@ export default function StockingSiteDetailPage({ params }: { params: { siteId: s
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.siteId]);
+
+  useEffect(() => {
+    fetchSiteDetail();
+  }, [fetchSiteDetail]);
 
   if (loading) {
     return (

@@ -255,7 +255,7 @@ export default function StockingCalendarPage() {
                 Calendar View Coming Soon
               </h3>
               <p className="text-gray-600 mb-6">
-                We're building an interactive calendar view with day-by-day stockings.
+                We&rsquo;re building an interactive calendar view with day-by-day stockings.
               </p>
               <button
                 onClick={() => setView('list')}

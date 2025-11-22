@@ -94,7 +94,7 @@ export default function TeamChallengesPage() {
         <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg p-6 mb-6 shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold mb-1">Ms. Johnson's Biology Class</h2>
+              <h2 className="text-2xl font-bold mb-1">Ms. Johnson&rsquo;s Biology Class</h2>
               <div className="flex items-center gap-4 text-purple-100">
                 <span>👥 24 students</span>
                 <span>•</span>
@@ -229,7 +229,7 @@ export default function TeamChallengesPage() {
           <ul className="space-y-2 text-sm text-gray-700">
             <li className="flex items-start gap-2">
               <span className="text-purple-600 mt-0.5">✓</span>
-              <span>Every student's actions count toward the class goal</span>
+              <span>Every student&rsquo;s actions count toward the class goal</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-purple-600 mt-0.5">✓</span>

@@ -177,7 +177,7 @@ export default function CheckInFlow({
                   Check in at {site.name}?
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  You'll earn points and can add photos and observations!
+                  You&rsquo;ll earn points and can add photos and observations!
                 </p>
 
                 <button

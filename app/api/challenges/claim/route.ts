@@ -13,14 +13,14 @@ export async function POST(request: NextRequest) {
     // Authentication
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.userId) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
-
-    const userId = session.user.userId;
 
     // Parse request body
     const body = await request.json();
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       .rpc('claim_challenge_rewards', {
         p_user_id: userId,
         p_challenge_id: challengeId,
-      });
+      } as never);
 
     if (error) {
       console.error('Error claiming rewards:', error);
@@ -49,7 +49,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse the JSON result from the function
-    const result = data;
+    const result = (data as { success: boolean; error?: string; points_awarded?: number } | null) ?? {
+      success: false,
+    };
 
     if (!result.success) {
       return NextResponse.json(

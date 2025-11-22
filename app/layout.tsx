@@ -9,17 +9,18 @@ import GamificationBar from '@/components/layout/GamificationBar';
 import BottomNav from '@/components/layout/BottomNav';
 import GlobalSearchWrapper from '@/components/search/GlobalSearchWrapper';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#0077B6',
+};
+
 export const metadata = {
   title: 'WLA Conservation Ambassadors - Youth Conservation Leadership',
   description: 'Wildlife Leadership Academy app for PA youth to learn, explore, and become conservation leaders',
   manifest: '/manifest.json',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
-  themeColor: '#0077B6',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',

@@ -22,13 +22,27 @@
     "build:static": "BUILD_MODE=static next build",
     "start": "next start",
     "lint": "next lint",
+    "verify:env": "tsx bin/verify-env.ts",
     "cap:sync": "npx cap sync",
     "cap:ios": "npx cap open ios",
     "cap:android": "npx cap open android",
-    "deploy:mobile": "npm run build:static && npx cap sync"
+    "deploy:mobile": "npm run build:static && npx cap sync",
+    "scrape:all": "tsx scripts/scrape-all-pfbc.ts",
+    "scrape:pasda": "tsx scripts/scrape-pfbc-pasda.ts",
+    "scrape:pfbc": "tsx scripts/scrape-pfbc-data.ts",
+    "scrape:conservation": "tsx scripts/scrape-conservation-docs.ts",
+    "expand:waterways": "tsx scripts/expand-waterways-statewide.ts",
+    "expand:50plus": "tsx scripts/expand-waterways-50plus.ts",
+    "expand:regional": "tsx scripts/expand-regional-waterways.ts",
+    "scrape:experts": "tsx scripts/scrape-fly-fishing-experts.ts",
+    "sync:pfbc": "tsx scripts/sync-pfbc-data.ts",
+    "import:pfbc": "tsx scripts/import-pfbc-data.ts",
+    "import:pfbc:stocking": "tsx scripts/import-pfbc-data.ts stocking",
+    "import:pfbc:access": "tsx scripts/import-pfbc-data.ts access-points",
+    "import:pfbc:habitat": "tsx scripts/import-pfbc-data.ts habitat",
+    "apply-migrations": "tsx scripts/apply-migrations.ts"
   },
   "dependencies": {
-    "idb": "^8.0.0",
     "@capacitor/android": "^7.4.4",
     "@capacitor/camera": "^7.0.2",
     "@capacitor/cli": "^7.4.4",
@@ -49,9 +63,9 @@
     "idb": "^8.0.3",
     "mapbox-gl": "^3.6.0",
     "next": "14.2.4",
-    "react-confetti": "^6.1.0",
     "next-auth": "^4.24.7",
     "react": "18.3.1",
+    "react-confetti": "^6.1.0",
     "react-dom": "18.3.1",
     "stripe": "^19.3.0",
     "typescript": "^5.4.5",
@@ -59,5 +73,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "cheerio": "^1.1.2",
+    "tsx": "^4.7.0"
   }
 }

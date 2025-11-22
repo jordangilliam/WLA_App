@@ -15,19 +15,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/auth.config';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/db/client';
-
-/**
- * User role hierarchy
- */
-export const ROLE_HIERARCHY = {
-  student: 0,
-  parent: 1,
-  educator: 2,
-  admin: 3,
-  partner: 3,
-} as const;
-
-export type UserRole = keyof typeof ROLE_HIERARCHY;
+import { ROLE_HIERARCHY, UserRole } from './roles';
 
 /**
  * Check if user is authenticated
@@ -352,6 +340,8 @@ export async function isOrganizationAdmin(
     .eq('org_id', orgId)
     .single();
 
-  return !error && data?.role === 'admin';
+  const orgUser = data as { role?: string } | null;
+
+  return !error && orgUser?.role === 'admin';
 }
 

@@ -12,6 +12,15 @@ export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database connection not available' },
+        { status: 500 }
+      )
+    }
+
+    const db = supabaseAdmin
+
     const body = await request.text()
     const signature = request.headers.get('stripe-signature')
 
@@ -39,20 +48,28 @@ export async function POST(request: NextRequest) {
         }
 
         // Update organization with subscription details
-        await supabaseAdmin
+        const subWithPeriods = subscription as Stripe.Subscription & {
+          current_period_start?: number | null
+          current_period_end?: number | null
+        }
+
+        const currentPeriodStart = subWithPeriods.current_period_start
+          ? new Date(subWithPeriods.current_period_start * 1000).toISOString()
+          : null
+        const currentPeriodEnd = subWithPeriods.current_period_end
+          ? new Date(subWithPeriods.current_period_end * 1000).toISOString()
+          : null
+
+        await db
           .from('organizations')
           .update({
             subscription_id: subscription.id,
             subscription_status: subscription.status,
             subscription_plan: planId,
-            subscription_current_period_start: new Date(
-              subscription.current_period_start * 1000
-            ).toISOString(),
-            subscription_current_period_end: new Date(
-              subscription.current_period_end * 1000
-            ).toISOString(),
+            subscription_current_period_start: currentPeriodStart,
+            subscription_current_period_end: currentPeriodEnd,
             stripe_customer_id: subscription.customer as string,
-          })
+          } as never)
           .eq('id', organizationId)
 
         console.log(
@@ -70,17 +87,25 @@ export async function POST(request: NextRequest) {
         }
 
         // Update organization subscription status
-        await supabaseAdmin
+        const updatedPeriods = subscription as Stripe.Subscription & {
+          current_period_start?: number | null
+          current_period_end?: number | null
+        }
+
+        const updatedCurrentPeriodStart = updatedPeriods.current_period_start
+          ? new Date(updatedPeriods.current_period_start * 1000).toISOString()
+          : null
+        const updatedCurrentPeriodEnd = updatedPeriods.current_period_end
+          ? new Date(updatedPeriods.current_period_end * 1000).toISOString()
+          : null
+
+        await db
           .from('organizations')
           .update({
             subscription_status: subscription.status,
-            subscription_current_period_start: new Date(
-              subscription.current_period_start * 1000
-            ).toISOString(),
-            subscription_current_period_end: new Date(
-              subscription.current_period_end * 1000
-            ).toISOString(),
-          })
+            subscription_current_period_start: updatedCurrentPeriodStart,
+            subscription_current_period_end: updatedCurrentPeriodEnd,
+          } as never)
           .eq('id', organizationId)
 
         console.log(
@@ -98,12 +123,12 @@ export async function POST(request: NextRequest) {
         }
 
         // Mark subscription as canceled
-        await supabaseAdmin
+        await db
           .from('organizations')
           .update({
             subscription_status: 'canceled',
             subscription_canceled_at: new Date().toISOString(),
-          })
+          } as never)
           .eq('id', organizationId)
 
         console.log(

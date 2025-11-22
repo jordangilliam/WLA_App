@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
         school_district: body.school_district,
         allow_location_sharing: body.allow_location_sharing || false,
         require_assignment_approval: body.require_assignment_approval !== false,
-      })
+      } as never)
       .select()
       .single();
 

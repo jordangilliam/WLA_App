@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/leaderboard/class
  * Fetch class rankings for current week
@@ -12,7 +14,9 @@ export async function GET(request: NextRequest) {
     // Authentication
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.userId) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -25,7 +29,7 @@ export async function GET(request: NextRequest) {
 
     // Call Supabase RPC function
     const { data, error } = await supabaseAdmin!
-      .rpc('get_class_leaderboard', { p_limit: limit });
+      .rpc('get_class_leaderboard', { p_limit: limit } as never);
 
     if (error) {
       console.error('Error fetching class leaderboard:', error);

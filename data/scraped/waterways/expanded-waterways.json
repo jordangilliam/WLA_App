@@ -1,0 +1,652 @@
+[
+  {
+    "id": "spring-creek",
+    "name": "Spring Creek",
+    "type": "Creek",
+    "county": "Centre",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.7981,
+      "lng": -77.86
+    },
+    "size": "35 miles",
+    "description": "Famous limestone spring creek running through State College. All-tackle trophy section. Year-round fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall",
+        "winter"
+      ],
+      "springNotes": "Excellent Hendrickson and Sulphur hatches. Spring stocking in March-April.",
+      "summerNotes": "Trico hatches in early morning. Water stays cool year-round.",
+      "fallNotes": "Blue-Winged Olive hatches. Fall stocking in October.",
+      "winterNotes": "Year-round fishing. Midge hatches throughout winter.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemps": {
+        "spring": 52,
+        "summer": 58,
+        "fall": 55,
+        "winter": 45
+      }
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "peakMonth": "Late April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "peakMonth": "Late May",
+        "timeOfDay": "evening",
+        "hookSize": "#16-#18"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "peakMonth": "August-September",
+        "timeOfDay": "morning",
+        "hookSize": "#20-#24"
+      },
+      {
+        "species": "Chironomidae",
+        "commonName": "Midges",
+        "peakMonth": "Year-round",
+        "timeOfDay": "all-day",
+        "hookSize": "#18-#24"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Fisherman's Paradise",
+        "coordinates": {
+          "lat": 40.7981,
+          "lng": -77.86
+        },
+        "type": "fly-fishing-only",
+        "amenities": [
+          "Parking",
+          "Restrooms",
+          "Wheelchair Accessible",
+          "Visitor Center"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yellow-breeches",
+    "name": "Yellow Breeches Creek",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.2342,
+      "lng": -77.0264
+    },
+    "size": "60 miles",
+    "description": "Premier limestone spring creek. One of PA best trout streams with wild and stocked fish.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Hendrickson hatch in late April. Excellent spring fishing.",
+      "fallNotes": "Fall stocking and Blue-Winged Olive hatches.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemps": {
+        "spring": 50,
+        "summer": 60,
+        "fall": 55,
+        "winter": 42
+      }
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "peakMonth": "Late April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "peakMonth": "Late May",
+        "timeOfDay": "evening",
+        "hookSize": "#16-#18"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "peakMonth": "August-September",
+        "timeOfDay": "morning",
+        "hookSize": "#20-#24"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Allenberry Resort",
+        "coordinates": {
+          "lat": 40.2342,
+          "lng": -77.0264
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking",
+          "Resort Facilities"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "big-spring-creek",
+    "name": "Big Spring Creek",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.15,
+      "lng": -77.2
+    },
+    "size": "8 miles",
+    "description": "Small but productive limestone spring creek. Trophy trout section.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Early season Hendrickson hatch.",
+      "fallNotes": "Fall stocking and hatches.",
+      "springStocking": true,
+      "fallStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "peakMonth": "Late April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "peakMonth": "Late May",
+        "timeOfDay": "evening",
+        "hookSize": "#16-#18"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "peakMonth": "August-September",
+        "timeOfDay": "morning",
+        "hookSize": "#20-#24"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Big Spring Access",
+        "coordinates": {
+          "lat": 40.15,
+          "lng": -77.2
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "penns-creek",
+    "name": "Penns Creek",
+    "type": "Stream",
+    "county": "Centre/Snyder",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.867,
+      "lng": -77.4167
+    },
+    "size": "67 miles",
+    "description": "Freestone stream with excellent insect hatches. One of PA premier wild trout streams.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Grannom hatch in mid-April. March Brown in late March.",
+      "summerNotes": "Isonychia hatch in June. Excellent dry fly fishing.",
+      "fallNotes": "Fall colors and good fishing.",
+      "springStocking": true,
+      "waterTemps": {
+        "spring": 48,
+        "summer": 65,
+        "fall": 55,
+        "winter": 38
+      }
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "peakMonth": "Mid-April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#14-#16"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "peakMonth": "Late March",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "peakMonth": "June",
+        "timeOfDay": "evening",
+        "hookSize": "#10-#12"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Coburn Access",
+        "coordinates": {
+          "lat": 40.867,
+          "lng": -77.4167
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "loyalsock-creek",
+    "name": "Loyalsock Creek",
+    "type": "Creek",
+    "county": "Lycoming",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.25,
+      "lng": -76.8
+    },
+    "size": "64 miles",
+    "description": "Scenic mountain stream with quality trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springNotes": "Spring stocking and hatches.",
+      "summerNotes": "Good bass fishing in lower sections.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "peakMonth": "Mid-April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#14-#16"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "peakMonth": "Late March",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "peakMonth": "June",
+        "timeOfDay": "evening",
+        "hookSize": "#10-#12"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Loyalsock Access",
+        "coordinates": {
+          "lat": 41.25,
+          "lng": -76.8
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pine-creek",
+    "name": "Pine Creek",
+    "type": "Creek",
+    "county": "Tioga",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.7,
+      "lng": -77.4
+    },
+    "size": "87 miles",
+    "description": "Pennsylvania Grand Canyon stream with diverse fishing opportunities.",
+    "species": [
+      "Brook Trout",
+      "Brown Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Brook trout in headwaters. Spring stocking.",
+      "summerNotes": "Bass fishing in lower sections.",
+      "fallNotes": "Fall colors make this a beautiful time to fish.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "peakMonth": "Mid-April",
+        "timeOfDay": "afternoon",
+        "hookSize": "#14-#16"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "peakMonth": "Late March",
+        "timeOfDay": "afternoon",
+        "hookSize": "#12-#14"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "peakMonth": "June",
+        "timeOfDay": "evening",
+        "hookSize": "#10-#12"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Leonard Harrison State Park",
+        "coordinates": {
+          "lat": 41.7,
+          "lng": -77.4
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking",
+          "Overlook",
+          "Trails",
+          "Visitor Center"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tulpehocken-creek",
+    "name": "Tulpehocken Creek",
+    "type": "Creek",
+    "county": "Berks",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.4,
+      "lng": -76.05
+    },
+    "size": "25 miles",
+    "description": "Excellent trout stream with cold water releases from Blue Marsh Dam.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "springNotes": "Year-round fishing due to cold water releases.",
+      "summerNotes": "Stays cool even in summer. Excellent fishing.",
+      "fallNotes": "Fall stocking and hatches.",
+      "winterNotes": "Year-round fishing possible.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemps": {
+        "spring": 48,
+        "summer": 52,
+        "fall": 50,
+        "winter": 45
+      }
+    },
+    "hatches": [
+      {
+        "species": "Baetis",
+        "commonName": "Blue-Winged Olive",
+        "peakMonth": "April, October",
+        "timeOfDay": "afternoon",
+        "hookSize": "#16-#20"
+      },
+      {
+        "species": "Pseudocloeon",
+        "commonName": "Tiny Blue-Winged Olive",
+        "peakMonth": "May-September",
+        "timeOfDay": "afternoon",
+        "hookSize": "#20-#24"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Blue Marsh Dam Tailwaters",
+        "coordinates": {
+          "lat": 40.4,
+          "lng": -76.05
+        },
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "raystown-lake",
+    "name": "Raystown Lake",
+    "type": "Lake",
+    "county": "Huntingdon",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.4167,
+      "lng": -78.0833
+    },
+    "size": "8,300 acres",
+    "description": "PA largest lake with exceptional multi-species fishing. 30 miles long, 200 feet deep.",
+    "species": [
+      "Smallmouth Bass",
+      "Largemouth Bass",
+      "Walleye",
+      "Muskellunge",
+      "Striped Bass",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Excellent bass fishing. Walleye spawn in April.",
+      "summerNotes": "Deep water fishing for bass and walleye. Topwater action.",
+      "fallNotes": "Excellent fall fishing. Muskie season peaks.",
+      "winterNotes": "Ice fishing possible in coves.",
+      "iceFishing": true,
+      "waterTemps": {
+        "spring": 55,
+        "summer": 75,
+        "fall": 65,
+        "winter": 40
+      }
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Seven Points Marina",
+        "coordinates": {
+          "lat": 40.4167,
+          "lng": -78.0833
+        },
+        "type": "boat-launch",
+        "amenities": [
+          "Boat Launch",
+          "Marina",
+          "Restrooms",
+          "Picnic Area"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lake-erie",
+    "name": "Lake Erie - Presque Isle Bay",
+    "type": "Lake",
+    "county": "Erie",
+    "region": "Erie",
+    "coordinates": {
+      "lat": 42.1275,
+      "lng": -80.0851
+    },
+    "size": "3,200 acres (bay)",
+    "description": "World-class fishing for walleye and perch with protected bay habitat.",
+    "species": [
+      "Smallmouth Bass",
+      "Walleye",
+      "Yellow Perch",
+      "Northern Pike",
+      "Muskellunge",
+      "Channel Catfish",
+      "Steelhead"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Walleye spawn in April. Excellent spring fishing.",
+      "summerNotes": "Perch fishing peaks. Smallmouth bass active.",
+      "fallNotes": "Steelhead runs begin. Excellent fall fishing.",
+      "winterNotes": "Ice fishing for perch and walleye.",
+      "iceFishing": true,
+      "waterTemps": {
+        "spring": 45,
+        "summer": 70,
+        "fall": 60,
+        "winter": 35
+      }
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Presque Isle State Park",
+        "coordinates": {
+          "lat": 42.1275,
+          "lng": -80.0851
+        },
+        "type": "boat-launch",
+        "amenities": [
+          "Multiple Launches",
+          "Parking",
+          "Beach",
+          "Trails",
+          "Visitor Center",
+          "Marina"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lake-wallenpaupack",
+    "name": "Lake Wallenpaupack",
+    "type": "Reservoir",
+    "county": "Pike/Wayne",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.35,
+      "lng": -75.1833
+    },
+    "size": "5,700 acres",
+    "description": "Large reservoir with rocky shorelines, submerged timber, and deep basins.",
+    "species": [
+      "Smallmouth Bass",
+      "Largemouth Bass",
+      "Walleye",
+      "Yellow Perch",
+      "Crappie",
+      "Bluegill",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Bass spawn in May. Excellent spring fishing.",
+      "summerNotes": "Deep water fishing. Topwater action early and late.",
+      "fallNotes": "Fall colors and good fishing.",
+      "winterNotes": "Ice fishing possible.",
+      "iceFishing": true
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Mangan's Boat Launch",
+        "coordinates": {
+          "lat": 41.35,
+          "lng": -75.1833
+        },
+        "type": "boat-launch",
+        "amenities": [
+          "Boat Launch",
+          "Parking",
+          "Marina"
+        ]
+      }
+    ]
+  }
+]

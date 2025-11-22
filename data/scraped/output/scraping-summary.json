@@ -1,0 +1,21 @@
+{
+  "scrapedAt": "2025-11-22T01:11:24.550Z",
+  "counts": {
+    "stockingEvents": 0,
+    "accessPoints": 0,
+    "habitatInstallations": 0,
+    "conservationDocuments": 0
+  },
+  "sources": {
+    "pfbc": "https://www.fishandboat.com",
+    "pasda": "https://www.pasda.psu.edu",
+    "conservationGroups": [
+      "Trout Unlimited - PA Council",
+      "Pennsylvania Lake Management Society",
+      "Pennsylvania Environmental Council",
+      "Chesapeake Bay Foundation - PA",
+      "Western Pennsylvania Conservancy",
+      "Pennsylvania Watershed Association"
+    ]
+  }
+}

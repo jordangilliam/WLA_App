@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 
 interface NavigationContextType {
@@ -20,6 +20,7 @@ const NavigationContext = createContext<NavigationContextType | undefined>(undef
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession();
+  const userId = (session?.user as { id?: string } | undefined)?.id;
   const [activeTab, setActiveTab] = useState('explore');
   const [showSearch, setShowSearch] = useState(false);
   const [notificationCounts, setNotificationCounts] = useState({
@@ -29,8 +30,8 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
   });
 
   // Fetch notification counts
-  const refreshNotifications = async () => {
-    if (status !== 'authenticated' || !session?.user?.id) {
+  const refreshNotifications = useCallback(async () => {
+    if (status !== 'authenticated' || !userId) {
       return;
     }
 
@@ -53,7 +54,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Error fetching notifications:', error);
     }
-  };
+  }, [status, userId]);
 
   // Initial load and periodic refresh
   useEffect(() => {
@@ -64,7 +65,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
       const interval = setInterval(refreshNotifications, 5 * 60 * 1000);
       return () => clearInterval(interval);
     }
-  }, [status, session?.user?.id]);
+  }, [status, userId, refreshNotifications]);
 
   // Listen for custom events to refresh notifications
   useEffect(() => {
@@ -77,7 +78,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('achievement-unlocked', handleRefresh);
       window.removeEventListener('observation-feedback', handleRefresh);
     };
-  }, []);
+  }, [refreshNotifications]);
 
   return (
     <NavigationContext.Provider

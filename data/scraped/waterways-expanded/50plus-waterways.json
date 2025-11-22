@@ -1,0 +1,3177 @@
+[
+  {
+    "id": "spring-creek",
+    "name": "Spring Creek",
+    "type": "Creek",
+    "county": "Centre",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.7981,
+      "lng": -77.86
+    },
+    "size": "35 miles",
+    "description": "Famous limestone spring creek running through State College. All-tackle trophy section. Year-round fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall",
+        "winter"
+      ],
+      "springNotes": "Excellent Hendrickson and Sulphur hatches. Spring stocking in March-April.",
+      "summerNotes": "Trico hatches in early morning. Water stays cool year-round.",
+      "fallNotes": "Blue-Winged Olive hatches. Fall stocking in October.",
+      "winterNotes": "Year-round fishing. Midge hatches throughout winter.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemperature": {
+        "spring": 52,
+        "summer": 58,
+        "fall": 55,
+        "winter": 45
+      }
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Late April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 48,
+          "optimal": 52,
+          "max": 56
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#12-#14",
+        "color": "Dark brown body, gray wings",
+        "notes": "One of the first major hatches of spring"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "June",
+          "peak": "Late May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 60,
+          "max": 65
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#16-#18",
+        "color": "Yellow body, pale yellow wings"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "morning",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 65,
+          "max": 70
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#20-#24",
+        "color": "Dark body, clear wings",
+        "notes": "Early morning hatch, very small"
+      },
+      {
+        "species": "Chironomidae",
+        "commonName": "Midges",
+        "hatchPeriod": {
+          "start": "January",
+          "end": "December",
+          "peak": "Year-round"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 35,
+          "optimal": 50,
+          "max": 65
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#18-#24",
+        "color": "Black, olive, or cream",
+        "notes": "Year-round hatch, especially important in winter"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Fisherman's Paradise",
+        "latitude": 40.7981,
+        "longitude": -77.86,
+        "type": "fly-fishing-only",
+        "amenities": [
+          "Parking",
+          "Restrooms",
+          "Wheelchair Accessible",
+          "Visitor Center"
+        ],
+        "parking": true,
+        "wheelchairAccessible": true
+      }
+    ]
+  },
+  {
+    "id": "yellow-breeches",
+    "name": "Yellow Breeches Creek",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.2342,
+      "lng": -77.0264
+    },
+    "size": "60 miles",
+    "description": "Premier limestone spring creek. One of PA best trout streams with wild and stocked fish.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Hendrickson hatch in late April. Excellent spring fishing.",
+      "fallNotes": "Fall stocking and Blue-Winged Olive hatches.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemperature": {
+        "spring": 50,
+        "summer": 60,
+        "fall": 55,
+        "winter": 42
+      }
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Late April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 48,
+          "optimal": 52,
+          "max": 56
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#12-#14",
+        "color": "Dark brown body, gray wings",
+        "notes": "One of the first major hatches of spring"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "June",
+          "peak": "Late May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 60,
+          "max": 65
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#16-#18",
+        "color": "Yellow body, pale yellow wings"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "morning",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 65,
+          "max": 70
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#20-#24",
+        "color": "Dark body, clear wings",
+        "notes": "Early morning hatch, very small"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Allenberry Resort",
+        "latitude": 40.2342,
+        "longitude": -77.0264,
+        "type": "wade-access",
+        "amenities": [
+          "Parking",
+          "Resort Facilities"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "big-spring-creek",
+    "name": "Big Spring Creek",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.15,
+      "lng": -77.2
+    },
+    "size": "8 miles",
+    "description": "Small but productive limestone spring creek. Trophy trout section.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Early season Hendrickson hatch.",
+      "fallNotes": "Fall stocking and hatches.",
+      "springStocking": true,
+      "fallStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Late April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 48,
+          "optimal": 52,
+          "max": 56
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#12-#14",
+        "color": "Dark brown body, gray wings",
+        "notes": "One of the first major hatches of spring"
+      },
+      {
+        "species": "Ephemerella invaria",
+        "commonName": "Sulphur",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "June",
+          "peak": "Late May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 60,
+          "max": 65
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#16-#18",
+        "color": "Yellow body, pale yellow wings"
+      },
+      {
+        "species": "Tricorythodes",
+        "commonName": "Trico",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "morning",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 65,
+          "max": 70
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#20-#24",
+        "color": "Dark body, clear wings",
+        "notes": "Early morning hatch, very small"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Big Spring Access",
+        "latitude": 40.15,
+        "longitude": -77.2,
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "penns-creek",
+    "name": "Penns Creek",
+    "type": "Stream",
+    "county": "Centre/Snyder",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.867,
+      "lng": -77.4167
+    },
+    "size": "67 miles",
+    "description": "Freestone stream with excellent insect hatches. One of PA premier wild trout streams.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Grannom hatch in mid-April. March Brown in late March.",
+      "summerNotes": "Isonychia hatch in June. Excellent dry fly fishing.",
+      "fallNotes": "Fall colors and good fishing.",
+      "springStocking": true,
+      "waterTemperature": {
+        "spring": 48,
+        "summer": 65,
+        "fall": 55,
+        "winter": 38
+      }
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Mid-April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 54,
+          "max": 58
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, gray wings"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "hatchPeriod": {
+          "start": "March",
+          "end": "April",
+          "peak": "Late March"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 50,
+          "max": 55
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#12-#14",
+        "color": "Brown body, mottled wings"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 58,
+          "optimal": 62,
+          "max": 68
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#10-#12",
+        "color": "Dark brown body, dark wings"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Coburn Access",
+        "latitude": 40.867,
+        "longitude": -77.4167,
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "loyalsock-creek",
+    "name": "Loyalsock Creek",
+    "type": "Creek",
+    "county": "Lycoming",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.25,
+      "lng": -76.8
+    },
+    "size": "64 miles",
+    "description": "Scenic mountain stream with quality trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springNotes": "Spring stocking and hatches.",
+      "summerNotes": "Good bass fishing in lower sections.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Mid-April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 54,
+          "max": 58
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, gray wings"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "hatchPeriod": {
+          "start": "March",
+          "end": "April",
+          "peak": "Late March"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 50,
+          "max": 55
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#12-#14",
+        "color": "Brown body, mottled wings"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 58,
+          "optimal": 62,
+          "max": 68
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#10-#12",
+        "color": "Dark brown body, dark wings"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Loyalsock Access",
+        "latitude": 41.25,
+        "longitude": -76.8,
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "pine-creek",
+    "name": "Pine Creek",
+    "type": "Creek",
+    "county": "Tioga",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.7,
+      "lng": -77.4
+    },
+    "size": "87 miles",
+    "description": "Pennsylvania Grand Canyon stream with diverse fishing opportunities.",
+    "species": [
+      "Brook Trout",
+      "Brown Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Brook trout in headwaters. Spring stocking.",
+      "summerNotes": "Bass fishing in lower sections.",
+      "fallNotes": "Fall colors make this a beautiful time to fish.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Mid-April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 54,
+          "max": 58
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, gray wings"
+      },
+      {
+        "species": "Ephemerella dorothea",
+        "commonName": "March Brown",
+        "hatchPeriod": {
+          "start": "March",
+          "end": "April",
+          "peak": "Late March"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 50,
+          "max": 55
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#12-#14",
+        "color": "Brown body, mottled wings"
+      },
+      {
+        "species": "Isonychia",
+        "commonName": "Isonychia",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 58,
+          "optimal": 62,
+          "max": 68
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#10-#12",
+        "color": "Dark brown body, dark wings"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Leonard Harrison State Park",
+        "latitude": 41.7,
+        "longitude": -77.4,
+        "type": "wade-access",
+        "amenities": [
+          "Parking",
+          "Overlook",
+          "Trails",
+          "Visitor Center"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "tulpehocken-creek",
+    "name": "Tulpehocken Creek",
+    "type": "Creek",
+    "county": "Berks",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.4,
+      "lng": -76.05
+    },
+    "size": "25 miles",
+    "description": "Excellent trout stream with cold water releases from Blue Marsh Dam.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "springNotes": "Year-round fishing due to cold water releases.",
+      "summerNotes": "Stays cool even in summer. Excellent fishing.",
+      "fallNotes": "Fall stocking and hatches.",
+      "winterNotes": "Year-round fishing possible.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemperature": {
+        "spring": 48,
+        "summer": 52,
+        "fall": 50,
+        "winter": 45
+      }
+    },
+    "hatches": [
+      {
+        "species": "Baetis",
+        "commonName": "Blue-Winged Olive",
+        "hatchPeriod": {
+          "start": "March",
+          "end": "November",
+          "peak": "April, October"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "tailwater",
+          "limestone"
+        ],
+        "size": "#16-#20",
+        "color": "Olive body, gray-blue wings",
+        "notes": "Year-round hatch in tailwaters"
+      },
+      {
+        "species": "Pseudocloeon",
+        "commonName": "Tiny Blue-Winged Olive",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "October",
+          "peak": "May-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "tailwater"
+        ],
+        "size": "#20-#24",
+        "color": "Olive body, blue-gray wings"
+      }
+    ],
+    "accessPoints": [
+      {
+        "name": "Blue Marsh Dam Tailwaters",
+        "latitude": 40.4,
+        "longitude": -76.05,
+        "type": "wade-access",
+        "amenities": [
+          "Parking"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "raystown-lake",
+    "name": "Raystown Lake",
+    "type": "Lake",
+    "county": "Huntingdon",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.4167,
+      "lng": -78.0833
+    },
+    "size": "8,300 acres",
+    "description": "PA largest lake with exceptional multi-species fishing. 30 miles long, 200 feet deep.",
+    "species": [
+      "Smallmouth Bass",
+      "Largemouth Bass",
+      "Walleye",
+      "Muskellunge",
+      "Striped Bass",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Excellent bass fishing. Walleye spawn in April.",
+      "summerNotes": "Deep water fishing for bass and walleye. Topwater action.",
+      "fallNotes": "Excellent fall fishing. Muskie season peaks.",
+      "winterNotes": "Ice fishing possible in coves.",
+      "iceFishing": true,
+      "waterTemperature": {
+        "spring": 55,
+        "summer": 75,
+        "fall": 65,
+        "winter": 40
+      }
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Seven Points Marina",
+        "latitude": 40.4167,
+        "longitude": -78.0833,
+        "type": "boat-launch",
+        "amenities": [
+          "Boat Launch",
+          "Marina",
+          "Restrooms",
+          "Picnic Area"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "lake-erie",
+    "name": "Lake Erie - Presque Isle Bay",
+    "type": "Lake",
+    "county": "Erie",
+    "region": "Erie",
+    "coordinates": {
+      "lat": 42.1275,
+      "lng": -80.0851
+    },
+    "size": "3,200 acres (bay)",
+    "description": "World-class fishing for walleye and perch with protected bay habitat.",
+    "species": [
+      "Smallmouth Bass",
+      "Walleye",
+      "Yellow Perch",
+      "Northern Pike",
+      "Muskellunge",
+      "Channel Catfish",
+      "Steelhead"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Walleye spawn in April. Excellent spring fishing.",
+      "summerNotes": "Perch fishing peaks. Smallmouth bass active.",
+      "fallNotes": "Steelhead runs begin. Excellent fall fishing.",
+      "winterNotes": "Ice fishing for perch and walleye.",
+      "iceFishing": true,
+      "waterTemperature": {
+        "spring": 45,
+        "summer": 70,
+        "fall": 60,
+        "winter": 35
+      }
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Presque Isle State Park",
+        "latitude": 42.1275,
+        "longitude": -80.0851,
+        "type": "boat-launch",
+        "amenities": [
+          "Multiple Launches",
+          "Parking",
+          "Beach",
+          "Trails",
+          "Visitor Center",
+          "Marina"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "lake-wallenpaupack",
+    "name": "Lake Wallenpaupack",
+    "type": "Reservoir",
+    "county": "Pike/Wayne",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.35,
+      "lng": -75.1833
+    },
+    "size": "5,700 acres",
+    "description": "Large reservoir with rocky shorelines, submerged timber, and deep basins.",
+    "species": [
+      "Smallmouth Bass",
+      "Largemouth Bass",
+      "Walleye",
+      "Yellow Perch",
+      "Crappie",
+      "Bluegill",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Bass spawn in May. Excellent spring fishing.",
+      "summerNotes": "Deep water fishing. Topwater action early and late.",
+      "fallNotes": "Fall colors and good fishing.",
+      "winterNotes": "Ice fishing possible.",
+      "iceFishing": true
+    },
+    "hatches": [],
+    "accessPoints": [
+      {
+        "name": "Mangan's Boat Launch",
+        "latitude": 41.35,
+        "longitude": -75.1833,
+        "type": "boat-launch",
+        "amenities": [
+          "Boat Launch",
+          "Parking",
+          "Marina"
+        ],
+        "parking": true
+      }
+    ]
+  },
+  {
+    "id": "letort-spring-run",
+    "name": "Letort Spring Run",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.2,
+      "lng": -77.2
+    },
+    "size": "3 miles",
+    "description": "Famous limestone spring creek. Challenging fishing for selective trout.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Excellent spring hatches. Very selective trout.",
+      "fallNotes": "Fall fishing excellent.",
+      "springStocking": true,
+      "fallStocking": true,
+      "waterTemperature": {
+        "spring": 52,
+        "summer": 58,
+        "fall": 55,
+        "winter": 45
+      }
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Ephemerella subvaria",
+        "commonName": "Hendrickson",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Late April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 48,
+          "optimal": 52,
+          "max": 56
+        },
+        "waterType": [
+          "limestone",
+          "spring-fed"
+        ],
+        "size": "#12-#14",
+        "color": "Dark brown body, gray wings"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "falling-spring-branch",
+    "name": "Falling Spring Branch",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.15,
+      "lng": -77.25
+    },
+    "size": "5 miles",
+    "description": "Small but productive limestone spring creek.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Spring hatches excellent.",
+      "fallNotes": "Fall fishing good.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "kettle-creek",
+    "name": "Kettle Creek",
+    "type": "Creek",
+    "county": "Clinton",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.35,
+      "lng": -77.8
+    },
+    "size": "44 miles",
+    "description": "Remote wilderness stream with native and stocked trout.",
+    "species": [
+      "Brook Trout",
+      "Brown Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Brook trout in headwaters. Spring stocking.",
+      "summerNotes": "Good summer fishing.",
+      "fallNotes": "Fall colors and fishing.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      },
+      {
+        "species": "Brachycentrus",
+        "commonName": "Grannom",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "May",
+          "peak": "Mid-April"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 54,
+          "max": 58
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, gray wings"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "slate-run",
+    "name": "Slate Run",
+    "type": "Creek",
+    "county": "Lycoming",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41.4,
+      "lng": -77.5
+    },
+    "size": "12 miles",
+    "description": "Wild brook trout stream in remote area.",
+    "species": [
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springNotes": "Wild brook trout fishing.",
+      "summerNotes": "Cool water maintains trout."
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "little-juniata-river",
+    "name": "Little Juniata River",
+    "type": "River",
+    "county": "Huntingdon",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.5,
+      "lng": -78
+    },
+    "size": "35 miles",
+    "description": "Excellent freestone river with diverse fishing opportunities.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Spring stocking and hatches.",
+      "summerNotes": "Good bass fishing in lower sections.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "brodhead-creek",
+    "name": "Brodhead Creek",
+    "type": "Creek",
+    "county": "Monroe",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41,
+      "lng": -75.2
+    },
+    "size": "25 miles",
+    "description": "Popular Pocono stream with good trout fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springNotes": "Spring stocking and hatches.",
+      "fallNotes": "Fall fishing excellent.",
+      "springStocking": true,
+      "fallStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "delaware-river",
+    "name": "Delaware River",
+    "type": "River",
+    "county": "Pike",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.3,
+      "lng": -74.8
+    },
+    "size": "Major river",
+    "description": "Major river system with excellent trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass",
+      "Walleye"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Trout fishing in upper sections.",
+      "summerNotes": "Bass fishing excellent.",
+      "fallNotes": "Fall fishing good."
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "promised-land-lake",
+    "name": "Promised Land Lake",
+    "type": "Lake",
+    "county": "Pike",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.3,
+      "lng": -75.2
+    },
+    "size": "422 acres",
+    "description": "Popular Pocono lake with excellent bass and trout fishing.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Rainbow Trout",
+      "Brown Trout",
+      "Yellow Perch"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Trout fishing excellent in spring.",
+      "summerNotes": "Bass fishing peaks.",
+      "fallNotes": "Fall fishing good.",
+      "iceFishing": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "blue-marsh-lake",
+    "name": "Blue Marsh Lake",
+    "type": "Reservoir",
+    "county": "Berks",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.3758,
+      "lng": -75.9244
+    },
+    "size": "1,147 acres",
+    "description": "Large federal reservoir with diverse fishing opportunities.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Striped Bass",
+      "Muskellunge",
+      "Walleye",
+      "Crappie"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Excellent spring fishing.",
+      "summerNotes": "Deep water fishing.",
+      "fallNotes": "Fall fishing excellent."
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "beltzville-lake",
+    "name": "Beltzville Lake",
+    "type": "Reservoir",
+    "county": "Carbon",
+    "region": "Lehigh Valley",
+    "coordinates": {
+      "lat": 40.85,
+      "lng": -75.6
+    },
+    "size": "949 acres",
+    "description": "Popular lake with excellent bass and walleye fishing.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Walleye",
+      "Crappie",
+      "Bluegill"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Spring fishing excellent.",
+      "summerNotes": "Good summer fishing.",
+      "fallNotes": "Fall fishing good."
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "nockamixon-lake",
+    "name": "Lake Nockamixon",
+    "type": "Reservoir",
+    "county": "Bucks",
+    "region": "Philadelphia",
+    "coordinates": {
+      "lat": 40.45,
+      "lng": -75.2
+    },
+    "size": "1,450 acres",
+    "description": "Large reservoir near Philadelphia with diverse fishing.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Walleye",
+      "Crappie",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Spring fishing excellent.",
+      "summerNotes": "Good summer fishing.",
+      "fallNotes": "Fall fishing good."
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "french-creek",
+    "name": "French Creek",
+    "type": "Creek",
+    "county": "Chester",
+    "region": "Philadelphia",
+    "coordinates": {
+      "lat": 40.1,
+      "lng": -75.6
+    },
+    "size": "60 miles",
+    "description": "Excellent warm-water stream with smallmouth bass and trout.",
+    "species": [
+      "Smallmouth Bass",
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springNotes": "Trout in upper sections.",
+      "summerNotes": "Bass fishing excellent.",
+      "fallNotes": "Fall fishing good.",
+      "springStocking": true
+    },
+    "hatches": [
+      {
+        "species": "Ant",
+        "commonName": "Ant",
+        "hatchPeriod": {
+          "start": "June",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 60,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#14-#20",
+        "color": "Black or red",
+        "notes": "Terrestrial pattern, important in late summer"
+      },
+      {
+        "species": "Beetle",
+        "commonName": "Beetle",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "July-August"
+        },
+        "timeOfDay": "all-day",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 70,
+          "max": 80
+        },
+        "waterType": [
+          "limestone",
+          "freestone"
+        ],
+        "size": "#12-#18",
+        "color": "Black, brown, or green",
+        "notes": "Terrestrial, especially important near vegetation"
+      },
+      {
+        "species": "Grasshopper",
+        "commonName": "Grasshopper",
+        "hatchPeriod": {
+          "start": "July",
+          "end": "October",
+          "peak": "August-September"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 65,
+          "optimal": 75,
+          "max": 85
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Green, brown, or yellow",
+        "notes": "Large terrestrial, excellent for big trout"
+      },
+      {
+        "species": "Hydropsychidae",
+        "commonName": "Spotted Sedge",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "September",
+          "peak": "June-July"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 55,
+          "optimal": 65,
+          "max": 75
+        },
+        "waterType": [
+          "freestone",
+          "limestone"
+        ],
+        "size": "#14-#18",
+        "color": "Tan or olive body, mottled wings",
+        "notes": "Important caddisfly hatch"
+      },
+      {
+        "species": "Rhyacophilidae",
+        "commonName": "Green Sedge",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "evening",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#14-#16",
+        "color": "Olive body, green wings",
+        "notes": "Early season caddisfly"
+      },
+      {
+        "species": "Pteronarcys",
+        "commonName": "Giant Stonefly",
+        "hatchPeriod": {
+          "start": "April",
+          "end": "June",
+          "peak": "May"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 45,
+          "optimal": 55,
+          "max": 65
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#6-#10",
+        "color": "Dark brown or black",
+        "notes": "Large stonefly, important early season hatch"
+      },
+      {
+        "species": "Acroneuria",
+        "commonName": "Golden Stonefly",
+        "hatchPeriod": {
+          "start": "May",
+          "end": "July",
+          "peak": "June"
+        },
+        "timeOfDay": "afternoon",
+        "waterTemperature": {
+          "min": 50,
+          "optimal": 60,
+          "max": 70
+        },
+        "waterType": [
+          "freestone"
+        ],
+        "size": "#8-#12",
+        "color": "Golden yellow",
+        "notes": "Important summer stonefly hatch"
+      }
+    ],
+    "accessPoints": []
+  },
+  {
+    "id": "bald-eagle-creek",
+    "name": "Bald Eagle Creek",
+    "type": "Creek",
+    "county": "Centre",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.9,
+      "lng": -77.8
+    },
+    "size": "40 miles",
+    "description": "Excellent freestone stream with good trout fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "moshannon-creek",
+    "name": "Moshannon Creek",
+    "type": "Creek",
+    "county": "Centre",
+    "region": "Central",
+    "coordinates": {
+      "lat": 41,
+      "lng": -78
+    },
+    "size": "50 miles",
+    "description": "Large freestone stream with diverse fishing.",
+    "species": [
+      "Brown Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "clarion-river",
+    "name": "Clarion River",
+    "type": "River",
+    "county": "Clarion",
+    "region": "Pittsburgh",
+    "coordinates": {
+      "lat": 41.2,
+      "lng": -79.2
+    },
+    "size": "110 miles",
+    "description": "Major river with excellent smallmouth bass fishing.",
+    "species": [
+      "Smallmouth Bass",
+      "Walleye",
+      "Channel Catfish"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ]
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "youghiogheny-river",
+    "name": "Youghiogheny River",
+    "type": "River",
+    "county": "Fayette",
+    "region": "Pittsburgh",
+    "coordinates": {
+      "lat": 40.1,
+      "lng": -79.5
+    },
+    "size": "134 miles",
+    "description": "Scenic river with excellent fishing.",
+    "species": [
+      "Smallmouth Bass",
+      "Walleye",
+      "Brown Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "lehigh-river",
+    "name": "Lehigh River",
+    "type": "River",
+    "county": "Lehigh",
+    "region": "Lehigh Valley",
+    "coordinates": {
+      "lat": 40.6,
+      "lng": -75.5
+    },
+    "size": "103 miles",
+    "description": "Major river with trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "schuylkill-river-reading",
+    "name": "Schuylkill River",
+    "type": "River",
+    "county": "Schuylkill",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.3,
+      "lng": -76
+    },
+    "size": "135 miles",
+    "description": "Major river system with diverse fishing.",
+    "species": [
+      "Smallmouth Bass",
+      "Walleye",
+      "Brown Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ]
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "pymatuning-lake",
+    "name": "Pymatuning Lake",
+    "type": "Reservoir",
+    "county": "Crawford",
+    "region": "Erie",
+    "coordinates": {
+      "lat": 41.6,
+      "lng": -80.5
+    },
+    "size": "17,088 acres",
+    "description": "Massive reservoir on PA/OH border. Excellent fishing.",
+    "species": [
+      "Walleye",
+      "Muskellunge",
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Crappie"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "iceFishing": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "shenango-river-lake",
+    "name": "Shenango River Lake",
+    "type": "Reservoir",
+    "county": "Mercer",
+    "region": "Pittsburgh",
+    "coordinates": {
+      "lat": 41.3,
+      "lng": -80.4
+    },
+    "size": "3,560 acres",
+    "description": "Large reservoir with excellent fishing.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Walleye",
+      "Crappie"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ]
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "swatara-creek",
+    "name": "Swatara Creek",
+    "type": "Creek",
+    "county": "Lebanon",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.3,
+      "lng": -76.4
+    },
+    "size": "70 miles",
+    "description": "Excellent warm-water stream with bass and trout.",
+    "species": [
+      "Smallmouth Bass",
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "conodoguinet-creek",
+    "name": "Conodoguinet Creek",
+    "type": "Creek",
+    "county": "Cumberland",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.2789,
+      "lng": -77.2147
+    },
+    "size": "90 miles",
+    "description": "Long creek with good trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "loyalsock-creek",
+    "name": "Loyalsock Creek",
+    "type": "Creek",
+    "county": "Sullivan",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.4,
+      "lng": -76.7
+    },
+    "size": "64 miles",
+    "description": "Excellent freestone stream with wild trout.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "pine-creek",
+    "name": "Pine Creek",
+    "type": "Creek",
+    "county": "Tioga",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.6,
+      "lng": -77.4
+    },
+    "size": "87 miles",
+    "description": "Scenic canyon stream with excellent fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "cowanesque-lake",
+    "name": "Cowanesque Lake",
+    "type": "Reservoir",
+    "county": "Tioga",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.9,
+      "lng": -77.2
+    },
+    "size": "1,085 acres",
+    "description": "Northern PA reservoir with excellent fishing.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Walleye",
+      "Crappie"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "iceFishing": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "raystown-lake",
+    "name": "Raystown Lake",
+    "type": "Reservoir",
+    "county": "Huntingdon",
+    "region": "Central",
+    "coordinates": {
+      "lat": 40.3,
+      "lng": -78
+    },
+    "size": "8,300 acres",
+    "description": "Large reservoir with diverse fishing opportunities.",
+    "species": [
+      "Largemouth Bass",
+      "Smallmouth Bass",
+      "Striped Bass",
+      "Walleye",
+      "Muskellunge"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ]
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "mahoning-creek",
+    "name": "Mahoning Creek",
+    "type": "Creek",
+    "county": "Armstrong",
+    "region": "Pittsburgh",
+    "coordinates": {
+      "lat": 40.8,
+      "lng": -79.2
+    },
+    "size": "30 miles",
+    "description": "Good freestone stream with trout and bass.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "crooked-creek",
+    "name": "Crooked Creek",
+    "type": "Creek",
+    "county": "Armstrong",
+    "region": "Pittsburgh",
+    "coordinates": {
+      "lat": 40.7,
+      "lng": -79.4
+    },
+    "size": "25 miles",
+    "description": "Productive freestone stream.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "tulpehocken-creek",
+    "name": "Tulpehocken Creek",
+    "type": "Creek",
+    "county": "Berks",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.4,
+      "lng": -76.1
+    },
+    "size": "20 miles",
+    "description": "Limestone-influenced stream with good trout fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "fall"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "manatawny-creek",
+    "name": "Manatawny Creek",
+    "type": "Creek",
+    "county": "Berks",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.3,
+      "lng": -75.6
+    },
+    "size": "30 miles",
+    "description": "Good trout stream in Berks County.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "tobyhanna-creek",
+    "name": "Tobyhanna Creek",
+    "type": "Creek",
+    "county": "Monroe",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.2,
+      "lng": -75.4
+    },
+    "size": "20 miles",
+    "description": "Pocono stream with good trout fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "bushkill-creek",
+    "name": "Bushkill Creek",
+    "type": "Creek",
+    "county": "Northampton",
+    "region": "Lehigh Valley",
+    "coordinates": {
+      "lat": 40.7,
+      "lng": -75.2
+    },
+    "size": "25 miles",
+    "description": "Good trout stream in Lehigh Valley.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "saw-creek",
+    "name": "Saw Creek",
+    "type": "Creek",
+    "county": "Pike",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.3,
+      "lng": -75
+    },
+    "size": "15 miles",
+    "description": "Small but productive Pocono stream.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Brook Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "wissahickon-creek",
+    "name": "Wissahickon Creek",
+    "type": "Creek",
+    "county": "Philadelphia",
+    "region": "Philadelphia",
+    "coordinates": {
+      "lat": 40.05,
+      "lng": -75.2
+    },
+    "size": "23 miles",
+    "description": "Urban stream with trout and bass fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "perkiomen-creek",
+    "name": "Perkiomen Creek",
+    "type": "Creek",
+    "county": "Montgomery",
+    "region": "Philadelphia",
+    "coordinates": {
+      "lat": 40.2,
+      "lng": -75.5
+    },
+    "size": "37 miles",
+    "description": "Good warm-water stream with trout in upper sections.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "conestoga-river",
+    "name": "Conestoga River",
+    "type": "River",
+    "county": "Lancaster",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 40.05,
+      "lng": -76.3
+    },
+    "size": "62 miles",
+    "description": "Good warm-water river with bass fishing.",
+    "species": [
+      "Smallmouth Bass",
+      "Largemouth Bass",
+      "Brown Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer",
+        "fall"
+      ]
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "octoraro-creek",
+    "name": "Octoraro Creek",
+    "type": "Creek",
+    "county": "Lancaster",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 39.9,
+      "lng": -76.2
+    },
+    "size": "22 miles",
+    "description": "Good trout stream in Lancaster County.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "codorus-creek",
+    "name": "Codorus Creek",
+    "type": "Creek",
+    "county": "York",
+    "region": "Harrisburg",
+    "coordinates": {
+      "lat": 39.95,
+      "lng": -76.7
+    },
+    "size": "42 miles",
+    "description": "Good trout stream with bass in lower sections.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "catawissa-creek",
+    "name": "Catawissa Creek",
+    "type": "Creek",
+    "county": "Schuylkill",
+    "region": "Reading",
+    "coordinates": {
+      "lat": 40.9,
+      "lng": -76.2
+    },
+    "size": "30 miles",
+    "description": "Good freestone stream with trout.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "tunkhannock-creek",
+    "name": "Tunkhannock Creek",
+    "type": "Creek",
+    "county": "Wyoming",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.5,
+      "lng": -75.9
+    },
+    "size": "30 miles",
+    "description": "Good trout stream in northeast PA.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  },
+  {
+    "id": "lackawanna-river",
+    "name": "Lackawanna River",
+    "type": "River",
+    "county": "Lackawanna",
+    "region": "Scranton",
+    "coordinates": {
+      "lat": 41.4,
+      "lng": -75.7
+    },
+    "size": "40 miles",
+    "description": "Urban river with improving trout fishing.",
+    "species": [
+      "Brown Trout",
+      "Rainbow Trout",
+      "Smallmouth Bass"
+    ],
+    "seasonal": {
+      "bestSeasons": [
+        "spring",
+        "summer"
+      ],
+      "springStocking": true
+    },
+    "hatches": [],
+    "accessPoints": []
+  }
+]

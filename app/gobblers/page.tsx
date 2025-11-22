@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
 import { TERRESTRIAL_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
 import ConservationHistory from '@/components/ConservationHistory';
@@ -158,7 +159,13 @@ export default function GobblersPage() {
                 <p><strong>Pattern:</strong> Alternating steps, not in a line</p>
                 <p><strong>Where to Look:</strong> Muddy areas, snow, dusty trails</p>
               </div>
-              <img src="/images/tracks/Turkey.png" alt="Turkey tracks" style={{ width: '100%', borderRadius: '8px' }} />
+                  <Image
+                    src="/images/tracks/Turkey.png"
+                    alt="Turkey tracks"
+                    width={800}
+                    height={600}
+                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                  />
             </div>
 
             <div>

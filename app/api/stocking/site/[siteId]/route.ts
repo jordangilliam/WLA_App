@@ -30,6 +30,20 @@ export async function GET(
       );
     }
 
+    const siteRow = site as {
+      id: number
+      name: string
+      latitude: number
+      longitude: number
+      site_type?: string | null
+      description?: string | null
+      ecology_notes?: string | null
+      access_info?: string | null
+      regulations?: string | null
+      safety_notes?: string | null
+      water_body_details?: any
+    }
+
     // Fetch stocking schedules for this site
     const { data: stockings, error: stockingsError } = await supabaseAdmin
       .from('stocking_schedules')
@@ -54,7 +68,9 @@ export async function GET(
     }
 
     // Calculate next stocking
-    const upcomingStockings = (stockings || []).filter(
+    const stockingList = (stockings as any[] | null) || []
+
+    const upcomingStockings = stockingList.filter(
       (s: any) => new Date(s.stocking_date) >= new Date() && s.status === 'scheduled'
     );
 
@@ -64,7 +80,7 @@ export async function GET(
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-    const recentStockings = (stockings || []).filter(
+    const recentStockings = stockingList.filter(
       (s: any) =>
         new Date(s.stocking_date) >= thirtyDaysAgo &&
         new Date(s.stocking_date) <= new Date() &&
@@ -79,18 +95,18 @@ export async function GET(
     return NextResponse.json({
       success: true,
       site: {
-        id: site.id,
-        name: site.name,
-        latitude: site.latitude,
-        longitude: site.longitude,
-        site_type: site.site_type,
-        description: site.description,
-        ecology_notes: site.ecology_notes,
-        access_info: site.access_info,
-        regulations: site.regulations,
-        safety_notes: site.safety_notes,
+        id: siteRow.id,
+        name: siteRow.name,
+        latitude: siteRow.latitude,
+        longitude: siteRow.longitude,
+        site_type: siteRow.site_type,
+        description: siteRow.description,
+        ecology_notes: siteRow.ecology_notes,
+        access_info: siteRow.access_info,
+        regulations: siteRow.regulations,
+        safety_notes: siteRow.safety_notes,
       },
-      waterBody: site.water_body_details || null,
+      waterBody: siteRow.water_body_details || null,
       nextStocking: nextStocking
         ? {
             date: nextStocking.stocking_date,

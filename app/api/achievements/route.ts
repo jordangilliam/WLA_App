@@ -3,11 +3,28 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
 
+export const dynamic = 'force-dynamic';
+
+type UserStatsRow = {
+  total_visits?: number;
+  total_observations?: number;
+  unique_species?: number;
+  total_points?: number;
+  total_photos?: number;
+  streak_days?: number;
+};
+
+type UserAchievementRow = {
+  achievement_id: string;
+  unlocked_at: string | null;
+};
+
 export async function GET(request: NextRequest) {
   try {
     // Check authentication
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -38,7 +55,7 @@ export async function GET(request: NextRequest) {
     const { data: userAchievements, error: userAchievementsError } = await supabaseAdmin
       .from('user_achievements')
       .select('*')
-      .eq('user_id', session.user.id);
+      .eq('user_id', userId);
 
     if (userAchievementsError) {
       console.error('Error fetching user achievements:', userAchievementsError);
@@ -46,7 +63,7 @@ export async function GET(request: NextRequest) {
 
     // Get user stats for progress calculation
     const { data: userStats, error: statsError } = await supabaseAdmin
-      .rpc('get_user_stats', { user_id_param: session.user.id });
+      .rpc('get_user_stats', { user_id_param: userId } as never);
 
     if (statsError) {
       console.error('Error fetching user stats:', statsError);
@@ -54,32 +71,33 @@ export async function GET(request: NextRequest) {
 
     // Calculate progress for each achievement
     const achievementsWithProgress = (achievements || []).map((achievement: any) => {
-      const userAchievement = (userAchievements || []).find(
-        (ua: any) => ua.achievement_id === achievement.id
+      const userAchievement = (userAchievements as UserAchievementRow[] | null)?.find(
+        (ua) => ua.achievement_id === achievement.id
       );
 
       let currentCount = 0;
 
       // Calculate current progress based on requirement type
       if (userStats && !userAchievement) {
+        const stats = userStats as UserStatsRow;
         switch (achievement.requirement_type) {
           case 'visits':
-            currentCount = userStats.total_visits || 0;
+            currentCount = stats.total_visits || 0;
             break;
           case 'observations':
-            currentCount = userStats.total_observations || 0;
+            currentCount = stats.total_observations || 0;
             break;
           case 'species':
-            currentCount = userStats.unique_species || 0;
+            currentCount = stats.unique_species || 0;
             break;
           case 'points':
-            currentCount = userStats.total_points || 0;
+            currentCount = stats.total_points || 0;
             break;
           case 'photos':
-            currentCount = userStats.total_photos || 0;
+            currentCount = stats.total_photos || 0;
             break;
           case 'consecutive_days':
-            currentCount = userStats.streak_days || 0;
+            currentCount = stats.streak_days || 0;
             break;
           default:
             currentCount = 0;
@@ -109,13 +127,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       achievements: achievements || [],
-      userAchievements: (userAchievements || []).map((ua: any) => ({
-        achievement_id: ua.achievement_id,
-        unlocked_at: ua.unlocked_at,
-        progress: 100,
-        current_count: (achievements || []).find((a: any) => a.id === ua.achievement_id)
-          ?.requirement_count || 0,
-      })),
+      userAchievements: ((userAchievements as UserAchievementRow[] | null) || []).map((ua) => {
+        const matched = (achievements || []).find(
+          (a: any) => a.id === ua.achievement_id
+        ) as { requirement_count?: number } | undefined;
+        return {
+          achievement_id: ua.achievement_id,
+          unlocked_at: ua.unlocked_at,
+          progress: 100,
+          current_count: matched?.requirement_count || 0,
+        };
+      }),
       userStats: userStats || {
         total_visits: 0,
         total_observations: 0,

@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
         teacher_id: user.id,
         ...classData,
         class_code: classCode,
-      })
+      } as never)
       .select()
       .single();
 
@@ -143,12 +143,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Log successful creation
-    await logAPIAccess(request, user.id, 'create', 'classes', newClass.id.toString(), true);
+    const createdClass = newClass as Class;
+
+    await logAPIAccess(
+      request,
+      user.id,
+      'create',
+      'classes',
+      createdClass.id.toString(),
+      true
+    );
 
     return NextResponse.json<ApiResponse<Class>>(
       {
         success: true,
-        data: newClass as Class,
+        data: createdClass,
         message: 'Class created successfully',
       },
       { status: 201 }

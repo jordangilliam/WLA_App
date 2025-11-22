@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, useParams } from 'next/navigation';
 import TeacherNav from '@/components/dashboard/TeacherNav';
@@ -28,18 +28,7 @@ export default function ClassDetailPage() {
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [newStudentEmail, setNewStudentEmail] = useState('');
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth');
-      return;
-    }
-
-    if (status === 'authenticated' && classId) {
-      fetchClassData();
-    }
-  }, [status, classId, router]);
-
-  const fetchClassData = async () => {
+  const fetchClassData = useCallback(async () => {
     try {
       // Fetch class details
       const classResponse = await fetch(`/api/classes/${classId}`);
@@ -67,7 +56,18 @@ export default function ClassDetailPage() {
       console.error('Error fetching class data:', error);
       setLoading(false);
     }
-  };
+  }, [classId]);
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth');
+      return;
+    }
+
+    if (status === 'authenticated' && classId) {
+      fetchClassData();
+    }
+  }, [status, classId, router, fetchClassData]);
 
   const handleAddStudent = async () => {
     if (!newStudentEmail.trim()) return;

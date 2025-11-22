@@ -36,7 +36,7 @@ function LandingPage() {
           </h1>
           
           <p className="text-xl sm:text-2xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Join Pennsylvania's premier conservation app for youth. Check in at field sites, document wildlife, and become a conservation leader.
+            Join Pennsylvania&rsquo;s premier conservation app for youth. Check in at field sites, document wildlife, and become a conservation leader.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -166,13 +166,13 @@ function LandingPage() {
           Ready to Start Your Conservation Journey?
         </h2>
         <p className="text-xl text-gray-600 mb-8">
-          Join hundreds of students exploring Pennsylvania's natural heritage.
+          Join hundreds of students exploring Pennsylvania&rsquo;s natural heritage.
         </p>
         <Link
           href="/auth"
           className="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-xl"
         >
-          Sign Up Now - It's Free
+          Sign Up Now - It&rsquo;s Free
         </Link>
       </div>
     </div>

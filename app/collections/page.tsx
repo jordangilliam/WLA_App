@@ -63,7 +63,7 @@ export default function CollectionsPage() {
               <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">🦋</div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Species</h2>
               <p className="text-gray-600 mb-4">
-                Document and collect Pennsylvania's incredible wildlife
+                Document and collect Pennsylvania&rsquo;s incredible wildlife
               </p>
               <div className="bg-blue-50 rounded-lg p-4 mb-4">
                 <div className="text-3xl font-bold text-blue-600">0/150+</div>

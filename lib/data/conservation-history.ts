@@ -1,4 +1,35 @@
-export const BIRD_CONSERVATION_HISTORY = {
+export interface ConservationHistory {
+  title: string;
+  overview?: string;
+  timeline: {
+    year: number;
+    event: string;
+    description: string;
+  }[];
+  keySpecies?: {
+    name: string;
+    status: string;
+    conservation: string;
+  }[];
+  sections?: {
+    era: string;
+    period: string;
+    icon: string;
+    keyPoints: string[];
+    paExample?: string;
+    significance: string;
+  }[];
+  currentIssues?: string[];
+  keyFigures?: {
+    name: string;
+    role: string;
+    era: string;
+    contribution: string;
+  }[];
+  callToAction?: string;
+}
+
+export const BIRD_CONSERVATION_HISTORY: ConservationHistory = {
   title: "Bird Conservation in Pennsylvania",
   timeline: [
     {
@@ -46,7 +77,7 @@ export const BIRD_CONSERVATION_HISTORY = {
   ],
 };
 
-export const FISHING_CONSERVATION_HISTORY = {
+export const FISHING_CONSERVATION_HISTORY: ConservationHistory = {
   title: "Fisheries Conservation in Pennsylvania",
   timeline: [
     {
@@ -74,7 +105,7 @@ export const FISHING_CONSERVATION_HISTORY = {
   ],
 };
 
-export const TERRESTRIAL_CONSERVATION_HISTORY = {
+export const TERRESTRIAL_CONSERVATION_HISTORY: ConservationHistory = {
   title: "Wildlife Conservation in Pennsylvania",
   timeline: [
     {

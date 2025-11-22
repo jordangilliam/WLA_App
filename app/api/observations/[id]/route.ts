@@ -10,7 +10,8 @@ export async function DELETE(
   try {
     // Check authentication
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -31,14 +32,16 @@ export async function DELETE(
       .eq('id', id)
       .single();
 
-    if (fetchError || !observation) {
+    const visitRow = observation as { user_id: string } | null;
+
+    if (fetchError || !visitRow) {
       return NextResponse.json(
         { error: 'Observation not found' },
         { status: 404 }
       );
     }
 
-    if (observation.user_id !== session.user.id) {
+    if (visitRow.user_id !== userId) {
       return NextResponse.json(
         { error: 'Unauthorized to delete this observation' },
         { status: 403 }
@@ -79,7 +82,8 @@ export async function PATCH(
   try {
     // Check authentication
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -93,7 +97,16 @@ export async function PATCH(
 
     const { id } = params;
     const body = await request.json();
-    const { notes, species_observed, photos } = body;
+    const {
+      notes,
+      species_observed,
+      photos,
+      weather,
+      temperature,
+      tags,
+      mood,
+      reflection_prompts,
+    } = body;
 
     // Verify ownership before updating
     const { data: observation, error: fetchError } = await supabaseAdmin
@@ -102,14 +115,16 @@ export async function PATCH(
       .eq('id', id)
       .single();
 
-    if (fetchError || !observation) {
+    const visitRow = observation as { user_id: string } | null;
+
+    if (fetchError || !visitRow) {
       return NextResponse.json(
         { error: 'Observation not found' },
         { status: 404 }
       );
     }
 
-    if (observation.user_id !== session.user.id) {
+    if (visitRow.user_id !== userId) {
       return NextResponse.json(
         { error: 'Unauthorized to update this observation' },
         { status: 403 }
@@ -121,10 +136,15 @@ export async function PATCH(
     if (notes !== undefined) updateData.notes = notes;
     if (species_observed !== undefined) updateData.species_observed = species_observed;
     if (photos !== undefined) updateData.photos = photos;
+    if (weather !== undefined) updateData.weather = weather;
+    if (temperature !== undefined) updateData.temperature = temperature;
+    if (tags !== undefined) updateData.tags = tags;
+    if (mood !== undefined) updateData.mood = mood;
+    if (reflection_prompts !== undefined) updateData.reflection_prompts = reflection_prompts;
 
     const { data: updated, error: updateError } = await supabaseAdmin
       .from('user_visits')
-      .update(updateData)
+      .update(updateData as never)
       .eq('id', id)
       .select()
       .single();

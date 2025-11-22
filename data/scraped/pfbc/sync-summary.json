@@ -1,0 +1,11 @@
+{
+  "syncedAt": "2025-11-22T01:38:29.056Z",
+  "sources": {
+    "stocking": 0,
+    "accessPoints": 0,
+    "bestWaters": 0,
+    "regulations": 0,
+    "habitat": 0
+  },
+  "note": "Some data sources require PASDA dataset IDs or API access. Using sample data where needed."
+}

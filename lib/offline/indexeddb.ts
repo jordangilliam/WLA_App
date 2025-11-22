@@ -268,6 +268,14 @@ class IndexedDBManager {
   }
 
   /**
+   * Get photo by id
+   */
+  async getPhotoById(id: string) {
+    await this.init()
+    return await this.db!.get('photos', id)
+  }
+
+  /**
    * Add item to sync queue
    */
   async addToSyncQueue(item: Omit<WLADatabase['sync_queue']['value'], 'id'>) {

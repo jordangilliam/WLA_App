@@ -74,6 +74,124 @@ Run these SQL files **in this exact order** in Supabase SQL Editor.
 -- Purpose: Scavenger hunt with teacher approval workflow
 ```
 
+### 10. AI Identification Review Queue
+```sql
+-- File: supabase/migrations/016_ai_identifications.sql
+-- Creates: ai_identifications table for AI results
+-- Adds: RLS policies so students see their entries and educators review all
+-- Purpose: Store AI provider outputs + teacher approvals
+```
+
+### 11. Soundscape Recordings
+```sql
+-- File: supabase/migrations/017_soundscape_recordings.sql
+-- Creates: soundscape_recordings table for audio journal entries
+-- Adds: RLS for student submissions + educator oversight
+-- Purpose: Capture audio + enable Purdue export workflow
+```
+
+### 12. Citizen Science Media Library
+```sql
+-- File: supabase/migrations/018_citizen_science_media.sql
+-- Creates: observation_media table for photo/audio/video assets
+-- Links: ai_identifications.media_id to stored assets
+-- Purpose: Power citizen science mode with review + AI pipelines
+```
+
+### 13. Community Challenge Engine
+```sql
+-- File: supabase/migrations/019_community_challenges.sql
+-- Creates: community_challenges, participants, and event tables
+-- Adds: progress trigger for scoreboard updates
+-- Purpose: Support shared class/org missions with live progress
+```
+
+### 14. Story Missions
+```sql
+-- File: supabase/migrations/020_story_missions.sql
+-- Creates: story_missions, stages, and progress tables
+-- Adds: RLS + triggers for mission content + tracking
+-- Purpose: Power story-driven learning arcs with stage objectives
+```
+
+### 15. Journal Reflections
+```sql
+-- File: supabase/migrations/021_journal_reflections.sql
+-- Adds: reflection_prompts JSONB, mood, tags to user_visits
+-- Purpose: Store structured journaling prompts + mood/tags for filtering
+```
+
+### 16. Resource Stream
+```sql
+-- File: supabase/migrations/022_resource_stream.sql
+-- Creates: resource_updates table + category enum
+-- Purpose: Surface PSU Extension articles, workshops, alerts
+```
+
+### 17. Pollinator Planner
+```sql
+-- File: supabase/migrations/023_pollinator_plans.sql
+-- Creates: pollinator_plans table for saved recommendations
+-- Purpose: Track pollinator action plans per user
+```
+
+### 18. Mission Locations Bridge
+```sql
+-- File: supabase/migrations/024_mission_locations.sql
+-- Creates: mission_locations, mission_location_visits tables
+-- Links: missions to field_sites for location-based gameplay
+-- Purpose: Enable S.E.C.R.E.T.-style location triggers and QR/AR clues
+```
+
+### 19. PA Waterways Expansion
+```sql
+-- File: supabase/migrations/025_expand_pa_waterways.sql
+-- Adds: 33+ waterways across 9 PA regions
+-- Types: Rivers, streams, lakes, reservoirs
+-- Purpose: Expand waterways knowledge base for fishing and aquatic ecology
+```
+
+### 20. PA Safe Spaces Expansion
+```sql
+-- File: supabase/migrations/026_expand_pa_safe_spaces.sql
+-- Adds: 30+ safe spaces across 8 PA regions
+-- Types: Libraries, parks, museums, community centers
+-- Purpose: Replicate Pittsburgh model across major PA cities
+```
+
+### 21. Seasonal Waterway Data & Macroinvertebrate Hatches
+```sql
+-- File: supabase/migrations/027_seasonal_waterway_data.sql
+-- Creates: macroinvertebrate_hatches, waterway_hatches tables
+-- Adds: Seasonal fields to water_body_details
+-- Seeds: 9 macroinvertebrate hatch species
+-- Purpose: Add seasonal considerations and hatch data for fly fishing
+```
+
+### 22. Fly Fishing Experts & Shops
+```sql
+-- File: supabase/migrations/028_fly_fishing_experts.sql
+-- Creates: fly_fishing_experts, expert_techniques, expert_patterns, expert_favorite_locations, expert_publications, fly_fishing_shops tables
+-- Seeds: Joe Humphreys, George Daniel, 10 fly shops, 7 TU chapters
+-- Purpose: Add expert knowledge, techniques, patterns, and shop locations
+```
+
+### 23. PFBC Mapping Layers & Comprehensive Fly Shops
+```sql
+-- File: supabase/migrations/029_pfbc_mapping_layers.sql
+-- Creates: pfbc_trout_streams, pfbc_bass_waters, pfbc_other_species_waters tables
+-- Seeds: Class A trout streams (10), Wild Trout streams (4), Delayed Harvest (3), Trophy Trout (2), Best Bass Waters (10), Other Species (7)
+-- Updates: fly_fishing_shops table with specialties and notes
+-- Purpose: Add PFBC trout stream classifications, bass waters, and comprehensive fly shop data
+```
+
+### 24. Complete PFBC Data Integration
+```sql
+-- File: supabase/migrations/030_pfbc_complete_integration.sql
+-- Creates: pfbc_stocking_schedules, pfbc_access_points, pfbc_regulations, pfbc_habitat_installations tables
+-- Seeds: Stocking schedules (13), Access points (15), Regulations (8), Habitat installations (7)
+-- Purpose: Complete PFBC data integration including stocking, access, regulations, and habitat
+```
 ---
 
 ## 📊 **Verification Queries**
@@ -190,6 +308,21 @@ Keep track of what you've run:
 - [ ] 013_class_leaderboards.sql
 - [ ] 014_species_cards.sql
 - [ ] 015_photo_challenges.sql
+- [ ] 016_ai_identifications.sql
+- [ ] 017_soundscape_recordings.sql
+- [ ] 018_citizen_science_media.sql
+- [ ] 019_community_challenges.sql
+- [ ] 020_story_missions.sql
+- [ ] 021_journal_reflections.sql
+- [ ] 022_resource_stream.sql
+- [ ] 023_pollinator_plans.sql
+- [ ] 024_mission_locations.sql
+- [ ] 025_expand_pa_waterways.sql
+- [ ] 026_expand_pa_safe_spaces.sql
+- [ ] 027_seasonal_waterway_data.sql
+- [ ] 028_fly_fishing_experts.sql
+- [ ] 029_pfbc_mapping_layers.sql
+- [ ] 030_pfbc_complete_integration.sql
 
 ---
 

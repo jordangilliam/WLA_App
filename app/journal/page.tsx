@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
+import NatureSoundRecorder from '@/components/journal/NatureSoundRecorder';
 
 interface JournalEntry {
   id: string;
@@ -447,17 +449,18 @@ export default function JournalPage() {
             </div>
           </div>
 
+          <div style={{ marginBottom: '1.5rem' }}>
+            <NatureSoundRecorder />
+          </div>
+
           {newEntry.photo && (
-            <div style={{ marginBottom: '1.5rem' }}>
-              <img 
-                src={newEntry.photo} 
-                alt="Preview" 
-                style={{ 
-                  maxWidth: '100%', 
-                  maxHeight: '300px', 
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                }} 
+            <div style={{ marginBottom: '1.5rem', maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', overflow: 'hidden', position: 'relative', minHeight: '200px' }}>
+              <Image
+                src={newEntry.photo}
+                alt="Preview"
+                fill
+                unoptimized
+                style={{ objectFit: 'cover' }}
               />
             </div>
           )}
@@ -577,16 +580,15 @@ export default function JournalPage() {
             </div>
 
             {entry.photo && (
-              <img 
-                src={entry.photo} 
-                alt={entry.title}
-                style={{
-                  width: '100%',
-                  borderRadius: '8px',
-                  marginBottom: '1rem',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}
-              />
+              <div style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', overflow: 'hidden', position: 'relative', minHeight: '200px' }}>
+                <Image
+                  src={entry.photo}
+                  alt={entry.title}
+                  fill
+                  unoptimized
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
             )}
 
             <p style={{ 

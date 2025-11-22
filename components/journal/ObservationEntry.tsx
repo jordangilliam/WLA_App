@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import ReflectionPromptsCard from './ReflectionPromptsCard';
 
 interface Observation {
   id: string;
@@ -15,6 +16,15 @@ interface Observation {
   photos?: string[];
   verified?: boolean;
   teacher_feedback?: string;
+  tags?: string[];
+  mood?: string;
+  reflection_prompts?: {
+    conditions?: string;
+    habitat?: string;
+    phenology?: string;
+    action?: string;
+    feelings?: string;
+  };
 }
 
 interface ObservationEntryProps {
@@ -22,6 +32,14 @@ interface ObservationEntryProps {
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
   compact?: boolean;
+  onReflectionSave?: (
+    id: string,
+    payload: {
+      reflection_prompts: NonNullable<Observation['reflection_prompts']>;
+      mood?: string;
+      tags?: string[];
+    }
+  ) => Promise<void>;
 }
 
 const WEATHER_EMOJIS: Record<string, string> = {
@@ -39,6 +57,7 @@ export default function ObservationEntry({
   onEdit,
   onDelete,
   compact = false,
+  onReflectionSave,
 }: ObservationEntryProps) {
   const [showFullNotes, setShowFullNotes] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
@@ -279,6 +298,14 @@ export default function ObservationEntry({
             <p className="text-sm text-blue-800">{observation.teacher_feedback}</p>
           </div>
         )}
+
+        <ReflectionPromptsCard
+          observationId={observation.id}
+          prompts={observation.reflection_prompts}
+          mood={observation.mood}
+          tags={observation.tags}
+          onSave={onReflectionSave}
+        />
       </div>
 
       {/* Photo Modal */}

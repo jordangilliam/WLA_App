@@ -71,7 +71,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!classData) {
+    const classRow = classData as { id: number; name: string; archived: boolean; teacher_id: number } | null;
+
+    if (!classRow) {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'Invalid class code' },
         { status: 404 }
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if class is archived
-    if (classData.archived) {
+    if (classRow.archived) {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'This class is no longer accepting students' },
         { status: 400 }
@@ -90,7 +92,7 @@ export async function POST(request: NextRequest) {
     const { data: existingEnrollment, error: enrollCheckError } = await supabaseAdmin
       .from('class_enrollments')
       .select('id, status')
-      .eq('class_id', classData.id)
+      .eq('class_id', classRow.id)
       .eq('student_id', user.id)
       .maybeSingle();
 
@@ -102,21 +104,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (existingEnrollment) {
-      if (existingEnrollment.status === 'active') {
+    const enrollmentRow = existingEnrollment as { id: number; status: string } | null;
+
+    if (enrollmentRow) {
+      if (enrollmentRow.status === 'active') {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'You are already enrolled in this class' },
           { status: 400 }
         );
-      } else if (existingEnrollment.status === 'withdrawn') {
+      } else if (enrollmentRow.status === 'withdrawn') {
         // Re-activate withdrawn enrollment
         const { data: reactivated, error: reactivateError } = await supabaseAdmin
           .from('class_enrollments')
           .update({ 
             status: 'active',
             withdrawn_at: null
-          })
-          .eq('id', existingEnrollment.id)
+          } as never)
+          .eq('id', enrollmentRow.id)
           .select()
           .single();
 
@@ -132,7 +136,7 @@ export async function POST(request: NextRequest) {
           {
             success: true,
             data: reactivated as ClassEnrollment,
-            message: `Welcome back to ${classData.name}!`,
+            message: `Welcome back to ${classRow.name}!`,
           },
           { status: 200 }
         );
@@ -143,11 +147,11 @@ export async function POST(request: NextRequest) {
     const { data: enrollment, error: insertError } = await supabaseAdmin
       .from('class_enrollments')
       .insert({
-        class_id: classData.id,
+        class_id: classRow.id,
         student_id: user.id,
         enrolled_by: 'class_code',
         status: 'active',
-      })
+      } as never)
       .select()
       .single();
 
@@ -163,7 +167,7 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         data: enrollment as ClassEnrollment,
-        message: `Successfully joined ${classData.name}!`,
+        message: `Successfully joined ${classRow.name}!`,
       },
       { status: 201 }
     );

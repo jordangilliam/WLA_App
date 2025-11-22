@@ -4,6 +4,14 @@ import AzureADProvider from "next-auth/providers/azure-ad";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { supabaseAdmin } from "@/lib/db/client";
 
+type DbUser = {
+  id: string;
+  email: string;
+  name: string | null;
+  avatar_url?: string | null;
+  role?: string | null;
+};
+
 export const authOptions: NextAuthOptions = {
   providers: [
     // Simple email/password for testing
@@ -25,24 +33,24 @@ export const authOptions: NextAuthOptions = {
             }
 
             try {
-              // @ts-ignore - Supabase type inference issue
-              const { data: existingUser } = await supabaseAdmin
+            const { data: existingUser } = await supabaseAdmin
                 .from('users')
                 .select('*')
                 .eq('email', credentials.email)
                 .maybeSingle();
 
-              if (existingUser) {
+              const existingDbUser = existingUser as DbUser | null;
+
+              if (existingDbUser) {
                 return {
-                  id: existingUser.id,
-                  email: existingUser.email,
-                  name: existingUser.name,
-                  image: existingUser.avatar_url
+                  id: existingDbUser.id,
+                  email: existingDbUser.email,
+                  name: existingDbUser.name,
+                  image: existingDbUser.avatar_url
                 };
               }
 
               // Create new user
-              // @ts-ignore - Supabase type inference issue
               const { data: newUser } = await supabaseAdmin
                 .from('users')
                 .insert({
@@ -50,16 +58,18 @@ export const authOptions: NextAuthOptions = {
                   name: credentials.email.split('@')[0],
                   role: 'student',
                   auth_provider: 'credentials',
-                })
+                } as never)
                 .select()
                 .single();
 
-              if (newUser) {
+              const newDbUser = newUser as DbUser | null;
+
+              if (newDbUser) {
                 return {
-                  id: newUser.id,
-                  email: newUser.email,
-                  name: newUser.name,
-                  image: newUser.avatar_url
+                  id: newDbUser.id,
+                  email: newDbUser.email,
+                  name: newDbUser.name,
+                  image: newDbUser.avatar_url
                 };
               }
         } catch (error) {
@@ -118,7 +128,7 @@ export const authOptions: NextAuthOptions = {
               avatar_url: user.image,
               role: 'student', // Default role - can be changed by admin
               auth_provider: account?.provider || 'email',
-            });
+            } as never);
 
           if (insertError) {
             console.error('Error creating user in Supabase:', insertError);
@@ -133,7 +143,7 @@ export const authOptions: NextAuthOptions = {
             .update({ 
               last_login_at: new Date().toISOString(),
               avatar_url: user.image // Update avatar if changed
-            })
+            } as never)
             .eq('email', user.email);
         }
 
@@ -163,10 +173,12 @@ export const authOptions: NextAuthOptions = {
             .eq('email', user.email)
             .maybeSingle();
 
-          if (dbUser) {
-            token.userId = dbUser.id;
-            token.role = dbUser.role;
-            token.name = dbUser.name;
+          const typedUser = dbUser as DbUser | null;
+
+          if (typedUser) {
+            token.userId = typedUser.id;
+            token.role = typedUser.role;
+            token.name = typedUser.name;
           }
         } catch (error) {
           console.error('Error loading user from DB:', error);

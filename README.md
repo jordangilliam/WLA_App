@@ -142,6 +142,8 @@ npm run dev
 
 Visit `http://localhost:3000`
 
+> **New laptop?** Follow the full onboarding steps in `SETUP_CHECKLIST.md`, then run `npm run verify:env` to confirm Supabase, Stripe, Mapbox, NextAuth, and FieldQuest secrets are present.
+
 ---
 
 ## 📚 **Documentation**
@@ -150,6 +152,13 @@ Visit `http://localhost:3000`
 - **[Migration Order](MIGRATION_ORDER.md)** - Database setup instructions
 - **[3-Week Sprint Progress](3-WEEK-SPRINT-PROGRESS.md)** - Development timeline
 - **[API Audit Report](API_AUDIT_REPORT.md)** - API security review
+- **[Setup Checklist](SETUP_CHECKLIST.md)** - Cross-device onboarding + environment verification
+- **[Payments Test Plan](PAYMENTS_TEST_PLAN.md)** - Stripe CLI flow + export validation
+- **[AI Identification Guide](AI_IDENTIFICATION_GUIDE.md)** - Provider setup + teacher review workflow
+- **[Soundscapes Playbook](SOUNDSCAPES_PLAYBOOK.md)** - Purdue export workflow + fallback repo
+- **[QA & Deployment Playbook](QA_DEPLOY_PLAYBOOK.md)** - Release checklist
+- **Env Verification Script:** `npm run verify:env`
+- **Health Check Endpoint:** `GET /api/health` (returns Supabase + NextAuth status for monitoring)
 
 ---
 

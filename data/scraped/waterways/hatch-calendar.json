@@ -1,0 +1,337 @@
+{
+  "January": [
+    {
+      "species": "Chironomidae",
+      "commonName": "Midges",
+      "hatchPeriod": {
+        "start": "January",
+        "end": "December",
+        "peak": "Year-round"
+      },
+      "timeOfDay": "all-day",
+      "waterTemperature": {
+        "min": 35,
+        "optimal": 50,
+        "max": 65
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#18-#24",
+      "color": "Black, olive, or cream"
+    }
+  ],
+  "February": [
+    {
+      "species": "Chironomidae",
+      "commonName": "Midges",
+      "hatchPeriod": {
+        "start": "January",
+        "end": "December",
+        "peak": "Year-round"
+      },
+      "timeOfDay": "all-day",
+      "waterTemperature": {
+        "min": 35,
+        "optimal": 50,
+        "max": 65
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#18-#24",
+      "color": "Black, olive, or cream"
+    }
+  ],
+  "March": [
+    {
+      "species": "Baetis",
+      "commonName": "Blue-Winged Olive",
+      "hatchPeriod": {
+        "start": "March",
+        "end": "November",
+        "peak": "April, October"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 45,
+        "optimal": 55,
+        "max": 65
+      },
+      "waterType": [
+        "tailwater",
+        "limestone"
+      ],
+      "size": "#16-#20",
+      "color": "Olive body, gray-blue wings"
+    },
+    {
+      "species": "Ephemerella dorothea",
+      "commonName": "March Brown",
+      "hatchPeriod": {
+        "start": "March",
+        "end": "April",
+        "peak": "Late March"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 45,
+        "optimal": 50,
+        "max": 55
+      },
+      "waterType": [
+        "freestone"
+      ],
+      "size": "#12-#14",
+      "color": "Brown body, mottled wings"
+    }
+  ],
+  "April": [
+    {
+      "species": "Ephemerella subvaria",
+      "commonName": "Hendrickson",
+      "hatchPeriod": {
+        "start": "April",
+        "end": "May",
+        "peak": "Late April"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 48,
+        "optimal": 52,
+        "max": 56
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#12-#14",
+      "color": "Dark brown body, gray wings"
+    },
+    {
+      "species": "Brachycentrus",
+      "commonName": "Grannom",
+      "hatchPeriod": {
+        "start": "April",
+        "end": "May",
+        "peak": "Mid-April"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 50,
+        "optimal": 54,
+        "max": 58
+      },
+      "waterType": [
+        "freestone"
+      ],
+      "size": "#14-#16",
+      "color": "Olive body, gray wings"
+    }
+  ],
+  "May": [
+    {
+      "species": "Ephemerella invaria",
+      "commonName": "Sulphur",
+      "hatchPeriod": {
+        "start": "May",
+        "end": "June",
+        "peak": "Late May"
+      },
+      "timeOfDay": "evening",
+      "waterTemperature": {
+        "min": 55,
+        "optimal": 60,
+        "max": 65
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#16-#18",
+      "color": "Yellow body, pale yellow wings"
+    },
+    {
+      "species": "Isonychia",
+      "commonName": "Isonychia",
+      "hatchPeriod": {
+        "start": "May",
+        "end": "July",
+        "peak": "June"
+      },
+      "timeOfDay": "evening",
+      "waterTemperature": {
+        "min": 58,
+        "optimal": 62,
+        "max": 68
+      },
+      "waterType": [
+        "freestone"
+      ],
+      "size": "#10-#12",
+      "color": "Dark brown body, dark wings"
+    }
+  ],
+  "June": [
+    {
+      "species": "Isonychia",
+      "commonName": "Isonychia",
+      "hatchPeriod": {
+        "start": "May",
+        "end": "July",
+        "peak": "June"
+      },
+      "timeOfDay": "evening",
+      "waterTemperature": {
+        "min": 58,
+        "optimal": 62,
+        "max": 68
+      },
+      "waterType": [
+        "freestone"
+      ],
+      "size": "#10-#12",
+      "color": "Dark brown body, dark wings"
+    }
+  ],
+  "July": [
+    {
+      "species": "Tricorythodes",
+      "commonName": "Trico",
+      "hatchPeriod": {
+        "start": "July",
+        "end": "October",
+        "peak": "August-September"
+      },
+      "timeOfDay": "morning",
+      "waterTemperature": {
+        "min": 60,
+        "optimal": 65,
+        "max": 70
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#20-#24",
+      "color": "Dark body, clear wings"
+    }
+  ],
+  "August": [
+    {
+      "species": "Tricorythodes",
+      "commonName": "Trico",
+      "hatchPeriod": {
+        "start": "July",
+        "end": "October",
+        "peak": "August-September"
+      },
+      "timeOfDay": "morning",
+      "waterTemperature": {
+        "min": 60,
+        "optimal": 65,
+        "max": 70
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#20-#24",
+      "color": "Dark body, clear wings"
+    }
+  ],
+  "September": [
+    {
+      "species": "Tricorythodes",
+      "commonName": "Trico",
+      "hatchPeriod": {
+        "start": "July",
+        "end": "October",
+        "peak": "August-September"
+      },
+      "timeOfDay": "morning",
+      "waterTemperature": {
+        "min": 60,
+        "optimal": 65,
+        "max": 70
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#20-#24",
+      "color": "Dark body, clear wings"
+    }
+  ],
+  "October": [
+    {
+      "species": "Baetis",
+      "commonName": "Blue-Winged Olive",
+      "hatchPeriod": {
+        "start": "March",
+        "end": "November",
+        "peak": "April, October"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 45,
+        "optimal": 55,
+        "max": 65
+      },
+      "waterType": [
+        "tailwater",
+        "limestone"
+      ],
+      "size": "#16-#20",
+      "color": "Olive body, gray-blue wings"
+    }
+  ],
+  "November": [
+    {
+      "species": "Baetis",
+      "commonName": "Blue-Winged Olive",
+      "hatchPeriod": {
+        "start": "March",
+        "end": "November",
+        "peak": "April, October"
+      },
+      "timeOfDay": "afternoon",
+      "waterTemperature": {
+        "min": 45,
+        "optimal": 55,
+        "max": 65
+      },
+      "waterType": [
+        "tailwater",
+        "limestone"
+      ],
+      "size": "#16-#20",
+      "color": "Olive body, gray-blue wings"
+    }
+  ],
+  "December": [
+    {
+      "species": "Chironomidae",
+      "commonName": "Midges",
+      "hatchPeriod": {
+        "start": "January",
+        "end": "December",
+        "peak": "Year-round"
+      },
+      "timeOfDay": "all-day",
+      "waterTemperature": {
+        "min": 35,
+        "optimal": 50,
+        "max": 65
+      },
+      "waterType": [
+        "limestone",
+        "spring-fed"
+      ],
+      "size": "#18-#24",
+      "color": "Black, olive, or cream"
+    }
+  ]
+}

@@ -4,20 +4,24 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-interface FieldSite {
+export interface MapFieldSite {
   id: string;
   name: string;
   site_type: string;
   latitude: number;
   longitude: number;
+  description?: string;
+  address?: string;
+  city?: string;
+  state?: string;
   distance_meters?: number;
 }
 
 interface InteractiveMapProps {
-  sites: FieldSite[];
+  sites: MapFieldSite[];
   userLocation: { latitude: number; longitude: number } | null;
-  selectedSite: FieldSite | null;
-  onSiteSelect: (site: FieldSite) => void;
+  selectedSite: MapFieldSite | null;
+  onSiteSelect: (site: MapFieldSite) => void;
 }
 
 // Site type to color mapping
@@ -52,6 +56,7 @@ export default function InteractiveMap({
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
   const userMarker = useRef<mapboxgl.Marker | null>(null);
+  const initialUserLocation = useRef(userLocation);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   // Initialize map
@@ -68,13 +73,16 @@ export default function InteractiveMap({
     mapboxgl.accessToken = mapboxToken;
 
     // Create map instance
+    const centerCoords: [number, number] = initialUserLocation.current
+      ? [initialUserLocation.current.longitude, initialUserLocation.current.latitude]
+      : [-79.9959, 40.4406];
+    const initialZoom = initialUserLocation.current ? 12 : 10;
+
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: userLocation
-        ? [userLocation.longitude, userLocation.latitude]
-        : [-79.9959, 40.4406], // Pittsburgh default
-      zoom: userLocation ? 12 : 10,
+      center: centerCoords,
+      zoom: initialZoom,
       pitch: 0,
       bearing: 0,
     });
@@ -249,7 +257,7 @@ export default function InteractiveMap({
         maxZoom: 14,
       });
     }
-  }, [sites, mapLoaded, onSiteSelect]);
+  }, [sites, mapLoaded, userLocation, onSiteSelect]);
 
   // Highlight selected site
   useEffect(() => {

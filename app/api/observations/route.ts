@@ -7,7 +7,8 @@ export async function GET(request: NextRequest) {
   try {
     // Check authentication
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -30,11 +31,16 @@ export async function GET(request: NextRequest) {
         photos,
         species_observed,
         points_earned,
+        weather,
+        temperature,
+        tags,
+        mood,
+        reflection_prompts,
         field_sites!inner (
           name
         )
       `)
-      .eq('user_id', session.user.id)
+      .eq('user_id', userId)
       .order('visited_at', { ascending: false });
 
     if (error) {
@@ -45,9 +51,31 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Transform the data to include weather and temperature if stored
-    // (We'll need to add these columns to user_visits table in a future migration)
-    const transformedObservations = (observations || []).map((obs: any) => ({
+    const observationList = observations || [];
+    let mediaByObservation: Record<string, any[]> = {};
+
+    if (observationList.length > 0) {
+      const observationIds = observationList.map((obs: any) => obs.id);
+      const { data: mediaRows } = await supabaseAdmin
+        .from('observation_media')
+        .select('*')
+        .eq('user_id', userId)
+        .in('observation_id', observationIds)
+        .neq('status', 'removed');
+
+      if (mediaRows) {
+        mediaRows.forEach((row: any) => {
+          if (!row.observation_id) return;
+          mediaByObservation[row.observation_id] = [
+            ...(mediaByObservation[row.observation_id] || []),
+            row,
+          ];
+        });
+      }
+    }
+
+    // Transform the data to include media attachments and reserved weather slots
+    const transformedObservations = observationList.map((obs: any) => ({
       id: obs.id,
       created_at: obs.created_at,
       field_site_id: obs.field_site_id,
@@ -55,6 +83,12 @@ export async function GET(request: NextRequest) {
       notes: obs.notes || '',
       species_observed: obs.species_observed || [],
       photos: obs.photos || [],
+      weather: obs.weather || undefined,
+      temperature: obs.temperature ?? undefined,
+      tags: obs.tags || [],
+      mood: obs.mood || undefined,
+      reflection_prompts: obs.reflection_prompts || {},
+      media: mediaByObservation[obs.id] || [],
       verified: false, // TODO: Add verification system
       teacher_feedback: null, // TODO: Add feedback system
       // Weather and temperature would come from stored data
@@ -79,7 +113,8 @@ export async function POST(request: NextRequest) {
   try {
     // Check authentication
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -100,6 +135,10 @@ export async function POST(request: NextRequest) {
       photos,
       weather,
       temperature,
+      tags,
+      mood,
+      reflection_prompts,
+      mediaIds,
     } = body;
 
     // Validate required fields
@@ -117,13 +156,18 @@ export async function POST(request: NextRequest) {
     const { data: observation, error } = await supabaseAdmin
       .from('user_visits')
       .insert({
-        user_id: session.user.id,
+        user_id: userId,
         field_site_id: field_site_id,
         notes: notes || '',
         species_observed: species_observed || [],
         photos: photos || [],
+        weather: weather || null,
+        temperature: temperature ?? null,
+        tags: tags || [],
+        mood: mood || null,
+        reflection_prompts: reflection_prompts || {},
         // TODO: Add weather and temperature fields to schema
-      })
+      } as never)
       .select()
       .single();
 
@@ -133,6 +177,28 @@ export async function POST(request: NextRequest) {
         { error: 'Failed to create observation' },
         { status: 500 }
       );
+    }
+
+    if (
+      observation &&
+      Array.isArray(mediaIds) &&
+      mediaIds.length > 0
+    ) {
+      const validMediaIds = mediaIds.filter(
+        (value: unknown): value is string =>
+          typeof value === 'string' && value.length > 0
+      );
+
+      if (validMediaIds.length > 0) {
+        await supabaseAdmin
+          .from('observation_media')
+          .update({
+            observation_id: observation.id,
+            field_site_id,
+          } as never)
+          .in('id', validMediaIds)
+          .eq('user_id', userId);
+      }
     }
 
     return NextResponse.json({

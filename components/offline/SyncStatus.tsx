@@ -9,6 +9,7 @@ export default function SyncStatus() {
   const [pendingCount, setPendingCount] = useState(0);
   const [failedCount, setFailedCount] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
+  const [lastSyncedAt, setLastSyncedAt] = useState<number | null>(offlineQueue.getLastSyncTimestamp());
 
   useEffect(() => {
     // Update online status
@@ -37,6 +38,9 @@ export default function SyncStatus() {
       } else if (event === 'sync-complete') {
         setIsSyncing(false);
         updateCounts();
+        if (data?.lastSyncAt) {
+          setLastSyncedAt(data.lastSyncAt);
+        }
       } else if (event === 'sync-error') {
         setIsSyncing(false);
         updateCounts();
@@ -118,6 +122,8 @@ export default function SyncStatus() {
                   ? 'Your data will sync when you reconnect'
                   : isSyncing
                   ? 'Please wait...'
+                  : lastSyncedAt
+                  ? `Last synced ${new Date(lastSyncedAt).toLocaleTimeString()}`
                   : 'Tap for details'}
               </div>
             </div>
@@ -202,7 +208,7 @@ export default function SyncStatus() {
                         {failedCount} Failed Item{failedCount > 1 ? 's' : ''}
                       </div>
                       <div className="text-sm text-gray-600">
-                        These items couldn't be synced after 3 attempts
+                        These items couldn&rsquo;t be synced after 3 attempts
                       </div>
                     </div>
                   </div>
@@ -244,6 +250,11 @@ export default function SyncStatus() {
                     <span>No data is lost - everything is backed up locally</span>
                   </li>
                 </ul>
+                {lastSyncedAt && (
+                  <p className="text-xs text-gray-500 mt-3">
+                    Last successful sync: {new Date(lastSyncedAt).toLocaleString()}
+                  </p>
+                )}
               </div>
             </div>
           </div>

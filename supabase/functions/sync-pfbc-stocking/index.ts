@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * Supabase Edge Function: Sync PFBC Stocking Data
  * 

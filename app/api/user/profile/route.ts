@@ -123,7 +123,7 @@ export async function PATCH(request: NextRequest) {
     // Update profile in database
     const { data: updated, error: updateError } = await supabaseAdmin
       .from('users')
-      .update(filteredUpdates)
+      .update(filteredUpdates as never)
       .eq('id', user.id)
       .select()
       .single();

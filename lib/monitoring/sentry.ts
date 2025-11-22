@@ -5,6 +5,9 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+const BrowserTracingIntegration = (Sentry as any).BrowserTracing
+const ReplayIntegration = (Sentry as any).Replay
+
 export function initSentry() {
   if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
     Sentry.init({
@@ -28,15 +31,17 @@ export function initSentry() {
       
       // Integrations
       integrations: [
-        new Sentry.BrowserTracing({
-          // Set sampling rate for performance monitoring
-          tracePropagationTargets: ['localhost', /^https:\/\/yourapp\.com/],
-        }),
-        new Sentry.Replay({
+        BrowserTracingIntegration
+          ? new BrowserTracingIntegration({
+              // Set sampling rate for performance monitoring
+              tracePropagationTargets: ['localhost', /^https:\/\/yourapp\.com/],
+            })
+          : null,
+        new ReplayIntegration({
           maskAllText: true,
           blockAllMedia: true,
         }),
-      ],
+      ].filter(Boolean) as any,
       
       // Filter out common non-errors
       beforeSend(event, hint) {
@@ -46,7 +51,8 @@ export function initSentry() {
         }
         
         // Don't send network errors from ad blockers
-        if (hint.originalException?.message?.includes('blocked by client')) {
+        const originalException = hint.originalException as { message?: string } | undefined
+        if (originalException?.message?.includes('blocked by client')) {
           return null
         }
         
@@ -102,7 +108,11 @@ export function addBreadcrumb(message: string, data?: Record<string, any>) {
  * Start transaction for performance monitoring
  */
 export function startTransaction(name: string, op: string) {
-  return Sentry.startTransaction({
+  const startTransactionFn = (Sentry as any).startTransaction
+  if (!startTransactionFn) {
+    return null
+  }
+  return startTransactionFn({
     name,
     op,
   })

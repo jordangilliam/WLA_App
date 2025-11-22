@@ -106,11 +106,14 @@ export async function executeSql<T = any>(
   }
 
   try {
-    const { data, error } = await supabaseAdmin.rpc('exec_sql', {
-      query,
-      params,
-    });
-    return { data: data as T[], error };
+    const { data, error } = await supabaseAdmin.rpc(
+      'exec_sql',
+      {
+        query,
+        params,
+      } as never
+    );
+    return { data: (data as T[] | null) ?? null, error };
   } catch (error) {
     return { data: null, error };
   }

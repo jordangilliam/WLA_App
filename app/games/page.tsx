@@ -116,19 +116,37 @@ export default function GamesPage() {
             <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', textAlign: 'center' }}>📸 Screenshots</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
               <div style={{ borderRadius: '12px', overflow: 'hidden', border: '2px solid #e5e7eb' }}>
-                <img src="/TroutTower/screenshots/Screenshot1.png" alt="Trout Tower Menu" style={{ width: '100%', display: 'block' }} />
+                  <Image
+                    src="/TroutTower/screenshots/Screenshot1.png"
+                    alt="Trout Tower Menu"
+                    width={1600}
+                    height={900}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
                 <div style={{ padding: '1rem', background: '#f9fafb', textAlign: 'center', fontWeight: 600 }}>
                   Main Menu
                 </div>
               </div>
               <div style={{ borderRadius: '12px', overflow: 'hidden', border: '2px solid #e5e7eb' }}>
-                <img src="/TroutTower/screenshots/Screenshot2.png" alt="Trout Tower Gameplay" style={{ width: '100%', display: 'block' }} />
+                  <Image
+                    src="/TroutTower/screenshots/Screenshot2.png"
+                    alt="Trout Tower Gameplay"
+                    width={1600}
+                    height={900}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
                 <div style={{ padding: '1rem', background: '#f9fafb', textAlign: 'center', fontWeight: 600 }}>
                   In-Game Action
                 </div>
               </div>
               <div style={{ borderRadius: '12px', overflow: 'hidden', border: '2px solid #e5e7eb' }}>
-                <img src="/TroutTower/screenshots/Screenshot3.png" alt="Trout Tower Jumping" style={{ width: '100%', display: 'block' }} />
+                  <Image
+                    src="/TroutTower/screenshots/Screenshot3.png"
+                    alt="Trout Tower Jumping"
+                    width={1600}
+                    height={900}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
                 <div style={{ padding: '1rem', background: '#f9fafb', textAlign: 'center', fontWeight: 600 }}>
                   Platform Jumping
                 </div>

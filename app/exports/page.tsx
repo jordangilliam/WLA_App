@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface ExportData {
   generatedAt: string;
@@ -30,11 +30,7 @@ export default function ExportsPage() {
     habitat: true
   });
 
-  useEffect(() => {
-    generateExport();
-  }, []);
-
-  const generateExport = () => {
+  const generateExport = useCallback(() => {
     try {
       const points = JSON.parse(localStorage.getItem('wla-points') || '[]');
       const readings = JSON.parse(localStorage.getItem('wla-map-readings') || '[]');
@@ -58,11 +54,15 @@ export default function ExportsPage() {
       };
 
       setExportData(data);
-      setStatus({ ...status, generate: '✓ Data generated from local storage' });
+      setStatus((prev) => ({ ...prev, generate: '✓ Data generated from local storage' }));
     } catch (e: any) {
-      setStatus({ ...status, generate: `✗ Error: ${e.message}` });
+      setStatus((prev) => ({ ...prev, generate: `✗ Error: ${e.message}` }));
     }
-  };
+  }, [track, team, includeOptions]);
+
+  useEffect(() => {
+    generateExport();
+  }, [generateExport]);
 
   const downloadFile = (content: string, filename: string, mimeType: string) => {
     const blob = new Blob([content], { type: mimeType });

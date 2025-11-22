@@ -247,7 +247,7 @@ export default function LeaderboardPage() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
               <span className="mt-0.5">✓</span>
-              <span>Your class earns points from every student's check-ins and observations</span>
+              <span>Your class earns points from every student&rsquo;s check-ins and observations</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-0.5">✓</span>

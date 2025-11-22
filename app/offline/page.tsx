@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Offline fallback page
  * Shown when user navigates while offline and page isn't cached

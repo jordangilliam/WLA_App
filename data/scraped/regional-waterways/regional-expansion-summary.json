@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2025-11-22T01:29:21.064Z",
+  "totalWaterways": 254,
+  "byType": {
+    "Lake": 5,
+    "Stream": 1,
+    "Creek": 208,
+    "River": 23,
+    "Reservoir": 13,
+    "Pond": 4
+  },
+  "byRegion": {
+    "Central": 82,
+    "Pittsburgh": 64,
+    "Lehigh Valley": 59,
+    "Philadelphia": 49
+  },
+  "focusRegions": {
+    "Southwest PA (Pittsburgh)": 64,
+    "Central PA": 82,
+    "Lehigh Valley": 59,
+    "Chester County (Philadelphia)": 49
+  },
+  "withHatches": 228,
+  "withSeasonalData": 254
+}

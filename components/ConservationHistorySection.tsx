@@ -70,7 +70,8 @@ export default function ConservationHistorySection({ history }: ConservationHist
           }}
         >
           {/* Timeline */}
-          <div style={{ position: 'relative', paddingLeft: '2rem' }}>
+          {history.sections && history.sections.length > 0 && (
+            <div style={{ position: 'relative', paddingLeft: '2rem' }}>
             {/* Vertical Line */}
             <div
               style={{
@@ -202,7 +203,8 @@ export default function ConservationHistorySection({ history }: ConservationHist
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
 
           {/* Current Issues */}
           {history.currentIssues && history.currentIssues.length > 0 && (

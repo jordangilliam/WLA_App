@@ -115,7 +115,7 @@ export default function ChallengesPage() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                 <span>☀️</span>
-                <span>Today's Challenges</span>
+                <span>Today&rsquo;s Challenges</span>
               </h2>
               <span className="text-sm text-gray-600">Resets daily at midnight</span>
             </div>

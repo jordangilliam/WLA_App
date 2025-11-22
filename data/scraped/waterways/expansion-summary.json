@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2025-11-22T01:14:53.284Z",
+  "totalWaterways": 10,
+  "byType": {
+    "Lake": 2,
+    "Stream": 1,
+    "Creek": 6,
+    "River": 0,
+    "Reservoir": 1
+  },
+  "byRegion": {
+    "Central": 5,
+    "Harrisburg": 2,
+    "Reading": 1,
+    "Erie": 1,
+    "Scranton": 1
+  },
+  "withHatches": 7,
+  "withSeasonalData": 10
+}

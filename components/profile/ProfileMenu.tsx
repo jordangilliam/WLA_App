@@ -37,8 +37,9 @@ export default function ProfileMenu() {
     );
   }
 
-  const isTeacher = session?.user?.role === 'teacher';
-  const isAdmin = session?.user?.role === 'admin';
+  const user = session?.user as { role?: string } | undefined;
+  const isTeacher = user?.role === 'teacher';
+  const isAdmin = user?.role === 'admin';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 pb-20 md:pb-6">
@@ -155,7 +156,7 @@ export default function ProfileMenu() {
                   <span className="text-3xl">🏆</span>
                   <div>
                     <h3 className="font-semibold text-gray-900">Achievements</h3>
-                    <p className="text-sm text-gray-600">{badges.filter(b => b.earned).length} unlocked</p>
+                    <p className="text-sm text-gray-600">{badges} unlocked</p>
                   </div>
                 </div>
                 <span className="text-gray-400">→</span>
@@ -253,7 +254,7 @@ export default function ProfileMenu() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Role</span>
-                  <span className="text-gray-900 capitalize">{session?.user?.role || 'student'}</span>
+                  <span className="text-gray-900 capitalize">{user?.role || 'student'}</span>
                 </div>
               </div>
             </div>

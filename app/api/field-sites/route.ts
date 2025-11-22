@@ -10,6 +10,13 @@ export async function GET(request: Request) {
     const lng = searchParams.get('lng');
     const radius = searchParams.get('radius') || '50000'; // 50km default
 
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database connection not available' },
+        { status: 500 }
+      );
+    }
+
     let query = supabaseAdmin
       .from('field_sites')
       .select('id, name, description, site_type, latitude, longitude, address, city, state, ecological_notes, species_commonly_found, habitat_types');
@@ -38,8 +45,9 @@ export async function GET(request: Request) {
       const userLng = parseFloat(lng);
       const maxRadius = parseInt(radius);
 
-      const sitesWithDistance = sites
-        ?.map((site) => {
+      const sitesArray = (sites as Array<{ latitude: number; longitude: number }> | null) || [];
+      const sitesWithDistance = sitesArray
+        .map((site) => {
           const distance = calculateDistance(
             userLat,
             userLng,

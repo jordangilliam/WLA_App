@@ -3,11 +3,13 @@
 interface FieldSite {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   site_type: string;
-  address: string;
-  city: string;
-  state: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  latitude: number;
+  longitude: number;
   distance_meters?: number;
   species_likely?: string[];
   habitat_type?: string;
@@ -115,7 +117,7 @@ export default function NearbySitesList({
               {/* Location */}
               <p className="text-xs text-gray-600 mb-1">
                 {site.address && `${site.address}, `}
-                {site.city}, {site.state}
+                {site.city ?? 'Unknown'}, {site.state ?? ''}
               </p>
 
               {/* Description (detailed view only) */}

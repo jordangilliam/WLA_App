@@ -309,7 +309,7 @@ export default function SwitchUserPage() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-purple-600 mt-0.5">•</span>
-              <span>Each user's progress is saved separately</span>
+              <span>Each user&rsquo;s progress is saved separately</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-purple-600 mt-0.5">•</span>

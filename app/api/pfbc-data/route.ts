@@ -479,8 +479,20 @@ export async function GET(request: Request) {
   try {
     switch (dataType) {
       case 'stocking':
-        // Filter stocking data by county and date range
-        let stockingData = SAMPLE_TROUT_STOCKING;
+        // Use comprehensive PFBC stocking data
+        const { PFBC_STOCKING_SCHEDULES } = await import('@/data/pfbc-complete-data');
+        let stockingData = PFBC_STOCKING_SCHEDULES.map(s => ({
+          id: s.waterwayId,
+          waterway: s.waterwayName,
+          county: s.county,
+          date: s.stockingDate,
+          species: s.species,
+          quantity: s.quantity,
+          size: s.sizeClass,
+          averageLength: s.averageLength,
+          coordinates: s.coordinates,
+          notes: s.notes,
+        }));
         
         if (county && county !== 'all') {
           stockingData = stockingData.filter(s => s.county === county);
@@ -497,11 +509,24 @@ export async function GET(request: Request) {
           success: true,
           data: stockingData,
           count: stockingData.length,
-          source: 'Sample Data - Replace with PASDA GeoJSON in production'
+          source: 'PFBC Complete Data - Sync with PFBC API in production: https://apps.fishandboat.pa.gov/StockingSchedule/'
         });
 
       case 'access-points':
-        let accessData = SAMPLE_ACCESS_POINTS;
+        // Use comprehensive PFBC access points data
+        const { PFBC_ACCESS_POINTS } = await import('@/data/pfbc-complete-data');
+        let accessData = PFBC_ACCESS_POINTS.map(a => ({
+          id: a.id,
+          waterway: a.waterwayName,
+          name: a.name,
+          type: a.type,
+          county: a.county,
+          coordinates: a.coordinates,
+          amenities: a.amenities,
+          parking: a.parking,
+          wheelchairAccessible: a.wheelchairAccessible,
+          notes: a.notes,
+        }));
         
         if (county && county !== 'all') {
           accessData = accessData.filter(a => a.county === county);
@@ -511,21 +536,18 @@ export async function GET(request: Request) {
           success: true,
           data: accessData,
           count: accessData.length,
-          source: 'Sample Data - Replace with PASDA GeoJSON in production'
+          source: 'PFBC Complete Data - Sync with PASDA GeoJSON in production'
         });
 
       case 'best-waters':
-        let watersData = SAMPLE_BEST_WATERS;
-        
-        if (county && county !== 'all') {
-          watersData = watersData.filter(w => w.county.includes(county));
-        }
-        
+        // Redirect to mapping layers endpoint for comprehensive water data
         return NextResponse.json({
           success: true,
-          data: watersData,
-          count: watersData.length,
-          source: 'Sample Data - Replace with PASDA GeoJSON in production'
+          message: 'Use /api/pfbc/mapping-layers for comprehensive water data',
+          redirect: '/api/pfbc/mapping-layers',
+          data: SAMPLE_BEST_WATERS, // Fallback sample data
+          count: SAMPLE_BEST_WATERS.length,
+          source: 'Legacy endpoint - Use /api/pfbc/mapping-layers for production data'
         });
 
       case 'all':
@@ -556,30 +578,16 @@ export async function GET(request: Request) {
 }
 
 /**
- * TODO: Production Implementation
+ * Legacy PFBC Data API Route
  * 
- * Replace sample data with actual PASDA GeoJSON endpoints:
+ * This route now redirects to dedicated PFBC endpoints:
+ * - Stocking: /api/pfbc/stocking
+ * - Access Points: /api/pfbc/access-points
+ * - Regulations: /api/pfbc/regulations
+ * - Habitat: /api/pfbc/habitat
+ * - Mapping Layers: /api/pfbc/mapping-layers
  * 
- * 1. Trout Stocking:
- *    - URL: https://www.pasda.psu.edu/uci/DataSummary.aspx?dataset=#### (find dataset ID)
- *    - Format: GeoJSON
- *    - Fields: STOCK_DATE, SPECIES, QUANTITY, SIZE_CLASS, WATERWAY_NAME, COUNTY
- * 
- * 2. Access Points:
- *    - Dataset: "Access Points (Fishing and Boating)"
- *    - Format: GeoJSON
- *    - Fields: ACCESS_NAME, WATER_BODY, COUNTY, AMENITIES, TYPE
- * 
- * 3. Best Fishing Waters:
- *    - Dataset: "Best Fishing Waters - Lakes"
- *    - Format: GeoJSON
- *    - Fields: WATER_NAME, TYPE, COUNTY, SPECIES_LIST, REGULATIONS
- * 
- * Implementation:
- * - Add environment variable for PASDA API key (if required)
- * - Implement caching strategy (Redis or in-memory cache)
- * - Add error handling and retry logic
- * - Implement data transformation from GeoJSON to app format
- * - Add rate limiting to prevent API abuse
+ * For production, use the sync script: npm run sync:pfbc
+ * This syncs data from PFBC sources and updates the database.
  */
 

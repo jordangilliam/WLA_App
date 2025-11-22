@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/db/client';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // Check database connection
@@ -18,10 +20,13 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get('startDate') || new Date().toISOString().split('T')[0];
 
     // Fetch upcoming stockings using the RPC function
-    const { data: stockings, error } = await supabaseAdmin.rpc('get_upcoming_stockings', {
-      days_ahead: 90,
-      limit_count: limit,
-    });
+    const { data: stockings, error } = await supabaseAdmin.rpc(
+      'get_upcoming_stockings',
+      {
+        days_ahead: 90,
+        limit_count: limit,
+      } as never
+    );
 
     if (error) {
       console.error('Error fetching stockings:', error);
@@ -31,8 +36,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const stockingRows = (stockings as any[] | null) || [];
+
     // Fetch field sites for the stocked locations
-    const fieldSiteIds = [...new Set((stockings || []).map((s: any) => s.field_site_id))];
+    const fieldSiteIds = [...new Set(stockingRows.map((s: any) => s.field_site_id))];
 
     const { data: fieldSites, error: sitesError } = await supabaseAdmin
       .from('field_sites')
@@ -44,7 +51,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Transform data
-    const transformedStockings = (stockings || []).map((stocking: any) => ({
+    const transformedStockings = stockingRows.map((stocking: any) => ({
       id: stocking.id,
       field_site_id: stocking.field_site_id,
       site_name: stocking.site_name,

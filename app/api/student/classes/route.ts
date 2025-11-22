@@ -153,7 +153,7 @@ export async function DELETE(request: NextRequest) {
       .update({ 
         status: 'withdrawn',
         withdrawn_at: new Date().toISOString()
-      })
+      } as never)
       .eq('class_id', classId)
       .eq('student_id', user.id)
       .eq('status', 'active');

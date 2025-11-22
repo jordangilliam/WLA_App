@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -13,26 +13,7 @@ export default function TeacherDashboardClient() {
   const [classes, setClasses] = useState<Class[]>([]);
   const [summary, setSummary] = useState<TeacherDashboardSummary | null>(null);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth');
-      return;
-    }
-
-    if (status === 'authenticated') {
-      const user = session?.user as any;
-      
-      // Only teachers and admins can access
-      if (user?.role !== 'teacher' && user?.role !== 'admin') {
-        router.push('/');
-        return;
-      }
-
-      fetchDashboardData();
-    }
-  }, [status, session, router]);
-
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     try {
       // Fetch classes
       const classesResponse = await fetch('/api/classes');
@@ -59,7 +40,26 @@ export default function TeacherDashboardClient() {
       console.error('Error fetching dashboard data:', error);
       setLoading(false);
     }
-  };
+  }, [session?.user?.name]);
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth');
+      return;
+    }
+
+    if (status === 'authenticated') {
+      const user = session?.user as any;
+      
+      // Only teachers and admins can access
+      if (user?.role !== 'teacher' && user?.role !== 'admin') {
+        router.push('/');
+        return;
+      }
+
+      fetchDashboardData();
+    }
+  }, [status, session, router, fetchDashboardData]);
 
   if (status === 'loading' || loading) {
     return (

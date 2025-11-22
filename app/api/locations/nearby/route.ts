@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // Get query parameters
@@ -28,11 +30,14 @@ export async function GET(request: NextRequest) {
     }
 
     // Use the nearby_field_sites database function
-    const { data: sites, error } = await supabaseAdmin.rpc('nearby_field_sites', {
-      user_lat: lat,
-      user_lng: lng,
-      radius_meters: radius,
-    });
+    const { data: sites, error } = await supabaseAdmin.rpc(
+      'nearby_field_sites',
+      {
+        user_lat: lat,
+        user_lng: lng,
+        radius_meters: radius,
+      } as never
+    );
 
     if (error) {
       console.error('Error fetching nearby sites:', error);
@@ -44,7 +49,8 @@ export async function GET(request: NextRequest) {
 
     // Transform the data to include latitude/longitude
     // The PostGIS geography type is returned as a point
-    const transformedSites = (sites || []).map((site: any) => ({
+    const siteList = (sites as any[] | null) || []
+    const transformedSites = siteList.map((site: any) => ({
       id: site.id,
       name: site.name,
       description: site.description,
@@ -83,11 +89,13 @@ export async function GET(request: NextRequest) {
           .eq('id', site.id)
           .single();
 
-        if (coords && coords.location) {
+        const coordRow = coords as { location?: any } | null
+
+        if (coordRow && coordRow.location) {
           // Parse WKT or GeoJSON
           try {
             // PostGIS returns geography as GeoJSON
-            const locationStr = coords.location;
+            const locationStr = coordRow.location;
             if (typeof locationStr === 'string') {
               // Parse WKT format: POINT(lng lat)
               const match = locationStr.match(/POINT\(([^ ]+) ([^)]+)\)/);

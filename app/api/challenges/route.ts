@@ -12,18 +12,18 @@ export async function GET(request: NextRequest) {
     // Authentication
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.userId) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    const userId = session.user.userId;
-
     // Call Supabase RPC function
     const { data, error } = await supabaseAdmin!
-      .rpc('get_active_challenges', { p_user_id: userId });
+      .rpc('get_active_challenges', { p_user_id: userId } as never);
 
     if (error) {
       console.error('Error fetching challenges:', error);
@@ -57,14 +57,14 @@ export async function POST(request: NextRequest) {
     // Authentication
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.userId) {
+    const userId = (session?.user as { id?: string } | undefined)?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
-
-    const userId = session.user.userId;
 
     // Parse request body
     const body = await request.json();
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         p_user_id: userId,
         p_challenge_id: challengeId,
         p_increment: increment,
-      });
+      } as never);
 
     if (error) {
       console.error('Error updating challenge progress:', error);

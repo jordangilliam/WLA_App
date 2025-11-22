@@ -555,6 +555,117 @@ export function getStreakReward(streakDays: number): { points: number; badge?: s
 }
 
 // ============================================================================
+// Daily Quests & Streak Forecasting
+// ============================================================================
+
+export interface DailyQuest {
+  id: string;
+  title: string;
+  description: string;
+  type: 'exploration' | 'learning' | 'observation' | 'community';
+  target: number;
+  progress: number;
+  rewardPoints: number;
+}
+
+const DAILY_QUEST_LIBRARY: Omit<DailyQuest, 'progress'>[] = [
+  {
+    id: 'daily-check-in',
+    title: 'Field Check-in',
+    description: 'Log a check-in at any approved field site.',
+    type: 'exploration',
+    target: 1,
+    rewardPoints: 75,
+  },
+  {
+    id: 'observation-journal',
+    title: 'Observation Journal',
+    description: 'Add a new wildlife or habitat observation.',
+    type: 'observation',
+    target: 1,
+    rewardPoints: 60,
+  },
+  {
+    id: 'lesson-sprint',
+    title: 'Complete a Lesson',
+    description: 'Finish any lesson plan or quiz.',
+    type: 'learning',
+    target: 1,
+    rewardPoints: 90,
+  },
+  {
+    id: 'species-spotter',
+    title: 'Identify Species',
+    description: 'Submit an AI identification or teacher-reviewed species.',
+    type: 'observation',
+    target: 1,
+    rewardPoints: 80,
+  },
+  {
+    id: 'team-cheer',
+    title: 'Team Boost',
+    description: 'Help a teammate or comment on class activity.',
+    type: 'community',
+    target: 1,
+    rewardPoints: 40,
+  },
+]
+
+export function generateDailyQuests(stats: Partial<UserStats>): DailyQuest[] {
+  const quests: DailyQuest[] = []
+
+  const today = new Date().toISOString().split('T')[0]
+  const seedValue = Number(today.replace(/-/g, ''))
+
+  const pickQuest = (offset: number) => {
+    const index = (seedValue + offset) % DAILY_QUEST_LIBRARY.length
+    const base = DAILY_QUEST_LIBRARY[index]
+    return { ...base, progress: 0 }
+  }
+
+  // Always include check-in quest
+  quests.push({
+    ...DAILY_QUEST_LIBRARY[0],
+    progress: 0,
+  })
+
+  // Add quest tailored to the student's weaker area
+  if ((stats.lessonsCompleted ?? 0) < (stats.locationsVisited ?? 0)) {
+    quests.push({
+      ...DAILY_QUEST_LIBRARY.find((q) => q.id === 'lesson-sprint')!,
+      progress: 0,
+    })
+  } else {
+    quests.push({
+      ...DAILY_QUEST_LIBRARY.find((q) => q.id === 'observation-journal')!,
+      progress: 0,
+    })
+  }
+
+  // Fill remaining slot with rotating quest
+  let attempts = 1
+  while (quests.length < 3 && attempts < DAILY_QUEST_LIBRARY.length) {
+    const candidate = pickQuest(attempts)
+    if (!quests.find((q) => q.id === candidate.id)) {
+      quests.push(candidate)
+    }
+    attempts++
+  }
+
+  return quests
+}
+
+export function forecastStreakStatus(lastActivity: Date, currentDate: Date = new Date()) {
+  const hoursSinceLastActivity = (currentDate.getTime() - lastActivity.getTime()) / (1000 * 60 * 60)
+  const hoursUntilStreakBreak = Math.max(0, 48 - hoursSinceLastActivity) // streak breaks after 48h gap
+
+  return {
+    shouldWarn: hoursUntilStreakBreak <= 12,
+    hoursUntilStreakBreak,
+  }
+}
+
+// ============================================================================
 // Utility Functions
 // ============================================================================
 

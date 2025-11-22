@@ -1,29 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import InteractiveMap from '@/components/map/InteractiveMap';
+import InteractiveMap, { MapFieldSite } from '@/components/map/InteractiveMap';
 import SiteFilters from '@/components/map/SiteFilters';
 import NearbySitesList from '@/components/map/NearbySitesList';
 import CheckInButton from '@/components/map/CheckInButton';
 import { useGeolocation } from '@/lib/hooks/useGeolocation';
 
-interface FieldSite {
-  id: string;
-  name: string;
-  description: string;
-  site_type: string;
-  address: string;
-  city: string;
-  state: string;
-  latitude: number;
-  longitude: number;
-  distance_meters?: number;
+type FieldSite = MapFieldSite & {
+  description?: string;
+  address?: string;
+  city?: string;
+  state?: string;
   ecological_notes?: string;
   species_likely?: string[];
   habitat_type?: string;
-}
+};
 
 export default function ExplorePage() {
   const { data: session, status } = useSession();
@@ -41,19 +35,7 @@ export default function ExplorePage() {
   });
   const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
 
-  // Fetch nearby sites when location changes
-  useEffect(() => {
-    if (location) {
-      fetchNearbySites(location.latitude, location.longitude);
-    }
-  }, [location]);
-
-  // Apply filters when sites or filters change
-  useEffect(() => {
-    applyFilters();
-  }, [sites, filters]);
-
-  const fetchNearbySites = async (lat: number, lng: number) => {
+  const fetchNearbySites = useCallback(async (lat: number, lng: number) => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -71,9 +53,9 @@ export default function ExplorePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters.maxDistance]);
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...sites];
 
     // Filter by site type
@@ -87,7 +69,7 @@ export default function ExplorePage() {
       filtered = filtered.filter(
         (site) =>
           site.name.toLowerCase().includes(query) ||
-          site.city.toLowerCase().includes(query) ||
+          site.city?.toLowerCase().includes(query) ||
           site.description?.toLowerCase().includes(query)
       );
     }
@@ -105,7 +87,19 @@ export default function ExplorePage() {
     });
 
     setFilteredSites(filtered);
-  };
+  }, [sites, filters]);
+
+  // Fetch nearby sites when location changes
+  useEffect(() => {
+    if (location) {
+      fetchNearbySites(location.latitude, location.longitude);
+    }
+  }, [location, fetchNearbySites]);
+
+  // Apply filters when sites or filters change
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
 
   const handleSiteSelect = (site: FieldSite) => {
     setSelectedSite(site);

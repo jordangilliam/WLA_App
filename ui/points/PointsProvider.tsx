@@ -6,6 +6,8 @@ interface PointsContextType {
   points: number;
   total: number; // Alias for points
   currentStreak: number;
+  level: number;
+  badges: number;
   addPoints: (amount: number, activity: string) => void;
   award: (amount: number, activity: string) => void; // Alias for addPoints
   resetPoints: () => void;
@@ -15,6 +17,8 @@ const PointsContext = createContext<PointsContextType>({
   points: 0,
   total: 0,
   currentStreak: 0,
+  level: 1,
+  badges: 0,
   addPoints: () => {},
   award: () => {},
   resetPoints: () => {},
@@ -61,6 +65,8 @@ export function PointsProvider({ children }: { children: React.ReactNode }) {
       points, 
       total: points, // Provide alias
       currentStreak,
+      level: Math.max(1, Math.floor(points / 500) + 1),
+      badges: Math.floor(points / 1000),
       addPoints, 
       award: addPoints, // Provide alias
       resetPoints 

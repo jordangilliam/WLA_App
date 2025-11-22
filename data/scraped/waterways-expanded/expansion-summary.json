@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2025-11-22T01:20:26.362Z",
+  "totalWaterways": 51,
+  "byType": {
+    "Lake": 3,
+    "Stream": 1,
+    "Creek": 31,
+    "River": 8,
+    "Reservoir": 8
+  },
+  "byRegion": {
+    "Central": 11,
+    "Harrisburg": 9,
+    "Reading": 6,
+    "Erie": 2,
+    "Scranton": 11,
+    "Lehigh Valley": 3,
+    "Philadelphia": 4,
+    "Pittsburgh": 5
+  },
+  "withHatches": 15,
+  "withSeasonalData": 51
+}

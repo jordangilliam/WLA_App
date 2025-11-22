@@ -298,7 +298,16 @@ POST   /api/check-in            # Create new check-in
 
 #### Payments (Optional)
 ```
+POST   /api/payments/checkout     # Create Stripe checkout session
+POST   /api/payments/portal       # Open Stripe customer portal
 POST   /api/webhooks/stripe     # Stripe webhook handler
+```
+
+#### AI Identification
+```
+POST   /api/identify                     # Run AI providers + log to review queue
+GET    /api/ai/identifications?status=   # Teacher review list
+PATCH  /api/ai/identifications           # Approve/reject identification
 ```
 
 ### API Request/Response Format
@@ -591,6 +600,16 @@ export async function requireRole(req: NextRequest, role: string) {
   return session
 }
 ```
+
+**Edge Middleware Enforcement**
+- `middleware.ts` now inspects JWT tokens via `next-auth/jwt` and enforces role-based access for `/admin`, `/dashboard/*`, `/app/admin`, and `/app/exports`.
+- Route policies map to the shared `ROLE_HIERARCHY` in `lib/auth/roles.ts`, ensuring students cannot hit educator/admin surfaces without elevated privileges.
+- Unauthorized users are redirected to `/auth` with a `callbackUrl`; insufficient roles receive a 403 to surface misconfigurations quickly.
+
+**Operational Health Endpoint**
+- `GET /api/health` performs Supabase anon/admin queries and checks `NEXTAUTH_SECRET` presence.
+- Responses return `status: ok|error`, per-check diagnostics, and HTTP 503 on failure.
+- Use for uptime monitoring (Vercel checks, Datadog, etc.) and to validate service-role credentials after environment changes.
 
 ### Data Security
 

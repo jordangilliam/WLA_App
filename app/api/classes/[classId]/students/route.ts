@@ -61,14 +61,16 @@ export async function GET(
         .eq('id', classId)
         .maybeSingle();
 
-      if (classCheckError || !classCheck) {
+      const classRow = classCheck as { teacher_id: number } | null;
+
+      if (classCheckError || !classRow) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'Class not found' },
           { status: 404 }
         );
       }
 
-      if (classCheck.teacher_id !== user.id) {
+      if (classRow.teacher_id !== user.id) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'You do not teach this class' },
           { status: 403 }
@@ -101,7 +103,7 @@ export async function GET(
     }
 
     // Transform into ClassRosterStudent format
-    const roster: ClassRosterStudent[] = (enrollments || []).map((enrollment: any) => ({
+    const roster = (enrollments || []).map((enrollment: any) => ({
       class_id: classId,
       student_id: enrollment.student_id,
       student_name: enrollment.users?.name || 'Unknown Student',
@@ -109,11 +111,12 @@ export async function GET(
       grade_level: enrollment.users?.grade_level || '',
       enrolled_at: new Date(enrollment.enrolled_at),
       enrollment_status: enrollment.status,
-      // TODO: Add these from user profile/activity tables
       consent_status: 'verified',
       badges_earned: 0,
       last_active: new Date(),
-    }));
+      class_name: enrollment.class_name || `Class ${classId}`,
+      teacher_id: enrollment.teacher_id || (user.id ?? 0),
+    })) as ClassRosterStudent[];
 
     return NextResponse.json<ApiResponse<ClassRosterStudent[]>>({
       success: true,
@@ -190,14 +193,16 @@ export async function POST(
         .eq('id', classId)
         .maybeSingle();
 
-      if (classCheckError || !classCheck) {
+      const classRow = classCheck as { teacher_id: number } | null;
+
+      if (classCheckError || !classRow) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'Class not found' },
           { status: 404 }
         );
       }
 
-      if (classCheck.teacher_id !== user.id) {
+      if (classRow.teacher_id !== user.id) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'You do not teach this class' },
           { status: 403 }
@@ -217,21 +222,23 @@ export async function POST(
         .eq('email', body.student_email)
         .maybeSingle();
 
-      if (studentError || !studentUser) {
+      const studentRow = studentUser as { id: number; role: string } | null;
+
+      if (studentError || !studentRow) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'Student not found with that email' },
           { status: 404 }
         );
       }
 
-      if (studentUser.role !== 'student') {
+      if (studentRow.role !== 'student') {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'User is not a student' },
           { status: 400 }
         );
       }
 
-      studentId = studentUser.id;
+      studentId = studentRow.id;
     } else {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'Student ID or email required' },
@@ -247,6 +254,8 @@ export async function POST(
       .eq('student_id', studentId)
       .maybeSingle();
 
+    const existingEnrollment = existing as { id: number; status: string } | null;
+
     if (checkError) {
       console.error('Error checking enrollment:', checkError);
       return NextResponse.json<ApiResponse<null>>(
@@ -255,7 +264,7 @@ export async function POST(
       );
     }
 
-    if (existing && existing.status === 'active') {
+    if (existingEnrollment && existingEnrollment.status === 'active') {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'Student is already enrolled in this class' },
         { status: 400 }
@@ -265,15 +274,15 @@ export async function POST(
     // Insert or reactivate enrollment
     let enrollment: any;
 
-    if (existing && existing.status === 'withdrawn') {
+    if (existingEnrollment && existingEnrollment.status === 'withdrawn') {
       // Reactivate
       const { data: reactivated, error: reactivateError } = await supabaseAdmin
         .from('class_enrollments')
         .update({ 
           status: 'active',
           withdrawn_at: null
-        })
-        .eq('id', existing.id)
+        } as never)
+        .eq('id', existingEnrollment.id)
         .select()
         .single();
 
@@ -295,7 +304,7 @@ export async function POST(
           student_id: studentId,
           enrolled_by: 'teacher_added',
           status: 'active',
-        })
+        } as never)
         .select()
         .single();
 
@@ -383,14 +392,16 @@ export async function DELETE(
         .eq('id', classId)
         .maybeSingle();
 
-      if (classCheckError || !classCheck) {
+      const classRow = classCheck as { teacher_id: number } | null;
+
+      if (classCheckError || !classRow) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'Class not found' },
           { status: 404 }
         );
       }
 
-      if (classCheck.teacher_id !== user.id) {
+      if (classRow.teacher_id !== user.id) {
         return NextResponse.json<ApiResponse<null>>(
           { success: false, error: 'You do not teach this class' },
           { status: 403 }
@@ -401,10 +412,10 @@ export async function DELETE(
     // Update enrollment status to 'withdrawn'
     const { error: withdrawError } = await supabaseAdmin
       .from('class_enrollments')
-      .update({ 
+      .update({
         status: 'withdrawn',
         withdrawn_at: new Date().toISOString()
-      })
+      } as never)
       .eq('class_id', classId)
       .eq('student_id', studentId);
 

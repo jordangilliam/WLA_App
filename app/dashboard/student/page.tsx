@@ -2,9 +2,11 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
 import Link from 'next/link';
+
+const DEFAULT_BADGE_TARGET = 50;
 
 interface EnrolledClass {
   id: string;
@@ -15,6 +17,11 @@ interface EnrolledClass {
   active_assignment_count?: number;
 }
 
+interface AchievementStats {
+  earned: number;
+  total: number;
+}
+
 export default function StudentDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -23,36 +30,68 @@ export default function StudentDashboard() {
   const [classes, setClasses] = useState<EnrolledClass[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [achievementStats, setAchievementStats] = useState<AchievementStats | null>(null);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth');
-    } else if (status === 'authenticated') {
-      if (session?.user?.role !== 'student') {
-        router.push('/dashboard/teacher');
-      } else {
-        fetchClasses();
-      }
-    }
-  }, [status, session, router]);
-
-  const fetchClasses = async () => {
+  const loadDashboardData = useCallback(async () => {
     try {
+      setError(null);
       setLoading(true);
-      const response = await fetch('/api/student/classes');
-      
-      if (!response.ok) {
+
+      const [classesResult, achievementsResult] = await Promise.allSettled([
+        fetch('/api/student/classes'),
+        fetch('/api/achievements'),
+      ]);
+
+      if (
+        classesResult.status === 'rejected' ||
+        !classesResult.value.ok
+      ) {
         throw new Error('Failed to fetch classes');
       }
-      
-      const data = await response.json();
-      setClasses(data.classes || []);
-    } catch (err: any) {
-      setError(err.message);
+
+      const classesPayload = await classesResult.value.json();
+      setClasses(classesPayload.classes || []);
+
+      if (achievementsResult.status === 'fulfilled') {
+        if (achievementsResult.value.ok) {
+          const achievementsPayload = await achievementsResult.value.json();
+          const totalAchievements = Array.isArray(achievementsPayload.achievements)
+            ? achievementsPayload.achievements.length
+            : 0;
+          const unlockedAchievements = Array.isArray(achievementsPayload.userAchievements)
+            ? achievementsPayload.userAchievements.length
+            : 0;
+
+          setAchievementStats({
+            earned: unlockedAchievements,
+            total: totalAchievements,
+          });
+        } else {
+          console.error('Failed to fetch achievements:', achievementsResult.value.statusText);
+        }
+      } else {
+        console.error('Failed to fetch achievements:', achievementsResult.reason);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load dashboard');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const user = session?.user as { role?: string } | undefined;
+
+    if (status === 'unauthenticated') {
+      router.push('/auth');
+    } else if (status === 'authenticated') {
+      if (user?.role !== 'student') {
+        router.push('/dashboard/teacher');
+      } else {
+        loadDashboardData();
+      }
+    }
+  }, [status, session, router, loadDashboardData]);
 
   if (status === 'loading' || loading) {
     return (
@@ -62,8 +101,15 @@ export default function StudentDashboard() {
     );
   }
 
-  const earnedBadgesCount = badges.filter(b => b.earned).length;
-  const totalBadges = badges.length;
+  const rawEarnedBadges = achievementStats ? achievementStats.earned : badges;
+  const totalBadgeBaseline = achievementStats?.total ?? 0;
+  const totalBadges =
+    totalBadgeBaseline > 0
+      ? totalBadgeBaseline
+      : Math.max(DEFAULT_BADGE_TARGET, rawEarnedBadges, 1);
+  const earnedBadgesCount = Math.min(rawEarnedBadges, totalBadges);
+  const badgeProgress =
+    totalBadges === 0 ? 0 : Math.min((earnedBadgesCount / totalBadges) * 100, 100);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
@@ -254,7 +300,7 @@ export default function StudentDashboard() {
           <div className="mt-4 bg-white bg-opacity-20 rounded-full h-3">
             <div
               className="bg-white rounded-full h-3 transition-all"
-              style={{ width: `${(earnedBadgesCount / totalBadges) * 100}%` }}
+              style={{ width: `${badgeProgress}%` }}
             ></div>
           </div>
         </Link>

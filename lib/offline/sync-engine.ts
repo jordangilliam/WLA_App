@@ -43,7 +43,9 @@ class SyncEngine {
     // Immediately send current state
     listener(this.getState())
     
-    return () => this.listeners.delete(listener)
+    return () => {
+      this.listeners.delete(listener)
+    }
   }
 
   /**
@@ -227,7 +229,7 @@ class SyncEngine {
    */
   private async syncPhoto(action: string, data: any) {
     // Get photo from IndexedDB
-    const photo = await db.db!.get('photos', data.id)
+    const photo = await db.getPhotoById(data.id)
     if (!photo) {
       throw new Error('Photo not found in local storage')
     }

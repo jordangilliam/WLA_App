@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
 import { PA_WATER_BODIES_EXPANDED } from '@/data/pa-water-bodies-expanded';
 import { FISHING_CONSERVATION_HISTORY } from '@/lib/data/conservation-history';
@@ -2466,12 +2467,24 @@ export default function FishingPage() {
                   {logPhotos.length > 0 && (
                     <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                       {logPhotos.map((photo, idx) => (
-                        <img 
+                        <div
                           key={idx}
-                          src={photo} 
-                          alt={`Upload ${idx + 1}`}
-                          style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
-                        />
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            borderRadius: '8px',
+                            overflow: 'hidden',
+                            position: 'relative',
+                          }}
+                        >
+                          <Image
+                            src={photo}
+                            alt={`Upload ${idx + 1}`}
+                            fill
+                            unoptimized
+                            style={{ objectFit: 'cover' }}
+                          />
+                        </div>
                       ))}
                     </div>
                   )}
@@ -2600,12 +2613,25 @@ export default function FishingPage() {
                       {log.photos.length > 0 && (
                         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', overflowX: 'auto' }}>
                           {log.photos.map((photo, idx) => (
-                            <img 
+                            <div
                               key={idx}
-                              src={photo} 
-                              alt={`Catch ${idx + 1}`}
-                              style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '8px', flexShrink: 0 }}
-                            />
+                              style={{
+                                width: '150px',
+                                height: '150px',
+                                borderRadius: '8px',
+                                overflow: 'hidden',
+                                position: 'relative',
+                                flexShrink: 0,
+                              }}
+                            >
+                              <Image
+                                src={photo}
+                                alt={`Catch ${idx + 1}`}
+                                fill
+                                unoptimized
+                                style={{ objectFit: 'cover' }}
+                              />
+                            </div>
                           ))}
                         </div>
                       )}

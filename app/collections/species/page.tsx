@@ -63,7 +63,7 @@ export default function SpeciesCollectionPage() {
             ← Back to Collections
           </Link>
           <h1 className="text-3xl font-bold mb-2">🦋 Species Collection</h1>
-          <p className="text-blue-100 mb-4">Document Pennsylvania's incredible biodiversity</p>
+          <p className="text-blue-100 mb-4">Document Pennsylvania&rsquo;s incredible biodiversity</p>
           
           {/* Progress Bar */}
           <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">

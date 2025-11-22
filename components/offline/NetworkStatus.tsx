@@ -9,9 +9,21 @@ import { useState, useEffect } from 'react'
 import { syncEngine, useSyncState } from '@/lib/offline/sync-engine'
 import { db } from '@/lib/offline/indexeddb'
 
+type OfflineStats = {
+  syncQueue: number
+  classes: number
+  lessons: number
+  photos: number
+}
+
 export default function NetworkStatus() {
   const syncState = useSyncState()
-  const [stats, setStats] = useState({ syncQueue: 0 })
+  const [stats, setStats] = useState<OfflineStats>({
+    syncQueue: 0,
+    classes: 0,
+    lessons: 0,
+    photos: 0,
+  })
   const [showDetails, setShowDetails] = useState(false)
   const [cacheSize, setCacheSize] = useState(0)
 
@@ -25,7 +37,12 @@ export default function NetworkStatus() {
 
   const loadStats = async () => {
     const dbStats = await db.getStats()
-    setStats(dbStats)
+    setStats({
+      syncQueue: dbStats.syncQueue ?? 0,
+      classes: dbStats.classes ?? 0,
+      lessons: dbStats.lessons ?? 0,
+      photos: dbStats.photos ?? 0,
+    })
     
     // Get cache size from service worker
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {

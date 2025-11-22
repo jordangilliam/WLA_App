@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Camera } from '@capacitor/camera';
 import { CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -9,10 +10,22 @@ interface PhotoCaptureProps {
   onSkip: () => void;
 }
 
+type IdentifyResult = {
+  provider: string;
+  status: 'ok' | 'unavailable' | 'error';
+  label?: string;
+  confidence?: number;
+  reason?: string;
+  mode: 'species' | 'bird' | 'macro';
+};
+
 export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps) {
   const [isCapturing, setIsCapturing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isIdentifying, setIsIdentifying] = useState(false);
+  const [identificationError, setIdentificationError] = useState<string | null>(null);
+  const [identifications, setIdentifications] = useState<IdentifyResult[]>([]);
 
   const takePicture = async (source: CameraSource) => {
     try {
@@ -72,9 +85,45 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
     }
   };
 
+  const runIdentification = async () => {
+    if (!previewUrl) return;
+
+    try {
+      setIsIdentifying(true);
+      setIdentificationError(null);
+
+      const response = await fetch('/api/identify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          mediaType: 'image',
+          imageData: previewUrl,
+          targets: ['species', 'macro'],
+        }),
+      });
+
+      if (!response.ok) {
+        const message = await response.text();
+        throw new Error(message || 'Identification failed');
+      }
+
+      const payload = await response.json();
+      setIdentifications(payload.results || []);
+    } catch (err: any) {
+      console.error('AI identification error:', err);
+      setIdentificationError(err?.message || 'Unable to identify right now.');
+    } finally {
+      setIsIdentifying(false);
+    }
+  };
+
   const retakePhoto = () => {
     setPreviewUrl(null);
     setError(null);
+    setIdentifications([]);
+    setIdentificationError(null);
   };
 
   // If we have a preview, show it
@@ -84,10 +133,13 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
         <div className="bg-white rounded-lg p-4">
           <h3 className="font-semibold text-gray-900 mb-3">Photo Preview</h3>
           <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gray-100">
-            <img
+            <Image
               src={previewUrl}
               alt="Site photo"
-              className="w-full h-full object-cover"
+              fill
+              unoptimized
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>
@@ -105,6 +157,66 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
           >
             Continue →
           </button>
+        </div>
+
+        <div className="bg-white rounded-lg p-4 mt-4 space-y-3 border border-gray-100">
+          <div className="flex items-center justify-between">
+            <h4 className="font-semibold text-gray-900">AI Identification</h4>
+            <button
+              onClick={runIdentification}
+              disabled={isIdentifying}
+              className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isIdentifying ? 'Identifying…' : 'Run Identification'}
+            </button>
+          </div>
+
+          {identificationError && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded text-sm text-red-700">
+              {identificationError}
+            </div>
+          )}
+
+          {identifications.length > 0 && (
+            <div className="space-y-2">
+              {identifications.map((result) => (
+                <div
+                  key={`${result.provider}-${result.mode}`}
+                  className="p-3 rounded-lg border border-gray-200 bg-gray-50"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 uppercase tracking-wide">
+                        {result.provider} • {result.mode}
+                      </p>
+                      <p className="text-lg font-semibold text-gray-900">
+                        {result.label || 'No match'}
+                      </p>
+                    </div>
+                    <span
+                      className={`text-sm font-semibold ${
+                        result.status === 'ok'
+                          ? 'text-green-600'
+                          : result.status === 'unavailable'
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
+                      }`}
+                    >
+                      {result.status.toUpperCase()}
+                    </span>
+                  </div>
+                  {typeof result.confidence === 'number' && (
+                    <p className="text-sm text-gray-600">
+                      Confidence: {(result.confidence * 100).toFixed(1)}%
+                    </p>
+                  )}
+                  {result.reason && (
+                    <p className="text-sm text-gray-500 mt-1">{result.reason}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
 
 interface InsectObservation {
@@ -595,7 +596,18 @@ export default function InsectID() {
             {newObservation.photos && newObservation.photos.length > 0 && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
                 {newObservation.photos.map((photo, idx) => (
-                  <img key={idx} src={photo} alt={`Photo ${idx + 1}`} style={{ width: '100%', borderRadius: '6px' }} />
+                  <div
+                    key={idx}
+                    style={{ width: '100%', borderRadius: '6px', overflow: 'hidden', position: 'relative', height: '120px' }}
+                  >
+                    <Image
+                      src={photo}
+                      alt={`Photo ${idx + 1}`}
+                      fill
+                      unoptimized
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
                 ))}
               </div>
             )}

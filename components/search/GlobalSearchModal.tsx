@@ -12,19 +12,7 @@ interface SearchResult {
   icon: string;
 }
 
-interface GlobalSearchModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-
-  // All searchable content
-  const allContent: SearchResult[] = [
+const ALL_CONTENT: SearchResult[] = [
     // Educational Modules
     { title: 'Birds', description: 'Pennsylvania bird species and conservation', category: 'Learning', path: '/birds', icon: '🦜' },
     { title: 'Fishing', description: 'Fishing techniques and aquatic ecosystems', category: 'Learning', path: '/fishing', icon: '🎣' },
@@ -48,7 +36,18 @@ export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModal
     { title: 'Outreach', description: 'Conservation outreach programs', category: 'Resources', path: '/outreach', icon: '📢' },
     { title: 'Media', description: 'Educational videos and photos', category: 'Resources', path: '/media', icon: '🎥' },
     { title: 'Offline Mode', description: 'Download content for offline use', category: 'Tools', path: '/offline', icon: '📱' },
-  ];
+];
+
+interface GlobalSearchModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   // Focus input when modal opens
   useEffect(() => {
@@ -81,7 +80,7 @@ export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModal
     }
 
     const q = query.toLowerCase();
-    const filtered = allContent.filter(
+    const filtered = ALL_CONTENT.filter(
       (item) =>
         item.title.toLowerCase().includes(q) ||
         item.description.toLowerCase().includes(q) ||

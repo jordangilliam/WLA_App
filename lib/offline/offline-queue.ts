@@ -35,6 +35,7 @@ class OfflineQueueManager {
   private db: IDBPDatabase<OfflineDB> | null = null;
   private syncInProgress = false;
   private listeners: Set<(event: 'sync-start' | 'sync-complete' | 'sync-error', data?: any) => void> = new Set();
+  private lastSyncAt: number | null = null;
 
   async init() {
     if (this.db) return;
@@ -50,6 +51,11 @@ class OfflineQueueManager {
         db.createObjectStore('photos', { keyPath: 'id' });
       },
     });
+
+    const storedLastSync = localStorage.getItem('wla-last-sync');
+    if (storedLastSync) {
+      this.lastSyncAt = Number(storedLastSync);
+    }
 
     // Listen for online events
     window.addEventListener('online', () => {
@@ -178,7 +184,12 @@ class OfflineQueueManager {
         }
       }
 
-      this.notifyListeners('sync-complete', { synced: pending.length });
+      if (navigator.onLine) {
+        this.lastSyncAt = Date.now();
+        localStorage.setItem('wla-last-sync', this.lastSyncAt.toString());
+      }
+
+      this.notifyListeners('sync-complete', { synced: pending.length, lastSyncAt: this.lastSyncAt });
     } catch (error) {
       console.error('Queue sync error:', error);
       this.notifyListeners('sync-error', error);
@@ -398,6 +409,10 @@ class OfflineQueueManager {
       isOnline: navigator.onLine,
       isSyncing: this.syncInProgress,
     };
+  }
+
+  getLastSyncTimestamp(): number | null {
+    return this.lastSyncAt;
   }
 }
 

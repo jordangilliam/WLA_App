@@ -1,6 +1,7 @@
 'use client';
 import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
 
 (mapboxgl as any).accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
@@ -407,9 +408,26 @@ export default function WaterQualityMap() {
 
                 {newReading.photos && newReading.photos.length > 0 && (
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
-                    {newReading.photos.map((photo, idx) => (
-                      <img key={idx} src={photo} alt={`Photo ${idx + 1}`} style={{ width: '100%', borderRadius: '6px' }} />
-                    ))}
+                {newReading.photos.map((photo, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      width: '100%',
+                      borderRadius: '6px',
+                      overflow: 'hidden',
+                      position: 'relative',
+                      height: '140px',
+                    }}
+                  >
+                    <Image
+                      src={photo}
+                      alt={`Photo ${idx + 1}`}
+                      fill
+                      unoptimized
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                ))}
                   </div>
                 )}
 
@@ -478,7 +496,18 @@ export default function WaterQualityMap() {
                   <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Photos:</strong>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
                     {selectedReading.photos.map((photo, idx) => (
-                      <img key={idx} src={photo} alt={`Photo ${idx + 1}`} style={{ width: '100%', borderRadius: '6px' }} />
+                      <div
+                        key={idx}
+                        style={{ width: '100%', borderRadius: '6px', overflow: 'hidden', position: 'relative', height: '160px' }}
+                      >
+                        <Image
+                          src={photo}
+                          alt={`Photo ${idx + 1}`}
+                          fill
+                          unoptimized
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>

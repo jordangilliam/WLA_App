@@ -1,16 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import InteractiveMap from '@/components/map/InteractiveMap';
+import InteractiveMap, { MapFieldSite } from '@/components/map/InteractiveMap';
 import CheckInButton from '@/components/map/CheckInButton';
 
-interface FieldSite {
-  id: string;
-  name: string;
-  description: string;
-  site_type: string;
-  latitude: number;
-  longitude: number;
+type FieldSite = MapFieldSite & {
+  description?: string;
   address?: string;
   city?: string;
   state?: string;
@@ -18,7 +13,7 @@ interface FieldSite {
   species_commonly_found?: string[];
   habitat_types?: string[];
   distance_meters?: number;
-}
+};
 
 interface UserLocation {
   latitude: number;
@@ -391,7 +386,7 @@ export default function FieldSitesPage() {
                 <CheckInButton
                   site={selectedSite}
                   userLocation={userLocation}
-                  onCheckInSuccess={() => {
+                  onSuccess={() => {
                     alert('Check-in successful! Points awarded!');
                   }}
                 />
