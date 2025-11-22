@@ -8,7 +8,7 @@ export interface WaterBody {
   name: string;
   type: 'Stream' | 'Lake' | 'River' | 'Pond';
   county: string;
-  region: 'Philadelphia' | 'Pittsburgh' | 'Harrisburg' | 'Lehigh Valley' | 'Erie' | 'Scranton' | 'Reading' | 'Lancaster' | 'Central';
+  region: 'Philadelphia' | 'Pittsburgh' | 'Harrisburg' | 'Lehigh Valley' | 'Erie' | 'Scranton' | 'Reading' | 'Lancaster' | 'Central' | 'Pocono';
   urbanProximity: 'Urban' | 'Suburban' | 'Rural';
   lat: number;
   lon: number;
@@ -1090,6 +1090,7 @@ export const WATER_BODIES_STATS = {
     'Reading': PA_WATER_BODIES_EXPANDED.filter(w => w.region === 'Reading').length,
     'Lancaster': PA_WATER_BODIES_EXPANDED.filter(w => w.region === 'Lancaster').length,
     'Central': PA_WATER_BODIES_EXPANDED.filter(w => w.region === 'Central').length,
+    'Pocono': PA_WATER_BODIES_EXPANDED.filter(w => w.region === 'Pocono').length,
   },
   byType: {
     'Lake': PA_WATER_BODIES_EXPANDED.filter(w => w.type === 'Lake').length,

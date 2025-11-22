@@ -186,6 +186,7 @@ export default function StockingCalendarPage() {
                 <option value="state-college">State College</option>
                 <option value="harrisburg">Harrisburg</option>
                 <option value="philadelphia">Philadelphia</option>
+                <option value="pocono">Pocono Mountains</option>
               </select>
             </div>
           </div>

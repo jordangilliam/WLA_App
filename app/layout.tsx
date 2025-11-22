@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/globals.css';
+import './globals.css';
 import Link from 'next/link';
 import SessionProviderWrapper from '@/components/providers/SessionProviderWrapper';
 import { PointsProvider } from '@/ui/points/PointsProvider';
