@@ -7,10 +7,11 @@ This expansion significantly increases the fishing locations database from **4 l
 ## What's New
 
 ### 📊 Statistics
-- **Total Locations**: 50+ water bodies
-- **High Maintenance**: 45+ locations (regularly stocked/maintained)
-- **Urban/Suburban Access**: 42+ locations within 30 minutes of cities
-- **Regional Coverage**: 9 major regions
+- **Total Locations**: 75+ water bodies
+- **High Maintenance**: 60+ locations (regularly stocked/maintained)
+- **Urban/Suburban Access**: 60+ locations within 30 minutes of cities
+- **Regional Coverage**: 10 major regions
+- **NEW**: Pocono Mountains region added (27 premier waters)
 
 ### 🌍 Regional Breakdown
 
@@ -64,6 +65,33 @@ This expansion significantly increases the fishing locations database from **4 l
 - Penns Creek - Premier wild trout stream
 - Spring Creek - Famous Fisherman's Paradise section
 - Raystown Lake - 8,300 acres, PA's largest lake
+
+#### Pocono Mountains Region (27 locations) ✨ NEW!
+**Major Lakes**:
+- Lake Wallenpaupack - 5,700 acres, PA's 3rd largest
+- Promised Land Lake - 422 acres, state park, family-friendly
+- Beltzville Lake - 949 acres, striped bass destination
+- Tobyhanna Lake - 170 acres, state park
+- Gouldsboro Lake - 250 acres, state park
+- Mauch Chunk Lake - 344 acres, near Jim Thorpe
+
+**Premier Trout Streams**:
+- Brodhead Creek - Delayed Harvest, heavily stocked
+- McMichaels Creek - Wild trout in upper sections
+- Tobyhanna Creek - State park access
+- Lackawaxen River - Large river, bass and trout
+- Big Bushkill Creek - Scenic, wild trout
+- Pohopoco Creek, Aquashicola Creek, Shohola Creek, Dyberry Creek
+- Lehigh River (upper section) - Whitewater and fishing
+
+**National Scenic River**:
+- Delaware River (40+ miles) - World-class trout and bass, Delaware Water Gap National Recreation Area
+
+**Why Added**: 
+- 9+ million annual tourists (PA's #1 vacation destination)
+- 330,000 permanent residents
+- Premier outdoor recreation and education opportunities
+- 8 state parks including Delaware Water Gap NRA
 
 ## Key Features
 
@@ -236,8 +264,9 @@ This dataset provides a strong foundation for the fishing feature. It can be ext
 
 ---
 
-**Last Updated**: October 12, 2025
-**Data Version**: 1.0
-**Total Locations**: 50+
-**Coverage**: All major PA urban centers
+**Last Updated**: November 22, 2025
+**Data Version**: 2.0
+**Total Locations**: 75+
+**Coverage**: All major PA urban centers + Pocono Mountains tourism region
+**NEW in v2.0**: Complete Pocono Mountains region (27 locations)
 

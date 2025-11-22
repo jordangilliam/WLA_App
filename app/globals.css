@@ -5,6 +5,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Brand Colors - Enhanced for Youth Engagement */
   --wla-blue:       #00B4D8;  /* Brighter trout blue */
@@ -50,36 +54,6 @@
 html { box-sizing: border-box; scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: inherit; }
 
-body {
-  margin: 0;
-  color: var(--text);
-  background: linear-gradient(135deg, 
-    #E8F4F8 0%,      /* Light sky blue */
-    #F0F9F4 25%,     /* Soft mint */
-    #FFF8E7 50%,     /* Warm cream */
-    #F4F1E8 75%,     /* Natural beige */
-    #E3F2E1 100%     /* Pale sage */
-  );
-  background-attachment: fixed;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-  color: var(--wla-ink);
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
-  font-weight: 700;
-}
-
-h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-
 /* Links */
 a {
   color: var(--link);
@@ -94,7 +68,7 @@ a:hover, a:focus {
 }
 
 /* Buttons - Enhanced with animations */
-.btn, button, input[type="submit"] {
+.btn, button:not(.no-style), input[type="submit"] {
   display: inline-block;
   padding: 0.75em 1.5em;
   border-radius: 12px;
@@ -110,13 +84,13 @@ a:hover, a:focus {
   overflow: hidden;
 }
 
-.btn:hover, button:hover, input[type="submit"]:hover {
+.btn:hover, button:not(.no-style):hover, input[type="submit"]:hover {
   background: var(--btn-primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-.btn:active, button:active {
+.btn:active, button:not(.no-style):active {
   transform: translateY(0);
   box-shadow: var(--shadow-sm);
 }
@@ -247,38 +221,6 @@ nav a:active {
   outline: none;
 }
 
-/* Form elements */
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="password"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid #DEE2E6;
-  border-radius: 10px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background: white;
-  margin: 0.5rem 0;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--wla-blue);
-  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
-  outline: none;
-}
-
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--wla-ink);
-  font-family: 'Poppins', sans-serif;
-}
-
 /* Badges & Achievements */
 .badge {
   display: inline-flex;
@@ -401,16 +343,6 @@ label {
   to { transform: rotate(360deg); }
 }
 
-/* Footer */
-footer {
-  padding: 3rem 1rem;
-  text-align: center;
-  color: var(--text-muted);
-  background: var(--bg-card);
-  margin-top: 4rem;
-  border-top: 1px solid #DEE2E6;
-}
-
 /* Responsive improvements */
 @media (max-width: 768px) {
   nav {
@@ -426,8 +358,6 @@ footer {
   .row {
     gap: 1rem;
   }
-  
-  h1 { font-size: 2rem; }
 }
 
 /* Print styles */
