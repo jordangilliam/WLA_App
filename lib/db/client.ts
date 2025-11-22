@@ -14,29 +14,57 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
+// Helper function to get validated URL
+function getSupabaseUrl(): string {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!url) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
+  }
+  return url;
 }
 
-if (!supabaseAnonKey) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
+// Helper function to get validated anon key
+function getSupabaseAnonKey(): string {
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!key) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
+  }
+  return key;
 }
 
 /**
  * Public Supabase client for client-side operations
  * Uses anon key with Row Level Security (RLS) policies
  */
-export const supabase = createClient<Database>(
-  supabaseUrl,
-  supabaseAnonKey,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
-    },
+let _supabase: any | null = null;
+
+function getSupabaseClient() {
+  if (!_supabase && supabaseUrl && supabaseAnonKey) {
+    _supabase = createClient<Database>(
+      supabaseUrl,
+      supabaseAnonKey,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+        },
+      }
+    );
   }
-);
+  return _supabase;
+}
+
+export const supabase = new Proxy({} as any, {
+  get(_target, prop) {
+    const client = getSupabaseClient();
+    if (!client) {
+      // During build time, return a no-op function
+      return () => Promise.resolve({ data: null, error: null });
+    }
+    return client[prop];
+  }
+});
 
 /**
  * Admin Supabase client for server-side operations
@@ -45,20 +73,35 @@ export const supabase = createClient<Database>(
  * ⚠️ WARNING: Only use in server-side code (API routes, server components)
  * Never expose this client to the browser
  */
-export const supabaseAdmin = supabaseServiceKey
-  ? createClient<Database>(supabaseUrl, supabaseServiceKey, {
+let _supabaseAdmin: any | null = null;
+
+function getSupabaseAdminClient() {
+  if (!_supabaseAdmin && supabaseUrl && supabaseServiceKey) {
+    _supabaseAdmin = createClient<Database>(supabaseUrl, supabaseServiceKey, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
       },
-    })
-  : null;
-
-if (!supabaseAdmin) {
-  console.warn(
-    '⚠️ SUPABASE_SERVICE_ROLE_KEY not set. Admin operations will be limited.'
-  );
+    });
+  }
+  return _supabaseAdmin;
 }
+
+export const supabaseAdmin = new Proxy({} as any, {
+  get(_target, prop) {
+    const client = getSupabaseAdminClient();
+    if (!client) {
+      if (typeof window === 'undefined' && supabaseServiceKey === undefined) {
+        console.warn(
+          '⚠️ SUPABASE_SERVICE_ROLE_KEY not set. Admin operations will be limited.'
+        );
+      }
+      // During build time, return a no-op function
+      return () => Promise.resolve({ data: null, error: null });
+    }
+    return client[prop];
+  }
+});
 
 /**
  * Get Supabase client with user session
@@ -69,7 +112,10 @@ export function getSupabaseWithSession(accessToken?: string) {
     return supabase;
   }
 
-  return createClient<Database>(supabaseUrl!, supabaseAnonKey!, {
+  const url = getSupabaseUrl();
+  const key = getSupabaseAnonKey();
+  
+  return createClient<Database>(url, key, {
     global: {
       headers: {
         Authorization: `Bearer ${accessToken}`,
