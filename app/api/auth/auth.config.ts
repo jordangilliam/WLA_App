@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { supabaseAdmin } from "@/lib/db/client";
+import { supabaseAdmin, hasSupabaseAdmin } from "@/lib/db/client";
 
 type DbUser = {
   id: string;
@@ -26,9 +26,9 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-            // For testing: any password works, email creates/finds user
+        // For testing: any password works, email creates/finds user
             // In production, you'd verify password properly
-            if (!supabaseAdmin) {
+            if (!hasSupabaseAdmin()) {
               return null;
             }
 
@@ -101,7 +101,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       // Create or update user in Supabase on first sign-in
-      if (!supabaseAdmin || !user.email) {
+      if (!hasSupabaseAdmin() || !user.email) {
         return true; // Allow sign-in even if DB fails (will retry on next access)
       }
 
@@ -165,7 +165,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Load user details from Supabase
-      if (user && user.email && supabaseAdmin) {
+      if (user && user.email && hasSupabaseAdmin()) {
         try {
           const { data: dbUser } = await supabaseAdmin
             .from('users')

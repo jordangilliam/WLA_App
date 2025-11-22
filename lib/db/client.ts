@@ -89,6 +89,11 @@ function getSupabaseAdminClient() {
 
 export const supabaseAdmin = new Proxy({} as any, {
   get(_target, prop) {
+    // Special handling for truthiness checks
+    if (prop === Symbol.toPrimitive || prop === 'valueOf') {
+      return () => getSupabaseAdminClient();
+    }
+    
     const client = getSupabaseAdminClient();
     if (!client) {
       if (typeof window === 'undefined' && supabaseServiceKey === undefined) {
@@ -102,6 +107,11 @@ export const supabaseAdmin = new Proxy({} as any, {
     return client[prop];
   }
 });
+
+// Helper to check if admin client is available
+export function hasSupabaseAdmin(): boolean {
+  return !!(supabaseUrl && supabaseServiceKey);
+}
 
 /**
  * Get Supabase client with user session
