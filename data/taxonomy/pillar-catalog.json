@@ -1,0 +1,303 @@
+{
+  "generatedAt": "2025-11-23T00:00:00.000Z",
+  "pillars": [
+    {
+      "id": "species",
+      "title": "Species & Wildlife Management",
+      "description": "Bucktails/Gobblers/Ursids track material that covers mammals, birds, sign interpretation, and wildlife stewardship.",
+      "tracks": ["Bucktails", "Gobblers", "Ursids"],
+      "assets": [
+        {
+          "id": "lessons-terrestrial",
+          "name": "Terrestrial Camp Lessons",
+          "type": "lesson_collection",
+          "path": "lib/data/lessons-terrestrial.ts",
+          "contentTypes": ["lesson", "quiz", "field_activity"],
+          "coverageTags": ["deer", "turkey", "bear", "habitat-management"],
+          "status": "complete"
+        },
+        {
+          "id": "lesson-plan-track-identification",
+          "name": "Track Identification Curriculum",
+          "type": "classroom_lesson",
+          "path": "curriculum/lesson-plans/lesson-02-track-identification.md",
+          "contentTypes": ["lesson-plan", "fieldwork", "home-extension"],
+          "coverageTags": ["tracks", "sign", "STEM-notebooks"],
+          "status": "complete"
+        },
+        {
+          "id": "terrestrial-field-guide",
+          "name": "Terrestrial Field Guide UI",
+          "type": "experience",
+          "path": "app/terrestrials/page.tsx",
+          "contentTypes": ["interactive", "study-mode"],
+          "coverageTags": ["mammals", "signs", "habitat-clues"],
+          "status": "shipped"
+        },
+        {
+          "id": "gobblers-module",
+          "name": "Gobblers Track Content",
+          "type": "experience",
+          "path": "app/gobblers/page.tsx",
+          "contentTypes": ["quiz", "species-card"],
+          "coverageTags": ["turkey", "tracks", "biology"],
+          "status": "shipped"
+        }
+      ],
+      "gaps": [
+        "No shared species metadata service yet (cards pulled from static React arrays).",
+        "Need per-species stewardship missions that tie back into Explore map."
+      ]
+    },
+    {
+      "id": "waterways",
+      "title": "Waterways, Watersheds & Fisheries",
+      "description": "Brookies/Bass aquatic curriculum plus PFBC data integrations and stocking intel.",
+      "tracks": ["Brookies", "Bass"],
+      "assets": [
+        {
+          "id": "lessons-aquatic",
+          "name": "Aquatic Camp Lessons",
+          "type": "lesson_collection",
+          "path": "lib/data/lessons-aquatic.ts",
+          "contentTypes": ["lesson", "quiz", "macro-labs"],
+          "coverageTags": ["macroinvertebrates", "water-quality", "riparian"],
+          "status": "complete"
+        },
+        {
+          "id": "pa-water-bodies",
+          "name": "PA Water Bodies Dataset",
+          "type": "data_set",
+          "path": "data/pa-water-bodies-expanded.ts",
+          "contentTypes": ["geojson", "metadata"],
+          "coverageTags": ["waterways", "regions", "seasons"],
+          "status": "complete"
+        },
+        {
+          "id": "pfbc-complete",
+          "name": "PFBC Integration Bundle",
+          "type": "data_set",
+          "path": "data/pfbc-complete-data.ts",
+          "contentTypes": ["stocking", "access", "regulations"],
+          "coverageTags": ["PFBC", "habitat", "compliance"],
+          "status": "complete"
+        },
+        {
+          "id": "fishing-lab",
+          "name": "Interactive Fishing + Hatch Lab",
+          "type": "experience",
+          "path": "app/fishing/page.tsx",
+          "contentTypes": ["map", "guide", "minigame"],
+          "coverageTags": ["hatches", "access-points", "species"],
+          "status": "beta"
+        },
+        {
+          "id": "stocking-tracker",
+          "name": "Stocking Explorer",
+          "type": "experience",
+          "path": "app/stocking/page.tsx",
+          "contentTypes": ["calendar", "search"],
+          "coverageTags": ["PFBC", "events"],
+          "status": "draft"
+        }
+      ],
+      "gaps": [
+        "Need consistent water-quality readings/logbook to pair with PFBC sites.",
+        "Macro-to-map linkage for Explore filters not wired yet."
+      ]
+    },
+    {
+      "id": "food_systems",
+      "title": "Food Systems, Agriculture & Pollinators",
+      "description": "Garden/Ag science content for youth ambassadors plus community stewardship plans.",
+      "tracks": ["Bass", "Brookies", "All"],
+      "assets": [
+        {
+          "id": "pollinator-plants",
+          "name": "Pollinator Keystone Plants Dataset",
+          "type": "data_set",
+          "path": "lib/data/pollinator-plants.ts",
+          "contentTypes": ["reference", "plant-guide"],
+          "coverageTags": ["native-plants", "bloom-calendar", "habitat"],
+          "status": "complete"
+        },
+        {
+          "id": "pollinator-plan-builder",
+          "name": "Pollinator Plan Builder",
+          "type": "experience",
+          "path": "app/pollinators/plan/page.tsx",
+          "contentTypes": ["form", "generator", "stewardship-plan"],
+          "coverageTags": ["gardens", "agriculture", "maintenance"],
+          "status": "beta"
+        },
+        {
+          "id": "lesson-05-conservation-careers",
+          "name": "Conservation Careers & Ag Interfaces",
+          "type": "classroom_lesson",
+          "path": "curriculum/lesson-plans/lesson-05-conservation-careers.md",
+          "contentTypes": ["lesson-plan", "career-paths"],
+          "coverageTags": ["ag-economy", "management-vs-research"],
+          "status": "complete"
+        },
+        {
+          "id": "cross-cutting-ag",
+          "name": "Cross-Cutting Lessons (agriculture nodes)",
+          "type": "lesson_collection",
+          "path": "lib/data/lessons-cross-cutting.ts",
+          "contentTypes": ["lesson", "case-study"],
+          "coverageTags": ["watersheds", "forest-vs-ag"],
+          "status": "complete"
+        }
+      ],
+      "gaps": [
+        "Need explicit student missions tied to local farms/CSAs for real volunteer hours.",
+        "No Explore map layer for food system partners yet."
+      ]
+    },
+    {
+      "id": "micro_macro",
+      "title": "Micro/Macro Life & Lab Work",
+      "description": "Macroinvertebrate, pollinator, and AI-ID tooling that supports lab notebooks.",
+      "tracks": ["Brookies", "Bass", "All"],
+      "assets": [
+        {
+          "id": "macro-key",
+          "name": "Macro ID Interactive Key",
+          "type": "experience",
+          "path": "app/keys/macro/page.tsx",
+          "contentTypes": ["id-key", "quiz"],
+          "coverageTags": ["EPT", "macroinvertebrates"],
+          "status": "shipped"
+        },
+        {
+          "id": "hatch-calendar",
+          "name": "Statewide Hatch Calendar",
+          "type": "data_set",
+          "path": "data/scraped/waterways/hatch-calendar.json",
+          "contentTypes": ["time-series"],
+          "coverageTags": ["macro-emergence", "phenology"],
+          "status": "complete"
+        },
+        {
+          "id": "ai-identification",
+          "name": "AI Identification Pipeline",
+          "type": "service",
+          "path": "AI_IDENTIFICATION_GUIDE.md",
+          "contentTypes": ["guide", "api"],
+          "coverageTags": ["ai", "species-id", "teacher-review"],
+          "status": "beta"
+        },
+        {
+          "id": "habitat-lab",
+          "name": "Water Habitat Simulator",
+          "type": "experience",
+          "path": "app/habitat/page.tsx",
+          "contentTypes": ["simulator", "scoring"],
+          "coverageTags": ["water-chemistry", "species-tolerance"],
+          "status": "shipped"
+        }
+      ],
+      "gaps": [
+        "Need offline-friendly specimen data capture to sync with AI pipeline.",
+        "Macro data not yet surfaced in Explore filters."
+      ]
+    },
+    {
+      "id": "industry_artifacts",
+      "title": "Industry Artifacts & Conservation Economy",
+      "description": "Shops, PFBC infrastructure, and partner documents that show the human side of conservation work.",
+      "tracks": ["All"],
+      "assets": [
+        {
+          "id": "pa-fly-shops",
+          "name": "PA Fly Shops Dataset",
+          "type": "data_set",
+          "path": "data/pa-fly-shops-comprehensive.ts",
+          "contentTypes": ["directory", "services"],
+          "coverageTags": ["industry", "economy"],
+          "status": "complete"
+        },
+        {
+          "id": "pfbc-mapping-layers",
+          "name": "PFBC Mapping Layers",
+          "type": "data_set",
+          "path": "data/pfbc-mapping-layers-expanded.ts",
+          "contentTypes": ["geojson", "designations"],
+          "coverageTags": ["infrastructure", "habitat"],
+          "status": "complete"
+        },
+        {
+          "id": "conservation-docs",
+          "name": "Scraped Conservation Documents",
+          "type": "data_set",
+          "path": "data/scraped/conservation/conservation-documents.json",
+          "contentTypes": ["pdf-summary", "policy"],
+          "coverageTags": ["policy", "industry-history"],
+          "status": "beta"
+        },
+        {
+          "id": "trouttower",
+          "name": "TroutTower Media Pack",
+          "type": "media_collection",
+          "path": "public/TroutTower/",
+          "contentTypes": ["images", "audio"],
+          "coverageTags": ["interpretive", "exhibit"],
+          "status": "archive"
+        }
+      ],
+      "gaps": [
+        "Need narrative cards linking shop/infrastructure data to student missions.",
+        "No current lessons on conservation careers within industry artifacts (e.g., fly-shop owners, PFBC engineers)."
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Historical Narratives & Timeline Work",
+      "description": "Context for how PA conservation evolved and how youth ambassadors contribute.",
+      "tracks": ["All"],
+      "assets": [
+        {
+          "id": "conservation-history",
+          "name": "Conservation History Data",
+          "type": "data_set",
+          "path": "lib/data/conservation-history.ts",
+          "contentTypes": ["timeline", "key-figures"],
+          "coverageTags": ["birds", "fisheries", "terrestrial"],
+          "status": "complete"
+        },
+        {
+          "id": "lesson-03-bird-observation",
+          "name": "Bird Observation Lesson Plan",
+          "type": "classroom_lesson",
+          "path": "curriculum/lesson-plans/lesson-03-bird-observation.md",
+          "contentTypes": ["lesson-plan", "history-links"],
+          "coverageTags": ["ibis-programs", "tourism-industry"],
+          "status": "complete"
+        },
+        {
+          "id": "pa-expansion-guide",
+          "name": "PA Expansion Narrative",
+          "type": "doc",
+          "path": "PA_EXPANSION_GUIDE.md",
+          "contentTypes": ["narrative", "summary"],
+          "coverageTags": ["regional-history", "deployment"],
+          "status": "complete"
+        },
+        {
+          "id": "audit-benchmark-report",
+          "name": "Audit Benchmark Report",
+          "type": "doc",
+          "path": "AUDIT_BENCHMARK_REPORT.md",
+          "contentTypes": ["analysis", "recommendations"],
+          "coverageTags": ["curriculum-alignment", "history-gaps"],
+          "status": "complete"
+        }
+      ],
+      "gaps": [
+        "Need timeline widgets on Learn/Explore to surface these datasets.",
+        "No mission templates yet that send students to historical industry artifacts (mills, hatcheries)."
+      ]
+    }
+  ]
+}
+
