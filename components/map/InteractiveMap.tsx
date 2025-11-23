@@ -15,6 +15,9 @@ export interface MapFieldSite {
   city?: string;
   state?: string;
   distance_meters?: number;
+  trackTags?: string[];
+  pillarTags?: string[];
+  rarity?: string;
 }
 
 interface InteractiveMapProps {

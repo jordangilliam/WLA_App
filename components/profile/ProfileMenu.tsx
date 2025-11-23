@@ -1,295 +1,463 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { usePoints } from '@/ui/points/PointsProvider';
 import SoundSettings from '@/components/settings/SoundSettings';
 
+const ICONS = {
+  map: '/images/icons/Map.jpg',
+  journal: '/images/icons/journal.jpg',
+  award: '/images/icons/award.jpg',
+  habitat: '/images/icons/Habitat.png',
+  book: '/images/icons/Book.png',
+  macro: '/images/icons/Micor(Macro).png',
+};
+
+type SectionKey = 'progress' | 'learn' | 'settings';
+
 export default function ProfileMenu() {
   const { data: session, status } = useSession();
   const { total: points, level, currentStreak, badges } = usePoints();
-  const [activeSection, setActiveSection] = useState<'progress' | 'learn' | 'settings'>('progress');
+  const [activeSection, setActiveSection] = useState<SectionKey>('progress');
+
+  const user = session?.user as { role?: string; name?: string; email?: string } | undefined;
+  const isTeacher = user?.role === 'teacher';
+  const isAdmin = user?.role === 'admin';
+
+  const formatNumber = (value: number) => value.toLocaleString();
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'grid',
+          placeItems: 'center',
+          background:
+            'radial-gradient(circle at 10% 20%, rgba(29,166,219,0.15), transparent 45%), radial-gradient(circle at 85% 0%, rgba(234,126,55,0.15), transparent 40%), #F5F7FB',
+        }}
+      >
+        <div
+          className="animate-spin rounded-full border-4 border-white/20 border-t-white"
+          style={{ width: '54px', height: '54px' }}
+        />
       </div>
     );
   }
 
   if (status === 'unauthenticated') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
-          <div className="text-6xl mb-4">🌲</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to WildPraxis</h2>
-          <p className="text-gray-600 mb-6">Sign in to track your progress and unlock achievements</p>
+      <div
+        style={{
+          minHeight: '100vh',
+          background:
+            'radial-gradient(circle at 20% 20%, rgba(29,166,219,0.18), transparent 45%), radial-gradient(circle at 80% 0%, rgba(234,126,55,0.18), transparent 45%), #F9FBFF',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2rem 1rem',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '420px',
+            width: '100%',
+            background: 'white',
+            borderRadius: '28px',
+            padding: '2.5rem',
+            textAlign: 'center',
+            boxShadow: '0 30px 70px rgba(15,23,42,0.12)',
+          }}
+        >
+          <Image src={ICONS.habitat} alt="WLA badge" width={72} height={72} style={{ borderRadius: '18px', marginBottom: '1rem' }} />
+          <h2 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#0F172A', marginBottom: '0.75rem' }}>Sign in to unlock your WLA journey</h2>
+          <p style={{ color: '#5E6A82', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+            Track achievements, field journals, and teacher tools in the new Wildlife Leadership Academy app experience.
+          </p>
           <Link
             href="/auth"
-            className="block w-full px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              padding: '0.95rem 1.25rem',
+              borderRadius: '18px',
+              background: 'linear-gradient(120deg, #0EA5E9, #0F766E)',
+              color: 'white',
+              fontWeight: 600,
+              textDecoration: 'none',
+              boxShadow: '0 18px 40px rgba(14,165,233,0.35)',
+            }}
           >
-            Sign In
+            Start your session →
           </Link>
         </div>
       </div>
     );
   }
 
-  const user = session?.user as { role?: string } | undefined;
-  const isTeacher = user?.role === 'teacher';
-  const isAdmin = user?.role === 'admin';
+  const heroStats = [
+    { label: 'Points', value: formatNumber(points), icon: ICONS.award },
+    { label: 'Day Streak', value: `${currentStreak} days`, icon: ICONS.journal },
+    { label: 'Level', value: level, icon: ICONS.macro },
+    { label: 'Badges', value: badges, icon: ICONS.habitat },
+  ];
+
+  const progressCards = [
+    {
+      href: '/collections',
+      title: 'My Collection',
+      description: 'Sites visited and species observed',
+      icon: ICONS.map,
+    },
+    {
+      href: '/journal-new',
+      title: 'Visit History',
+      description: 'Browse every field journal entry',
+      icon: ICONS.journal,
+    },
+    {
+      href: '/achievements',
+      title: 'Achievements',
+      description: `${badges} badges earned so far`,
+      icon: ICONS.award,
+    },
+  ];
+
+  if (isTeacher) {
+    progressCards.push({
+      href: '/dashboard/teacher',
+      title: 'Teacher Dashboard',
+      description: 'Manage classes, progress, and missions',
+      icon: ICONS.habitat,
+    });
+  }
+
+  const learnSections = [
+    {
+      title: 'Educational Modules',
+      icon: ICONS.book,
+      links: [
+        { href: '/birds', label: '🦜 Birds' },
+        { href: '/fishing', label: '🎣 Fishing' },
+        { href: '/gobblers', label: '🦃 Gobblers' },
+        { href: '/terrestrials', label: '🦌 Terrestrials' },
+      ],
+    },
+    {
+      title: 'Identification Keys',
+      icon: ICONS.macro,
+      links: [
+        { href: '/keys/macro', label: '🔬 Macroinvertebrates' },
+        { href: '/keys/plants', label: '🌿 Plants' },
+        { href: '/keys/bugs', label: '🐛 Bugs' },
+        { href: '/keys/insects', label: '🦋 Insects' },
+      ],
+    },
+    {
+      title: 'Additional Resources',
+      icon: ICONS.map,
+      links: [
+        { href: '/habitat', label: '🏕️ Habitat' },
+        { href: '/stocking', label: '🎣 Stocking Calendar' },
+        { href: '/outreach', label: '📢 Outreach' },
+        { href: '/media', label: '🎥 Media Library' },
+      ],
+    },
+  ];
+
+  const toolLinks = [
+    { href: '/exports', label: '💾 Export Data' },
+    ...(isAdmin ? [{ href: '/admin/dashboard', label: '⚙️ Admin Dashboard' }] : []),
+  ];
+
+  const navButtons: { id: SectionKey; label: string; emoji: string }[] = [
+    { id: 'progress', label: 'Progress Deck', emoji: '📊' },
+    { id: 'learn', label: 'Learning Hub', emoji: '🌱' },
+    { id: 'settings', label: 'Profile & Settings', emoji: '⚙️' },
+  ];
+
+  const cardBaseStyle: CSSProperties = {
+    background: 'white',
+    borderRadius: '24px',
+    padding: '1.5rem',
+    border: '1px solid rgba(148,163,184,0.25)',
+    boxShadow: '0 25px 55px rgba(15,23,42,0.08)',
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 pb-20 md:pb-6">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-3xl">
-              👤
+    <div
+      style={{
+        minHeight: '100vh',
+        background:
+          'radial-gradient(circle at 10% 20%, rgba(29,166,219,0.15), transparent 45%), radial-gradient(circle at 85% 0%, rgba(234,126,55,0.18), transparent 40%), #F7FAFF',
+        paddingBottom: '4rem',
+      }}
+    >
+      <section
+        style={{
+          maxWidth: '1100px',
+          margin: '1.5rem auto',
+          padding: '3rem 2rem',
+          borderRadius: '32px',
+          color: 'white',
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'linear-gradient(135deg, #012A3A 0%, #0369A1 60%, #0EA5E9 100%)',
+          boxShadow: '0 35px 70px rgba(1,42,58,0.45)',
+        }}
+      >
+        <Image
+          src="/images/hero/Hero BAckground.jpg"
+          alt="Profile hero"
+          fill
+          priority
+          style={{ objectFit: 'cover', opacity: 0.12 }}
+        />
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center' }}>
+            <div
+              style={{
+                width: '90px',
+                height: '90px',
+                borderRadius: '28px',
+                background: 'rgba(255,255,255,0.18)',
+                display: 'grid',
+                placeItems: 'center',
+                fontSize: '2.5rem',
+                fontWeight: 700,
+              }}
+            >
+              {(session?.user?.name || 'WLA')[0]}
             </div>
             <div>
-              <h1 className="text-2xl font-bold">{session?.user?.name || 'Student'}</h1>
-              <p className="text-green-100">{session?.user?.email}</p>
+              <p style={{ margin: 0, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
+                Wildlife Leadership Academy
+              </p>
+              <h1 style={{ margin: '0.25rem 0 0.35rem', fontSize: '2.45rem', fontWeight: 900 }}>{session?.user?.name || 'Student'}</h1>
+              <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)' }}>{session?.user?.email}</p>
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-3 gap-3 mt-6">
-            <div className="bg-white bg-opacity-20 rounded-lg p-3 text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold">{points}</div>
-              <div className="text-xs text-green-100">Points</div>
-            </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-3 text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold">{currentStreak}</div>
-              <div className="text-xs text-green-100">Day Streak</div>
-            </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-3 text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold">{level}</div>
-              <div className="text-xs text-green-100">Level</div>
-            </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: '1rem',
+              background: 'rgba(255,255,255,0.1)',
+              borderRadius: '26px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255,255,255,0.2)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            {heroStats.map((stat) => (
+              <div key={stat.label} style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                <div
+                  style={{
+                    width: '52px',
+                    height: '52px',
+                    borderRadius: '16px',
+                    background: 'rgba(255,255,255,0.15)',
+                    display: 'grid',
+                    placeItems: 'center',
+                  }}
+                >
+                  <Image src={stat.icon} alt={stat.label} width={34} height={34} style={{ borderRadius: '12px' }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>{stat.value}</div>
+                  <div style={{ fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)' }}>
+                    {stat.label}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
+
+      <div
+        style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          display: 'flex',
+          gap: '0.75rem',
+          padding: '0 1.5rem',
+          flexWrap: 'wrap',
+        }}
+      >
+        {navButtons.map((nav) => {
+          const active = activeSection === nav.id;
+          return (
+            <button
+              key={nav.id}
+              onClick={() => setActiveSection(nav.id)}
+              style={{
+                flex: '1 1 200px',
+                border: 'none',
+                borderRadius: '999px',
+                padding: '0.85rem 1.4rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                background: active ? '#012A3A' : 'rgba(255,255,255,0.85)',
+                color: active ? 'white' : '#0F172A',
+                boxShadow: active ? '0 15px 35px rgba(1,42,58,0.35)' : '0 10px 25px rgba(15,23,42,0.08)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <span>{nav.emoji}</span>
+              {nav.label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Section Tabs */}
-      <div className="bg-white border-b border-gray-200 sticky top-14 z-30">
-        <div className="max-w-4xl mx-auto flex">
-          <button
-            onClick={() => setActiveSection('progress')}
-            className={`flex-1 px-4 py-3 font-medium transition-colors ${
-              activeSection === 'progress'
-                ? 'text-green-600 border-b-2 border-green-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            My Progress
-          </button>
-          <button
-            onClick={() => setActiveSection('learn')}
-            className={`flex-1 px-4 py-3 font-medium transition-colors ${
-              activeSection === 'learn'
-                ? 'text-green-600 border-b-2 border-green-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            Learn More
-          </button>
-          <button
-            onClick={() => setActiveSection('settings')}
-            className={`flex-1 px-4 py-3 font-medium transition-colors ${
-              activeSection === 'settings'
-                ? 'text-green-600 border-b-2 border-green-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            Settings
-          </button>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
-        {/* Progress Section */}
+      <section style={{ maxWidth: '1100px', margin: '2rem auto 0', padding: '0 1.5rem' }}>
         {activeSection === 'progress' && (
-          <div className="space-y-4">
-            <Link
-              href="/collections"
-              className="block bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">📦</span>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">My Collection</h3>
-                    <p className="text-sm text-gray-600">Sites visited and species observed</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+            {progressCards.map((card) => (
+              <Link key={card.title} href={card.href} style={{ textDecoration: 'none' }}>
+                <div
+                  style={{
+                    ...cardBaseStyle,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1.1rem',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '18px',
+                      background: 'rgba(14,165,233,0.12)',
+                      display: 'grid',
+                      placeItems: 'center',
+                    }}
+                  >
+                    <Image src={card.icon} alt={card.title} width={38} height={38} style={{ borderRadius: '12px' }} />
                   </div>
-                </div>
-                <span className="text-gray-400">→</span>
-              </div>
-            </Link>
-
-            <Link
-              href="/journal-new"
-              className="block bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">📝</span>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Visit History</h3>
-                    <p className="text-sm text-gray-600">View all your field observations</p>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700, color: '#0F172A', marginBottom: '0.3rem' }}>{card.title}</div>
+                    <p style={{ margin: 0, color: '#5E6A82' }}>{card.description}</p>
                   </div>
-                </div>
-                <span className="text-gray-400">→</span>
-              </div>
-            </Link>
-
-            <Link
-              href="/achievements"
-              className="block bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">🏆</span>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Achievements</h3>
-                    <p className="text-sm text-gray-600">{badges} unlocked</p>
-                  </div>
-                </div>
-                <span className="text-gray-400">→</span>
-              </div>
-            </Link>
-
-            {isTeacher && (
-              <Link
-                href="/dashboard/teacher"
-                className="block bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">👨‍🏫</span>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Teacher Dashboard</h3>
-                      <p className="text-sm text-gray-600">Manage classes and students</p>
-                    </div>
-                  </div>
-                  <span className="text-gray-400">→</span>
+                  <div style={{ fontSize: '1.4rem', color: '#94A3B8' }}>→</div>
                 </div>
               </Link>
-            )}
+            ))}
           </div>
         )}
 
-        {/* Learn More Section */}
         {activeSection === 'learn' && (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Educational Modules</h3>
-              <div className="space-y-2">
-                <Link href="/birds" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🦜 Birds
-                </Link>
-                <Link href="/fishing" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🎣 Fishing
-                </Link>
-                <Link href="/gobblers" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🦃 Gobblers
-                </Link>
-                <Link href="/terrestrials" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🦌 Terrestrials
-                </Link>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            {learnSections.map((section) => (
+              <div key={section.title} style={cardBaseStyle}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1rem' }}>
+                  <Image src={section.icon} alt={section.title} width={40} height={40} style={{ borderRadius: '12px' }} />
+                  <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#0F172A' }}>{section.title}</h3>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {section.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      style={{
+                        textDecoration: 'none',
+                        padding: '0.6rem 0.85rem',
+                        borderRadius: '14px',
+                        background: 'rgba(241,245,249,0.8)',
+                        color: '#0F172A',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Identification Keys</h3>
-              <div className="space-y-2">
-                <Link href="/keys/macro" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🔬 Macroinvertebrates
-                </Link>
-                <Link href="/keys/plants" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🌿 Plants
-                </Link>
-                <Link href="/keys/bugs" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🐛 Bugs
-                </Link>
-                <Link href="/keys/insects" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🦋 Insects
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Additional Resources</h3>
-              <div className="space-y-2">
-                <Link href="/habitat" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🏕️ Habitat
-                </Link>
-                <Link href="/stocking" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🎣 Stocking Calendar
-                </Link>
-                <Link href="/outreach" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  📢 Outreach
-                </Link>
-                <Link href="/media" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                  🎥 Media
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         )}
 
-        {/* Settings Section */}
         {activeSection === 'settings' && (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Account</h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Email</span>
-                  <span className="text-gray-900">{session?.user?.email}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Role</span>
-                  <span className="text-gray-900 capitalize">{user?.role || 'student'}</span>
-                </div>
+          <div style={{ display: 'grid', gap: '1.5rem' }}>
+            <div style={cardBaseStyle}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>Account Overview</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem', marginTop: '1rem' }}>
+                <div style={{ color: '#5E6A82' }}>Email</div>
+                <div style={{ fontWeight: 600, color: '#0F172A' }}>{session?.user?.email}</div>
+                <div style={{ color: '#5E6A82' }}>Role</div>
+                <div style={{ fontWeight: 600, color: '#0F172A', textTransform: 'capitalize' }}>{user?.role || 'student'}</div>
               </div>
             </div>
 
-            {/* Sound Settings */}
-            <SoundSettings />
+            <div style={cardBaseStyle}>
+              <SoundSettings />
+            </div>
 
-            {(isTeacher || isAdmin) && (
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Tools</h3>
-                <div className="space-y-2">
-                  <Link href="/exports" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                    💾 Export Data
-                  </Link>
-                  {isAdmin && (
-                    <Link href="/admin/dashboard" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
-                      ⚙️ Admin Dashboard
+            {(isTeacher || isAdmin) && toolLinks.length > 0 && (
+              <div style={cardBaseStyle}>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>Mentor Tools</h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1rem' }}>
+                  {toolLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      style={{
+                        textDecoration: 'none',
+                        padding: '0.65rem 1rem',
+                        borderRadius: '14px',
+                        border: '1px solid rgba(148,163,184,0.4)',
+                        fontWeight: 600,
+                        color: '#0F172A',
+                      }}
+                    >
+                      {link.label}
                     </Link>
-                  )}
+                  ))}
                 </div>
               </div>
             )}
 
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Help & Info</h3>
-              <div className="space-y-2">
+            <div style={cardBaseStyle}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>Help & Info</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1rem' }}>
                 <a
                   href="https://wildlifeleadershipacademy.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700"
+                  style={{
+                    textDecoration: 'none',
+                    padding: '0.65rem 1rem',
+                    borderRadius: '14px',
+                    background: 'rgba(16,185,129,0.12)',
+                    color: '#065F46',
+                    fontWeight: 600,
+                  }}
                 >
                   🌲 WLA Website
                 </a>
-                <Link href="/offline" className="block px-3 py-2 hover:bg-green-50 rounded text-gray-700">
+                <Link
+                  href="/offline"
+                  style={{
+                    textDecoration: 'none',
+                    padding: '0.65rem 1rem',
+                    borderRadius: '14px',
+                    background: 'rgba(14,165,233,0.12)',
+                    color: '#0369A1',
+                    fontWeight: 600,
+                  }}
+                >
                   📱 Offline Mode
                 </Link>
               </div>
@@ -297,14 +465,23 @@ export default function ProfileMenu() {
 
             <button
               onClick={() => signOut({ callbackUrl: '/' })}
-              className="w-full px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors"
+              style={{
+                border: 'none',
+                borderRadius: '22px',
+                padding: '1rem 1.5rem',
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: 'white',
+                background: 'linear-gradient(120deg, #DC2626, #B91C1C)',
+                cursor: 'pointer',
+                boxShadow: '0 25px 45px rgba(220,38,38,0.35)',
+              }}
             >
               Sign Out
             </button>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }
-

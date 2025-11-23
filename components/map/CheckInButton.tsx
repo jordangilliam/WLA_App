@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import CheckInFlow from '../checkin/CheckInFlow';
+import CheckInFlow, { CheckInResultPayload } from '../checkin/CheckInFlow';
 
 interface FieldSite {
   id: string;
@@ -15,7 +15,7 @@ interface FieldSite {
 interface CheckInButtonProps {
   site: FieldSite;
   userLocation: { latitude: number; longitude: number } | null;
-  onSuccess?: () => void;
+  onSuccess?: (payload?: CheckInResultPayload) => void;
 }
 
 // Calculate distance between two coordinates (Haversine formula)
@@ -131,7 +131,7 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
             <div className="flex-1">
               <p className="text-sm font-medium">You&apos;re here!</p>
               <p className="text-xs text-green-700">
-                Within {Math.round(distance!)}m of site • Earn +10 points
+                Within {Math.round(distance!)}m of site • Ready to earn conservation points
               </p>
             </div>
           </div>
@@ -164,9 +164,9 @@ export default function CheckInButton({ site, userLocation, onSuccess }: CheckIn
           site={site}
           userLocation={userLocation}
           onClose={() => setShowCheckInFlow(false)}
-          onSuccess={() => {
+          onSuccess={(payload) => {
             setShowCheckInFlow(false);
-            if (onSuccess) onSuccess();
+            if (onSuccess) onSuccess(payload);
           }}
         />
       )}

@@ -2,14 +2,27 @@
 
 import { useState } from 'react';
 
+type ExploreFilters = {
+  siteType: string;
+  maxDistance: number;
+  searchQuery: string;
+  trackTags: string[];
+  pillarTags: string[];
+};
+
+type FilterChip = {
+  value: string;
+  label: string;
+  icon: string;
+  count: number;
+};
+
 interface SiteFiltersProps {
-  filters: {
-    siteType: string;
-    maxDistance: number;
-    searchQuery: string;
-  };
-  onFiltersChange: (filters: any) => void;
+  filters: ExploreFilters;
+  onFiltersChange: (filters: ExploreFilters) => void;
   siteCount: number;
+  trackFilters?: FilterChip[];
+  pillarFilters?: FilterChip[];
 }
 
 const SITE_TYPES = [
@@ -31,7 +44,13 @@ const DISTANCE_OPTIONS = [
   { value: 100000, label: '100 km' },
 ];
 
-export default function SiteFilters({ filters, onFiltersChange, siteCount }: SiteFiltersProps) {
+export default function SiteFilters({
+  filters,
+  onFiltersChange,
+  siteCount,
+  trackFilters = [],
+  pillarFilters = [],
+}: SiteFiltersProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const handleFilterChange = (key: string, value: any) => {
@@ -41,15 +60,31 @@ export default function SiteFilters({ filters, onFiltersChange, siteCount }: Sit
     });
   };
 
+  const toggleArrayFilter = (key: 'trackTags' | 'pillarTags', value: string) => {
+    const current = filters[key];
+    const exists = current.includes(value);
+    const next = exists ? current.filter((entry) => entry !== value) : [...current, value];
+    onFiltersChange({
+      ...filters,
+      [key]: next,
+    });
+  };
+
   const clearFilters = () => {
     onFiltersChange({
       siteType: 'all',
       maxDistance: 50000,
       searchQuery: '',
+      trackTags: [],
+      pillarTags: [],
     });
   };
 
-  const hasActiveFilters = filters.siteType !== 'all' || filters.searchQuery !== '';
+  const hasActiveFilters =
+    filters.siteType !== 'all' ||
+    filters.searchQuery !== '' ||
+    filters.trackTags.length > 0 ||
+    filters.pillarTags.length > 0;
 
   return (
     <div className="space-y-3">
@@ -72,6 +107,60 @@ export default function SiteFilters({ filters, onFiltersChange, siteCount }: Sit
           </button>
         )}
       </div>
+
+      {/* Track Filters */}
+      {trackFilters.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-gray-700">Track Highlights</p>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            {trackFilters.map((track) => {
+              const active = filters.trackTags.includes(track.value);
+              return (
+                <button
+                  key={track.value}
+                  onClick={() => toggleArrayFilter('trackTags', track.value)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium whitespace-nowrap transition-all ${
+                    active ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <span>{track.icon}</span>
+                  <span className="flex flex-col items-start leading-tight">
+                    <span className="text-sm">{track.label}</span>
+                    <span className="text-xs text-gray-500">{track.count} sites</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Pillar Filters */}
+      {pillarFilters.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-gray-700">Pillar Focus</p>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            {pillarFilters.map((pillar) => {
+              const active = filters.pillarTags.includes(pillar.value);
+              return (
+                <button
+                  key={pillar.value}
+                  onClick={() => toggleArrayFilter('pillarTags', pillar.value)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium whitespace-nowrap transition-all ${
+                    active ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <span>{pillar.icon}</span>
+                  <span className="flex flex-col items-start leading-tight">
+                    <span className="text-sm capitalize">{pillar.label}</span>
+                    <span className="text-xs text-gray-500">{pillar.count} sites</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Quick Filters */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2">

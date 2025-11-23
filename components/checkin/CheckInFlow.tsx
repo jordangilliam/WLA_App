@@ -13,11 +13,18 @@ interface FieldSite {
   species_likely?: string[];
 }
 
+export interface CheckInResultPayload {
+  pointsEarned?: number;
+  isFirstVisit?: boolean;
+  message?: string;
+  newAchievements?: { title?: string; achievementId?: string }[];
+}
+
 interface CheckInFlowProps {
   site: FieldSite;
   userLocation: { latitude: number; longitude: number };
   onClose: () => void;
-  onSuccess?: () => void;
+  onSuccess?: (payload?: CheckInResultPayload) => void;
 }
 
 type FlowStep = 'confirming' | 'photo' | 'observation' | 'submitting' | 'success';
@@ -105,7 +112,7 @@ export default function CheckInFlow({
         );
 
         if (onSuccess) {
-          onSuccess();
+          onSuccess(data.checkIn as CheckInResultPayload);
         }
       } else {
         throw new Error('Unexpected response format');
