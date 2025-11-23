@@ -161,7 +161,7 @@ export default function ARIdentification({
       setOverlays(newOverlays);
 
       // Call callback with best result
-      const bestResult = results.find((r) => r.status === 'ok' && r.confidence && r.confidence > 0.7);
+      const bestResult = results.find((r: any) => r.status === 'ok' && r.confidence && r.confidence > 0.7);
       if (bestResult && onIdentification) {
         onIdentification(bestResult);
       }
