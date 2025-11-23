@@ -194,124 +194,126 @@ export default function Home() {
 function LandingPage() {
   return (
     <div className="landing-shell">
-      <section className="hero-panel">
-        <div className="hero-grid">
-          <div className="hero-content">
-            <span className="hero-badge">Wildlife Leadership Academy · Pennsylvania</span>
-            <h1 className="hero-title">
-              Lead Pennsylvania&apos;s <span>Next Conservation Wave.</span>
-            </h1>
-            <p className="hero-text">
-              A modern WLA experience for exploring waterways, journaling observations, and earning recognition as a
-              statewide conservation leader.
-            </p>
-            <div className="hero-actions">
-              <Link href="/auth" className="hero-primary">
-                Start Your Journey
-              </Link>
-              <Link href="/explore" className="hero-secondary">
-                Explore Pennsylvania
-              </Link>
+      <div className="landing-inner">
+        <section className="hero-panel">
+          <div className="hero-grid">
+            <div className="hero-content">
+              <span className="hero-badge">Wildlife Leadership Academy · Pennsylvania</span>
+              <h1 className="hero-title">
+                Lead Pennsylvania&apos;s <span>Next Conservation Wave.</span>
+              </h1>
+              <p className="hero-text">
+                A modern WLA experience for exploring waterways, journaling observations, and earning recognition as a
+                statewide conservation leader.
+              </p>
+              <div className="hero-actions">
+                <Link href="/auth" className="hero-primary">
+                  Start Your Journey
+                </Link>
+                <Link href="/explore" className="hero-secondary">
+                  Explore Pennsylvania
+                </Link>
+              </div>
+              <div className="hero-metrics">
+                {heroStats.map((stat) => (
+                  <div className="hero-metric" key={stat.label}>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="hero-metrics">
-              {heroStats.map((stat) => (
-                <div className="hero-metric" key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
+            <div className="hero-visual" aria-hidden="true">
+              <Image
+                src="/images/hero/conservation-hero.jpg"
+                alt="WLA ambassadors exploring Pennsylvania habitats"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
             </div>
           </div>
-          <div className="hero-visual" aria-hidden="true">
-            <Image
-              src="/images/hero/conservation-hero.jpg"
-              alt="WLA ambassadors exploring Pennsylvania habitats"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 40vw"
+        </section>
+
+        <div className="hero-wave" aria-hidden="true">
+          <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0,160 C240,120 480,40 720,40 C960,40 1200,120 1440,160 L1440,180 L0,180 Z"
+              fill="#f8fafc"
+              fillOpacity="0.8"
             />
+          </svg>
+        </div>
+
+        <section className="section">
+          <div className="section-heading">
+            <p className="hero-badge">Five WLA Learning Tracks</p>
+            <h2>Choose Your Conservation Pathway</h2>
+            <p>Every track includes field missions, expert lessons, and achievement rewards.</p>
           </div>
-        </div>
-      </section>
-
-      <div className="hero-wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0,160 C240,120 480,40 720,40 C960,40 1200,120 1440,160 L1440,180 L0,180 Z"
-            fill="#f8fafc"
-            fillOpacity="0.8"
-          />
-        </svg>
-      </div>
-
-      <section className="section">
-        <div className="section-heading">
-          <p className="hero-badge">Five WLA Learning Tracks</p>
-          <h2>Choose Your Conservation Pathway</h2>
-          <p>Every track includes field missions, expert lessons, and achievement rewards.</p>
-        </div>
-        <div className="track-grid">
-          {learningTracks.map((track) => (
-            <article className="track-card" style={{ background: track.gradient }} key={track.id}>
-              <div className="track-emoji" aria-hidden="true" style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>
-                {track.emoji}
-              </div>
-              <div className="track-title">{track.title}</div>
-              <p className="track-description">{track.description}</p>
-              <Link href={track.href} className="track-link">
-                Explore Track →
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-heading">
-          <p className="hero-badge">Tools Built For Field Work</p>
-          <h2>Everything Ambassadors Need in One Hub</h2>
-        </div>
-        <div className="feature-grid">
-          {featureHighlights.map((feature) => (
-            <article className="feature-card" key={feature.title}>
-              <div className="feature-icon" style={{ background: feature.color }}>
-                {feature.letter}
-              </div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-              <Link className="feature-link" href={feature.href}>
-                Open {feature.title} →
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="cta-panel">
-          <p className="hero-badge">Ready for the 2025 Field Season</p>
-          <h2>Launch Your Classroom or Field Team Today</h2>
-          <p>
-            Seamless onboarding for students, mentors, and instructors. Everyone operates from the same trusted WLA
-            system.
-          </p>
-          <div className="cta-actions">
-            <Link href="/auth" className="cta-button" style={{ background: 'var(--wla-blue)', color: '#fff' }}>
-              Launch Student Account
-            </Link>
-            <Link href="/admin/dashboard" className="cta-button secondary">
-              Visit Teacher HQ
-            </Link>
-          </div>
-          <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', color: 'var(--text-muted)' }}>
-            {ctaHighlights.map((item) => (
-              <li key={item} style={{ marginBottom: '0.4rem' }}>
-                ✅ {item}
-              </li>
+          <div className="track-grid">
+            {learningTracks.map((track) => (
+              <article className="track-card" style={{ background: track.gradient }} key={track.id}>
+                <div className="track-emoji" aria-hidden="true" style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>
+                  {track.emoji}
+                </div>
+                <div className="track-title">{track.title}</div>
+                <p className="track-description">{track.description}</p>
+                <Link href={track.href} className="track-link">
+                  Explore Track →
+                </Link>
+              </article>
             ))}
-          </ul>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="section-heading">
+            <p className="hero-badge">Tools Built For Field Work</p>
+            <h2>Everything Ambassadors Need in One Hub</h2>
+          </div>
+          <div className="feature-grid">
+            {featureHighlights.map((feature) => (
+              <article className="feature-card" key={feature.title}>
+                <div className="feature-icon" style={{ background: feature.color }}>
+                  {feature.letter}
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+                <Link className="feature-link" href={feature.href}>
+                  Open {feature.title} →
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="cta-panel">
+            <p className="hero-badge">Ready for the 2025 Field Season</p>
+            <h2>Launch Your Classroom or Field Team Today</h2>
+            <p>
+              Seamless onboarding for students, mentors, and instructors. Everyone operates from the same trusted WLA
+              system.
+            </p>
+            <div className="cta-actions">
+              <Link href="/auth" className="cta-button" style={{ background: 'var(--wla-blue)', color: '#fff' }}>
+                Launch Student Account
+              </Link>
+              <Link href="/admin/dashboard" className="cta-button secondary">
+                Visit Teacher HQ
+              </Link>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+              {ctaHighlights.map((item) => (
+                <li key={item} style={{ marginBottom: '0.4rem' }}>
+                  ✅ {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

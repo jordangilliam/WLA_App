@@ -6,6 +6,7 @@ import { PointsProvider } from '@/ui/points/PointsProvider';
 import { NavigationProvider } from '@/lib/contexts/NavigationContext';
 import PWAInstall from '@/components/PWAInstall';
 import GamificationBar from '@/components/layout/GamificationBar';
+import PrimaryNav from '@/components/layout/PrimaryNav';
 import BottomNav from '@/components/layout/BottomNav';
 import GlobalSearchWrapper from '@/components/search/GlobalSearchWrapper';
 
@@ -169,6 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <NavigationProvider>
               <PWAInstall />
               <GamificationBar />
+              <PrimaryNav />
               <GlobalSearchWrapper />
               <main className="min-h-screen">{children}</main>
               <BottomNav />

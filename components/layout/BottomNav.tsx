@@ -103,7 +103,7 @@ export default function BottomNav({ notificationCounts }: BottomNavProps) {
     <>
       {/* Mobile Bottom Navigation */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 safe-area-bottom">
-        <div className="flex items-center justify-around px-2 h-16">
+        <div className="flex items-center justify-around px-2 h-16 max-w-md mx-auto">
           {tabs.map((tab, index) => {
             if (tab.isFAB) {
               // Center Floating Action Button
@@ -170,47 +170,7 @@ export default function BottomNav({ notificationCounts }: BottomNavProps) {
         </div>
       </nav>
 
-      {/* Desktop Horizontal Navigation (adapts bottom nav to top) */}
-      <div className="hidden md:flex items-center justify-center gap-2 px-4 py-3 bg-white border-b border-gray-200">
-        {tabs.map((tab) => {
-          if (tab.isFAB) {
-            return (
-              <button
-                key={tab.id}
-                onClick={handleCheckIn}
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
-              >
-                <span className="text-xl">{tab.icon}</span>
-                <span>{tab.label}</span>
-              </button>
-            );
-          }
-
-          const active = isActive(tab.path);
-
-          return (
-            <button
-              key={tab.id}
-              onClick={() => handleNavigation(tab.path)}
-              className={`relative flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                active
-                  ? `${tab.activeBg} ${tab.activeColor}`
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              {/* Badge */}
-              {tab.badge && tab.badge > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full px-1">
-                  {tab.badge > 9 ? '9+' : tab.badge}
-                </span>
-              )}
-
-              <span className="text-xl">{tab.icon}</span>
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      {/* Desktop variant intentionally omitted to keep footer area clean */}
 
       {/* Spacer for mobile to prevent content from being hidden behind fixed nav */}
       <div className="md:hidden h-16"></div>

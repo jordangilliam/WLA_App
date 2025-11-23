@@ -460,13 +460,73 @@ footer {
   color: var(--text-muted);
 }
 
+.primary-nav {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(11,37,52,0.06);
+}
+
+.primary-nav__scroll {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.primary-nav__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.primary-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.primary-nav__item:hover {
+  border-color: rgba(29,166,219,0.2);
+  color: var(--wla-ink);
+}
+
+.primary-nav__item.active {
+  color: var(--wla-blue);
+  background: rgba(29,166,219,0.1);
+  border-color: rgba(29,166,219,0.3);
+  box-shadow: 0 8px 20px rgba(29,166,219,0.08);
+}
+
+.primary-nav__icon {
+  font-size: 1.1rem;
+}
+
+.primary-nav__label {
+  font-size: 0.95rem;
+}
+
 
 /* ===========================
    Landing – Hero & Sections
    =========================== */
 
 .landing-shell {
-  padding: clamp(1.5rem, 4vw, 4rem) 1rem 3rem;
+  padding: clamp(1.5rem, 4vw, 4rem) clamp(1.25rem, 5vw, 3.5rem) 3rem;
+  margin-top: 1rem;
+}
+
+.landing-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .hero-panel {
@@ -603,8 +663,13 @@ footer {
 }
 
 .hero-wave {
-  margin-top: -4rem;
-  margin-bottom: 2rem;
+  margin: -4rem auto 2rem;
+  max-width: 1200px;
+}
+
+.hero-wave svg {
+  width: 100%;
+  height: auto;
 }
 
 .section-heading {
