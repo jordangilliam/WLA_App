@@ -102,36 +102,52 @@ const featureHighlights = [
   },
 ] as const;
 
-const quickActions = [
+type QuickAction = {
+  label: string;
+  emoji: string;
+  description: string;
+  href: string;
+  accent?: 'blue' | 'green' | 'gold' | 'purple' | 'sage';
+  variant?: 'primary';
+};
+
+const quickActions: QuickAction[] = [
   {
     label: 'Check In',
     emoji: '📍',
     description: 'Log a field site visit.',
     href: '/explore?action=checkin',
-    variant: 'primary',
+    variant: 'primary' as const,
   },
   {
     label: 'Explore Map',
     emoji: '🗺️',
     description: 'Find nearby habitats.',
     href: '/explore',
-    variant: 'default',
+    accent: 'blue' as const,
   },
   {
     label: 'Journal Entry',
     emoji: '📝',
     description: 'Document observations.',
     href: '/journal-new',
-    variant: 'default',
+    accent: 'green' as const,
   },
   {
-    label: 'Stocking Alerts',
-    emoji: '🎣',
-    description: 'View trout releases.',
-    href: '/stocking',
-    variant: 'default',
+    label: 'Achievements',
+    emoji: '🏆',
+    description: 'Track badges and streaks.',
+    href: '/achievements',
+    accent: 'gold' as const,
   },
-] as const;
+  {
+    label: 'Profile',
+    emoji: '👤',
+    description: 'Review classes and progress.',
+    href: '/profile',
+    accent: 'sage' as const,
+  },
+];
 
 const featuredLocations = [
   {
@@ -183,11 +199,11 @@ function LandingPage() {
           <div className="hero-content">
             <span className="hero-badge">Wildlife Leadership Academy · Pennsylvania</span>
             <h1 className="hero-title">
-              Conservation Starts <span>With You.</span>
+              Lead Pennsylvania&apos;s <span>Next Conservation Wave.</span>
             </h1>
             <p className="hero-text">
-              The official WLA experience for exploring the outdoors, capturing data, and earning recognition as a PA
-              conservation leader.
+              A modern WLA experience for exploring waterways, journaling observations, and earning recognition as a
+              statewide conservation leader.
             </p>
             <div className="hero-actions">
               <Link href="/auth" className="hero-primary">
@@ -336,22 +352,25 @@ function LoggedInHome({ points, level, streak }: { points: number; level: number
       <div className="dashboard-content">
         <div className="dashboard-actions">
           {quickActions.map((action) => {
-            const actionClass = ['action-card', action.variant === 'primary' ? 'primary' : '']
-              .filter(Boolean)
-              .join(' ');
+            const accentClass =
+              action.variant === 'primary'
+                ? 'primary'
+                : action.accent
+                ? `accent-${action.accent}`
+                : '';
+            const actionClass = ['action-card', accentClass].filter(Boolean).join(' ');
             return (
               <button key={action.label} className={actionClass} onClick={() => router.push(action.href)}>
-                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{action.emoji}</div>
-                <div style={{ fontWeight: 700 }}>{action.label}</div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: '0.9rem',
-                    color: action.variant === 'primary' ? 'rgba(255,255,255,0.9)' : '#64748b',
-                  }}
-                >
-                  {action.description}
-                </p>
+                <div className="action-card__icon" aria-hidden="true">
+                  {action.emoji}
+                </div>
+                <div className="action-card__body">
+                  <div className="action-card__title">{action.label}</div>
+                  <p className="action-card__desc">{action.description}</p>
+                </div>
+                <div className="action-card__arrow" aria-hidden="true">
+                  →
+                </div>
               </button>
             );
           })}

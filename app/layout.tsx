@@ -172,21 +172,48 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <GlobalSearchWrapper />
               <main className="min-h-screen">{children}</main>
               <BottomNav />
-              <footer className="hidden md:block bg-gray-50 border-t border-gray-200 py-8 mt-12">
-              <div className="max-w-7xl mx-auto px-4 text-center">
-                <div className="text-4xl mb-4">🌲🦌🐟🦃🐻</div>
-                <div className="font-semibold text-gray-900 mb-2">Wildlife Leadership Academy</div>
-                <div className="text-sm text-gray-600 mb-6">
-                  Empowering PA youth to become conservation leaders
+              <footer className="site-footer">
+                <div className="site-footer__grid">
+                  <div>
+                    <div className="site-footer__brand">Wildlife Leadership Academy</div>
+                    <p>
+                      Inspiring Pennsylvania youth to become lifelong conservation leaders through immersive field work,
+                      storytelling, and community action.
+                    </p>
+                  </div>
+                  <div>
+                    <div className="site-footer__label">Explore</div>
+                    <div className="site-footer__links">
+                      <Link href="/explore">Field Sites Map</Link>
+                      <Link href="/learn">Learning Tracks</Link>
+                      <Link href="/journal-new">Field Journal</Link>
+                      <Link href="/achievements">Achievements</Link>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="site-footer__label">Support</div>
+                    <div className="site-footer__links">
+                      <Link href="/profile">Your Profile</Link>
+                      <Link href="/admin/dashboard">Teacher HQ</Link>
+                      <a href="mailto:info@wildlifeleadershipacademy.org">info@wildlifeleadershipacademy.org</a>
+                      <a href="https://wildlifeleadershipacademy.org" target="_blank" rel="noopener noreferrer">
+                        wildlifeleadershipacademy.org
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-6 justify-center text-sm">
-                  <Link href="/admin/automations" className="text-gray-600 hover:text-green-600">Admin</Link>
-                  <a href="https://wildlifeleadershipacademy.org" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-green-600">WLA Website</a>
+                <div className="site-footer__bottom">
+                  <span>© {new Date().getFullYear()} Wildlife Leadership Academy</span>
+                  <div className="site-footer__links" style={{ flexDirection: 'row', gap: '1rem' }}>
+                    <a href="https://wildlifeleadershipacademy.org/terms/" target="_blank" rel="noopener noreferrer">
+                      Terms
+                    </a>
+                    <a href="https://wildlifeleadershipacademy.org/privacy-policy/" target="_blank" rel="noopener noreferrer">
+                      Privacy
+                    </a>
+                    <Link href="/admin/automations">Admin</Link>
+                  </div>
                 </div>
-                <div className="mt-4 text-xs text-gray-500">
-                  © {new Date().getFullYear()} Wildlife Leadership Academy
-                </div>
-              </div>
               </footer>
             </NavigationProvider>
           </PointsProvider>
