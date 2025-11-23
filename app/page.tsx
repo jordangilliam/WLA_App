@@ -1,180 +1,301 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { usePoints } from '@/ui/points/PointsProvider';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+
+import { usePoints } from '@/ui/points/PointsProvider';
+
+const heroStats = [
+  { label: 'Field Sites', value: '140+' },
+  { label: 'Species IDs', value: '150+' },
+  { label: 'Lessons', value: '50+' },
+  { label: 'PA Counties', value: '67' },
+] as const;
+
+const learningTracks = [
+  {
+    id: 'brookies',
+    emoji: '🎣',
+    title: 'Brookies',
+    description: 'Champion brook trout and coldwater habitats.',
+    gradient: 'linear-gradient(135deg, #1DA6DB 0%, #147FB1 100%)',
+    href: '/learn?track=brookies',
+  },
+  {
+    id: 'bass',
+    emoji: '🐟',
+    title: 'Bass',
+    description: 'Protect warm-water fisheries and river systems.',
+    gradient: 'linear-gradient(135deg, #22c55e 0%, #15803d 100%)',
+    href: '/learn?track=bass',
+  },
+  {
+    id: 'bucktails',
+    emoji: '🦌',
+    title: 'Bucktails',
+    description: 'Study white-tailed deer and habitat balance.',
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    href: '/learn?track=bucktails',
+  },
+  {
+    id: 'gobblers',
+    emoji: '🦃',
+    title: 'Gobblers',
+    description: 'Restore wild turkey populations statewide.',
+    gradient: 'linear-gradient(135deg, #EA7E37 0%, #C75E1A 100%)',
+    href: '/learn?track=gobblers',
+  },
+  {
+    id: 'ursids',
+    emoji: '🐻',
+    title: 'Ursids',
+    description: 'Track black bear movement and safety plans.',
+    gradient: 'linear-gradient(135deg, #64748b 0%, #475569 100%)',
+    href: '/learn?track=ursids',
+  },
+] as const;
+
+const featureHighlights = [
+  {
+    title: 'Interactive Maps',
+    description: 'Navigate 140+ conservation field sites across Pennsylvania.',
+    letter: 'M',
+    color: 'linear-gradient(135deg, var(--wla-blue), var(--wla-teal))',
+    href: '/explore',
+  },
+  {
+    title: 'Field Journal',
+    description: 'Capture photos, notes, and observations in one tap.',
+    letter: 'J',
+    color: 'linear-gradient(135deg, #EA7E37, #F4A259)',
+    href: '/journal-new',
+  },
+  {
+    title: 'Learning Tracks',
+    description: 'Guided lessons curated by WLA faculty experts.',
+    letter: 'L',
+    color: 'linear-gradient(135deg, #7C3AED, #6d28d9)',
+    href: '/learn',
+  },
+  {
+    title: 'Achievements',
+    description: 'Earn badges, streaks, and leaderboard recognition.',
+    letter: 'A',
+    color: 'linear-gradient(135deg, #22c55e, #15803d)',
+    href: '/achievements',
+  },
+  {
+    title: 'Habitat Tools',
+    description: 'Run habitat plans and pollinator simulations.',
+    letter: 'H',
+    color: 'linear-gradient(135deg, #0ea5e9, #0369a1)',
+    href: '/habitat',
+  },
+  {
+    title: 'ID Keys',
+    description: 'Identify species quickly with interactive keys.',
+    letter: 'ID',
+    color: 'linear-gradient(135deg, #f97316, #ea580c)',
+    href: '/keys',
+  },
+] as const;
+
+const quickActions = [
+  {
+    label: 'Check In',
+    emoji: '📍',
+    description: 'Log a field site visit.',
+    href: '/explore?action=checkin',
+    variant: 'primary',
+  },
+  {
+    label: 'Explore Map',
+    emoji: '🗺️',
+    description: 'Find nearby habitats.',
+    href: '/explore',
+    variant: 'default',
+  },
+  {
+    label: 'Journal Entry',
+    emoji: '📝',
+    description: 'Document observations.',
+    href: '/journal-new',
+    variant: 'default',
+  },
+  {
+    label: 'Stocking Alerts',
+    emoji: '🎣',
+    description: 'View trout releases.',
+    href: '/stocking',
+    variant: 'default',
+  },
+] as const;
+
+const featuredLocations = [
+  {
+    title: 'Schenley Park',
+    description: '456 acres of urban nature in Pittsburgh.',
+    href: '/explore?s=schenley',
+    accent: 'var(--wla-blue)',
+  },
+  {
+    title: 'Yellow Creek State Park',
+    description: '722-acre lake perfect for fisheries studies.',
+    href: '/stocking?site=yellow-creek',
+    accent: 'var(--wla-orange)',
+  },
+] as const;
+
+const trackSpotlight = {
+  title: 'Brook Trout Steward',
+  summary: 'Complete these missions to unlock the Brookies badge.',
+  tasks: [
+    'Visit a coldwater stream and log a water temp reading.',
+    'Upload two macro-invertebrate observations.',
+    'Share your conservation plan with your mentor.',
+  ],
+} as const;
+
+const ctaHighlights = [
+  'Student + teacher-ready experiences out of the box.',
+  'Optimized for mobile field work and offline visits.',
+  'Trusted data from PFBC, DCNR, and WLA experts.',
+] as const;
 
 export default function Home() {
   const { data: session, status } = useSession();
   const { total: points, level, currentStreak } = usePoints();
-  const router = useRouter();
 
-  // If logged in, show personalized dashboard
   if (status === 'authenticated') {
     return <LoggedInHome points={points} level={level} streak={currentStreak} />;
   }
 
-  // If not logged in, show landing page
   return <LandingPage />;
 }
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-green-600 via-green-700 to-blue-700 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        
-        <div className="relative max-w-4xl mx-auto px-4 py-16 sm:py-24 text-center">
-          <div className="inline-block px-4 py-2 bg-yellow-400 text-green-900 rounded-full text-sm font-bold mb-6">
-            Wildlife Leadership Academy
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
-            Explore Nature.<br />Earn Achievements.<br />Make an Impact.
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Join Pennsylvania&rsquo;s premier conservation app for youth. Check in at field sites, document wildlife, and become a conservation leader.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/auth"
-              className="px-8 py-4 bg-yellow-400 text-green-900 rounded-full font-bold text-lg hover:bg-yellow-300 transition-all shadow-lg hover:shadow-xl"
-            >
-              Get Started Free
-            </Link>
-            <Link
-              href="/explore"
-              className="px-8 py-4 bg-white bg-opacity-20 text-white rounded-full font-bold text-lg hover:bg-opacity-30 transition-all backdrop-blur-sm"
-            >
-              Explore Sites
-            </Link>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid grid-cols-3 gap-4 mt-12 max-w-2xl mx-auto">
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl font-bold">140+</div>
-              <div className="text-sm text-green-100">Field Sites</div>
-            </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl font-bold">500+</div>
-              <div className="text-sm text-green-100">Active Users</div>
-            </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
-              <div className="text-3xl font-bold">67</div>
-              <div className="text-sm text-green-100">PA Counties</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          How WildPraxis Works
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Feature 1 */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">🗺️</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Explore</h3>
-            <p className="text-gray-600 mb-4">
-              Discover 140+ field sites across Pennsylvania—parks, streams, libraries, and conservation areas.
+    <div className="landing-shell">
+      <section className="hero-panel">
+        <div className="hero-grid">
+          <div className="hero-content">
+            <span className="hero-badge">Wildlife Leadership Academy · Pennsylvania</span>
+            <h1 className="hero-title">
+              Conservation Starts <span>With You.</span>
+            </h1>
+            <p className="hero-text">
+              The official WLA experience for exploring the outdoors, capturing data, and earning recognition as a PA
+              conservation leader.
             </p>
-            <Link href="/explore" className="text-green-600 font-medium hover:text-green-700">
-              View Map →
-            </Link>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">📸</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Document</h3>
-            <p className="text-gray-600 mb-4">
-              Check in at sites, take photos, record observations, and contribute to citizen science.
-            </p>
-            <Link href="/journal-new" className="text-green-600 font-medium hover:text-green-700">
-              Start Journal →
-            </Link>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">🏆</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Achieve</h3>
-            <p className="text-gray-600 mb-4">
-              Earn points, unlock achievements, build streaks, and compete on leaderboards.
-            </p>
-            <Link href="/achievements" className="text-green-600 font-medium hover:text-green-700">
-              View Achievements →
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Special Features */}
-      <div className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                🎣 Trout Stocking Calendar
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Get real-time updates on trout stocking schedules across 16+ Pennsylvania waters. Plan your fishing trips with accurate, up-to-date information from the PA Fish & Boat Commission.
-              </p>
-              <Link
-                href="/stocking"
-                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-              >
-                View Stocking Schedule
+            <div className="hero-actions">
+              <Link href="/auth" className="hero-primary">
+                Start Your Journey
+              </Link>
+              <Link href="/explore" className="hero-secondary">
+                Explore Pennsylvania
               </Link>
             </div>
-
-            <div className="bg-blue-50 rounded-lg p-8">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">12 Streams & 4 Lakes</span>
+            <div className="hero-metrics">
+              {heroStats.map((stat) => (
+                <div className="hero-metric" key={stat.label}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Auto-Updated Schedules</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Stocking Notifications</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">✓</span>
-                  <span className="text-gray-700">Regulations & Safety Info</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
+          <div className="hero-visual" aria-hidden="true">
+            <Image
+              src="/images/hero/conservation-hero.jpg"
+              alt="WLA ambassadors exploring Pennsylvania habitats"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+          </div>
         </div>
+      </section>
+
+      <div className="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0,160 C240,120 480,40 720,40 C960,40 1200,120 1440,160 L1440,180 L0,180 Z"
+            fill="#f8fafc"
+            fillOpacity="0.8"
+          />
+        </svg>
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          Ready to Start Your Conservation Journey?
-        </h2>
-        <p className="text-xl text-gray-600 mb-8">
-          Join hundreds of students exploring Pennsylvania&rsquo;s natural heritage.
-        </p>
-        <Link
-          href="/auth"
-          className="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-xl"
-        >
-          Sign Up Now - It&rsquo;s Free
-        </Link>
-      </div>
+      <section className="section">
+        <div className="section-heading">
+          <p className="hero-badge">Five WLA Learning Tracks</p>
+          <h2>Choose Your Conservation Pathway</h2>
+          <p>Every track includes field missions, expert lessons, and achievement rewards.</p>
+        </div>
+        <div className="track-grid">
+          {learningTracks.map((track) => (
+            <article className="track-card" style={{ background: track.gradient }} key={track.id}>
+              <div className="track-emoji" aria-hidden="true" style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>
+                {track.emoji}
+              </div>
+              <div className="track-title">{track.title}</div>
+              <p className="track-description">{track.description}</p>
+              <Link href={track.href} className="track-link">
+                Explore Track →
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-heading">
+          <p className="hero-badge">Tools Built For Field Work</p>
+          <h2>Everything Ambassadors Need in One Hub</h2>
+        </div>
+        <div className="feature-grid">
+          {featureHighlights.map((feature) => (
+            <article className="feature-card" key={feature.title}>
+              <div className="feature-icon" style={{ background: feature.color }}>
+                {feature.letter}
+              </div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+              <Link className="feature-link" href={feature.href}>
+                Open {feature.title} →
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="cta-panel">
+          <p className="hero-badge">Ready for the 2025 Field Season</p>
+          <h2>Launch Your Classroom or Field Team Today</h2>
+          <p>
+            Seamless onboarding for students, mentors, and instructors. Everyone operates from the same trusted WLA
+            system.
+          </p>
+          <div className="cta-actions">
+            <Link href="/auth" className="cta-button" style={{ background: 'var(--wla-blue)', color: '#fff' }}>
+              Launch Student Account
+            </Link>
+            <Link href="/admin/dashboard" className="cta-button secondary">
+              Visit Teacher HQ
+            </Link>
+          </div>
+          <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+            {ctaHighlights.map((item) => (
+              <li key={item} style={{ marginBottom: '0.4rem' }}>
+                ✅ {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }
@@ -183,106 +304,150 @@ function LoggedInHome({ points, level, streak }: { points: number; level: number
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
-      {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">Welcome Back! 🌲</h1>
-          <p className="text-green-100">Ready to explore and make an impact today?</p>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button
-            onClick={() => router.push('/explore?action=checkin')}
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6 text-center hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
-          >
-            <div className="text-3xl mb-2">📍</div>
-            <div className="font-bold">Check In</div>
-          </button>
-
-          <button
-            onClick={() => router.push('/explore')}
-            className="bg-white border-2 border-green-600 text-green-700 rounded-lg p-6 text-center hover:bg-green-50 transition-all"
-          >
-            <div className="text-3xl mb-2">🗺️</div>
-            <div className="font-bold">Explore</div>
-          </button>
-
-          <button
-            onClick={() => router.push('/journal-new')}
-            className="bg-white border-2 border-blue-600 text-blue-700 rounded-lg p-6 text-center hover:bg-blue-50 transition-all"
-          >
-            <div className="text-3xl mb-2">📝</div>
-            <div className="font-bold">Journal</div>
-          </button>
-
-          <button
-            onClick={() => router.push('/stocking')}
-            className="bg-white border-2 border-purple-600 text-purple-700 rounded-lg p-6 text-center hover:bg-purple-50 transition-all"
-          >
-            <div className="text-3xl mb-2">🎣</div>
-            <div className="font-bold">Stocking</div>
-          </button>
-        </div>
-      </div>
-
-      {/* Featured Sites */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Featured Locations</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <h3 className="font-bold text-gray-900 mb-1">Schenley Park</h3>
-            <p className="text-sm text-gray-600 mb-3">456 acres of urban nature in Pittsburgh</p>
-            <button
-              onClick={() => router.push('/explore')}
-              className="text-green-600 text-sm font-medium hover:text-green-700"
-            >
-              View on Map →
-            </button>
-          </div>
-
-          <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <h3 className="font-bold text-gray-900 mb-1">Yellow Creek State Park</h3>
-            <p className="text-sm text-gray-600 mb-3">722-acre lake perfect for fishing</p>
-            <button
-              onClick={() => router.push('/stocking')}
-              className="text-blue-600 text-sm font-medium hover:text-blue-700"
-            >
-              View Stocking →
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Continue Your Journey</h2>
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-bold text-gray-900">Build Your Streak!</h3>
-              <p className="text-sm text-gray-600">Visit a new site to keep your streak alive</p>
+    <div className="dashboard-shell">
+      <section className="dashboard-banner">
+        <div className="dashboard-content">
+          <p className="hero-badge" style={{ background: 'rgba(255,255,255,0.15)' }}>
+            Active Ambassador
+          </p>
+          <h2 className="hero-title" style={{ fontSize: '2.5rem' }}>
+            Ready for your next conservation win?
+          </h2>
+          <p className="hero-text" style={{ color: 'rgba(255,255,255,0.85)', maxWidth: 520, margin: '0 auto 1.5rem' }}>
+            Keep your streak alive, log observations, and guide your community.
+          </p>
+          <div className="hero-metrics">
+            <div className="hero-metric">
+              <strong>{points.toLocaleString()}</strong>
+              <span>Total Points</span>
             </div>
-            <div className="text-4xl">🔥</div>
+            <div className="hero-metric">
+              <strong>Lvl {level}</strong>
+              <span>Current Rank</span>
+            </div>
+            <div className="hero-metric">
+              <strong>{streak}🔥</strong>
+              <span>Day Streak</span>
+            </div>
           </div>
-          <div className="flex gap-2">
+        </div>
+      </section>
+
+      <div className="dashboard-content">
+        <div className="dashboard-actions">
+          {quickActions.map((action) => {
+            const actionClass = ['action-card', action.variant === 'primary' ? 'primary' : '']
+              .filter(Boolean)
+              .join(' ');
+            return (
+              <button key={action.label} className={actionClass} onClick={() => router.push(action.href)}>
+                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{action.emoji}</div>
+                <div style={{ fontWeight: 700 }}>{action.label}</div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: '0.9rem',
+                    color: action.variant === 'primary' ? 'rgba(255,255,255,0.9)' : '#64748b',
+                  }}
+                >
+                  {action.description}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="dashboard-panels">
+          <article className="panel-card">
+            <div className="panel-header">
+              <div>
+                <h3 style={{ margin: 0 }}>Featured Locations</h3>
+                <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>New data verified weekly</p>
+              </div>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {featuredLocations.map((location) => (
+                <li
+                  key={location.title}
+                  style={{
+                    padding: '0.85rem 0',
+                    borderBottom: '1px solid #E5E7EB',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '1rem',
+                  }}
+                >
+                  <div>
+                    <div style={{ fontWeight: 600 }}>{location.title}</div>
+                    <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>{location.description}</p>
+                  </div>
+                  <button
+                    onClick={() => router.push(location.href)}
+                    style={{
+                      background: location.accent,
+                      color: '#fff',
+                      borderRadius: '999px',
+                      padding: '0.4rem 1rem',
+                      fontSize: '0.85rem',
+                    }}
+                  >
+                    View
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="panel-card">
+            <div className="panel-header">
+              <div>
+                <h3 style={{ margin: 0 }}>Keep Your Streak</h3>
+                <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  One new action per day keeps the fire alive.
+                </p>
+              </div>
+              <div style={{ fontSize: '2rem' }}>🔥</div>
+            </div>
+            <p style={{ marginBottom: '1rem' }}>Visit any site or submit an observation within the next 12 hours.</p>
+            <div className="panel-footer">
+              <button
+                onClick={() => router.push('/explore')}
+                style={{ background: 'var(--wla-blue)', color: '#fff' }}
+              >
+                Find Sites
+              </button>
+              <button
+                onClick={() => router.push('/achievements')}
+                style={{ background: '#f3f4f6', color: '#1f2937' }}
+              >
+                View Badges
+              </button>
+            </div>
+          </article>
+
+          <article className="panel-card">
+            <div className="panel-header">
+              <div>
+                <h3 style={{ margin: 0 }}>Track Spotlight</h3>
+                <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>{trackSpotlight.title}</p>
+              </div>
+            </div>
+            <p style={{ marginBottom: '1rem' }}>{trackSpotlight.summary}</p>
+            <ul style={{ paddingLeft: '1.2rem', color: 'var(--text-muted)' }}>
+              {trackSpotlight.tasks.map((task) => (
+                <li key={task} style={{ marginBottom: '0.5rem' }}>
+                  {task}
+                </li>
+              ))}
+            </ul>
             <button
-              onClick={() => router.push('/explore')}
-              className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+              onClick={() => router.push('/learn')}
+              style={{ marginTop: '1rem', width: '100%', background: 'var(--wla-orange)', color: '#fff' }}
             >
-              Find Sites Nearby
+              Open Track Missions
             </button>
-            <button
-              onClick={() => router.push('/achievements')}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
-            >
-              View Progress
-            </button>
-          </div>
+          </article>
         </div>
       </div>
     </div>
