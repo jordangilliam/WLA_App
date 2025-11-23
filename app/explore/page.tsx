@@ -805,15 +805,60 @@ useEffect(() => {
         {loading || locationLoading ? (
           <div
             style={{
-              textAlign: 'center',
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '24px',
+              boxShadow: '0 20px 50px rgba(15,23,42,0.08)',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <div style={{ width: '60px', height: '60px', borderRadius: '12px', background: 'linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%)', backgroundSize: '200% 100%', animation: 'skeleton-loading 1.5s ease-in-out infinite' }} />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ width: '70%', height: '1.25rem', borderRadius: '8px', background: 'linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%)', backgroundSize: '200% 100%', animation: 'skeleton-loading 1.5s ease-in-out infinite' }} />
+                  <div style={{ width: '50%', height: '1rem', borderRadius: '8px', background: 'linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%)', backgroundSize: '200% 100%', animation: 'skeleton-loading 1.5s ease-in-out infinite' }} />
+                </div>
+              </div>
+              <div style={{ width: '100%', height: '200px', borderRadius: '12px', background: 'linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%)', backgroundSize: '200% 100%', animation: 'skeleton-loading 1.5s ease-in-out infinite' }} />
+            </div>
+          </div>
+        ) : filteredSites.length === 0 ? (
+          <div
+            style={{
               background: 'white',
               padding: '3rem',
               borderRadius: '24px',
               boxShadow: '0 20px 50px rgba(15,23,42,0.08)',
             }}
           >
-            <div className="animate-spin" style={{ margin: '0 auto', height: '48px', width: '48px', border: '4px solid #E2E8F0', borderTopColor: '#0EA5E9', borderRadius: '50%' }} />
-            <p style={{ marginTop: '1rem', color: '#475569', fontWeight: 600 }}>Finding field sites near you...</p>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🗺️</div>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '0.75rem' }}>
+                No sites found
+              </h3>
+              <p style={{ fontSize: '1rem', color: '#64748B', maxWidth: '500px', margin: '0 auto 2rem', lineHeight: 1.6 }}>
+                {filters.searchQuery || filters.trackTags.length > 0 || filters.pillarTags.length > 0
+                  ? 'Try adjusting your filters or search terms to find more sites.'
+                  : 'Enable location services to discover field sites near you, or browse all sites on the map.'}
+              </p>
+              {(filters.searchQuery || filters.trackTags.length > 0 || filters.pillarTags.length > 0) && (
+                <button
+                  onClick={() => setFilters({ siteType: 'all', maxDistance: 50000, searchQuery: '', trackTags: [], pillarTags: [] })}
+                  style={{
+                    padding: '0.875rem 1.75rem',
+                    background: '#0EA5E9',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '10px',
+                    fontWeight: 600,
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           <div

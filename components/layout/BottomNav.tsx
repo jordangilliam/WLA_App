@@ -55,6 +55,8 @@ export default function BottomNav({ notificationCounts }: BottomNavProps) {
     router.push('/explore?action=checkin');
   };
 
+  // Simplified to 3 core tabs + FAB (matching industry best practices)
+  // Achievements and Profile accessible via profile menu
   const tabs = [
     {
       id: 'explore',
@@ -65,15 +67,6 @@ export default function BottomNav({ notificationCounts }: BottomNavProps) {
       activeBg: 'bg-green-50',
     },
     {
-      id: 'journal',
-      path: '/journal-new',
-      icon: '📝',
-      label: 'Journal',
-      activeColor: 'text-blue-600',
-      activeBg: 'bg-blue-50',
-      badge: notificationCounts?.journal || 0,
-    },
-    {
       id: 'checkin',
       path: '#',
       icon: '➕',
@@ -81,21 +74,21 @@ export default function BottomNav({ notificationCounts }: BottomNavProps) {
       isFAB: true,
     },
     {
-      id: 'achievements',
-      path: '/achievements',
-      icon: '🏆',
-      label: 'Achievements',
-      activeColor: 'text-purple-600',
-      activeBg: 'bg-purple-50',
-      badge: notificationCounts?.achievements || 0,
+      id: 'learn',
+      path: '/learn',
+      icon: '📘',
+      label: 'Learn',
+      activeColor: 'text-blue-600',
+      activeBg: 'bg-blue-50',
     },
     {
-      id: 'profile',
-      path: '/profile',
-      icon: '👤',
-      label: 'Profile',
-      activeColor: 'text-gray-600',
-      activeBg: 'bg-gray-50',
+      id: 'journal',
+      path: '/journal-new',
+      icon: '📝',
+      label: 'Journal',
+      activeColor: 'text-purple-600',
+      activeBg: 'bg-purple-50',
+      badge: notificationCounts?.journal || 0,
     },
   ];
 

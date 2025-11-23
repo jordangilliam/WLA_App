@@ -3,13 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// Simplified navigation - 3 core items (matching industry best practices from PBS Kids, NatGeo Kids)
+// Secondary items (Achievements, Profile) moved to user menu/profile page
 const NAV_ITEMS = [
-  { href: '/', label: 'Home', icon: '🏡' },
   { href: '/explore', label: 'Explore', icon: '🗺️' },
-  { href: '/learn', label: 'Learning', icon: '📘' },
+  { href: '/learn', label: 'Learn', icon: '📘' },
   { href: '/journal-new', label: 'Journal', icon: '📝' },
-  { href: '/achievements', label: 'Achievements', icon: '🏆' },
-  { href: '/profile', label: 'Profile', icon: '👤' },
 ] as const;
 
 export default function PrimaryNav() {

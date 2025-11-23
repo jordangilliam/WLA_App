@@ -403,6 +403,16 @@ label {
   to { transform: rotate(360deg); }
 }
 
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Footer */
 footer {
   padding: 3rem 1.5rem;

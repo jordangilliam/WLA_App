@@ -94,6 +94,7 @@ export default function Home() {
             and make lasting impacts on our state&apos;s natural heritage.
           </p>
           
+          {/* Single Primary CTA - Industry best practice (PBS Kids, NatGeo Kids, Duolingo) */}
           <div style={{
             display: 'flex',
             gap: '1rem',
@@ -102,7 +103,7 @@ export default function Home() {
             marginBottom: '3rem',
           }}>
             <Link
-              href="/learn"
+              href="/explore"
               style={{
                 padding: '1.25rem 2.5rem',
                 background: '#FFD60A',
@@ -124,11 +125,12 @@ export default function Home() {
                 e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
               }}
             >
-              Start Learning →
+              Start Exploring →
             </Link>
             
+            {/* Secondary CTA - Less prominent */}
             <Link
-              href="/map"
+              href="/learn"
               style={{
                 padding: '1.25rem 2.5rem',
                 background: 'rgba(255,255,255,0.15)',
@@ -136,8 +138,8 @@ export default function Home() {
                 color: 'white',
                 textDecoration: 'none',
                 borderRadius: '12px',
-                fontWeight: 700,
-                fontSize: '1.1rem',
+                fontWeight: 600,
+                fontSize: '1rem',
                 border: '2px solid rgba(255,255,255,0.3)',
                 transition: 'all 0.3s',
                 display: 'inline-block',
