@@ -12,6 +12,7 @@ import CheckInButton from '@/components/map/CheckInButton';
 import { useGeolocation } from '@/lib/hooks/useGeolocation';
 import type { Track } from '@/lib/types/lesson.types';
 import type { CheckInResultPayload } from '@/components/checkin/CheckInFlow';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 type PfbcAccessPoint = {
   id: string;
@@ -880,12 +881,30 @@ useEffect(() => {
                     boxShadow: '0 20px 60px rgba(2,48,71,0.12)',
                   }}
                 >
-                  <InteractiveMap
-                    sites={filteredSites}
-                    userLocation={location}
-                    selectedSite={selectedSite}
-                    onSiteSelect={handleSiteSelect}
-                  />
+                  <ErrorBoundary
+                    fallback={
+                      <div className="flex items-center justify-center h-full min-h-[620px] bg-gray-100">
+                        <div className="text-center p-6">
+                          <div className="text-4xl mb-4">🗺️</div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">Map Error</h3>
+                          <p className="text-gray-600 mb-4">Unable to load map. Please refresh the page.</p>
+                          <button
+                            onClick={() => window.location.reload()}
+                            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                          >
+                            Refresh Page
+                          </button>
+                        </div>
+                      </div>
+                    }
+                  >
+                    <InteractiveMap
+                      sites={filteredSites}
+                      userLocation={location}
+                      selectedSite={selectedSite}
+                      onSiteSelect={handleSiteSelect}
+                    />
+                  </ErrorBoundary>
                 </div>
 
                 <div style={{ position: 'sticky', top: '1.5rem' }}>

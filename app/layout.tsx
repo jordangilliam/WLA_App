@@ -9,6 +9,7 @@ import GamificationBar from '@/components/layout/GamificationBar';
 import PrimaryNav from '@/components/layout/PrimaryNav';
 import BottomNav from '@/components/layout/BottomNav';
 import GlobalSearchWrapper from '@/components/search/GlobalSearchWrapper';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 export const viewport = {
   width: 'device-width',
@@ -165,15 +166,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
       </head>
       <body>
-        <SessionProviderWrapper>
-          <PointsProvider>
-            <NavigationProvider>
-              <PWAInstall />
-              <GamificationBar />
-              <PrimaryNav />
-              <GlobalSearchWrapper />
-              <main className="min-h-screen">{children}</main>
-              <BottomNav />
+        <ErrorBoundary>
+          <SessionProviderWrapper>
+            <PointsProvider>
+              <NavigationProvider>
+                <PWAInstall />
+                <GamificationBar />
+                <PrimaryNav />
+                <GlobalSearchWrapper />
+                <main className="min-h-screen">{children}</main>
+                <BottomNav />
               <footer className="site-footer">
                 <div className="site-footer__grid">
                   <div>
@@ -217,9 +219,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </div>
                 </div>
               </footer>
-            </NavigationProvider>
-          </PointsProvider>
-        </SessionProviderWrapper>
+              </NavigationProvider>
+            </PointsProvider>
+          </SessionProviderWrapper>
+        </ErrorBoundary>
       </body>
     </html>
   );

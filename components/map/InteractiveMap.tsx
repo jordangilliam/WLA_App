@@ -61,6 +61,7 @@ export default function InteractiveMap({
   const userMarker = useRef<mapboxgl.Marker | null>(null);
   const initialUserLocation = useRef(userLocation);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   // Initialize map
   useEffect(() => {
@@ -70,45 +71,58 @@ export default function InteractiveMap({
     const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     if (!mapboxToken) {
       console.error('Mapbox token not configured');
+      setMapError('Map configuration error. Please contact support.');
       return;
     }
 
-    mapboxgl.accessToken = mapboxToken;
+    try {
+      mapboxgl.accessToken = mapboxToken;
 
-    // Create map instance
-    const centerCoords: [number, number] = initialUserLocation.current
-      ? [initialUserLocation.current.longitude, initialUserLocation.current.latitude]
-      : [-79.9959, 40.4406];
-    const initialZoom = initialUserLocation.current ? 12 : 10;
+      // Create map instance
+      const centerCoords: [number, number] = initialUserLocation.current
+        ? [initialUserLocation.current.longitude, initialUserLocation.current.latitude]
+        : [-79.9959, 40.4406];
+      const initialZoom = initialUserLocation.current ? 12 : 10;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: centerCoords,
-      zoom: initialZoom,
-      pitch: 0,
-      bearing: 0,
-    });
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/outdoors-v12',
+        center: centerCoords,
+        zoom: initialZoom,
+        pitch: 0,
+        bearing: 0,
+      });
 
-    // Add navigation controls
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      // Handle map errors
+      map.current.on('error', (e) => {
+        console.error('Map error:', e);
+        setMapError('Failed to load map. Please refresh the page.');
+      });
 
-    // Add geolocation control
-    map.current.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-        showUserHeading: true,
-      }),
-      'top-right'
-    );
+      // Add navigation controls
+      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-    // Mark map as loaded
-    map.current.on('load', () => {
-      setMapLoaded(true);
-    });
+      // Add geolocation control
+      map.current.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          trackUserLocation: true,
+          showUserHeading: true,
+        }),
+        'top-right'
+      );
+
+      // Mark map as loaded
+      map.current.on('load', () => {
+        setMapLoaded(true);
+        setMapError(null);
+      });
+    } catch (error) {
+      console.error('Map initialization error:', error);
+      setMapError('Failed to initialize map. Please refresh the page.');
+    }
 
     // Cleanup
     return () => {
@@ -304,14 +318,28 @@ export default function InteractiveMap({
     <div className="relative w-full h-full">
       <div ref={mapContainer} className="w-full h-full" />
 
-      {!mapLoaded && (
+      {mapError ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <div className="text-center max-w-md mx-auto p-6">
+            <div className="text-4xl mb-4">🗺️</div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Map Unavailable</h3>
+            <p className="text-gray-600 mb-4">{mapError}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Refresh Page
+            </button>
+          </div>
+        </div>
+      ) : !mapLoaded ? (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading map...</p>
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3">
