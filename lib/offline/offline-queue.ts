@@ -7,12 +7,22 @@ import { openDB, DBSchema, IDBPDatabase } from 'idb';
 
 interface QueuedAction {
   id: string;
-  type: 'check-in' | 'observation' | 'photo' | 'challenge-progress' | 'achievement';
+  type: 'check-in' | 'observation' | 'photo' | 'challenge-progress' | 'achievement' | 'bundle';
   data: any;
   timestamp: number;
   retryCount: number;
   status: 'pending' | 'syncing' | 'failed';
   error?: string;
+}
+
+export interface BundleQueueRecord {
+  id: string;
+  createdAt: number;
+  siteId?: string;
+  siteName?: string;
+  pillarIds: string[];
+  tags?: string[];
+  metadata?: Record<string, any>;
 }
 
 interface OfflineDB extends DBSchema {
@@ -29,26 +39,39 @@ interface OfflineDB extends DBSchema {
       timestamp: number;
     };
   };
+  bundles: {
+    key: string;
+    value: BundleQueueRecord;
+    indexes: { 'by-created': number };
+  };
 }
 
 class OfflineQueueManager {
   private db: IDBPDatabase<OfflineDB> | null = null;
   private syncInProgress = false;
   private listeners: Set<(event: 'sync-start' | 'sync-complete' | 'sync-error', data?: any) => void> = new Set();
+  private bundleListeners: Set<(bundles: BundleQueueRecord[]) => void> = new Set();
   private lastSyncAt: number | null = null;
 
   async init() {
     if (this.db) return;
 
-    this.db = await openDB<OfflineDB>('wildpraxis-offline', 1, {
-      upgrade(db) {
-        // Queue store
-        const queueStore = db.createObjectStore('queue', { keyPath: 'id' });
-        queueStore.createIndex('by-status', 'status');
-        queueStore.createIndex('by-timestamp', 'timestamp');
+    this.db = await openDB<OfflineDB>('wildpraxis-offline', 2, {
+      upgrade(db, oldVersion) {
+        if (oldVersion < 1) {
+          // Queue store
+          const queueStore = db.createObjectStore('queue', { keyPath: 'id' });
+          queueStore.createIndex('by-status', 'status');
+          queueStore.createIndex('by-timestamp', 'timestamp');
 
-        // Photos store (for offline photo uploads)
-        db.createObjectStore('photos', { keyPath: 'id' });
+          // Photos store (for offline photo uploads)
+          db.createObjectStore('photos', { keyPath: 'id' });
+        }
+
+        if (oldVersion < 2) {
+          const bundleStore = db.createObjectStore('bundles', { keyPath: 'id' });
+          bundleStore.createIndex('by-created', 'createdAt');
+        }
       },
     });
 
@@ -217,6 +240,9 @@ class OfflineQueueManager {
         break;
       case 'achievement':
         await this.syncAchievement(action.data);
+        break;
+      case 'bundle':
+        // Bundles are local-only; no remote sync required.
         break;
       default:
         throw new Error(`Unknown action type: ${action.type}`);
@@ -394,6 +420,54 @@ class OfflineQueueManager {
         callback(event, data);
       } catch (error) {
         console.error('Listener error:', error);
+      }
+    });
+  }
+
+  /**
+   * Bundle queue helpers
+   */
+  async addBundleRecord(record: BundleQueueRecord): Promise<void> {
+    if (!this.db) await this.init();
+    await this.db!.put('bundles', record);
+    await this.notifyBundleListeners();
+  }
+
+  async getBundleRecords(): Promise<BundleQueueRecord[]> {
+    if (!this.db) await this.init();
+    return this.db!.getAllFromIndex('bundles', 'by-created');
+  }
+
+  async deleteBundleRecord(id: string): Promise<void> {
+    if (!this.db) await this.init();
+    await this.db!.delete('bundles', id);
+    await this.notifyBundleListeners();
+  }
+
+  async clearBundleRecords(): Promise<void> {
+    if (!this.db) await this.init();
+    const tx = this.db!.transaction('bundles', 'readwrite');
+    await tx.store.clear();
+    await tx.done;
+    await this.notifyBundleListeners();
+  }
+
+  addBundleListener(listener: (bundles: BundleQueueRecord[]) => void): void {
+    this.bundleListeners.add(listener);
+  }
+
+  removeBundleListener(listener: (bundles: BundleQueueRecord[]) => void): void {
+    this.bundleListeners.delete(listener);
+  }
+
+  private async notifyBundleListeners(): Promise<void> {
+    if (!this.bundleListeners.size) return;
+    const bundles = await this.getBundleRecords();
+    this.bundleListeners.forEach((listener) => {
+      try {
+        listener(bundles);
+      } catch (error) {
+        console.error('Bundle listener error:', error);
       }
     });
   }
