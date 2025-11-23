@@ -181,3 +181,4 @@ const response = await fetch('/api/shops/all?region=Central&hasGuides=true');
 **Ready for frontend integration! 🎣**
 
 
+

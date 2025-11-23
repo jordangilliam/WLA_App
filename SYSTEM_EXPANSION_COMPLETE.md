@@ -285,3 +285,4 @@ GET /api/shops/nearby
 **Total Waterways: 51 | Expert Techniques: 8 | Patterns: 6 | Shops: 10 | TU Chapters: 7**
 
 
+

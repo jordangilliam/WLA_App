@@ -2081,18 +2081,31 @@ export default function FishingPage() {
         el.style.width = '32px';
         el.style.height = '32px';
         el.style.cursor = 'pointer';
-        el.innerHTML = waterBody.type === 'Lake' ? '🏞️' : '🌊';
+        el.textContent = waterBody.type === 'Lake' ? '🏞️' : '🌊';
         el.style.fontSize = '24px';
 
+        // Sanitize popup content to prevent XSS
+        const popupContent = document.createElement('div');
+        const name = String(waterBody.name || 'Water Body').replace(/[<>]/g, '');
+        const type = String(waterBody.type || '').replace(/[<>]/g, '');
+        const county = String(waterBody.county || '').replace(/[<>]/g, '');
+        
+        popupContent.innerHTML = `
+          <strong>${name}</strong><br/>
+          ${type} - ${county} County<br/>
+          <button class="view-details-btn" data-water-body-id="${waterBody.id}">
+            View Details
+          </button>
+        `;
+        
+        // Add click handler safely
+        popupContent.querySelector('.view-details-btn')?.addEventListener('click', () => {
+          window.dispatchEvent(new CustomEvent('selectWaterBody', { detail: waterBody.id }));
+        });
+        
         new mapboxgl.Marker(el)
           .setLngLat([waterBody.lon, waterBody.lat])
-          .setPopup(new mapboxgl.Popup().setHTML(`
-            <strong>${waterBody.name}</strong><br/>
-            ${waterBody.type} - ${waterBody.county} County<br/>
-            <button onclick="window.dispatchEvent(new CustomEvent('selectWaterBody', {detail: '${waterBody.id}'}))">
-              View Details
-            </button>
-          `))
+          .setPopup(new mapboxgl.Popup().setDOMContent(popupContent))
           .addTo(map.current!);
       });
     });

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Camera } from '@capacitor/camera';
 import { CameraResultType, CameraSource } from '@capacitor/camera';
+import ARIdentification from '@/components/ar/ARIdentification';
 
 interface PhotoCaptureProps {
   onPhotoTaken: (photoUrl: string, photoData: string) => void;
@@ -272,6 +273,17 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
           </button>
 
           <button
+            onClick={() => setShowAR(true)}
+            disabled={isCapturing}
+            className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span>📷</span>
+              AR Identification
+            </span>
+          </button>
+
+          <button
             onClick={onSkip}
             className="w-full px-6 py-3 text-gray-600 hover:text-gray-900 font-medium transition-colors"
           >
@@ -291,6 +303,23 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
           <li>• Respect wildlife - observe from distance</li>
         </ul>
       </div>
+
+      {/* AR Identification Overlay */}
+      {showAR && (
+        <ARIdentification
+          isActive={showAR}
+          mode="species"
+          onIdentification={(result) => {
+            setShowAR(false);
+            // Auto-capture photo when species identified with high confidence
+            if (result.confidence && result.confidence > 0.8) {
+              // Trigger photo capture with identified species info
+              console.log('Species identified:', result);
+            }
+          }}
+          onClose={() => setShowAR(false)}
+        />
+      )}
     </div>
   );
 }

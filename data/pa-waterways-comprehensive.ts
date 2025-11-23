@@ -595,3 +595,4 @@ export const SEASONAL_HATCH_CALENDAR: Record<string, MacroinvertebrateHatch[]> =
 };
 
 
+

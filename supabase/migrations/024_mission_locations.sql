@@ -83,3 +83,4 @@ create trigger trg_mission_locations_updated_at
   for each row execute function touch_story_missions();
 
 
+

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
+import { sanitizeString } from '@/lib/auth/api-middleware';
 
 export async function GET(request: NextRequest) {
   try {
@@ -146,6 +147,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Sanitize user input to prevent XSS
+    const sanitizedNotes = notes ? sanitizeString(String(notes)) : '';
+    const sanitizedTags = Array.isArray(tags) 
+      ? tags.map(tag => sanitizeString(String(tag)))
+      : [];
+    const sanitizedMood = mood ? sanitizeString(String(mood)) : null;
+    const sanitizedSpecies = Array.isArray(species_observed)
+      ? species_observed.map(species => typeof species === 'string' ? sanitizeString(species) : species)
+      : [];
+
     // Create observation (linked to a visit)
     // For now, we'll update an existing visit or create a standalone observation
     // TODO: Enhance this to properly link with check-ins
@@ -155,13 +166,13 @@ export async function POST(request: NextRequest) {
       .insert({
         user_id: userId,
         field_site_id: field_site_id,
-        notes: notes || '',
-        species_observed: species_observed || [],
+        notes: sanitizedNotes,
+        species_observed: sanitizedSpecies,
         photos: photos || [],
         weather: weather || null,
         temperature: temperature ?? null,
-        tags: tags || [],
-        mood: mood || null,
+        tags: sanitizedTags,
+        mood: sanitizedMood,
         reflection_prompts: reflection_prompts || {},
         // TODO: Add weather and temperature fields to schema
       } as never)

@@ -90,3 +90,4 @@ The migration files are ready, but need to be applied to your Supabase database:
 The only remaining task is applying the migrations to Supabase, which requires manual action through the Supabase Dashboard.
 
 
+

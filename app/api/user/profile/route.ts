@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
+import { sanitizeString } from '@/lib/auth/api-middleware';
 import type { ApiResponse } from '@/lib/types/dashboard.types';
 
 interface UserProfile {
@@ -98,11 +99,17 @@ export async function PATCH(request: NextRequest) {
       'avatar_url',
     ];
 
-    // Filter to only allowed fields
+    // Filter to only allowed fields and sanitize text inputs
     const filteredUpdates: any = {};
     for (const field of allowedFields) {
       if (field in updates) {
-        filteredUpdates[field] = updates[field];
+        const value = updates[field];
+        // Sanitize text fields
+        if (typeof value === 'string' && ['name', 'bio', 'school_name', 'school_district', 'grade_level'].includes(field)) {
+          filteredUpdates[field] = sanitizeString(value);
+        } else {
+          filteredUpdates[field] = value;
+        }
       }
     }
 

@@ -56,3 +56,4 @@ This document catalogs where Pennsylvania-specific, indigenous history, and stat
 
 With this catalog complete, continue with the next plan steps: regenerate Supabase types, design query helper modules, and wire data into the UI. Keep this document updated as new datasets land.***
 
+

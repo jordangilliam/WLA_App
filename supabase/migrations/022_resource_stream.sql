@@ -66,3 +66,4 @@ create trigger trg_resource_updates_updated_at
 
 
 
+

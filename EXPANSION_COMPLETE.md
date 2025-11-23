@@ -185,3 +185,4 @@ const response = await fetch('/api/shops/nearby?region=Central&hasGuides=true');
 **System expansion complete! Ready for frontend integration! 🎣**
 
 
+

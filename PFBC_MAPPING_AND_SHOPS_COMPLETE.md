@@ -285,3 +285,4 @@ GET /api/shops/all
 **Ready for frontend integration! 🎣**
 
 
+

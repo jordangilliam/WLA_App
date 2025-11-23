@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/auth.config';
 import { supabaseAdmin } from '@/lib/db/client';
 import { getPillarRecommendations } from '@/lib/data/pillars';
+import { getAdaptiveRecommendations, scoreRecommendation, type UserProgress } from '@/lib/ai/recommendation-engine';
 
 // Force dynamic rendering since we use request.url
 export const dynamic = 'force-dynamic';
@@ -167,7 +168,48 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // 4. Sort by score and limit
+    // 4. Enhance with adaptive scoring if user is authenticated
+    if (userId && supabaseAdmin) {
+      try {
+        // Fetch user progress for adaptive recommendations
+        const { data: lessons } = await supabaseAdmin
+          .from('lesson_completions')
+          .select('lesson_id')
+          .eq('user_id', userId);
+        
+        const { data: missions } = await supabaseAdmin
+          .from('mission_completions')
+          .select('mission_id')
+          .eq('user_id', userId);
+
+        const userProgress: UserProgress = {
+          userId,
+          completedLessons: (lessons || []).map((l: any) => l.lesson_id),
+          completedMissions: (missions || []).map((m: any) => m.mission_id),
+          completedChallenges: [],
+          observations: 0,
+          speciesIdentified: 0,
+          favoritePillars: [],
+          preferredDifficulty: 'beginner',
+          learningGoals: [],
+        };
+
+        // Re-score recommendations with adaptive algorithm
+        recommendations.forEach((rec) => {
+          rec.score = scoreRecommendation(rec, userProgress, {
+            location: siteId ? { 
+              latitude: 0, // Will be populated from field site if needed
+              longitude: 0, // Will be populated from field site if needed
+              fieldSiteId: siteId 
+            } : undefined,
+          });
+        });
+      } catch (error) {
+        console.error('Error enhancing recommendations:', error);
+      }
+    }
+
+    // 5. Sort by score and limit
     recommendations.sort((a, b) => b.score - a.score);
     const limited = recommendations.slice(0, limit);
 

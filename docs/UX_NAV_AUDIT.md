@@ -50,3 +50,4 @@ Observed on `home.png` and `explore.png`:
 
 These findings feed directly into the upcoming layout plan.***
 
+

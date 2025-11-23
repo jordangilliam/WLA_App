@@ -45,7 +45,14 @@
     "test:api": "tsx scripts/test-api-endpoints.ts",
     "test:integration": "tsx scripts/integration-tests.ts",
     "verify:db": "tsx scripts/verify-database.ts",
-    "test:all": "npm run test:api && npm run verify:db && npm run test:integration"
+    "test:all": "npm run test:api && npm run verify:db && npm run test:integration",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
+    "test:unit:coverage": "jest --coverage",
+    "test:full": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.4",
@@ -80,8 +87,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/cheerio": "^0.22.35",
+    "@types/jest": "^30.0.0",
     "cheerio": "^1.1.2",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "ts-jest": "^29.4.5",
     "tsx": "^4.7.0"
   }
 }

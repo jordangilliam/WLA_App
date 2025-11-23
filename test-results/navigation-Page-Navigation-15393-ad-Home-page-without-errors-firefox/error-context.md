@@ -1,0 +1,257 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "🌲WildPraxis" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e7]:
+        - link "🪙0" [ref=e8] [cursor=pointer]:
+          - /url: /profile/
+        - link "🔔" [ref=e9] [cursor=pointer]:
+          - /url: /achievements/
+        - button "🔍" [ref=e10] [cursor=pointer]
+  - navigation [ref=e11]:
+    - generic [ref=e12]:
+      - link "Explore" [ref=e13] [cursor=pointer]:
+        - /url: /explore/
+        - generic [ref=e14]: 🗺️
+        - generic [ref=e15]: Explore
+      - link "Learn" [ref=e16] [cursor=pointer]:
+        - /url: /learn/
+        - generic [ref=e17]: 📘
+        - generic [ref=e18]: Learn
+      - link "Journal" [ref=e19] [cursor=pointer]:
+        - /url: /journal-new/
+        - generic [ref=e20]: 📝
+        - generic [ref=e21]: Journal
+  - main [ref=e22]:
+    - generic [ref=e25]:
+      - generic [ref=e26]: Pennsylvania Wildlife Leadership Academy
+      - heading "Become a Conservation Leader" [level=1] [ref=e27]
+      - paragraph [ref=e28]: Join Pennsylvania's elite program training the next generation of wildlife biologists, habitat managers, and conservation scientists. Learn from experts, conduct real field research, and make lasting impacts on our state's natural heritage.
+      - generic [ref=e29]:
+        - link "Start Exploring →" [ref=e30] [cursor=pointer]:
+          - /url: /explore/
+        - link "Explore Watersheds" [ref=e31] [cursor=pointer]:
+          - /url: /learn/
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: 1,000+
+          - generic [ref=e35]: Ambassadors Trained
+        - generic [ref=e36]:
+          - generic [ref=e37]: 500+
+          - generic [ref=e38]: Field Projects
+        - generic [ref=e39]:
+          - generic [ref=e40]: "67"
+          - generic [ref=e41]: PA Counties
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e45]:
+          - heading "Featured Missions" [level=2] [ref=e46]
+          - paragraph [ref=e47]: Explore conservation stories and field research
+        - generic [ref=e48]:
+          - generic [ref=e49]: 🗺️
+          - paragraph [ref=e50]: No active missions at the moment
+      - generic [ref=e53]:
+        - heading "Nearby Sites" [level=2] [ref=e54]
+        - paragraph [ref=e55]: Field sites within 10km of your location
+    - generic [ref=e66]:
+      - heading "Your Conservation Journey" [level=2] [ref=e67]
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - img "Conservation points icon" [ref=e71]
+          - generic [ref=e72]: "0"
+          - generic [ref=e73]: Conservation Points
+          - paragraph [ref=e74]: Earned through field work, lessons, and habitat projects
+        - generic [ref=e75]:
+          - img "Ambassador rank icon" [ref=e77]
+          - generic [ref=e78]: Level 1
+          - generic [ref=e79]: Ambassador Rank
+          - generic [ref=e82]: 0% to Level 2
+        - generic [ref=e83]:
+          - img "Daily streak icon" [ref=e85]
+          - generic [ref=e86]: "0"
+          - generic [ref=e87]: Day Streak
+          - paragraph [ref=e88]: Keep logging in daily to maintain momentum
+        - generic [ref=e89]:
+          - img "Achievements icon" [ref=e91]
+          - generic [ref=e92]:
+            - text: "0"
+            - generic [ref=e93]: /4
+          - generic [ref=e94]: Achievements Unlocked
+          - paragraph [ref=e95]: Earn badges through mastery and dedication
+    - generic [ref=e96]:
+      - generic [ref=e97]:
+        - img "Recent achievements icon" [ref=e99]
+        - heading "Recent Achievements" [level=2] [ref=e100]
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - generic [ref=e103]: 💧
+          - generic [ref=e104]:
+            - generic [ref=e105]: Water Guardian
+            - generic [ref=e106]: Monitored 5 watersheds
+        - generic [ref=e107]:
+          - generic [ref=e108]: 🌿
+          - generic [ref=e109]:
+            - generic [ref=e110]: Habitat Architect
+            - generic [ref=e111]: Designed 3 pollinator plots
+    - generic [ref=e112]:
+      - generic [ref=e113]:
+        - heading "Today's Field Missions" [level=2] [ref=e114]
+        - paragraph [ref=e115]: Complete hands-on conservation activities to earn points and advance your skills
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - img "Field guide icon" [ref=e120]
+                - generic [ref=e121]: PA Conservation History
+              - generic [ref=e122]: Learn about Gifford Pinchot and the birth of modern forestry
+            - button "+10 pts" [ref=e123] [cursor=pointer]
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - img "Water quality icon" [ref=e127]
+                - generic [ref=e128]: Water Quality Monitoring
+              - generic [ref=e129]: Collect temperature, pH, and dissolved oxygen readings
+            - button "+15 pts" [ref=e130] [cursor=pointer]
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - generic [ref=e133]:
+                - img "Macro survey icon" [ref=e134]
+                - generic [ref=e135]: Macroinvertebrate Survey
+              - generic [ref=e136]: Photograph and identify aquatic invertebrates for iNaturalist
+            - button "+5 pts" [ref=e137] [cursor=pointer]
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - img "Habitat design icon" [ref=e141]
+                - generic [ref=e142]: Design Wildlife Habitat
+              - generic [ref=e143]: Use the simulator to create a balanced Pennsylvania ecosystem
+            - button "+8 pts" [ref=e144] [cursor=pointer]
+      - generic [ref=e145]:
+        - heading "Explore Platform" [level=2] [ref=e146]
+        - paragraph [ref=e147]: Access all conservation tools and resources
+        - generic [ref=e148]:
+          - link "Learning icon Learn 12 comprehensive lessons" [ref=e149] [cursor=pointer]:
+            - /url: /learn/
+            - img "Learning icon" [ref=e151]
+            - generic [ref=e152]:
+              - generic [ref=e153]: Learn
+              - generic [ref=e154]: 12 comprehensive lessons
+          - link "Watershed icon Watersheds Interactive PA map" [ref=e155] [cursor=pointer]:
+            - /url: /map/
+            - img "Watershed icon" [ref=e157]
+            - generic [ref=e158]:
+              - generic [ref=e159]: Watersheds
+              - generic [ref=e160]: Interactive PA map
+          - link "Macro ID icon ID Keys Species identification" [ref=e161] [cursor=pointer]:
+            - /url: /keys/macro/
+            - img "Macro ID icon" [ref=e163]
+            - generic [ref=e164]:
+              - generic [ref=e165]: ID Keys
+              - generic [ref=e166]: Species identification
+          - link "Habitat icon Habitat Ecosystem builder" [ref=e167] [cursor=pointer]:
+            - /url: /habitat/
+            - img "Habitat icon" [ref=e169]
+            - generic [ref=e170]:
+              - generic [ref=e171]: Habitat
+              - generic [ref=e172]: Ecosystem builder
+          - link "Journal icon Journal Field documentation" [ref=e173] [cursor=pointer]:
+            - /url: /journal/
+            - img "Journal icon" [ref=e175]
+            - generic [ref=e176]:
+              - generic [ref=e177]: Journal
+              - generic [ref=e178]: Field documentation
+          - link "Leaderboard icon Leaderboard Team standings" [ref=e179] [cursor=pointer]:
+            - /url: /leaderboard/
+            - img "Leaderboard icon" [ref=e181]
+            - generic [ref=e182]:
+              - generic [ref=e183]: Leaderboard
+              - generic [ref=e184]: Team standings
+    - generic [ref=e185]:
+      - generic [ref=e186]:
+        - heading "Choose Your Conservation Track" [level=2] [ref=e187]
+        - paragraph [ref=e188]: Specialize in a specific area of Pennsylvania wildlife management and become an expert in your field
+      - generic [ref=e189]:
+        - link "Brook Trout Brookies Cold-water stream ecology, brook trout conservation, and wild trout management in Pennsylvania's pristine mountain waters" [ref=e190] [cursor=pointer]:
+          - /url: /learn/?track=Brookies
+          - img "Brook Trout" [ref=e192]
+          - heading "Brookies" [level=3] [ref=e193]
+          - paragraph [ref=e194]: Cold-water stream ecology, brook trout conservation, and wild trout management in Pennsylvania's pristine mountain waters
+        - link "Largemouth Bass Bass Warm-water fisheries management, lake and reservoir ecology, and largemouth bass population dynamics in PA waters" [ref=e195] [cursor=pointer]:
+          - /url: /learn/?track=Bass
+          - img "Largemouth Bass" [ref=e197]
+          - heading "Bass" [level=3] [ref=e198]
+          - paragraph [ref=e199]: Warm-water fisheries management, lake and reservoir ecology, and largemouth bass population dynamics in PA waters
+        - link "White-tailed Deer Bucktails White-tailed deer management, wildlife population monitoring, and forest regeneration in Pennsylvania hardwoods" [ref=e200] [cursor=pointer]:
+          - /url: /learn/?track=Bucktails
+          - img "White-tailed Deer" [ref=e202]
+          - heading "Bucktails" [level=3] [ref=e203]
+          - paragraph [ref=e204]: White-tailed deer management, wildlife population monitoring, and forest regeneration in Pennsylvania hardwoods
+        - link "Wild Turkey Gobblers Wild turkey restoration, upland game bird management, and Pennsylvania's forest-field edge habitats" [ref=e205] [cursor=pointer]:
+          - /url: /learn/?track=Gobblers
+          - img "Wild Turkey" [ref=e207]
+          - heading "Gobblers" [level=3] [ref=e208]
+          - paragraph [ref=e209]: Wild turkey restoration, upland game bird management, and Pennsylvania's forest-field edge habitats
+        - link "Black Bear Ursids Pennsylvania black bear ecology, large carnivore management, and human-wildlife coexistence in the Alleghenies" [ref=e210] [cursor=pointer]:
+          - /url: /learn/?track=Ursids
+          - img "Black Bear" [ref=e212]
+          - heading "Ursids" [level=3] [ref=e213]
+          - paragraph [ref=e214]: Pennsylvania black bear ecology, large carnivore management, and human-wildlife coexistence in the Alleghenies
+  - navigation [ref=e215]:
+    - generic [ref=e216]:
+      - button "🗺️ Explore" [ref=e217] [cursor=pointer]:
+        - generic [ref=e218]: 🗺️
+        - text: Explore
+      - button "➕ Check-In" [ref=e219] [cursor=pointer]:
+        - generic [ref=e220]: ➕
+        - text: Check-In
+      - button "📘 Learn" [ref=e221] [cursor=pointer]:
+        - generic [ref=e222]: 📘
+        - text: Learn
+      - button "0 📝 Journal" [ref=e223] [cursor=pointer]:
+        - text: "0"
+        - generic [ref=e224]: 📝
+        - text: Journal
+  - contentinfo [ref=e225]:
+    - generic [ref=e226]:
+      - generic [ref=e227]:
+        - generic [ref=e228]: Wildlife Leadership Academy
+        - paragraph [ref=e229]: Inspiring Pennsylvania youth to become lifelong conservation leaders through immersive field work, storytelling, and community action.
+      - generic [ref=e230]:
+        - generic [ref=e231]: Explore
+        - generic [ref=e232]:
+          - link "Field Sites Map" [ref=e233] [cursor=pointer]:
+            - /url: /explore/
+          - link "Learning Tracks" [ref=e234] [cursor=pointer]:
+            - /url: /learn/
+          - link "Field Journal" [ref=e235] [cursor=pointer]:
+            - /url: /journal-new/
+          - link "Achievements" [ref=e236] [cursor=pointer]:
+            - /url: /achievements/
+      - generic [ref=e237]:
+        - generic [ref=e238]: Support
+        - generic [ref=e239]:
+          - link "Your Profile" [ref=e240] [cursor=pointer]:
+            - /url: /profile/
+          - link "Teacher HQ" [ref=e241] [cursor=pointer]:
+            - /url: /admin/dashboard/
+          - link "info@wildlifeleadershipacademy.org" [ref=e242] [cursor=pointer]:
+            - /url: mailto:info@wildlifeleadershipacademy.org
+          - link "wildlifeleadershipacademy.org" [ref=e243] [cursor=pointer]:
+            - /url: https://wildlifeleadershipacademy.org
+    - generic [ref=e244]:
+      - generic [ref=e245]: © 2025 Wildlife Leadership Academy
+      - generic [ref=e246]:
+        - link "Terms" [ref=e247] [cursor=pointer]:
+          - /url: https://wildlifeleadershipacademy.org/terms/
+        - link "Privacy" [ref=e248] [cursor=pointer]:
+          - /url: https://wildlifeleadershipacademy.org/privacy-policy/
+        - link "Admin" [ref=e249] [cursor=pointer]:
+          - /url: /admin/automations/
+  - button [ref=e250] [cursor=pointer]:
+    - img [ref=e251]
+  - alert [ref=e253]
+```

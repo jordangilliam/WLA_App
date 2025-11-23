@@ -2,6 +2,18 @@
 import { usePoints } from '@/ui/points/PointsProvider';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+// Lazy load heavy components for better initial page load
+const MissionCarousel = dynamic(() => import('@/components/home/MissionCarousel'), {
+  ssr: false,
+  loading: () => <div className="h-64 animate-pulse bg-gray-200 rounded-xl" />,
+});
+
+const NearbySitesRail = dynamic(() => import('@/components/home/NearbySitesRail'), {
+  ssr: false,
+  loading: () => <div className="h-64 animate-pulse bg-gray-200 rounded-xl" />,
+});
 
 const SAMPLE_BADGES = [
   { id: 'water-guardian', name: 'Water Guardian', description: 'Monitored 5 watersheds', icon: '💧', tier: 'blue' },
@@ -183,6 +195,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Content Rails - Maximum Wins Feature */}
+      <section style={{ margin: '3rem 0', maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto', padding: '0 1rem' }}>
+        <MissionCarousel />
+        <NearbySitesRail />
       </section>
 
       {/* Your Progress Dashboard */}

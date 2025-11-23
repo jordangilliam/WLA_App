@@ -64,3 +64,4 @@ Refer to `docs/screenshots/*.png` for the visuals noted below.
 
 These notes feed into the upcoming layout plan and component roadmap.***
 
+

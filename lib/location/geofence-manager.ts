@@ -186,3 +186,4 @@ export class GeofenceManager {
 export const geofenceManager = new GeofenceManager()
 
 
+
