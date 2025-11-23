@@ -3,7 +3,7 @@
  * Enhanced version with retry logic, caching, accuracy validation, and fallbacks
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
 interface GeolocationState {
   location: {
@@ -46,7 +46,20 @@ const DEFAULT_OPTIONS: Required<Omit<UseRobustGeolocationOptions, 'onLocationUpd
 }
 
 export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) {
-  const opts = { ...DEFAULT_OPTIONS, ...options }
+  const mergedOptions = useMemo(() => ({ ...DEFAULT_OPTIONS, ...options }), [options])
+  const onLocationUpdate = options.onLocationUpdate
+  const onError = options.onError
+  const {
+    enableHighAccuracy,
+    timeout,
+    maximumAge,
+    retryAttempts,
+    retryDelay,
+    minAccuracy,
+    cacheDuration,
+    watchInterval,
+  } = mergedOptions
+  const latestRetryCountRef = useRef(0)
   const [state, setState] = useState<GeolocationState>({
     location: null,
     error: null,
@@ -67,7 +80,7 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
       if (cached) {
         const parsed = JSON.parse(cached)
         const age = Date.now() - parsed.timestamp
-        if (age < opts.cacheDuration) {
+        if (age < cacheDuration) {
           cachedLocationRef.current = parsed.location
           setState((prev) => ({
             ...prev,
@@ -79,7 +92,7 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
     } catch (e) {
       // Ignore cache errors
     }
-  }, [])
+  }, [cacheDuration])
 
   // Cache location
   const cacheLocation = useCallback((location: GeolocationState['location']) => {
@@ -103,10 +116,10 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
   const isValidLocation = useCallback(
     (position: GeolocationPosition): boolean => {
       if (!position.coords.accuracy) return false
-      if (position.coords.accuracy > opts.minAccuracy) return false
+      if (position.coords.accuracy > minAccuracy) return false
       return true
     },
-    [opts.minAccuracy]
+    [minAccuracy]
   )
 
   // Get location with retry logic
@@ -121,11 +134,11 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
         const successHandler = (position: GeolocationPosition) => {
           if (isValidLocation(position)) {
             resolve(position)
-          } else if (attempt < opts.retryAttempts) {
+          } else if (attempt < retryAttempts) {
             // Retry if accuracy is poor
             setTimeout(() => {
               getLocation(attempt + 1).then(resolve).catch(reject)
-            }, opts.retryDelay)
+            }, retryDelay)
           } else {
             // Accept poor accuracy after max retries
             resolve(position)
@@ -133,27 +146,23 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
         }
 
         const errorHandler = (error: GeolocationPositionError) => {
-          if (attempt < opts.retryAttempts) {
+          if (attempt < retryAttempts) {
             retryTimeoutRef.current = setTimeout(() => {
               getLocation(attempt + 1).then(resolve).catch(reject)
-            }, opts.retryDelay)
+            }, retryDelay)
           } else {
             reject(error)
           }
         }
 
-        navigator.geolocation.getCurrentPosition(
-          successHandler,
-          errorHandler,
-          {
-            enableHighAccuracy: opts.enableHighAccuracy,
-            timeout: opts.timeout,
-            maximumAge: opts.maximumAge,
-          }
-        )
+        navigator.geolocation.getCurrentPosition(successHandler, errorHandler, {
+          enableHighAccuracy,
+          timeout,
+          maximumAge,
+        })
       })
     },
-    [opts, isValidLocation]
+    [enableHighAccuracy, timeout, maximumAge, retryAttempts, retryDelay, isValidLocation]
   )
 
   // Update location state
@@ -161,7 +170,7 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
     (position: GeolocationPosition) => {
       const now = Date.now()
       // Throttle updates
-      if (now - lastUpdateRef.current < opts.watchInterval) {
+      if (now - lastUpdateRef.current < watchInterval) {
         return
       }
       lastUpdateRef.current = now
@@ -186,9 +195,9 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
       }))
 
       cacheLocation(location)
-      options.onLocationUpdate?.(location)
+      onLocationUpdate?.(location)
     },
-    [opts.watchInterval, cacheLocation, options]
+    [watchInterval, cacheLocation, onLocationUpdate]
   )
 
   // Handle errors
@@ -212,14 +221,14 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
       setState((prev) => ({
         ...prev,
         error: errorMessage,
-        isLoading: attempt < opts.retryAttempts,
+        isLoading: attempt < retryAttempts,
         retryCount: attempt,
       }))
 
-      options.onError?.(errorMessage)
+      onError?.(errorMessage)
 
       // Use cached location if available
-      if (cachedLocationRef.current && attempt >= opts.retryAttempts) {
+      if (cachedLocationRef.current && attempt >= retryAttempts) {
         setState((prev) => ({
           ...prev,
           location: cachedLocationRef.current,
@@ -228,8 +237,12 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
         }))
       }
     },
-    [opts.retryAttempts, options]
+    [retryAttempts, onError]
   )
+
+  useEffect(() => {
+    latestRetryCountRef.current = state.retryCount
+  }, [state.retryCount])
 
   // Initialize geolocation
   useEffect(() => {
@@ -245,24 +258,20 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
       })
 
     // Watch position if interval is set
-    if (opts.watchInterval > 0) {
+    if (watchInterval > 0) {
       const watchSuccess = (position: GeolocationPosition) => {
         if (mounted) updateLocation(position)
       }
 
       const watchError = (error: GeolocationPositionError) => {
-        if (mounted) handleError(error, state.retryCount)
+        if (mounted) handleError(error, latestRetryCountRef.current)
       }
 
-      watchIdRef.current = navigator.geolocation.watchPosition(
-        watchSuccess,
-        watchError,
-        {
-          enableHighAccuracy: opts.enableHighAccuracy,
-          timeout: opts.timeout,
-          maximumAge: opts.maximumAge,
-        }
-      )
+      watchIdRef.current = navigator.geolocation.watchPosition(watchSuccess, watchError, {
+        enableHighAccuracy,
+        timeout,
+        maximumAge,
+      })
     }
 
     return () => {
@@ -274,7 +283,15 @@ export function useRobustGeolocation(options: UseRobustGeolocationOptions = {}) 
         clearTimeout(retryTimeoutRef.current)
       }
     }
-  }, []) // Only run once on mount
+  }, [
+    getLocation,
+    updateLocation,
+    handleError,
+    enableHighAccuracy,
+    timeout,
+    maximumAge,
+    watchInterval,
+  ])
 
   // Manual refresh function
   const refresh = useCallback(() => {
