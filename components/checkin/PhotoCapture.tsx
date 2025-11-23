@@ -27,6 +27,7 @@ export default function PhotoCapture({ onPhotoTaken, onSkip }: PhotoCaptureProps
   const [isIdentifying, setIsIdentifying] = useState(false);
   const [identificationError, setIdentificationError] = useState<string | null>(null);
   const [identifications, setIdentifications] = useState<IdentifyResult[]>([]);
+  const [showAR, setShowAR] = useState(false);
 
   const takePicture = async (source: CameraSource) => {
     try {
