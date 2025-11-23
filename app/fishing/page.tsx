@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { usePoints } from '@/ui/points/PointsProvider';
 import { PA_WATER_BODIES_EXPANDED } from '@/data/pa-water-bodies-expanded';
@@ -78,6 +78,157 @@ interface FishingLog {
   photos: string[];
   notes: string;
   released: boolean;
+}
+
+interface WaterwayHatchRecord {
+  id: string;
+  field_site_id?: string;
+  intensity?: string;
+  hatch: {
+    id?: string;
+    species?: string;
+    common_name?: string;
+    hatch_start_month?: string;
+    hatch_end_month?: string;
+    peak_month?: string;
+    time_of_day?: string;
+    water_temp_min_f?: number;
+    water_temp_optimal_f?: number;
+    water_temp_max_f?: number;
+    water_types?: string[];
+    hook_size?: string;
+    color_description?: string;
+    notes?: string;
+  };
+  waterway?: {
+    id?: string;
+    name?: string;
+    site_type?: string;
+  };
+}
+
+interface PFBCStockingRecord {
+  waterwayId?: string;
+  waterwayName: string;
+  county?: string;
+  region?: string;
+  species: string;
+  stockingDate: string;
+  quantity?: number;
+  sizeClass?: string;
+  averageLength?: number;
+  notes?: string;
+}
+
+interface ExpertTechniqueRecord {
+  id: string;
+  expert_id: string;
+  name: string;
+  description?: string;
+  water_types?: string[];
+  best_seasons?: string[];
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  video_url?: string;
+  expert?: {
+    id: string;
+    name: string;
+    location?: string;
+  };
+}
+
+interface ExpertPatternRecord {
+  id: string;
+  expert_id: string;
+  name: string;
+  pattern_type?: string;
+  description?: string;
+  target_species?: string[];
+  best_seasons?: string[];
+  hook_size?: string;
+  materials?: string[];
+  expert?: {
+    id: string;
+    name: string;
+    location?: string;
+  };
+}
+
+interface FlyShopRecord {
+  id: string;
+  name: string;
+  location?: string;
+  county?: string;
+  region?: string;
+  address?: string;
+  phone?: string;
+  website?: string;
+  email?: string;
+  services?: string[];
+  hasGuides?: boolean;
+  hasClasses?: boolean;
+  hasFlyTying?: boolean;
+  specialties?: string[];
+  notes?: string;
+}
+
+interface PfbcAccessPointRecord {
+  id: string;
+  waterwayName: string;
+  name: string;
+  type: string;
+  county?: string;
+  region?: string;
+  amenities?: string[];
+  parking?: boolean;
+  wheelchairAccessible?: boolean;
+  notes?: string;
+}
+
+interface PfbcRegulationRecord {
+  waterwayId?: string;
+  waterwayName: string;
+  regulationType: string;
+  description: string;
+  season?: string;
+  species?: string[];
+  notes?: string;
+}
+
+interface PfbcHabitatRecord {
+  id: string;
+  waterwayName: string;
+  installationType: string;
+  county?: string;
+  region?: string;
+  installationDate?: string;
+  targetSpecies?: string[];
+  description?: string;
+}
+
+interface PfbcLayerSummary {
+  classATroutStreams?: any[];
+  wildTroutStreams?: any[];
+  delayedHarvestStreams?: any[];
+  trophyTroutStreams?: any[];
+  bestBassWaters?: any[];
+  otherSpeciesWaters?: any[];
+}
+
+interface StockingGroup {
+  id: string;
+  name: string;
+  county?: string;
+  region?: string;
+  type?: string;
+  entries: {
+    id: string;
+    species: string;
+    date: string;
+    quantity?: number;
+    sizeLabel?: string;
+    averageLength?: number;
+    notes?: string;
+  }[];
 }
 
 const PA_FISH_SPECIES: FishSpecies[] = [
@@ -1384,6 +1535,246 @@ const PA_AQUATIC_INSECTS = [
   }
 ];
 
+type AquaticInsect = (typeof PA_AQUATIC_INSECTS)[number];
+
+const MONTH_NAMES = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+const DEFAULT_HATCH_PATTERNS = ['Parachute Adams', 'Elk Hair Caddis', 'Sparkle Dun', 'Soft Hackle'];
+
+const HATCH_PATTERN_LIBRARY: Record<string, string[]> = {
+  hendrickson: ['Parachute Hendrickson', 'Red Quill', 'Hendrickson Emerger'],
+  sulphur: ['Sulphur Dun', 'CDC Emerger', 'Light Cahill'],
+  'march brown': ['March Brown Dry', 'Light Cahill', 'March Brown Emerger'],
+  'green drake': ['Green Drake Dry', 'Extended Body Drake', 'Wiggle Nymph'],
+  trico: ['Trico Spinner', 'Black Beauty', 'Trico Emerger'],
+  caddis: ['Elk Hair Caddis', 'X-Caddis', 'LaFontaine Sparkle Pupa'],
+  stonefly: ['Stimulator', 'Pat\'s Rubber Legs', 'Amy\'s Ant'],
+  midge: ['Griffith\'s Gnat', 'Zebra Midge', 'Disco Midge'],
+  grannom: ['Grannom Caddis', 'Soft Hackle', 'Pupa Caddis'],
+  isonychia: ['Iso Dun', 'Parachute Iso', 'Iso Nymph'],
+  'blue-winged olive': ['BWO Dun', 'RS2', 'BWO Emerger']
+};
+
+const toTitleCase = (value?: string): string => {
+  if (!value) return '';
+  return value
+    .split(' ')
+    .map((segment) => (segment ? segment[0].toUpperCase() + segment.slice(1).toLowerCase() : segment))
+    .join(' ')
+    .trim();
+};
+
+const monthIndex = (value?: string): number => {
+  if (!value) return -1;
+  return MONTH_NAMES.findIndex((month) => month.toLowerCase() === value.toLowerCase());
+};
+
+function expandMonths(start?: string, end?: string): string[] {
+  const startIndex = monthIndex(start);
+  const endIndex = monthIndex(end);
+
+  if (startIndex === -1 && endIndex === -1) {
+    return [];
+  }
+
+  if (startIndex === -1 && endIndex !== -1) {
+    return [MONTH_NAMES[endIndex]];
+  }
+
+  if (startIndex !== -1 && endIndex === -1) {
+    return [MONTH_NAMES[startIndex]];
+  }
+
+  if (startIndex <= endIndex) {
+    return MONTH_NAMES.slice(startIndex, endIndex + 1);
+  }
+
+  return [...MONTH_NAMES.slice(startIndex), ...MONTH_NAMES.slice(0, endIndex + 1)];
+}
+
+function formatTimeOfDayLabel(time?: string): string {
+  if (!time) {
+    return 'All day';
+  }
+  return time
+    .split(',')
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .map((segment) => segment[0].toUpperCase() + segment.slice(1))
+    .join(', ');
+}
+
+function formatWaterTempRange(hatch: WaterwayHatchRecord['hatch']): string {
+  if (!hatch) return 'Check stream temps';
+  const range =
+    hatch.water_temp_min_f !== undefined && hatch.water_temp_max_f !== undefined
+      ? `${hatch.water_temp_min_f}°F - ${hatch.water_temp_max_f}°F`
+      : undefined;
+  const optimal =
+    hatch.water_temp_optimal_f !== undefined ? `Optimal ${hatch.water_temp_optimal_f}°F` : undefined;
+  const summary = [range, optimal].filter(Boolean);
+  return summary.length ? summary.join(' · ') : 'Check stream temps';
+}
+
+function mapIntensityToDifficultyLabel(intensity?: string): 'Beginner' | 'Intermediate' | 'Advanced' {
+  switch ((intensity || '').toLowerCase()) {
+    case 'heavy':
+      return 'Intermediate';
+    case 'moderate':
+      return 'Beginner';
+    case 'light':
+      return 'Beginner';
+    case 'sporadic':
+      return 'Advanced';
+    default:
+      return 'Intermediate';
+  }
+}
+
+function mapIntensityToPoints(intensity?: string): number {
+  switch ((intensity || '').toLowerCase()) {
+    case 'heavy':
+      return 25;
+    case 'moderate':
+      return 20;
+    case 'light':
+      return 15;
+    case 'sporadic':
+      return 30;
+    default:
+      return 18;
+  }
+}
+
+function getPatternSuggestions(name?: string): string[] {
+  if (!name) return DEFAULT_HATCH_PATTERNS;
+  const key = name.toLowerCase();
+  return HATCH_PATTERN_LIBRARY[key] ?? DEFAULT_HATCH_PATTERNS;
+}
+
+function hydrateInsectsFromHatches(entries: WaterwayHatchRecord[]): AquaticInsect[] {
+  const map = new Map<string, AquaticInsect>();
+
+  entries.forEach((entry) => {
+    const hatch = entry.hatch;
+    if (!hatch) return;
+    const id = hatch.id || entry.id;
+    if (map.has(id)) return;
+
+    const displayName = toTitleCase(hatch.common_name || hatch.species || 'Macroinvertebrate');
+    const months = expandMonths(hatch.hatch_start_month, hatch.hatch_end_month);
+    const patterns = getPatternSuggestions(hatch.common_name || hatch.species);
+    const difficulty = mapIntensityToDifficultyLabel(entry.intensity);
+    const points = mapIntensityToPoints(entry.intensity);
+
+    // Determine if this is a caddis/midge (larva/pupa) or mayfly (nymph/emerger)
+    const isCaddisOrMidge = hatch.common_name?.toLowerCase().includes('caddis') || 
+                            hatch.common_name?.toLowerCase().includes('midge') ||
+                            hatch.species?.toLowerCase().includes('caddis') ||
+                            hatch.species?.toLowerCase().includes('midge');
+
+    const insect: AquaticInsect = isCaddisOrMidge ? {
+      id,
+      name: displayName,
+      scientificName: hatch.species || displayName,
+      type:
+        hatch.water_types && hatch.water_types.length
+          ? hatch.water_types.map((type) => toTitleCase(type)).join(', ')
+          : 'Aquatic insect',
+      months: months.length ? months : [hatch.peak_month || 'April'],
+      time: formatTimeOfDayLabel(hatch.time_of_day),
+      size: hatch.hook_size || '#16-#18',
+      waterTemp: formatWaterTempRange(hatch),
+      emergence: hatch.notes || `Peak in ${hatch.peak_month || 'prime season'}`,
+      larva: {
+        appearance: hatch.color_description || 'Match natural coloration',
+        habitat: entry.waterway?.name ? `${entry.waterway.name} system` : 'Riffles and runs',
+        size: hatch.hook_size || '#16-#18',
+        patterns: patterns.map((pattern) => `${pattern} (larva)`)
+      },
+      pupa: {
+        appearance: hatch.color_description || 'Swims to surface, wings visible',
+        behavior: 'Fast emerger, vulnerable',
+        patterns: patterns.map((pattern) => `${pattern} (pupa)`)
+      },
+      adult: {
+        appearance: hatch.color_description || 'Use natural-toned dries',
+        size: hatch.hook_size || '#16-#18',
+        patterns
+      },
+      points,
+      difficulty,
+      tips: `Target ${entry.waterway?.name ?? 'limestone streams'} when water temps hit ${
+        hatch.water_temp_optimal_f ?? 55
+      }°F.`
+    } : {
+      id,
+      name: displayName,
+      scientificName: hatch.species || displayName,
+      type:
+        hatch.water_types && hatch.water_types.length
+          ? hatch.water_types.map((type) => toTitleCase(type)).join(', ')
+          : 'Aquatic insect',
+      months: months.length ? months : [hatch.peak_month || 'April'],
+      time: formatTimeOfDayLabel(hatch.time_of_day),
+      size: hatch.hook_size || '#16-#18',
+      waterTemp: formatWaterTempRange(hatch),
+      emergence: hatch.notes || `Peak in ${hatch.peak_month || 'prime season'}`,
+      nymph: {
+        appearance: hatch.color_description || 'Match natural coloration',
+        habitat: entry.waterway?.name ? `${entry.waterway.name} system` : 'Riffles and runs',
+        size: hatch.hook_size || '#16-#18',
+        patterns: patterns.map((pattern) => `${pattern} (nymph)`)
+      },
+      emerger: {
+        appearance: hatch.color_description || 'Emerging wings',
+        behavior: 'Stuck in surface film',
+        patterns: patterns.map((pattern) => `${pattern} (emerger)`)
+      },
+      adult: {
+        appearance: hatch.color_description || 'Use natural-toned dries',
+        size: hatch.hook_size || '#16-#18',
+        patterns
+      },
+      points,
+      difficulty,
+      tips: `Target ${entry.waterway?.name ?? 'limestone streams'} when water temps hit ${
+        hatch.water_temp_optimal_f ?? 55
+      }°F.`
+    };
+
+    map.set(id, insect);
+  });
+
+  return Array.from(map.values());
+}
+
+function formatStockingDate(date: string): string {
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) {
+    return date;
+  }
+  return parsed.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
 // Keep original small set for backwards compatibility
 const OLD_PA_WATER_BODIES: WaterBody[] = [
   {
@@ -1546,7 +1937,7 @@ export default function FishingPage() {
   const [matchHatchScore, setMatchHatchScore] = useState(0);
   const [matchHatchStreak, setMatchHatchStreak] = useState(0);
   const [matchedInsects, setMatchedInsects] = useState<string[]>([]);
-  const [currentChallenge, setCurrentChallenge] = useState<typeof PA_AQUATIC_INSECTS[0] | null>(null);
+  const [currentChallenge, setCurrentChallenge] = useState<AquaticInsect | null>(null);
   const [showHatchGame, setShowHatchGame] = useState(false);
   const [selectedFlyGuess, setSelectedFlyGuess] = useState<string>('');
   
@@ -1554,6 +1945,18 @@ export default function FishingPage() {
   const [selectedKnot, setSelectedKnot] = useState<typeof FISHING_KNOTS[0] | null>(null);
   const [selectedCastType, setSelectedCastType] = useState<'conventional' | 'fly'>('conventional');
   const [selectedEquipmentType, setSelectedEquipmentType] = useState<'conventional' | 'fly'>('conventional');
+  const [hatchEntries, setHatchEntries] = useState<WaterwayHatchRecord[]>([]);
+  const [pfbcStockingRecords, setPfbcStockingRecords] = useState<PFBCStockingRecord[]>([]);
+  const [expertTechniques, setExpertTechniques] = useState<ExpertTechniqueRecord[]>([]);
+  const [expertPatterns, setExpertPatterns] = useState<ExpertPatternRecord[]>([]);
+  const [flyShops, setFlyShops] = useState<FlyShopRecord[]>([]);
+  const [pfbcAccessPoints, setPfbcAccessPoints] = useState<PfbcAccessPointRecord[]>([]);
+  const [pfbcRegulations, setPfbcRegulations] = useState<PfbcRegulationRecord[]>([]);
+  const [pfbcHabitatProjects, setPfbcHabitatProjects] = useState<PfbcHabitatRecord[]>([]);
+  const [pfbcLayerSummary, setPfbcLayerSummary] = useState<PfbcLayerSummary | null>(null);
+  const [matchHatchCatalog, setMatchHatchCatalog] = useState<AquaticInsect[]>(PA_AQUATIC_INSECTS);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [dataError, setDataError] = useState<string | null>(null);
 
   // Load user logs from localStorage
   useEffect(() => {
@@ -1571,6 +1974,87 @@ export default function FishingPage() {
       setMatchHatchStreak(parsed.streak || 0);
     }
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadAdvancedData() {
+      setDataLoading(true);
+      setDataError(null);
+
+      const configs: { url: string; dataKey?: 'data' | 'layers'; onSuccess: (payload: any) => void }[] = [
+        { url: '/api/waterways/hatches', onSuccess: (payload) => setHatchEntries((payload ?? []) as WaterwayHatchRecord[]) },
+        { url: '/api/pfbc/stocking', onSuccess: (payload) => setPfbcStockingRecords((payload ?? []) as PFBCStockingRecord[]) },
+        { url: '/api/experts/techniques', onSuccess: (payload) => setExpertTechniques((payload ?? []) as ExpertTechniqueRecord[]) },
+        { url: '/api/experts/patterns', onSuccess: (payload) => setExpertPatterns((payload ?? []) as ExpertPatternRecord[]) },
+        { url: '/api/shops/all', onSuccess: (payload) => setFlyShops((payload ?? []) as FlyShopRecord[]) },
+        { url: '/api/pfbc/access-points', onSuccess: (payload) => setPfbcAccessPoints((payload ?? []) as PfbcAccessPointRecord[]) },
+        { url: '/api/pfbc/regulations', onSuccess: (payload) => setPfbcRegulations((payload ?? []) as PfbcRegulationRecord[]) },
+        { url: '/api/pfbc/habitat', onSuccess: (payload) => setPfbcHabitatProjects((payload ?? []) as PfbcHabitatRecord[]) },
+        { url: '/api/pfbc/mapping-layers', dataKey: 'layers', onSuccess: (payload) => setPfbcLayerSummary((payload ?? null) as PfbcLayerSummary | null) }
+      ];
+
+      const responses = await Promise.allSettled(configs.map((config) => fetch(config.url)));
+      let failures = 0;
+
+      for (let i = 0; i < responses.length; i++) {
+        if (cancelled) {
+          return;
+        }
+
+        const result = responses[i];
+        const config = configs[i];
+
+        if (result.status !== 'fulfilled') {
+          failures++;
+          continue;
+        }
+
+        const res = result.value;
+        if (!res.ok) {
+          failures++;
+          continue;
+        }
+
+        try {
+          const payload = await res.json();
+          const data = config.dataKey ? payload[config.dataKey] : payload.data;
+          config.onSuccess(data ?? (config.dataKey ? null : []));
+        } catch (error) {
+          failures++;
+        }
+      }
+
+      if (!cancelled) {
+        setDataLoading(false);
+        if (failures === configs.length) {
+          setDataError('Unable to load Supabase advanced learning datasets right now.');
+        } else if (failures > 0) {
+          setDataError('Some advanced datasets failed to load. Refresh to try again.');
+        }
+      }
+    }
+
+    loadAdvancedData().catch((error) => {
+      if (!cancelled) {
+        setDataLoading(false);
+        setDataError('Unable to load Supabase advanced learning datasets right now.');
+        console.error('Advanced data fetch failed:', error);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hatchEntries.length) return;
+    const hydrated = hydrateInsectsFromHatches(hatchEntries);
+    if (hydrated.length) {
+      setMatchHatchCatalog(hydrated);
+    }
+  }, [hatchEntries]);
 
   // Initialize map
   useEffect(() => {
@@ -1701,6 +2185,69 @@ export default function FishingPage() {
         !s.scientificName.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
+
+  const pfbcStockingGroups = useMemo<StockingGroup[]>(() => {
+    if (!pfbcStockingRecords.length) return [];
+    const groups = new Map<string, StockingGroup>();
+
+    pfbcStockingRecords.forEach((record) => {
+      const id = record.waterwayId || record.waterwayName;
+      if (!id) return;
+
+      if (!groups.has(id)) {
+        groups.set(id, {
+          id,
+          name: record.waterwayName,
+          county: record.county,
+          region: record.region,
+          type: 'Waterway',
+          entries: []
+        });
+      }
+
+      const group = groups.get(id)!;
+      group.entries.push({
+        id: `${id}-${record.stockingDate}-${record.species}`,
+        species: record.species,
+        date: record.stockingDate,
+        quantity: record.quantity,
+        sizeLabel: record.sizeClass,
+        averageLength: record.averageLength,
+        notes: record.notes
+      });
+    });
+
+    return Array.from(groups.values()).sort((a, b) => a.name.localeCompare(b.name));
+  }, [pfbcStockingRecords]);
+
+  const fallbackStockingGroups = useMemo<StockingGroup[]>(() => {
+    return PA_WATER_BODIES
+      .filter((w) => w.stockingSchedule && w.stockingSchedule.length > 0)
+      .map((waterBody) => ({
+        id: waterBody.id,
+        name: waterBody.name,
+        county: waterBody.county,
+        region: waterBody.type,
+        type: waterBody.type,
+        entries: waterBody.stockingSchedule!.map((event, idx) => ({
+          id: `${waterBody.id}-${idx}`,
+          species: event.species,
+          date: event.date,
+          quantity: event.quantity,
+          sizeLabel: event.size
+        }))
+      }));
+  }, []);
+
+  const hasLiveStockingData = pfbcStockingGroups.length > 0;
+  const activeStockingGroups = hasLiveStockingData ? pfbcStockingGroups : fallbackStockingGroups;
+
+  const curatedTechniques = useMemo(() => expertTechniques.slice(0, 6), [expertTechniques]);
+  const curatedPatterns = useMemo(() => expertPatterns.slice(0, 6), [expertPatterns]);
+  const curatedFlyShops = useMemo(() => flyShops.slice(0, 6), [flyShops]);
+  const curatedAccessPoints = useMemo(() => pfbcAccessPoints.slice(0, 4), [pfbcAccessPoints]);
+  const curatedRegulations = useMemo(() => pfbcRegulations.slice(0, 4), [pfbcRegulations]);
+  const curatedHabitat = useMemo(() => pfbcHabitatProjects.slice(0, 4), [pfbcHabitatProjects]);
 
   const counties = ['all', ...Array.from(new Set(PA_WATER_BODIES.map(w => w.county)))].sort();
 
@@ -1888,69 +2435,100 @@ export default function FishingPage() {
         {/* Trout Stocking Tab */}
         {activeTab === 'stocking' && (
           <div className="card section">
-            <h2>📅 2024 Trout Stocking Schedule</h2>
+            <h2>{hasLiveStockingData ? '📡 PFBC Stocking Intelligence' : '📅 2024 Trout Stocking Schedule'}</h2>
             <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
-              Plan your fishing trips around PFBC stocking schedules
+              {hasLiveStockingData
+                ? 'Live Supabase migrations power these PFBC stocking releases across Pennsylvania.'
+                : 'Plan your fishing trips around PFBC stocking schedules.'}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
-              {PA_WATER_BODIES
-                .filter(w => w.stockingSchedule && w.stockingSchedule.length > 0)
-                .map(waterBody => (
-                  <div 
-                    key={waterBody.id}
-                    className="card"
-                    style={{ background: '#F0F9FF', border: '2px solid #0077B6' }}
-                  >
-                    <h3>{waterBody.name}</h3>
-                    <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
-                      {waterBody.type} • {waterBody.county} County
-                    </p>
+            {pfbcLayerSummary && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                {[
+                  { label: 'Class A Streams', value: pfbcLayerSummary.classATroutStreams?.length ?? 0, color: '#0E7490' },
+                  { label: 'Wild Trout Waters', value: pfbcLayerSummary.wildTroutStreams?.length ?? 0, color: '#2563EB' },
+                  { label: 'Delayed Harvest', value: pfbcLayerSummary.delayedHarvestStreams?.length ?? 0, color: '#D97706' },
+                  { label: 'Trophy Trout', value: pfbcLayerSummary.trophyTroutStreams?.length ?? 0, color: '#7C3AED' },
+                  { label: 'Best Bass Waters', value: pfbcLayerSummary.bestBassWaters?.length ?? 0, color: '#16A34A' },
+                  { label: 'Other Species', value: pfbcLayerSummary.otherSpeciesWaters?.length ?? 0, color: '#F43F5E' }
+                ].map((stat) => (
+                  <div key={stat.label} style={{ background: 'white', borderRadius: '12px', padding: '1rem', border: `1px solid ${stat.color}33` }}>
+                    <div style={{ fontSize: '2rem', fontWeight: 800, color: stat.color }}>{stat.value}</div>
+                    <div style={{ color: '#475569', fontWeight: 600 }}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
-                    {waterBody.stockingSchedule!.map((event, idx) => (
-                      <div 
-                        key={idx}
-                        style={{
-                          background: 'white',
-                          padding: '1rem',
-                          borderRadius: '8px',
-                          marginTop: '0.75rem',
-                          borderLeft: '4px solid #0077B6'
-                        }}
-                      >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                          <div style={{ fontWeight: 700, color: '#023047', fontSize: '1.1rem' }}>
-                            {event.species}
-                          </div>
-                          <div style={{ 
-                            background: '#FFD60A', 
-                            color: '#023047', 
-                            padding: '0.25rem 0.75rem', 
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
+              {activeStockingGroups.map((group) => (
+                <div
+                  key={group.id}
+                  className="card"
+                  style={{ background: '#F0F9FF', border: '2px solid #0077B6' }}
+                >
+                  <h3>{group.name}</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
+                    {[group.type, group.region, group.county && `${group.county} County`].filter(Boolean).join(' • ')}
+                  </p>
+
+                  {group.entries.map((entry) => (
+                    <div
+                      key={entry.id}
+                      style={{
+                        background: 'white',
+                        padding: '1rem',
+                        borderRadius: '8px',
+                        marginTop: '0.75rem',
+                        borderLeft: '4px solid #0077B6'
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                        <div style={{ fontWeight: 700, color: '#023047', fontSize: '1.1rem' }}>
+                          {entry.species}
+                        </div>
+                        <div
+                          style={{
+                            background: '#FFD60A',
+                            color: '#023047',
+                            padding: '0.25rem 0.75rem',
                             borderRadius: '6px',
                             fontSize: '0.85rem',
                             fontWeight: 700
-                          }}>
-                            {event.size}
-                          </div>
-                        </div>
-                        <div style={{ fontSize: '0.9rem', color: '#4B5563' }}>
-                          📅 {new Date(event.date).toLocaleDateString('en-US', { 
-                            weekday: 'long', 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                          })}
-                        </div>
-                        <div style={{ fontSize: '0.9rem', color: '#059669', fontWeight: 600, marginTop: '0.25rem' }}>
-                          🐟 {event.quantity.toLocaleString()} fish
+                          }}
+                        >
+                          {entry.sizeLabel || 'PFBC Release'}
                         </div>
                       </div>
-                    ))}
+                      <div style={{ fontSize: '0.9rem', color: '#4B5563' }}>
+                        📅 {formatStockingDate(entry.date)}
+                      </div>
+                      {entry.quantity && (
+                        <div style={{ fontSize: '0.9rem', color: '#059669', fontWeight: 600, marginTop: '0.25rem' }}>
+                          🐟 {entry.quantity.toLocaleString()} fish
+                        </div>
+                      )}
+                      {entry.averageLength && (
+                        <div style={{ fontSize: '0.85rem', color: '#1E3A8A', marginTop: '0.25rem' }}>
+                          📏 Avg {entry.averageLength.toFixed(1)}"
+                        </div>
+                      )}
+                      {entry.notes && (
+                        <div style={{ fontSize: '0.85rem', color: '#7C2D12', marginTop: '0.5rem' }}>
+                          📝 {entry.notes}
+                        </div>
+                      )}
+                    </div>
+                  ))}
 
+                  {!hasLiveStockingData && (
                     <button
                       onClick={() => {
-                        setSelectedWaterBody(waterBody);
-                        setActiveTab('map');
+                        const waterBody = PA_WATER_BODIES.find((w) => w.id === group.id);
+                        if (waterBody) {
+                          setSelectedWaterBody(waterBody);
+                          setActiveTab('map');
+                        }
                       }}
                       className="btn"
                       style={{
@@ -1962,8 +2540,9 @@ export default function FishingPage() {
                     >
                       View on Map
                     </button>
-                  </div>
-                ))}
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -2934,6 +3513,85 @@ export default function FishingPage() {
                   ))}
                 </div>
               </div>
+
+              {curatedTechniques.length > 0 && (
+                <div className="card" style={{ background: '#ECFDF5' }}>
+                  <h3>🎓 Mentor Techniques (Supabase)</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    Live data from migrations 028-030 featuring Joe Humphreys, George Daniel, and Trout Unlimited mentors.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                    {curatedTechniques.map((technique) => (
+                      <div key={technique.id} className="card" style={{ background: 'white' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                          <h4 style={{ color: '#047857' }}>{technique.name}</h4>
+                          {technique.difficulty && (
+                            <span style={{ background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.75rem', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 600 }}>
+                              {toTitleCase(technique.difficulty)}
+                            </span>
+                          )}
+                        </div>
+                        <p style={{ color: '#6B7280', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                          Mentor: {technique.expert?.name ?? 'WLA Expert'}
+                          {technique.expert?.location ? ` • ${technique.expert.location}` : ''}
+                        </p>
+                        {technique.description && (
+                          <p style={{ color: '#374151', marginBottom: '0.75rem', lineHeight: 1.5 }}>{technique.description}</p>
+                        )}
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                          {technique.water_types?.map((type) => (
+                            <span key={type} style={{ background: '#F0FDFA', color: '#0F766E', padding: '0.25rem 0.75rem', borderRadius: '8px', fontSize: '0.8rem' }}>
+                              {toTitleCase(type)}
+                            </span>
+                          ))}
+                        </div>
+                        {technique.best_seasons && technique.best_seasons.length > 0 && (
+                          <div style={{ fontSize: '0.85rem', color: '#475569' }}>
+                            Best seasons: {technique.best_seasons.map((season) => toTitleCase(season)).join(', ')}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {curatedPatterns.length > 0 && (
+                <div className="card" style={{ background: '#FFF7ED' }}>
+                  <h3>🪡 Signature Patterns & Materials</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    Advanced fly bench recipes direct from Pennsylvania legends. Perfect for lesson plans or shop orders.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                    {curatedPatterns.map((pattern) => (
+                      <div key={pattern.id} className="card" style={{ background: 'white' }}>
+                        <h4 style={{ color: '#B45309' }}>{pattern.name}</h4>
+                        <p style={{ color: '#6B7280', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                          {pattern.expert?.name ? `By ${pattern.expert.name}` : 'Expert pattern'} • {toTitleCase(pattern.pattern_type ?? 'All waters')}
+                        </p>
+                        {pattern.description && (
+                          <p style={{ color: '#374151', marginBottom: '0.75rem', lineHeight: 1.5 }}>{pattern.description}</p>
+                        )}
+                        {pattern.target_species && pattern.target_species.length > 0 && (
+                          <div style={{ marginBottom: '0.75rem', fontSize: '0.85rem', color: '#475569' }}>
+                            🎯 Targets: {pattern.target_species.join(', ')}
+                          </div>
+                        )}
+                        {pattern.materials && pattern.materials.length > 0 && (
+                          <div>
+                            <strong style={{ fontSize: '0.85rem', color: '#92400E' }}>Materials:</strong>
+                            <ul style={{ paddingLeft: '1.25rem', marginTop: '0.35rem', color: '#6B7280', fontSize: '0.85rem' }}>
+                              {pattern.materials.slice(0, 5).map((material, idx) => (
+                                <li key={idx}>{material}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -3419,11 +4077,22 @@ export default function FishingPage() {
                   <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Streak</div>
                 </div>
                 <div style={{ textAlign: 'center', background: '#ECFDF5', padding: '1rem 1.5rem', borderRadius: '12px' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#059669' }}>{matchedInsects.length}/{PA_AQUATIC_INSECTS.length}</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#059669' }}>{matchedInsects.length}/{matchHatchCatalog.length}</div>
                   <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>Mastered</div>
                 </div>
               </div>
             </div>
+
+            {dataLoading && (
+              <p style={{ color: '#0369A1', marginBottom: '1rem' }}>
+                Loading live macroinvertebrate intel from Supabase...
+              </p>
+            )}
+            {dataError && (
+              <p style={{ color: '#B45309', marginBottom: '1rem' }}>
+                {dataError}
+              </p>
+            )}
 
             {showHatchGame && currentChallenge ? (
               <div className="card" style={{ background: '#F9FAFB' }}>
@@ -3525,7 +4194,7 @@ export default function FishingPage() {
               </div>
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
-                {PA_AQUATIC_INSECTS.map((insect) => (
+                {matchHatchCatalog.map((insect) => (
                   <div 
                     key={insect.id}
                     className="card"
@@ -3904,6 +4573,150 @@ export default function FishingPage() {
                   ))}
                 </div>
               </div>
+
+              {curatedFlyShops.length > 0 && (
+                <div className="card" style={{ background: '#F0FDF4' }}>
+                  <h3>🛍️ Fly Shops & Guides (Live)</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    Pulled from Supabase fly shop migrations. Connect classes with outfitters statewide.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                    {curatedFlyShops.map((shop) => (
+                      <div key={shop.id} className="card" style={{ background: 'white' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                          <h4 style={{ color: '#15803D' }}>{shop.name}</h4>
+                          {shop.hasGuides && <span style={{ background: '#DCFCE7', color: '#166534', padding: '0.25rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600 }}>Guides</span>}
+                        </div>
+                        <p style={{ color: '#6B7280', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                          {shop.location || 'Pennsylvania'}{shop.region ? ` • ${shop.region}` : ''}
+                        </p>
+                        {shop.services && (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                            {shop.services.slice(0, 4).map((service, idx) => (
+                              <span key={idx} style={{ background: '#E0F2FE', color: '#0369A1', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.8rem' }}>
+                                {service}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        <div style={{ fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
+                          {shop.phone && <div>📞 {shop.phone}</div>}
+                          {shop.website && (
+                            <div>
+                              🌐 <a href={shop.website} target="_blank" rel="noreferrer" style={{ color: '#0E7490' }}>{shop.website.replace('https://', '')}</a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#475569' }}>
+                    Need the full list? <a href="/api/shops/all" style={{ color: '#0E7490', fontWeight: 600 }}>Download JSON →</a>
+                  </p>
+                </div>
+              )}
+
+              {curatedAccessPoints.length > 0 && (
+                <div className="card" style={{ background: '#EFF6FF' }}>
+                  <h3>🚗 PFBC Access Points</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    Highlighting public launches, wade access, and fly-fishing-only stretches from migration 030.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+                    {curatedAccessPoints.map((access) => (
+                      <div key={access.id} className="card" style={{ background: 'white' }}>
+                        <h4 style={{ color: '#1D4ED8' }}>{access.name}</h4>
+                        <p style={{ color: '#6B7280', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                          {access.waterwayName} • {access.type}
+                        </p>
+                        {access.amenities && (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                            {access.amenities.map((amenity, idx) => (
+                              <span key={idx} style={{ background: '#DBEAFE', color: '#1D4ED8', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem' }}>
+                                {amenity}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        <div style={{ fontSize: '0.85rem', color: '#475569' }}>
+                          {access.county && `${access.county} County`}
+                          {access.wheelchairAccessible && ' • ♿ Accessible'}
+                        </div>
+                        {access.notes && (
+                          <p style={{ fontSize: '0.85rem', color: '#475569', marginTop: '0.5rem' }}>{access.notes}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {curatedRegulations.length > 0 && (
+                <div className="card" style={{ background: '#FFF7ED' }}>
+                  <h3>📜 Regulation Highlights</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    Quick briefing of catch-and-release zones, delayed harvest stretches, and trophy sections.
+                  </p>
+                  <div style={{ display: 'grid', gap: '1rem' }}>
+                    {curatedRegulations.map((reg) => (
+                      <div key={reg.waterwayName + reg.regulationType} className="card" style={{ background: 'white' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                          <div>
+                            <h4 style={{ margin: 0 }}>{reg.waterwayName}</h4>
+                            <p style={{ color: '#6B7280', fontSize: '0.85rem', margin: 0 }}>{reg.regulationType}</p>
+                          </div>
+                          {reg.season && (
+                            <span style={{ background: '#FEF3C7', color: '#92400E', padding: '0.25rem 0.6rem', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 600 }}>
+                              {reg.season}
+                            </span>
+                          )}
+                        </div>
+                        <p style={{ color: '#374151', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{reg.description}</p>
+                        {reg.species && (
+                          <div style={{ fontSize: '0.85rem', color: '#475569' }}>
+                            Species: {reg.species.join(', ')}
+                          </div>
+                        )}
+                        {reg.notes && (
+                          <div style={{ fontSize: '0.8rem', color: '#7C2D12', marginTop: '0.5rem' }}>
+                            Note: {reg.notes}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {curatedHabitat.length > 0 && (
+                <div className="card" style={{ background: '#FEF2F2' }}>
+                  <h3>🌊 Habitat Enhancements</h3>
+                  <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
+                    PFBC-led structures (lunkers, attractors, spawning beds) to incorporate into field missions.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+                    {curatedHabitat.map((project) => (
+                      <div key={project.id} className="card" style={{ background: 'white' }}>
+                        <h4 style={{ color: '#DC2626' }}>{project.waterwayName}</h4>
+                        <p style={{ color: '#6B7280', fontSize: '0.9rem', marginBottom: '0.25rem' }}>
+                          {project.installationType}
+                        </p>
+                        {project.installationDate && (
+                          <div style={{ fontSize: '0.85rem', color: '#475569' }}>Installed: {project.installationDate}</div>
+                        )}
+                        {project.targetSpecies && (
+                          <div style={{ fontSize: '0.85rem', color: '#475569', marginTop: '0.5rem' }}>
+                            🎯 Target species: {project.targetSpecies.join(', ')}
+                          </div>
+                        )}
+                        {project.description && (
+                          <p style={{ fontSize: '0.9rem', color: '#374151', marginTop: '0.5rem' }}>{project.description}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

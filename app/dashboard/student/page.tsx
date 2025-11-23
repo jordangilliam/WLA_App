@@ -1,12 +1,21 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type CSSProperties } from 'react';
 import { usePoints } from '@/ui/points/PointsProvider';
-import Link from 'next/link';
 
 const DEFAULT_BADGE_TARGET = 50;
+
+const ICONS = {
+  map: '/images/icons/Map.jpg',
+  journal: '/images/icons/journal.jpg',
+  award: '/images/icons/award.jpg',
+  habitat: '/images/icons/Habitat.png',
+  macro: '/images/icons/Micor(Macro).png',
+};
 
 interface EnrolledClass {
   id: string;
@@ -22,11 +31,13 @@ interface AchievementStats {
   total: number;
 }
 
+const formatNumber = (value: number) => value.toLocaleString();
+
 export default function StudentDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const { total: points, level, currentStreak, badges } = usePoints();
-  
+
   const [classes, setClasses] = useState<EnrolledClass[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,35 +53,26 @@ export default function StudentDashboard() {
         fetch('/api/achievements'),
       ]);
 
-      if (
-        classesResult.status === 'rejected' ||
-        !classesResult.value.ok
-      ) {
+      if (classesResult.status === 'rejected' || !classesResult.value.ok) {
         throw new Error('Failed to fetch classes');
       }
 
       const classesPayload = await classesResult.value.json();
       setClasses(classesPayload.classes || []);
 
-      if (achievementsResult.status === 'fulfilled') {
-        if (achievementsResult.value.ok) {
-          const achievementsPayload = await achievementsResult.value.json();
-          const totalAchievements = Array.isArray(achievementsPayload.achievements)
-            ? achievementsPayload.achievements.length
-            : 0;
-          const unlockedAchievements = Array.isArray(achievementsPayload.userAchievements)
-            ? achievementsPayload.userAchievements.length
-            : 0;
+      if (achievementsResult.status === 'fulfilled' && achievementsResult.value.ok) {
+        const achievementsPayload = await achievementsResult.value.json();
+        const totalAchievements = Array.isArray(achievementsPayload.achievements)
+          ? achievementsPayload.achievements.length
+          : 0;
+        const unlockedAchievements = Array.isArray(achievementsPayload.userAchievements)
+          ? achievementsPayload.userAchievements.length
+          : 0;
 
-          setAchievementStats({
-            earned: unlockedAchievements,
-            total: totalAchievements,
-          });
-        } else {
-          console.error('Failed to fetch achievements:', achievementsResult.value.statusText);
-        }
-      } else {
-        console.error('Failed to fetch achievements:', achievementsResult.reason);
+        setAchievementStats({
+          earned: unlockedAchievements,
+          total: totalAchievements,
+        });
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
@@ -95,217 +97,391 @@ export default function StudentDashboard() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 flex items-center justify-center pb-20 md:pb-6">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'grid',
+          placeItems: 'center',
+          background:
+            'radial-gradient(circle at 10% 20%, rgba(29,166,219,0.15), transparent 45%), radial-gradient(circle at 85% 0%, rgba(234,126,55,0.15), transparent 40%), #F5F7FB',
+        }}
+      >
+        <div
+          className="animate-spin rounded-full border-4 border-white/20 border-t-white"
+          style={{ width: '54px', height: '54px' }}
+        />
       </div>
     );
   }
 
   const rawEarnedBadges = achievementStats ? achievementStats.earned : badges;
   const totalBadgeBaseline = achievementStats?.total ?? 0;
-  const totalBadges =
-    totalBadgeBaseline > 0
-      ? totalBadgeBaseline
-      : Math.max(DEFAULT_BADGE_TARGET, rawEarnedBadges, 1);
+  const totalBadges = totalBadgeBaseline > 0 ? totalBadgeBaseline : Math.max(DEFAULT_BADGE_TARGET, rawEarnedBadges, 1);
   const earnedBadgesCount = Math.min(rawEarnedBadges, totalBadges);
-  const badgeProgress =
-    totalBadges === 0 ? 0 : Math.min((earnedBadgesCount / totalBadges) * 100, 100);
+  const badgeProgress = totalBadges === 0 ? 0 : Math.min((earnedBadgesCount / totalBadges) * 100, 100);
+
+  const heroStats = [
+    { label: 'Total Points', value: formatNumber(points), icon: ICONS.award },
+    { label: 'Active Streak', value: `${currentStreak} days`, icon: ICONS.journal },
+    { label: 'Achievements', value: `${earnedBadgesCount}/${totalBadges}`, icon: ICONS.habitat },
+    { label: 'Current Level', value: level, icon: ICONS.macro },
+  ];
+
+  const quickActions = [
+    {
+      label: 'Field Check-In',
+      description: 'Log a site visit and boost your streak',
+      href: '/explore?action=checkin',
+      icon: ICONS.map,
+      variant: 'primary' as const,
+    },
+    {
+      label: 'Explore Sites',
+      description: 'Find trout waters and study habitats',
+      href: '/explore',
+      icon: ICONS.habitat,
+      accent: '#0EA5E9',
+    },
+    {
+      label: 'Field Journal',
+      description: 'Capture today’s observations and media',
+      href: '/journal-new',
+      icon: ICONS.journal,
+      accent: '#8B5CF6',
+    },
+    {
+      label: 'Stocking Calendar',
+      description: 'Watch PFBC releases statewide',
+      href: '/stocking',
+      icon: ICONS.award,
+      accent: '#F97316',
+    },
+  ];
+
+  const cardBaseStyle: CSSProperties = {
+    background: 'white',
+    borderRadius: '26px',
+    padding: '1.5rem',
+    border: '1px solid rgba(148,163,184,0.25)',
+    boxShadow: '0 25px 55px rgba(15,23,42,0.08)',
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 pb-20 md:pb-6">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">My Dashboard 📚</h1>
-          <p className="text-green-100">Track your progress and explore nature</p>
+    <div
+      style={{
+        minHeight: '100vh',
+        background:
+          'radial-gradient(circle at 15% 20%, rgba(29,166,219,0.18), transparent 45%), radial-gradient(circle at 85% 0%, rgba(234,126,55,0.15), transparent 40%), #F7FAFF',
+        paddingBottom: '4rem',
+      }}
+    >
+      <section
+        style={{
+          maxWidth: '1100px',
+          margin: '1.5rem auto',
+          padding: '3rem 2rem',
+          borderRadius: '32px',
+          color: 'white',
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'linear-gradient(135deg, #012A3A 0%, #0369A1 60%, #0EA5E9 100%)',
+          boxShadow: '0 35px 70px rgba(1,42,58,0.45)',
+        }}
+      >
+        <Image
+          src="/images/hero/Hero BAckground.jpg"
+          alt="Dashboard hero"
+          fill
+          priority
+          style={{ objectFit: 'cover', opacity: 0.12 }}
+        />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ margin: 0, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
+            Student Dashboard · Wildlife Leadership Academy
+          </p>
+          <h1 style={{ margin: '0.6rem 0', fontSize: 'clamp(2.1rem, 4vw, 3.4rem)', fontWeight: 900 }}>
+            Welcome back, {session?.user?.name || 'Ambassador'}
+          </h1>
+          <p style={{ margin: '0 0 1.5rem', color: 'rgba(255,255,255,0.9)', maxWidth: '640px', lineHeight: 1.5 }}>
+            Track your conservation streak, unlock achievements, and jump back into classes or missions with one tap.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <Link
+              href="/explore"
+              style={{
+                textDecoration: 'none',
+                padding: '0.85rem 1.5rem',
+                borderRadius: '16px',
+                background: 'rgba(255,255,255,0.15)',
+                color: 'white',
+                fontWeight: 600,
+                border: '1px solid rgba(255,255,255,0.3)',
+              }}
+            >
+              Find Field Sites →
+            </Link>
+            <Link
+              href="/journal-new"
+              style={{
+                textDecoration: 'none',
+                padding: '0.85rem 1.5rem',
+                borderRadius: '16px',
+                background: 'white',
+                color: '#012A3A',
+                fontWeight: 600,
+              }}
+            >
+              Update Field Journal
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Quick Stats Cards */}
-      <div className="max-w-4xl mx-auto px-4 -mt-8 mb-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <div className="text-3xl mb-2">🪙</div>
-            <div className="text-2xl font-bold text-gray-900">{points}</div>
-            <div className="text-xs text-gray-600">Total Points</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <div className="text-3xl mb-2">🔥</div>
-            <div className="text-2xl font-bold text-gray-900">{currentStreak}</div>
-            <div className="text-xs text-gray-600">Day Streak</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <div className="text-3xl mb-2">🏆</div>
-            <div className="text-2xl font-bold text-gray-900">{earnedBadgesCount}</div>
-            <div className="text-xs text-gray-600">Achievements</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <div className="text-3xl mb-2">📊</div>
-            <div className="text-2xl font-bold text-gray-900">{level}</div>
-            <div className="text-xs text-gray-600">Current Level</div>
-          </div>
+      <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+          {heroStats.map((stat) => (
+            <div key={stat.label} style={cardBaseStyle}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div
+                  style={{
+                    width: '58px',
+                    height: '58px',
+                    borderRadius: '18px',
+                    background: 'rgba(14,165,233,0.12)',
+                    display: 'grid',
+                    placeItems: 'center',
+                  }}
+                >
+                  <Image src={stat.icon} alt={stat.label} width={36} height={36} style={{ borderRadius: '12px' }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A' }}>{stat.value}</div>
+                  <div style={{ color: '#5E6A82', fontWeight: 600 }}>{stat.label}</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* Quick Actions */}
-      <div className="max-w-4xl mx-auto px-4 mb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link
-            href="/explore?action=checkin"
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6 text-center hover:from-green-600 hover:to-green-700 transition-all shadow-md"
-          >
-            <div className="text-3xl mb-2">📍</div>
-            <div className="font-bold">Check In</div>
-          </Link>
+      <section style={{ maxWidth: '1100px', margin: '2rem auto 0', padding: '0 1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+          {quickActions.map((action) => {
+            const isPrimary = action.variant === 'primary';
+            const baseStyle: CSSProperties = {
+              borderRadius: '24px',
+              padding: '1.5rem',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.75rem',
+              boxShadow: '0 25px 55px rgba(15,23,42,0.1)',
+            };
 
-          <Link
-            href="/explore"
-            className="bg-white border-2 border-green-600 text-green-700 rounded-lg p-6 text-center hover:bg-green-50 transition-all"
-          >
-            <div className="text-3xl mb-2">🗺️</div>
-            <div className="font-bold">Explore</div>
-          </Link>
+            const primaryStyle: CSSProperties = {
+              background: 'linear-gradient(135deg, #0F766E, #0EA5E9)',
+              color: 'white',
+            };
 
-          <Link
-            href="/journal-new"
-            className="bg-white border-2 border-blue-600 text-blue-700 rounded-lg p-6 text-center hover:bg-blue-50 transition-all"
-          >
-            <div className="text-3xl mb-2">📝</div>
-            <div className="font-bold">Journal</div>
-          </Link>
+            const neutralStyle: CSSProperties = {
+              background: 'white',
+              border: '1px solid rgba(148,163,184,0.3)',
+              color: '#0F172A',
+            };
 
-          <Link
-            href="/stocking"
-            className="bg-white border-2 border-purple-600 text-purple-700 rounded-lg p-6 text-center hover:bg-purple-50 transition-all"
-          >
-            <div className="text-3xl mb-2">🎣</div>
-            <div className="font-bold">Stocking</div>
-          </Link>
+            return (
+              <Link key={action.label} href={action.href} style={{ ...baseStyle, ...(isPrimary ? primaryStyle : neutralStyle) }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      width: '54px',
+                      height: '54px',
+                      borderRadius: '16px',
+                      background: isPrimary ? 'rgba(255,255,255,0.18)' : `${action.accent ?? '#0EA5E9'}1A`,
+                      display: 'grid',
+                      placeItems: 'center',
+                    }}
+                  >
+                    <Image src={action.icon} alt={action.label} width={34} height={34} style={{ borderRadius: '10px' }} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: '1.1rem' }}>{action.label}</div>
+                    <p style={{ margin: 0, opacity: isPrimary ? 0.85 : 0.75 }}>{action.description}</p>
+                  </div>
+                </div>
+                <div style={{ marginTop: 'auto', fontWeight: 700 }}>{isPrimary ? 'Start Check-In →' : 'Open →'}</div>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
-      {/* My Classes */}
-      <div className="max-w-4xl mx-auto px-4 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">My Classes</h2>
+      <section style={{ maxWidth: '1100px', margin: '2.5rem auto 0', padding: '0 1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', gap: '1rem' }}>
+          <h2 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 900, color: '#0F172A' }}>My Classes</h2>
           <Link
             href="/join-class"
-            className="text-sm font-medium text-green-600 hover:text-green-700"
+            style={{
+              textDecoration: 'none',
+              padding: '0.65rem 1.2rem',
+              borderRadius: '14px',
+              border: '1px solid rgba(14,165,233,0.4)',
+              fontWeight: 600,
+              color: '#0369A1',
+            }}
           >
             + Join Class
           </Link>
         </div>
 
         {error ? (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+          <div
+            style={{
+              background: 'linear-gradient(120deg, #FEE2E2, #FECACA)',
+              borderRadius: '24px',
+              padding: '1.5rem',
+              border: '1px solid #FCA5A5',
+              color: '#991B1B',
+              fontWeight: 600,
+            }}
+          >
             {error}
           </div>
         ) : classes.length === 0 ? (
-          <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-            <div className="text-4xl mb-3">🎓</div>
-            <h3 className="font-bold text-gray-900 mb-2">No Classes Yet</h3>
-            <p className="text-gray-600 mb-4">Ask your teacher for a class code to join</p>
-            <Link
-              href="/join-class"
-              className="inline-block px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-            >
-              Join a Class
-            </Link>
+          <div style={cardBaseStyle}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '0.75rem' }}>
+              <div style={{ fontSize: '3rem' }}>🎓</div>
+              <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 800, color: '#0F172A' }}>No classes yet</h3>
+              <p style={{ margin: 0, color: '#5E6A82' }}>Ask your teacher for a class code to unlock assignments.</p>
+              <Link
+                href="/join-class"
+                style={{
+                  marginTop: '0.5rem',
+                  textDecoration: 'none',
+                  padding: '0.85rem 1.5rem',
+                  borderRadius: '16px',
+                  background: 'linear-gradient(135deg, #0F766E, #22C55E)',
+                  color: 'white',
+                  fontWeight: 700,
+                }}
+              >
+                Join a class
+              </Link>
+            </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div style={{ display: 'grid', gap: '1.25rem' }}>
             {classes.map((cls) => (
-              <div key={cls.id} className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between">
+              <div key={cls.id} style={cardBaseStyle}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between' }}>
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-1">{cls.class_name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      Teacher: {cls.teacher_name}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {cls.organization_name}
-                    </p>
+                    <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800, color: '#0F172A' }}>{cls.class_name}</h3>
+                    <p style={{ margin: '0.35rem 0', color: '#5E6A82' }}>Teacher: {cls.teacher_name}</p>
+                    <p style={{ margin: 0, color: '#94A3B8' }}>{cls.organization_name}</p>
                   </div>
                   <Link
                     href={`/dashboard/student/classes/${cls.id}`}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                    style={{
+                      textDecoration: 'none',
+                      padding: '0.8rem 1.25rem',
+                      borderRadius: '14px',
+                      background: 'linear-gradient(135deg, #0EA5E9, #0F766E)',
+                      color: 'white',
+                      fontWeight: 700,
+                    }}
                   >
-                    View Class
+                    View Class →
                   </Link>
                 </div>
-                {cls.active_assignment_count !== undefined && cls.active_assignment_count > 0 && (
-                  <div className="mt-3 pt-3 border-t border-gray-200">
-                    <span className="text-sm text-orange-600 font-medium">
-                      📋 {cls.active_assignment_count} active assignment{cls.active_assignment_count > 1 ? 's' : ''}
-                    </span>
+                {cls.active_assignment_count && cls.active_assignment_count > 0 && (
+                  <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(148,163,184,0.3)', color: '#C2410C', fontWeight: 600 }}>
+                    📋 {cls.active_assignment_count} active assignment
+                    {cls.active_assignment_count > 1 ? 's' : ''}
                   </div>
                 )}
               </div>
             ))}
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Recent Activity & Progress */}
-      <div className="max-w-4xl mx-auto px-4 mb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Keep Going!</h2>
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-bold text-gray-900 mb-1">Build Your Streak</h3>
-              <p className="text-sm text-gray-600">
-                Visit a new site today to maintain your {currentStreak}-day streak!
-              </p>
-            </div>
-            <div className="text-5xl">🔥</div>
-          </div>
-          <div className="flex gap-3">
-            <Link
-              href="/explore"
-              className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-medium text-center hover:bg-green-700 transition-colors"
-            >
-              Find Sites Nearby
-            </Link>
-            <Link
-              href="/achievements"
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
-            >
-              View Progress
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Achievement Progress */}
-      <div className="max-w-4xl mx-auto px-4 mb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Achievement Progress</h2>
-        <Link
-          href="/achievements"
-          className="block bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg p-6 hover:from-purple-600 hover:to-purple-700 transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-4xl mb-2">🏆</div>
-              <div className="text-2xl font-bold mb-1">
-                {earnedBadgesCount} / {totalBadges}
+      <section style={{ maxWidth: '1100px', margin: '2.5rem auto 0', padding: '0 1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={cardBaseStyle}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800, color: '#0F172A' }}>Keep your streak alive</h3>
+                <p style={{ margin: '0.3rem 0 0', color: '#5E6A82' }}>Visit a new site today to maintain your {currentStreak}-day streak.</p>
               </div>
-              <div className="text-purple-100">Achievements Unlocked</div>
+              <div style={{ fontSize: '3rem' }}>🔥</div>
             </div>
-            <div className="text-6xl opacity-20">→</div>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <Link
+                href="/explore"
+                style={{
+                  flex: 1,
+                  minWidth: '160px',
+                  textDecoration: 'none',
+                  padding: '0.85rem 1.1rem',
+                  borderRadius: '14px',
+                  background: 'linear-gradient(135deg, #0F766E, #22C55E)',
+                  color: 'white',
+                  fontWeight: 700,
+                  textAlign: 'center',
+                }}
+              >
+                Find nearby sites
+              </Link>
+              <Link
+                href="/achievements"
+                style={{
+                  textDecoration: 'none',
+                  padding: '0.85rem 1.1rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(148,163,184,0.4)',
+                  color: '#0F172A',
+                  fontWeight: 700,
+                  textAlign: 'center',
+                }}
+              >
+                View progress
+              </Link>
+            </div>
           </div>
-          <div className="mt-4 bg-white bg-opacity-20 rounded-full h-3">
-            <div
-              className="bg-white rounded-full h-3 transition-all"
-              style={{ width: `${badgeProgress}%` }}
-            ></div>
-          </div>
-        </Link>
-      </div>
+
+          <Link
+            href="/achievements"
+            style={{
+              ...cardBaseStyle,
+              textDecoration: 'none',
+              background: 'linear-gradient(135deg, #7C3AED, #A855F7)',
+              color: 'white',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🏆</div>
+                <div style={{ fontSize: '2rem', fontWeight: 900 }}>
+                  {earnedBadgesCount} / {totalBadges}
+                </div>
+                <div style={{ opacity: 0.85 }}>Achievements unlocked</div>
+              </div>
+              <div style={{ fontSize: '3rem', opacity: 0.3 }}>→</div>
+            </div>
+            <div style={{ marginTop: '1.5rem', height: '10px', borderRadius: '999px', background: 'rgba(255,255,255,0.3)' }}>
+              <div
+                style={{
+                  width: `${badgeProgress}%`,
+                  height: '100%',
+                  borderRadius: '999px',
+                  background: 'white',
+                  transition: 'width 0.3s ease',
+                }}
+              />
+            </div>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
-
