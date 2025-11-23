@@ -9,9 +9,8 @@ import {
   trackPresence,
   unsubscribeChannel,
   type LiveObservation,
-  type RealtimeChannel,
 } from '@/lib/realtime/websocket';
-import type { RealtimeChannel as RealtimeChannelType } from '@supabase/supabase-js';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 
 interface LiveSessionProps {
   sessionId: string;
@@ -30,7 +29,7 @@ export default function LiveSession({
   const [observations, setObservations] = useState<LiveObservation[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [participantCount, setParticipantCount] = useState(0);
-  const channelsRef = useRef<RealtimeChannelType[]>([]);
+  const channelsRef = useRef<RealtimeChannel[]>([]);
 
   const userId = (session?.user as { id?: string } | undefined)?.id || '';
   const userName = session?.user?.name || 'Unknown';

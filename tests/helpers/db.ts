@@ -57,6 +57,6 @@ export async function getTestUserPoints(userId: string): Promise<number> {
     .select('points')
     .eq('user_id', userId);
 
-  return data?.reduce((sum, record) => sum + (record.points || 0), 0) || 0;
+  return data?.reduce((sum: number, record: any) => sum + (record.points || 0), 0) || 0;
 }
 

@@ -97,11 +97,11 @@ export async function identifyOffline(
       confidence,
       provider: 'offline',
       mode,
-      metadata: {
+      reason: 'Offline identification - low confidence. Connect to internet for better results.',
+      raw: {
         greenRatio,
         blueRatio,
         brownRatio,
-        note: 'Offline identification - low confidence. Connect to internet for better results.',
       },
     };
   } catch (error) {
@@ -112,7 +112,7 @@ export async function identifyOffline(
       confidence: 0,
       provider: 'offline',
       mode,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      reason: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }

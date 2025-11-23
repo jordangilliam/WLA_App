@@ -81,16 +81,8 @@ class SyncManager {
    */
   private async syncOfflineQueue(): Promise<void> {
     try {
-      const queue = await offlineQueue.getAll();
-      
-      for (const item of queue) {
-        try {
-          await offlineQueue.processItem(item.id);
-        } catch (error) {
-          console.error(`Failed to sync queue item ${item.id}:`, error);
-          // Continue with next item
-        }
-      }
+      // syncQueue() already handles syncing all pending items
+      await offlineQueue.syncQueue();
     } catch (error) {
       console.error('Failed to sync offline queue:', error);
     }

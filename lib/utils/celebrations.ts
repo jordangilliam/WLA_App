@@ -17,7 +17,7 @@ export interface CelebrationConfig {
 export function playCelebrationSound(type: CelebrationConfig['type'], intensity: CelebrationConfig['intensity'] = 'medium') {
   if (!soundManager.isEnabled()) return;
 
-  const soundMap: Record<string, string> = {
+  const soundMap: Record<string, 'check-in' | 'points' | 'level-up' | 'achievement' | 'button-click' | 'success' | 'error' | 'notification'> = {
     'level-up': 'level-up',
     'achievement': 'achievement',
     'milestone': 'achievement',
@@ -66,14 +66,15 @@ export function getCelebrationColors(type: CelebrationConfig['type']): string[] 
 export function triggerCelebrationHaptics(intensity: CelebrationConfig['intensity'] = 'medium') {
   if (typeof window === 'undefined' || !('vibrate' in navigator)) return;
 
-  const patterns: number[] = {
+  const patterns: Record<'low' | 'medium' | 'high', number[]> = {
     low: [50],
     medium: [100, 50, 100],
     high: [100, 50, 100, 50, 100],
   };
 
   try {
-    navigator.vibrate(patterns[intensity]);
+    const pattern = patterns[intensity || 'medium'];
+    navigator.vibrate(pattern);
   } catch (error) {
     console.warn('Failed to trigger haptics:', error);
   }

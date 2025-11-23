@@ -45,6 +45,8 @@ export default function NearbySitesRail() {
     if (!userLocation) return;
 
     async function loadNearbySites() {
+      if (!userLocation) return;
+      
       try {
         const response = await fetch(
           `/api/locations/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=10000`

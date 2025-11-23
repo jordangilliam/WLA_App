@@ -107,7 +107,7 @@ export default function ShareButton({
                 </div>
               </button>
 
-              {navigator.share && (
+              {typeof navigator.share === 'function' && (
                 <button
                   onClick={() => handleShare('native')}
                   className="w-full px-4 py-3 text-left hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-3"
